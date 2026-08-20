@@ -1,4 +1,4 @@
-import pluginCheck from './configs/plugin-check.mjs';
-import library from './library.mjs';
+import PluginCheck from './configs/plugin-check.mjs';
+import Library from './library.mjs';
 
-export default [...library, ...pluginCheck];
+export default [...Library, ...PluginCheck];
