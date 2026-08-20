@@ -1,27 +1,16 @@
-name: ci
+name: publish
 on:
   push:
     branches:
       - main
-  pull_request:
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
-
-permissions:
-  actions: read
-  contents: read
-  pages: write
-  id-token: write
 
 jobs:
-  main:
+  publish:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
+    environment: Aenode
+    permissions:
+      contents: write
+      id-token: write
     steps:
       - uses: actions/checkout@v7
         with:
@@ -65,14 +54,7 @@ jobs:
             pnpm nx run-many -t test      --projects="tag:lib:*,tag:app:cli"
             pnpm nx run-many -t doc       --projects="tag:lib:*,tag:app:cli"
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: public
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Publish
+        run: pnpm nx release publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
