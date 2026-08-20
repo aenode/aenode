@@ -1,0 +1,218 @@
+{
+    "Vitest: Test Suite Empty": {
+        "prefix": "test desc empty",
+        "body": [
+            "describe('sampleTest', () => {",
+            "   it('should work', ()=>{",
+            "       expect(1).toEqual(1)",
+            "   })",
+            "});"
+        ],
+        "description": "Create a describe block",
+        "scope": "typescript"
+    },
+    "Vitest: Test Suite (describe)": {
+        "prefix": "test desc",
+        "body": [
+            "describe('$1', () => {",
+            "\t$0",
+            "});"
+        ],
+        "description": "Create a describe block",
+        "scope": "typescript"
+    },
+    "Vitest: Test Case (it)": {
+        "prefix": "test it",
+        "body": [
+            "it('$1', $2() => {",
+            "\t$0",
+            "});"
+        ],
+        "description": "Create an it block",
+        "scope": "typescript"
+    },
+    "Vitest: Test Case (test)": {
+        "prefix": "test case",
+        "body": [
+            "test('$1', $2() => {",
+            "\t$0",
+            "});"
+        ],
+        "description": "Create a test block",
+        "scope": "typescript"
+    },
+    "Vitest: Async Test Case": {
+        "prefix": "test it async",
+        "body": [
+            "it('$1', async () => {",
+            "\t$0",
+            "});"
+        ],
+        "description": "Create an async it block",
+        "scope": "typescript"
+    },
+    "Vitest: Table-Driven Test (it.each - Template Literal)": {
+        "prefix": "test each template",
+        "body": [
+            "it.each`",
+            "\t${'input'} | ${'expected'}",
+            "\t${$1}     | ${$2}",
+            "`('$3', ({ input, expected }) => {",
+            "\t$0",
+            "});"
+        ],
+        "description": "Create a table-driven test using template literal format",
+        "scope": "typescript"
+    },
+    "Vitest: Table-Driven Test (it.each - Array)": {
+        "prefix": "test each array",
+        "body": [
+            "it.each([",
+            "\t{ input: $1, expected: $2 },",
+            "])('$3', ({ input, expected }) => {",
+            "\t$0",
+            "});"
+        ],
+        "description": "Create a table-driven test using an array of objects",
+        "scope": "typescript"
+    },
+    "Vitest: Lifecycle Hooks (All)": {
+        "prefix": "test hooks full",
+        "body": [
+            "beforeAll(() => {",
+            "\t$1",
+            "});",
+            "",
+            "beforeEach(() => {",
+            "\t$2",
+            "});",
+            "",
+            "afterEach(() => {",
+            "\tvi.restoreAllMocks();",
+            "\t$3",
+            "});",
+            "",
+            "afterAll(() => {",
+            "\t$0",
+            "});"
+        ],
+        "description": "Insert beforeAll, beforeEach, afterEach, and afterAll hooks",
+        "scope": "typescript"
+    },
+    "Vitest: Mock Module": {
+        "prefix": "test mock module",
+        "body": [
+            "vi.mock('$1', () => ({",
+            "\t$0",
+            "}));"
+        ],
+        "description": "Mock a module dependency",
+        "scope": "typescript"
+    },
+    "Vitest: Mock Function (vi.fn)": {
+        "prefix": "test mock fn",
+        "body": [
+            "const ${1:mockFn} = vi.fn().mockImplementation(($2) => $0);"
+        ],
+        "description": "Create a standalone vi.fn mock",
+        "scope": "typescript"
+    },
+    "Vitest: SpyOn Object Method": {
+        "prefix": "test mock spy",
+        "body": [
+            "const ${1:spy} = vi.spyOn(${2:object}, '$3').mockImplementation(($4) => $0);"
+        ],
+        "description": "Spy on an object method",
+        "scope": "typescript"
+    },
+    "Vitest: Mock Resolved Value": {
+        "prefix": "test mock resolve",
+        "body": [
+            "vi.spyOn(${1:object}, '$2').mockResolvedValue($0);"
+        ],
+        "description": "Mock an async method resolving a value",
+        "scope": "typescript"
+    },
+    "Vitest: Mock Rejected Value": {
+        "prefix": "test mock reject",
+        "body": [
+            "vi.spyOn(${1:object}, '$2').mockRejectedValue(new Error('$0'));"
+        ],
+        "description": "Mock an async method rejecting with an error",
+        "scope": "typescript"
+    },
+    "Vitest: Fake Timers Setup": {
+        "prefix": "test mock timers",
+        "body": [
+            "beforeEach(() => {",
+            "\tvi.useFakeTimers();",
+            "});",
+            "",
+            "afterEach(() => {",
+            "\tvi.useRealTimers();",
+            "});"
+        ],
+        "description": "Setup fake timers hooks",
+        "scope": "typescript"
+    },
+    "Vitest: Expect Equal / Strict Equal": {
+        "prefix": "test expect equal",
+        "body": [
+            "expect(${1:actual}).toEqual(${0:expected});"
+        ],
+        "description": "Deep equality assertion",
+        "scope": "typescript"
+    },
+    "Vitest: Expect Strictly Equal": {
+        "prefix": "test expect strict",
+        "body": [
+            "expect(${1:actual}).toBe(${0:expected});"
+        ],
+        "description": "Primitive identity/strict equality assertion",
+        "scope": "typescript"
+    },
+    "Vitest: Expect To Throw / Reject": {
+        "prefix": "test expect throw",
+        "body": [
+            "expect(() => ${1:fn()}).toThrowError(${0:Error});"
+        ],
+        "description": "Assert that a function throws an error",
+        "scope": "typescript"
+    },
+    "Vitest: Expect Async Reject": {
+        "prefix": "test expect reject",
+        "body": [
+            "await expect(${1:promise}).rejects.toThrow(${0:Error});"
+        ],
+        "description": "Assert that a promise rejects",
+        "scope": "typescript"
+    },
+    "Vitest: Expect Called With": {
+        "prefix": "test expect called",
+        "body": [
+            "expect(${1:mockFn}).toHaveBeenCalledWith($0);"
+        ],
+        "description": "Assert a mock function was called with specific arguments",
+        "scope": "typescript"
+    },
+    "Vitest: Expect Called Times": {
+        "prefix": "test expect times",
+        "body": [
+            "expect(${1:mockFn}).toHaveBeenCalledTimes(${0:1});"
+        ],
+        "description": "Assert a mock function call count",
+        "scope": "typescript"
+    },
+    "Vitest: Expect Object Matching / Partial": {
+        "prefix": "test expect match",
+        "body": [
+            "expect(${1:actual}).toEqual(",
+            "\texpect.objectContaining({",
+            "\t\t$0",
+            "\t})",
+            ");"
+        ],
+        "description": "Assert partial object shape matching",
+        "scope": "typescript"
+    }
+}

@@ -1,0 +1,13 @@
+{
+    "nest module": {
+        "prefix": "nest module",
+        "body": [
+            "import { Module } from '@nestjs/common';",
+            "",
+            "@Module({ imports: [], controllers: [], providers: [] })",
+            "export class $1Module {}",
+            "",
+        ],
+        "scope": "typescripts"
+    }
+}

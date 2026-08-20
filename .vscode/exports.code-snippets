@@ -1,0 +1,8 @@
+{
+    "export all": {
+        "prefix": "export all",
+        "body": "// @index(['./**/*.ts', '!./**/*.spec.ts'], f => `export * from '${f.path}.js'`)",
+        "scope": "typescript",
+        "description": "Generate barral file content",
+    }
+}

@@ -1,0 +1,15 @@
+{
+    "decorator property": {
+        "prefix": "decorator property",
+        "body": [
+            "export type $1Options = {$2};",
+            "export function $1(options: $1Options): PropertyDecorator {",
+            "  return (...args) => {",
+            "$0",
+            "    return args;",
+            "  };",
+            "}",
+        ],
+        "scope": "typescript"
+    }
+}

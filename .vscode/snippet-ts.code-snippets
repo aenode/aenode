@@ -1,0 +1,11 @@
+{
+    "import test target": {
+        "prefix": "import test target",
+        "body": [
+            "import { $2 } from './${TM_FILENAME/(.*)\\.spec\\.ts$/$1/}.js';",
+            "$0"
+        ],
+        "description": "Import the test target file",
+        "scope": "typescript"
+    }
+}

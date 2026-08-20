@@ -4,6 +4,11 @@
 dist
 tmp
 out-tsc
+public/libs
+public/utils
+public/modules
+public/apps
+public/dbs
 
 # dependencies
 node_modules
@@ -23,6 +28,8 @@ node_modules
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+!.vscode/*.code-snippets
+
 
 # misc
 /.sass-cache
