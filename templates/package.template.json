@@ -1,0 +1,85 @@
+{
+  "$schema": "https://www.schemastore.org/package",
+  "name": "__PROJECT_NAME__",
+  "version": "0.0.1",
+  "description": "__PROJECT_DESCRIPTION__",
+  "keywords": [],
+  "license": "BSL-1.0",
+  "author": {
+    "email": "__EMAIL__",
+    "name": "__AUTHOR_NAME__",
+    "url": "__AUTHOR_URL__"
+  },
+  "homepage": "https://__GITHUB_USERNAME__.github.io/__GITHUB_REPO_NAME__",
+  "funding": ["__FUNDING__LINK__"],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
+
+  "engines": {
+    "runtime": {
+      "name": "nodejs",
+      "version": "v24.16.0"
+    },
+    "vscode": "^1.131.0"
+  },
+  "type": "module",
+  "types": "./src/index.d.ts",
+  "bin": {},
+  "exports": {},
+  "scripts": {
+    "hello": "echo hello"
+  },
+
+  "devDependencies": {
+    "@eslint/js": "^9.8.0",
+    "@nx/eslint": "23.1.1",
+    "@nx/eslint-plugin": "23.1.1",
+    "@nx/js": "23.1.1",
+    "@nx/plugin": "^23.1.1",
+    "@nx/vitest": "23.1.1",
+    "@swc-node/register": "~1.11.1",
+    "@swc/cli": "~0.8.1",
+    "@swc/core": "~1.15.5",
+    "@swc/helpers": "~0.5.23",
+    "@types/node": "^22.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.67.0",
+    "@vitest/coverage-v8": "~4.1.0",
+    "dotenv": "^17.4.2",
+    "eslint": "^9.8.0",
+    "eslint-config-prettier": "^10.0.0",
+    "eslint-plugin-unicorn": "^72.0.0",
+    "eslint-plugin-unused-imports": "^4.4.1",
+    "husky": "^9.1.7",
+    "jsdom": "^27.1.0",
+    "jsonc-eslint-parser": "^2.1.0",
+    "nx": "23.1.1",
+    "prettier": "~3.6.2",
+    "prisma": "^7.9.0",
+    "tslib": "^2.3.0",
+    "typedoc": "^0.28.20",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.58.0",
+    "uuid": "^14.0.1",
+    "verdaccio": "^6.3.2",
+    "vite": "^8.0.0",
+    "vitest": "~4.1.0"
+  },
+  "nx": {
+    "includedScripts": [],
+    "targets": {
+      "local-registry": {
+        "executor": "@nx/js:verdaccio",
+        "options": {
+          "port": 4873,
+          "config": ".verdaccio/config.yml",
+          "storage": "tmp/local-registry/storage"
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "@nx/devkit": "23.1.1"
+  }
+}

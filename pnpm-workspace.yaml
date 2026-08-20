@@ -1,5 +1,9 @@
 packages:
-  - "packages/*"
+  - "apps/*"
+  - "modules/*"
+  - "libs/*"
+  - "utils/*"
+  - "plugins/*"
 
 autoInstallPeers: true
 allowBuilds:

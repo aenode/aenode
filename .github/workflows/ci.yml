@@ -1,0 +1,87 @@
+name: ci
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+permissions:
+  actions: read
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          filter: tree:0
+          fetch-depth: 0
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          version: 11.3.0
+          run_install: false
+
+      - name: Set node version
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: "pnpm"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Restore/Save Nx Cache
+        uses: actions/cache@v4
+        with:
+          path: .nx/cache
+          key: nx-${{ runner.os }}-${{ github.sha }}
+          restore-keys: |
+            nx-${{ runner.os }}-
+
+      - name: Build
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 15
+          max_attempts: 3
+          retry_wait_seconds: 5
+          command: |
+            pnpm nx run-many -t typecheck --projects="tag:lib:*,tag:app:plugin"
+            pnpm nx run-many -t build     --projects="tag:lib:*,tag:app:plugin"
+            pnpm nx run-many -t lint      --projects="tag:lib:*,tag:app:plugin"
+            pnpm nx run-many -t test      --projects="tag:lib:*,tag:app:plugin"
+            pnpm nx run-many -t doc       --projects="tag:lib:*,tag:app:plugin"
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+      - name: Publish to NPM
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: pnpm nx release publish --first-release
+        # run: pnpm nx release publish --first-release
+
+      - run: pnpm nx fix-ci
+        if: always()

@@ -1,0 +1,24 @@
+#!/bin/sh
+
+# $1 holds the path to the temporary file containing the commit message
+COMMIT_MSG_FILE=$1
+COMMIT_MSG=$(cat "$COMMIT_MSG_FILE")
+
+# Example Regex: Conventional Commits pattern (e.g., feat: ..., fix: ..., chore: ...)
+# Customize PATTERN to match your team's rules
+PATTERN="^(dev|feat|fix|docs|style|refactor|test|chore|ci|build|perf|release)(\([a-z0-9-]+\))?: .+"
+
+if ! echo "$COMMIT_MSG" | grep -qE "$PATTERN"; then
+  echo "\033[31m[ERROR] Invalid commit message format.\033[0m"
+  echo "Your message: \"$COMMIT_MSG\""
+  echo ""
+  echo "Must follow Conventional Commits format, e.g.:"
+  echo "  feat: add user authentication"
+  echo "  fix(auth): resolve token refresh bug"
+  exit 1
+fi
+
+
+pnpm nx run-many -t typecheck build lint test doc  --projects="tag:lib:*,tag:cli:*" --tuiAutoExit
+
+
