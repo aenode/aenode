@@ -6,6 +6,7 @@
 # Generate ssh key 
 
 
+
 NAME="$1"
 PASSPHRASE="$2"
 
@@ -23,3 +24,17 @@ cat "$HOME/.ssh/$NAME.pub"
 
 
 ```
+
+
+
+
+## Remove all keys from system
+
+```sh
+ ssh-add -D
+```
+
+
+## Connect 
+
+ssh -T @git@github.com
