@@ -80,7 +80,7 @@ jobs:
       - name: Publish to NPM
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: pnpm nx release publish
+        run: pnpm nx release publish --first-release
 
       - run: pnpm nx fix-ci
         if: always()
