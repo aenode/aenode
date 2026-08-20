@@ -21,7 +21,7 @@ If you find my open-source contributions or the **@aenode/source** project helpf
 ## 🤝 Connect with Me
 
 <p align="left">
-<a href="mailto:aesys+aenode@proton.me">
+<a href="mailto:aenode+source@proton.me">
 <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=proton&logoColor=white" />
 </a>
 </p>

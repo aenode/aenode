@@ -99,7 +99,7 @@
       "executor": "nx:run-commands",
       "options": {
         "commands": [
-          "typedoc {projectRoot}/src/index.ts --out public/{projectRoot} --tsconfig {projectRoot}/tsconfig.lib.json --favicon {projectRoot}/assets/favicon.svg"
+          "typedoc {projectRoot}/src/index.ts --out public/{projectRoot} --tsconfig {projectRoot}/tsconfig.lib.json"
         ]
       }
     }
