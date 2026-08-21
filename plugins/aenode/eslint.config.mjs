@@ -1,0 +1,3 @@
+import plugin from './../../.eslint/plugin.mjs';
+
+export default [...plugin];

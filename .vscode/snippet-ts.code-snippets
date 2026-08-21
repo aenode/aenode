@@ -1,4 +1,13 @@
 {
+    "shebang": {
+        "prefix": "shebang",
+        "body": [
+            "#!/usr/bin/env node",
+            "",
+            "console.log('Hello');",
+        ],
+        "scope": "javascript",
+    },
     "import test target": {
         "prefix": "import test target",
         "body": [

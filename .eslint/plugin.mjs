@@ -1,4 +1,4 @@
+import Base from './configs/base.mjs';
 import PluginCheck from './configs/plugin-check.mjs';
-import Library from './library.mjs';
 
-export default [...Library, ...PluginCheck];
+export default [...Base, ...PluginCheck];

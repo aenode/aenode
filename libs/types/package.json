@@ -43,6 +43,7 @@
     ],
     "targets": {
       "build": {},
+      "lint": {},
       "doc": {}
     }
   },

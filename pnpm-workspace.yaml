@@ -3,9 +3,11 @@ packages:
   - "modules/*"
   - "libs/*"
   - "utils/*"
+  - "clis/*"
   - "plugins/*"
 
 autoInstallPeers: true
 allowBuilds:
-  '@swc/core': true
+  "@swc/core": true
   nx: true
+  unrs-resolver: set this to true or false

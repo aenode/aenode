@@ -5,6 +5,15 @@
   "references": [
     {
       "path": "./libs/types"
+    },
+    {
+      "path": "./plugins/aenode"
+    },
+    {
+      "path": "./modules/fs"
+    },
+    {
+      "path": "./libs/errors"
     }
   ]
 }

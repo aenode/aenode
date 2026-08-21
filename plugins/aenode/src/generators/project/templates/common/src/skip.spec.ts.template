@@ -1,0 +1,5 @@
+describe('<%- projectName %>', () => {
+it('skip test', () => {
+expect(1).toEqual(1);
+});
+});

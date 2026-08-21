@@ -1,0 +1,44 @@
+{
+  "name": "@aenode/fs",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "@aenode/source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "!**/*.tsbuildinfo"
+  ],
+  "nx": {
+    "sourceRoot": "modules/fs/src",
+    "tags": [
+      "lib:module"
+    ],
+    "targets": {
+      "build": {},
+      "lint": {},
+      "doc": {}
+    }
+  },
+  "dependencies": {
+    "@swc/helpers": "~0.5.18"
+  },
+  "devDependencies": {
+    "@aenode/errors": "workspace:*",
+    "@aenode/types": "workspace:*",
+    "js-yaml": "^5.3.0"
+  },
+  "peerDependencies": {
+    "@aenode/errors": "workspace:*",
+    "js-yaml": "^5.3.0"
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "name": "@aenode/aenode",
+  "description": "Aenode Cli",
+  "version": "0.0.1",
+  "author": {
+    "email": "aenode+cli@proton.me",
+    "name": "Ahmet Emrebas",
+    "url": "https://aenode.github.io"
+  },
+  "keywords": [
+    "nx",
+    "cli",
+    "generator"
+  ],
+  "bugs": {
+    "email": "aenode+cli@proton.me",
+    "url": "https://github.com/aenode/aenode/issues"
+  },
+  "homepage": "https://aenode.github.io/aenode/plugins/aenode",
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
+  "funding": [
+    "https://cash.app/$puqlib"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "@aenode/source": "./dist/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "bin": {
+    "aenode": "./bin/aenode.mjs"
+  },
+  "files": [
+    "bin",
+    "assets",
+    "dist",
+    "generators.json"
+  ],
+  "nx": {
+    "sourceRoot": "plugins/aenode/src",
+    "tags": [
+      "app:cli",
+      "app:plugin"
+    ],
+    "targets": {
+      "build": {
+        "cache": true,
+        "executor": "@nx/js:swc",
+        "outputs": [
+          "{options.outputPath}"
+        ],
+        "options": {
+          "clean": true,
+          "outputPath": "{projectRoot}/dist",
+          "main": "{projectRoot}/src/index.ts",
+          "tsConfig": "{projectRoot}/tsconfig.lib.json",
+          "skipTypeCheck": false,
+          "stripLeadingPaths": true,
+          "assets": [
+            {
+              "input": "{projectRoot}/src",
+              "glob": "**/!(*.ts)",
+              "output": "."
+            }
+          ]
+        },
+        "dependsOn": [
+          "^build"
+        ]
+      },
+      "lint": {},
+      "doc": {}
+    }
+  },
+  "dependencies": {
+    "@swc/helpers": "~0.5.18",
+    "commander": "^15.0.0",
+    "@nx/devkit": "23.1.1"
+  },
+  "generators": "./generators.json",
+  "devDependencies": {
+    "@aenode/fs": "workspace:*"
+  },
+  "peerDependencies": {}
+}

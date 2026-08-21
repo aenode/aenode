@@ -5,8 +5,11 @@
   "eslint.validate": [
     "json",
     "javascript",
-    "typescript",
+    "typescript"
   ],
+  "files.associations": {
+    "*.template": "ejs",
+  },
   "eslint.workingDirectories": [
     {
       "mode": "auto"
@@ -25,7 +28,7 @@
     "editor.defaultFormatter": "redhat.vscode-yaml"
   },
   "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "editor.codeActionsOnSave": {
     "source.sort.json": "never",
@@ -35,5 +38,5 @@
     "source.sortImports": "always",
     "source.removeUnused.ts": "explicit",
     "source.addMissingImports.ts": "always"
-  },
+  }
 }

@@ -23,7 +23,13 @@
           "buildDepsName": "build-deps",
           "watchDepsName": "watch-deps"
         }
-      }
+      },
+      "exclude": [
+        "clis/aenode/*",
+        "plugins/aenode/*",
+        "modules/fs/*",
+        "libs/errors/*"
+      ]
     },
     {
       "plugin": "@nx/eslint/plugin",
@@ -38,6 +44,24 @@
         "ciTargetName": "test-ci",
         "testMode": "watch"
       }
+    },
+    {
+      "plugin": "@nx/js/typescript",
+      "include": [
+        "clis/aenode/*",
+        "plugins/aenode/*",
+        "modules/fs/*",
+        "libs/errors/*"
+      ],
+      "options": {
+        "typecheck": {
+          "targetName": "typecheck"
+        },
+        "build": {
+          "targetName": "build",
+          "configName": "tsconfig.lib.json"
+        }
+      }
     }
   ],
   "neverConnectToCloud": true,
@@ -50,7 +74,6 @@
     "test": {
       "dependsOn": ["^build"]
     },
-
     "build": {
       "cache": true,
       "executor": "@nx/js:swc",
@@ -65,7 +88,6 @@
       },
       "dependsOn": ["^build"]
     },
-
     "serve": {
       "executor": "@nx/js:node",
       "options": {
@@ -73,7 +95,6 @@
         "watch": true
       }
     },
-
     "prisma:migrate": {
       "executor": "nx:run-commands",
       "options": {
@@ -102,6 +123,19 @@
           "typedoc {projectRoot}/src/index.ts --out public/{projectRoot} --tsconfig {projectRoot}/tsconfig.lib.json"
         ]
       }
+    },
+    "@nx/js:tsc": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
+    }
+  },
+  "generators": {
+    "@nx/js:library": {
+      "publishable": true,
+      "bundler": "swc",
+      "linter": "eslint",
+      "unitTestRunner": "vitest"
     }
   },
   "release": {

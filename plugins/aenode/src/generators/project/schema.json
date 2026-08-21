@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/schema",
+  "$id": "Project",
+  "title": "Project generator",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "description": "Project type",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "enum": [
+        "api",
+        "cli",
+        "gql",
+        "lib",
+        "module",
+        "plugin",
+        "types",
+        "utils"
+      ],
+      "x-prompt": "What is the project type: "
+    },
+    "directory": {
+      "type": "string",
+      "description": "Project directory",
+      "$default": {
+        "$source": "argv",
+        "index": 1
+      },
+      "x-prompt": "What is the project directory: "
+    },
+    "orgName": {
+      "type": "string",
+      "description": "Project scope/organization name",
+      "$default": { "$source": "argv", "index": 2 },
+
+      "x-prompt": "What is the org/scope name: "
+    },
+    "funding": {
+      "type": "string",
+      "description": "Funding url",
+      "$default": { "$source": "argv", "index": 3 },
+      "x-prompt": "What is the fundin gurl: "
+    },
+    "fullName": {
+      "type": "string",
+      "description": "Author name",
+      "$default": { "$source": "argv", "index": 4 },
+      "x-prompt": "What is your name: "
+    },
+    "email": {
+      "type": "string",
+      "description": "Author email",
+      "$default": { "$source": "argv", "index": 5 },
+      "x-prompt": "What is your email address: "
+    },
+    "version": {
+      "type": "string",
+      "description": "version",
+      "$default": { "$source": "argv", "index": 6 },
+      "x-prompt": "What is the version: "
+    },
+    "url": {
+      "type": "string",
+      "description": "url",
+      "$default": { "$source": "argv", "index": 7 },
+      "x-prompt": "What is the url: "
+    },
+    "repoName": {
+      "type": "string",
+      "description": "repoName",
+      "$default": { "$source": "argv", "index": 8 },
+      "x-prompt": "What is the repoName: "
+    },
+    "username": {
+      "type": "string",
+      "description": "username",
+      "$default": { "$source": "argv", "index": 9 },
+      "x-prompt": "What is the username: "
+    }
+  },
+  "required": [
+    "type",
+    "directory",
+    "orgName",
+    "funding",
+    "fullName",
+    "email",
+    "version",
+    "url",
+    "repoName",
+    "username"
+  ]
+}

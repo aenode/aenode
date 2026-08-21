@@ -19,6 +19,8 @@ if ! echo "$COMMIT_MSG" | grep -qE "$PATTERN"; then
 fi
 
 
-pnpm nx run-many -t typecheck build lint test doc  --projects="tag:lib:*,tag:cli:*" --tuiAutoExit
+pnpm nx run-many -t lint  --tuiAutoExit
+pnpm nx run-many -t typecheck --tuiAutoExit
+pnpm nx run-many -t build test doc  --projects="tag:lib:*,tag:cli:*" --tuiAutoExit
 
 
