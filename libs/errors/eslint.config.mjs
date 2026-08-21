@@ -1,3 +1,3 @@
-import Library from '../../.eslint/library.mjs';
+import Types from '../../.eslint/types.mjs';
 
-export default [...Library];
+export default [...Types];
