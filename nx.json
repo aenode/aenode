@@ -131,6 +131,15 @@
     }
   },
   "generators": {
+    "@aenode/aenode:project": {
+      "orgName": "aenode",
+      "funding": "aenode",
+      "fullName": "aenode",
+      "email": "aenode+aenode@proton.me",
+      "url": "https://aenode.github.io",
+      "repoName": "aenode",
+      "username": "aenode"
+    },
     "@nx/js:library": {
       "publishable": true,
       "bundler": "swc",
