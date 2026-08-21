@@ -39,6 +39,9 @@ jobs:
       - name: Typecheck and lint
         uses: nick-fields/retry@v3
         with:
+          timeout_minutes: 15
+          max_attempts: 3
+          retry_wait_seconds: 5
           command: |
             pnpm nx run-many -t typecheck --projects="tag:lib:*,tag:app:cli"
             pnpm nx run-many -t lint      --projects="tag:lib:*,tag:app:cli"
@@ -46,6 +49,9 @@ jobs:
       - name: Build and test
         uses: nick-fields/retry@v3
         with:
+          timeout_minutes: 15
+          max_attempts: 3
+          retry_wait_seconds: 5s
           command: |
             pnpm nx run-many -t build     --projects="tag:lib:*,tag:app:cli"
             pnpm nx run-many -t test      --projects="tag:lib:*,tag:app:cli"

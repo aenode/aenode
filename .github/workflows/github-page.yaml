@@ -55,6 +55,9 @@ jobs:
       - name: Build
         uses: nick-fields/retry@v3
         with:
+          timeout_minutes: 15
+          max_attempts: 3
+          retry_wait_seconds: 5
           command: |
             pnpm nx run-many -t doc --projects="tag:lib:*,tag:app:cli"
 
