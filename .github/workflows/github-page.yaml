@@ -4,9 +4,24 @@ on:
     branches:
       - main
   pull_request:
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+permissions:
+  actions: read
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   main:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
     steps:
       - uses: actions/checkout@v7
         with:
@@ -24,6 +39,7 @@ jobs:
         with:
           node-version: 24
           cache: "pnpm"
+          registry-url: "https://registry.npmjs.org"
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -36,19 +52,23 @@ jobs:
           restore-keys: |
             nx-${{ runner.os }}-
 
-      - name: Typecheck and lint
+      - name: Build
         uses: nick-fields/retry@v3
         with:
           command: |
-            pnpm nx run-many -t typecheck --projects="tag:lib:*,tag:app:cli"
-            pnpm nx run-many -t lint      --projects="tag:lib:*,tag:app:cli"
+            pnpm nx run-many -t doc --projects="tag:lib:*,tag:app:cli"
 
-      - name: Build and test
-        uses: nick-fields/retry@v3
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          command: |
-            pnpm nx run-many -t build     --projects="tag:lib:*,tag:app:cli"
-            pnpm nx run-many -t test      --projects="tag:lib:*,tag:app:cli"
+          path: public
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
 
       - name: Finish
         run: pnpm exec nx fix-ci

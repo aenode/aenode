@@ -1,4 +1,4 @@
-name: publish
+name: npm-publish
 on:
   push:
     branches:
@@ -20,7 +20,7 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v6
         with:
-          version: 11.3.0
+          version: 11.22.0
           run_install: false
 
       - name: Set node version
@@ -41,20 +41,25 @@ jobs:
           restore-keys: |
             nx-${{ runner.os }}-
 
-      - name: Build
+      - name: Typecheck and lint
         uses: nick-fields/retry@v3
         with:
-          timeout_minutes: 15
-          max_attempts: 3
-          retry_wait_seconds: 5
           command: |
             pnpm nx run-many -t typecheck --projects="tag:lib:*,tag:app:cli"
-            pnpm nx run-many -t build     --projects="tag:lib:*,tag:app:cli"
             pnpm nx run-many -t lint      --projects="tag:lib:*,tag:app:cli"
+
+      - name: Build and test
+        uses: nick-fields/retry@v3
+        with:
+          command: |
+            pnpm nx run-many -t build     --projects="tag:lib:*,tag:app:cli"
             pnpm nx run-many -t test      --projects="tag:lib:*,tag:app:cli"
-            pnpm nx run-many -t doc       --projects="tag:lib:*,tag:app:cli"
 
       - name: Publish
         run: pnpm nx release publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Finish
+        run: pnpm exec nx fix-ci
+        if: always()
