@@ -4,11 +4,8 @@
 dist
 tmp
 out-tsc
-public/libs
-public/utils
-public/modules
-public/apps
-public/dbs
+public/*
+!public/index.html
 
 # dependencies
 node_modules
