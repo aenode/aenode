@@ -2,7 +2,7 @@
 
 
 <p align="center">
-  <img   srcset="./assets/favicon.jpeg, ./assets/favicon.png, https://aenode.github.io/assets/favicon.png" alt="Aesys Logo" height="128" width="128" style="border-radius: 32px;"/>
+  <img   src="https://aenode.github.io/favicon.png" alt="Aesys Logo" height="128" width="128" style="border-radius: 32px;"/>
 </p>
 
 ## @aenode/source
