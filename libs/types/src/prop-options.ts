@@ -12,11 +12,38 @@ export const PropType = {
 
 export type PropType = KeyOf<typeof PropType>;
 
-export type PropFormat = string;
+export type PropFormat =
+  | 'email'
+  | 'password'
+  | 'uuid'
+  | 'ean'
+  | 'phone'
+  | 'url'
+  | 'ip4'
+  | 'ip6'
+  | 'jwt'
+  | 'currency';
 
-export type PropCommonOptions = {
+export type PropDependencyOptions = {
+  isMoreThan?: string;
+  isMoreThanOrEqualTo?: string;
+
+  isLessThan?: string;
+  isLessThanOrEqualTo?: string;
+
+  isEqualTo?: string;
+  isNotEqualTo?: string;
+};
+
+export type PropOptions = {
   name?: string;
-  required?: boolean;
+  description?: string;
+
+  type?: PropType;
+  isArray?: boolean;
+
+  examples?: string[];
+  isRequired?: boolean;
   isIn?: object;
   isNotIn?: object;
   min?: number;
@@ -26,6 +53,8 @@ export type PropCommonOptions = {
   pattern?: string;
   format?: string;
 
+  isEncriped?: string;
+  isHashed?: string;
   isInternal?: boolean;
   isReadonly?: boolean;
   isWriteonly?: boolean;
@@ -33,8 +62,6 @@ export type PropCommonOptions = {
   isUuid?: boolean;
   isId?: boolean;
   isUnique?: boolean;
-};
-export type PropOptions = {
-  type?: PropType;
-  isArray?: boolean;
+
+  groups?: string[];
 };
