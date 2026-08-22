@@ -124,12 +124,9 @@ importers:
       '@aenode/errors':
         specifier: workspace:*
         version: link:../../libs/errors
-      '@aenode/types':
-        specifier: workspace:*
-        version: link:../../libs/types
       js-yaml:
-        specifier: ^5.3.0
-        version: 5.3.0
+        specifier: 4.3.1
+        version: 4.3.1
 
   plugins/aenode:
     dependencies:
@@ -3860,10 +3857,6 @@ packages:
 
   js-yaml@5.2.2:
     resolution: {integrity: sha512-dayzUzKkJ1MkuUtZglSebU43utNXH0OWQByK9rKOOuYIO8M5TV1y+n8ALMdG0rdzBnfNkOmZEqrURepb0ejqBw==}
-    hasBin: true
-
-  js-yaml@5.3.0:
-    resolution: {integrity: sha512-muutsYr+e2+d3rTgUGslq5rxbBlUy3cJ61IsHag2QNDQV+7zXWjkUpmALIajhrlLlrgRUiymj6U3zUr/TMK84Q==}
     hasBin: true
 
   jsbn@0.1.1:
@@ -9765,10 +9758,6 @@ snapshots:
       argparse: 2.0.1
 
   js-yaml@5.2.2:
-    dependencies:
-      argparse: 2.0.1
-
-  js-yaml@5.3.0:
     dependencies:
       argparse: 2.0.1
 

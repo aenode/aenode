@@ -1,6 +1,24 @@
 {
   "name": "@aenode/fs",
   "version": "0.0.1",
+  "description": "Nodejs better IO wrapper",
+  "keywords": [
+    "types"
+  ],
+  "license": "BSL-1.0",
+  "author": {
+    "email": "aenode+aenode+fs@proton.me",
+    "name": "Ahmet Emrebas",
+    "url": "https://aenode.github.io"
+  },
+  "homepage": "https://aenode.github.io/aenode/modules/fs",
+  "funding": [
+    "https://cash.app/$puqlib"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -16,6 +34,8 @@
   },
   "files": [
     "dist",
+    "assets",
+    "bin",
     "!**/*.tsbuildinfo"
   ],
   "nx": {
@@ -29,16 +49,15 @@
       "doc": {}
     }
   },
-  "dependencies": {
-    "@swc/helpers": "~0.5.18"
+  "peerDependencies": {
+    "js-yaml": "4.3.1",
+    "@aenode/errors": "workspace:*"
   },
   "devDependencies": {
-    "@aenode/errors": "workspace:*",
-    "@aenode/types": "workspace:*",
-    "js-yaml": "^5.3.0"
+    "js-yaml": "4.3.1",
+    "@aenode/errors": "workspace:*"
   },
-  "peerDependencies": {
-    "@aenode/errors": "workspace:*",
-    "js-yaml": "^5.3.0"
+  "dependencies": {
+    "@swc/helpers": "~0.5.18"
   }
 }

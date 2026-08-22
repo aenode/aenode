@@ -1,3 +1,3 @@
-import node from '../../.eslint/node.mjs';
+import module from '../../.eslint/module.mjs';
 
-export default [...node];
+export default [...module];
