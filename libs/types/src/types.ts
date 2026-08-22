@@ -4,6 +4,9 @@ export type Some<T> = T | undefined | null;
 export type KeyOf<T> = keyof T;
 export type Keys<T> = (keyof T)[];
 
+export interface ClassType<T> {
+  new (...args: any[]): T;
+}
 export type NonArrayObject = object;
 
 export type PickRequired<T extends NonArrayObject, K extends keyof T> = Omit<
