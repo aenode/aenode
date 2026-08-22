@@ -50,7 +50,7 @@ export default [
             },
             {
               sourceTag: 'lib:types',
-              onlyDependOnLibsWithTags: ['none:dependency'],
+              onlyDependOnLibsWithTags: ['lib:types'],
               allowedExternalImports: [],
             },
           ],

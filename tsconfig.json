@@ -20,6 +20,9 @@
     },
     {
       "path": "./utils/is"
+    },
+    {
+      "path": "./libs/prop-options"
     }
   ]
 }

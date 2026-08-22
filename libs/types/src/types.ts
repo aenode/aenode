@@ -4,7 +4,7 @@ export type Some<T> = T | undefined | null;
 export type KeyOf<T> = keyof T;
 export type Keys<T> = (keyof T)[];
 
-export interface ClassType<T> {
+export interface ClassType<T = any> {
   new (...args: any[]): T;
 }
 export type NonArrayObject = object;
