@@ -23,6 +23,13 @@ const ERROR_PREFIX = [
   'MaxLength',
   'Pattern',
   'AccessDenied',
+  'Timeout',
+  'MinNumber',
+  'MaxNumber',
+  'NotString',
+  'NotNumber',
+  'NotDate',
+  'NotArray',
 ] as const;
 
 type ErrorClassName<T extends string> = `${T}Error`;
