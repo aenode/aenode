@@ -8,7 +8,17 @@
     "typescript"
   ],
   "files.associations": {
-    "*.template": "ejs",
+    "*.sh.*": "shellscript",
+    "*.ts.*": "typescript",
+    "*.mts.*": "typescript",
+    "*.cts.*": "typescript",
+    "*.js.*": "javascript",
+    "*.mjs.*": "javascript",
+    "*.cjs.*": "javascript",
+    "*.json.*": "json",
+    "*.md.*": "markdown",
+    "*license": "markdown",
+    "*license.*": "markdown"
   },
   "eslint.workingDirectories": [
     {
