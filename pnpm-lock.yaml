@@ -114,10 +114,6 @@ importers:
       '@swc/helpers':
         specifier: ~0.5.18
         version: 0.5.23
-    devDependencies:
-      '@aenode/types':
-        specifier: workspace:*
-        version: link:../types
 
   libs/types:
     dependencies:
