@@ -1,0 +1,3 @@
+import Cli from '../../.eslint/cli.mjs';
+
+export default [...Cli];

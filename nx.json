@@ -133,12 +133,13 @@
   "generators": {
     "@aenode/aenode:project": {
       "orgName": "aenode",
-      "funding": "aenode",
-      "fullName": "aenode",
+      "repoName": "aenode",
+      "username": "aenode",
+      "fullName": "Ahmet Emrebas",
+      "funding": "https://cash.app/$puqlib",
       "email": "aenode+aenode@proton.me",
       "url": "https://aenode.github.io",
-      "repoName": "aenode",
-      "username": "aenode"
+      "version": "0.0.1"
     },
     "@nx/js:library": {
       "publishable": true,

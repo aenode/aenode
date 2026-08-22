@@ -1,3 +1,5 @@
 #!/usr/bin/env node
 
-console.log('Hello');
+import { main } from '../dist/cli/main.js';
+
+main();

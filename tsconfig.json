@@ -14,6 +14,12 @@
     },
     {
       "path": "./libs/errors"
+    },
+    {
+      "path": "./utils/brand-email"
+    },
+    {
+      "path": "./utils/is"
     }
   ]
 }

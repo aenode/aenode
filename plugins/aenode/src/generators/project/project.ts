@@ -1,9 +1,16 @@
-import { formatFiles, generateFiles, updateJson, type Tree } from '@nx/devkit';
+import { brandEmail } from '@aenode/brand-email';
+import {
+  formatFiles,
+  generateFiles,
+  names,
+  updateJson,
+  type Tree,
+} from '@nx/devkit';
 import { basename, dirname, join, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import type { ProjectGeneratorSchema } from './schema.js';
 
-const __dirname = dirname(fileURLToPath(import.meta.filename));
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export async function projectGenerator(
   tree: Tree,
@@ -13,7 +20,10 @@ export async function projectGenerator(
   options.directory = normalize(options.directory);
   const projectName = `@${options.orgName}/${name}`;
 
-  const source = join(__dirname, options.type);
+  options.email = brandEmail(options.email, name);
+
+  const commonSource = join(__dirname, 'templates', 'common');
+  const source = join(__dirname, 'templates', options.type);
   const target = normalize(options.directory);
 
   const tag = (() => {
@@ -39,14 +49,32 @@ export async function projectGenerator(
     }
   })();
 
-  generateFiles(tree, source, target, { ...options, projectName, tag });
+  const allNames = names(name);
+  generateFiles(tree, commonSource, target, {
+    ...options,
+    projectName,
+    tag,
+    ...allNames,
+    name,
+  });
+
+  generateFiles(tree, source, target, {
+    ...options,
+    projectName,
+    tag,
+    ...allNames,
+    name,
+  });
 
   updateJson(tree, 'tsconfig.json', (value) => {
     value.references ??= [];
 
-    value.references.push({
-      path: `./${options.directory}`,
-    });
+    const referencePath = `./${options.directory}`;
+    if (!value.references.find((e: any) => e.path === referencePath)) {
+      value.references.push({
+        path: referencePath,
+      });
+    }
 
     return value;
   });

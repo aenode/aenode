@@ -9,10 +9,10 @@
 "author": {
 "email": "<%- email %>",
 "name": "<%- fullName %>",
-"url": "<% url %>"
+"url": "<%- url %>"
 },
-"homepage": "<% url %>",
-"funding": [<%- funding %>],
+"homepage": "<%- url %>/<%- username %>/<%- repoName %>/<%- directory %>",
+"funding": ["<%- funding %>"],
 "publishConfig": {
 "access": "public",
 "tag": "latest"

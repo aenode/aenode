@@ -11,6 +11,7 @@
     "Prisma.prisma",
     "PKief.material-icon-theme",
     "DigitalBrainstem.javascript-ejs-support",
-    "cweijan.vscode-postgresql-client2"
+    "cweijan.vscode-postgresql-client2",
+    "vitest.explorer"
   ]
 }

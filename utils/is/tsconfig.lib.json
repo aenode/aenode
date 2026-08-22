@@ -10,10 +10,10 @@
   "include": ["src/**/*.ts"],
   "references": [
     {
-      "path": "../../modules/fs/tsconfig.lib.json"
+      "path": "../../libs/errors/tsconfig.lib.json"
     },
     {
-      "path": "../../utils/brand-email/tsconfig.lib.json"
+      "path": "../../libs/types/tsconfig.lib.json"
     }
   ],
   "exclude": ["vitest.config.mts", "src/**/*.spec.ts"]

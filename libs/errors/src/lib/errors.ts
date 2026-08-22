@@ -1,12 +1,13 @@
 export class BaseCustomError extends Error {
   public readonly code: string;
-
-  constructor(code: string, message?: string) {
+  public readonly extras: unknown[];
+  constructor(code: string, message?: string, ...extras: unknown[]) {
     super(message ?? code);
     this.name = this.constructor.name;
     this.code = code;
     // Restores proper prototype chain in V8 environments
     Object.setPrototypeOf(this, new.target.prototype);
+    this.extras = extras;
   }
 }
 
@@ -34,6 +35,7 @@ export function createErrorClasses<T extends readonly string[]>(
 ): {
   [K in T[number] as ErrorClassName<K>]: new (
     message?: string,
+    ...extras: unknown[]
   ) => BaseCustomError;
 } {
   const errorMap = {} as Record<
