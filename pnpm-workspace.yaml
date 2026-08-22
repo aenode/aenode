@@ -10,7 +10,7 @@ autoInstallPeers: true
 allowBuilds:
   "@swc/core": true
   nx: true
-  unrs-resolver: set this to true or false
+  unrs-resolver: true
 minimumReleaseAgeExclude:
   - '@babel/generator@7.29.8'
   - '@babel/parser@7.29.8'

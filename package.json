@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "prepare": "husky"
+    "prepare": "husky",
+    "prune": "rm -rf node_modules  **/**/node_modules **/**/dist .nx"
   },
   "private": true,
   "devDependencies": {
