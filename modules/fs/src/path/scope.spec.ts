@@ -1,6 +1,5 @@
 import { AccessDeniedError } from '@aenode/errors';
 import { join, resolve as nodeResolve } from 'node:path';
-import { describe, expect, it } from 'vitest';
 import { scope } from './scope.js';
 
 describe('scope()', () => {

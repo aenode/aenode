@@ -1,7 +1,7 @@
 {
   "name": "@aenode/source",
   "version": "0.0.0",
-  "license": "MIT",
+  "license": "BSL-1.0",
   "scripts": {
     "prepare": "husky",
     "prune": "rm -rf node_modules  **/**/node_modules **/**/dist .nx"
