@@ -50,12 +50,13 @@
     }
   },
   "peerDependencies": {
-    "js-yaml": "4.3.1",
-    "@aenode/errors": "workspace:*"
+    "@aenode/errors": "workspace:*",
+    "js-yaml": "4.3.1"
   },
   "devDependencies": {
-    "js-yaml": "4.3.1",
-    "@aenode/errors": "workspace:*"
+    "@aenode/errors": "workspace:*",
+    "@types/js-yaml": "^4.0.9",
+    "js-yaml": "4.3.1"
   },
   "dependencies": {
     "@swc/helpers": "~0.5.18"
