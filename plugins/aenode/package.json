@@ -13,7 +13,7 @@
     "generator"
   ],
   "bugs": {
-    "email": "aenode+cli@proton.me",
+    "email": "aenode+aenode-cli@proton.me",
     "url": "https://github.com/aenode/aenode/issues"
   },
   "homepage": "https://aenode.github.io/aenode/plugins/aenode",

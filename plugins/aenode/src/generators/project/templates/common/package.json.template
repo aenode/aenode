@@ -11,7 +11,7 @@
 "name": "<%- fullName %>",
 "url": "<%- url %>"
 },
-"homepage": "<%- url %>/<%- username %>/<%- repoName %>/<%- directory %>",
+"homepage": "<%- url %>/<%- repoName %>/<%- directory %>",
 "funding": ["<%- funding %>"],
 "publishConfig": {
 "access": "public",

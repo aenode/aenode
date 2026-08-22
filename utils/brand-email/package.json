@@ -7,11 +7,11 @@
   ],
   "license": "BSL-1.0",
   "author": {
-    "email": "aenode+aenode+brand-email@proton.me",
+    "email": "aenode+brand-email@proton.me",
     "name": "Ahmet Emrebas",
     "url": "https://aenode.github.io"
   },
-  "homepage": "https://aenode.github.io/aenode/aenode/utils/brand-email",
+  "homepage": "https://aenode.github.io/aenode/utils/brand-email",
   "funding": [
     "https://cash.app/$puqlib"
   ],
