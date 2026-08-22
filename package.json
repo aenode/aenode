@@ -4,7 +4,7 @@
   "license": "BSL-1.0",
   "scripts": {
     "prepare": "husky",
-    "prune": "rm -rf node_modules  **/**/node_modules **/**/dist .nx"
+    "aenode:prune": "rm -rf node_modules  **/**/node_modules **/**/dist .nx"
   },
   "private": true,
   "devDependencies": {

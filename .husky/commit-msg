@@ -18,11 +18,12 @@ if ! echo "$COMMIT_MSG" | grep -qE "$PATTERN"; then
   exit 1
 fi
 
-pnpm install 
-pnpm nx run-many -t lint --projects="tag:lib:*,tag:app:cli,tag:app:plugin"  --tuiAutoExit
-pnpm nx run-many -t build --projects="tag:lib:*,tag:app:cli,tag:app:plugin"  --tuiAutoExit
-pnpm nx run-many -t typecheck --projects="tag:lib:*,tag:app:cli,tag:app:plugin"  --tuiAutoExit
-pnpm nx run-many -t test doc  --projects="tag:lib:*,tag:app:cli,tag:app:plugin" --tuiAutoExit
+
+pnpm nx run-many -t build      --projects="tag:lib:*,tag:app:cli,tag:app:plugin"  --tuiAutoExit
+pnpm nx run-many -t lint       --projects="tag:lib:*,tag:app:cli,tag:app:plugin"  --tuiAutoExit
+pnpm nx run-many -t typecheck  --projects="tag:lib:*,tag:app:cli,tag:app:plugin"  --tuiAutoExit
+pnpm nx run-many -t test       --projects="tag:lib:*,tag:app:cli,tag:app:plugin"  --tuiAutoExit
+pnpm nx run-many -t doc        --projects="tag:lib:*,tag:app:cli,tag:app:plugin"  --tuiAutoExit
 
 
 

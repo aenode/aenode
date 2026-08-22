@@ -23,13 +23,7 @@
           "buildDepsName": "build-deps",
           "watchDepsName": "watch-deps"
         }
-      },
-      "exclude": [
-        "clis/aenode/*",
-        "plugins/aenode/*",
-        "modules/fs/*",
-        "libs/errors/*"
-      ]
+      }
     },
     {
       "plugin": "@nx/eslint/plugin",
@@ -43,24 +37,6 @@
         "testTargetName": "test",
         "ciTargetName": "test-ci",
         "testMode": "watch"
-      }
-    },
-    {
-      "plugin": "@nx/js/typescript",
-      "include": [
-        "clis/aenode/*",
-        "plugins/aenode/*",
-        "modules/fs/*",
-        "libs/errors/*"
-      ],
-      "options": {
-        "typecheck": {
-          "targetName": "typecheck"
-        },
-        "build": {
-          "targetName": "build",
-          "configName": "tsconfig.lib.json"
-        }
       }
     }
   ],
