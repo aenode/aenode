@@ -5,16 +5,16 @@
     "outDir": "dist",
     "tsBuildInfoFile": "dist/tsconfig.lib.tsbuildinfo",
     "emitDeclarationOnly": true,
-    "types": [
-      "node"
-    ]
+    "types": ["node"]
   },
-  "include": [
-    "src/**/*.ts"
+  "include": ["src/**/*.ts"],
+  "references": [
+    {
+      "path": "../../libs/types/tsconfig.lib.json"
+    },
+    {
+      "path": "../../libs/errors/tsconfig.lib.json"
+    }
   ],
-  "references": [],
-  "exclude": [
-    "vitest.config.mts",
-    "src/**/*.spec.ts"
-  ]
+  "exclude": ["vitest.config.mts", "src/**/*.spec.ts"]
 }

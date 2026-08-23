@@ -1,8 +1,9 @@
+import 'reflect-metadata';
+//
 import { RequiredOptionError } from '@aenode/errors';
 import { isNotDefined } from '@aenode/is';
 import type { PropValidationOptions } from '@aenode/prop-options';
 import type { ClassType } from '@aenode/types';
-import 'reflect-metadata';
 
 export function normalizePropValidaitonOptions(
   target: Parameters<PropertyDecorator>[0],
