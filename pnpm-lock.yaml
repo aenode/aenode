@@ -184,6 +184,19 @@ importers:
         specifier: workspace:*
         version: link:../../libs/types
 
+  utils/names:
+    dependencies:
+      '@swc/helpers':
+        specifier: ~0.5.18
+        version: 0.5.23
+    devDependencies:
+      '@aenode/errors':
+        specifier: workspace:*
+        version: link:../../libs/errors
+      '@aenode/types':
+        specifier: workspace:*
+        version: link:../../libs/types
+
 packages:
 
   '@acemir/cssom@0.9.31':

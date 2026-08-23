@@ -4,6 +4,25 @@ export type Some<T> = T | undefined | null;
 export type KeyOf<T> = keyof T;
 export type Keys<T> = (keyof T)[];
 
+export type IndexType<I extends readonly unknown[]> = I[number];
+
+export type Entries<T extends object> = {
+  [K in keyof T]-?: [K, T[K]];
+}[keyof T][];
+
+export type UniqueKeys<
+  T extends object,
+  K extends readonly (keyof T)[],
+  Seen extends keyof T = never,
+> = K extends readonly [
+  infer Head extends keyof T,
+  ...infer Tail extends (keyof T)[],
+]
+  ? Head extends Seen
+    ? never
+    : readonly [Head, ...UniqueKeys<T, Tail, Seen | Head>]
+  : K;
+
 export interface ClassType<T = any> {
   new (...args: any[]): T;
 }
@@ -38,3 +57,13 @@ export type DeepPartial<T extends NonArrayObject> = {
 export function types<T extends string>(value: Some<T>): Some<T> {
   return value;
 }
+
+export type Names = {
+  kebab: string;
+  pascal: string;
+  camel: string;
+  snake: string;
+  constant: string;
+  title: string;
+  sentence: string;
+};

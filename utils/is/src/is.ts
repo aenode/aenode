@@ -1,5 +1,16 @@
 import { UndefinedError } from '@aenode/errors';
-import { type DeepPartial, type KeyOf, type Some } from '@aenode/types';
+import {
+  type DeepPartial,
+  type Entries,
+  type IndexType,
+  type KeyOf,
+  type Some,
+  type UniqueKeys,
+} from '@aenode/types';
+
+export function isDate(value: unknown): value is Date {
+  return value instanceof Date;
+}
 
 export function isInvalidDate(value: Date): boolean {
   return value.toString() === new Date('Invalid Date').toString();
@@ -23,6 +34,10 @@ export function isEmptyString(value: unknown): value is '' {
   return false;
 }
 
+export function isArray<T = any>(value: unknown): value is T[] {
+  return Array.isArray(value);
+}
+
 export function isObject(value: unknown): value is object {
   if (isDefined(value) && typeof value === 'object' && !Array.isArray(value)) {
     return true;
@@ -31,26 +46,27 @@ export function isObject(value: unknown): value is object {
   return false;
 }
 
-export function isDate(value: unknown): value is Date {
-  return value instanceof Date;
-}
-
 export function keys<T extends object, K extends KeyOf<T> = KeyOf<T>>(
   value: T,
 ): K[] {
   return Object.keys(value) as K[];
 }
 
-export function pick<T extends object, K extends keyof T = keyof T>(
+export function entries<T extends object>(value: T): Entries<T> {
+  return Object.entries(value) as Entries<T>;
+}
+
+export function pick<T extends object, K extends readonly (keyof T)[]>(
   value: T,
-  ...keysToPick: K[]
-): Pick<T, K> {
+  keysToPick: UniqueKeys<T, K>,
+): Pick<T, IndexType<K>> {
   return keysToPick.reduce(
     (acc, key) => {
-      acc[key] = value[key];
+      Object.assign(acc, { [key]: value[key as IndexType<K>] });
+
       return acc;
     },
-    {} as Pick<T, K>,
+    {} as Pick<T, IndexType<K>>,
   );
 }
 
