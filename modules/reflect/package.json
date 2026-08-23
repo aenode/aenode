@@ -1,17 +1,17 @@
 {
-  "name": "@aenode/prop-options",
-  "version": "0.0.2",
-  "description": "Model property options/metadata",
+  "name": "@aenode/reflect",
+  "version": "0.0.1",
+  "description": "Helper function for reflect-metadata",
   "keywords": [
     "types"
   ],
   "license": "BSL-1.0",
   "author": {
-    "email": "aenode+aenode+prop-options@proton.me",
+    "email": "aenode+aenode+reflect@proton.me",
     "name": "Ahmet Emrebas",
     "url": "https://aenode.github.io"
   },
-  "homepage": "https://aenode.github.io/aenode/libs/prop-options",
+  "homepage": "https://aenode.github.io/aenode/modules/reflect",
   "funding": [
     "https://cash.app/$puqlib"
   ],
@@ -39,9 +39,9 @@
     "!**/*.tsbuildinfo"
   ],
   "nx": {
-    "sourceRoot": "libs/prop-options/src",
+    "sourceRoot": "modules/reflect/src",
     "tags": [
-      "lib:types"
+      "lib:module"
     ],
     "targets": {
       "build": {},
@@ -51,5 +51,12 @@
   },
   "dependencies": {
     "@swc/helpers": "~0.5.18"
+  },
+  "devDependencies": {
+    "@aenode/is": "workspace:*",
+    "reflect-metadata": "^0.2.2"
+  },
+  "peerDependencies": {
+    "reflect-metadata": "^0.2.2"
   }
 }

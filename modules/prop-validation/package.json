@@ -1,0 +1,73 @@
+{
+  "name": "@aenode/prop-validation",
+  "version": "0.0.1",
+  "description": "Simplified property validation decorators from class-validator and class-transform",
+  "keywords": [
+    "types"
+  ],
+  "license": "BSL-1.0",
+  "author": {
+    "email": "aenode+aenode+prop-validation@proton.me",
+    "name": "Ahmet Emrebas",
+    "url": "https://aenode.github.io"
+  },
+  "homepage": "https://aenode.github.io/aenode/modules/prop-validation",
+  "funding": [
+    "https://cash.app/$puqlib"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "@aenode/source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "assets",
+    "bin",
+    "!**/*.tsbuildinfo"
+  ],
+  "nx": {
+    "sourceRoot": "modules/prop-validation/src",
+    "tags": [
+      "lib:module"
+    ],
+    "targets": {
+      "build": {},
+      "lint": {},
+      "doc": {}
+    }
+  },
+  "dependencies": {
+    "@swc/helpers": "~0.5.18"
+  },
+  "devDependencies": {
+    "@aenode/errors": "workspace:*",
+    "@aenode/flow": "workspace:*",
+    "@aenode/is": "workspace:*",
+    "@aenode/prop-options": "workspace:*",
+    "@aenode/reflect": "workspace:*",
+    "@aenode/types": "workspace:*",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.15.1",
+    "reflect-metadata": "^0.2.2"
+  },
+  "peerDependencies": {
+    "@aenode/errors": "workspace:*",
+    "@aenode/is": "workspace:*",
+    "@aenode/prop-options": "workspace:*",
+    "@aenode/types": "workspace:*",
+    "reflect-metadata": "^0.2.2"
+  }
+}

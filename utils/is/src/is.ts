@@ -145,6 +145,10 @@ export function isDefined<T>(value: Some<T>): value is T {
   return value !== undefined && value !== null;
 }
 
+export function isNotDefined<T>(value: Some<T>): value is undefined | null {
+  return value === undefined || value === null;
+}
+
 export function isDefinedOrThrow<T>(value: Some<T>): value is T {
   if (isDefined(value)) {
     return true;

@@ -29,6 +29,15 @@
     },
     {
       "path": "./utils/names"
+    },
+    {
+      "path": "./libs/env"
+    },
+    {
+      "path": "./modules/prop-validation"
+    },
+    {
+      "path": "./modules/reflect"
     }
   ]
 }

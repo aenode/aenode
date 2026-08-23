@@ -1,6 +1,11 @@
-export interface ClassType<T = any> {
-  new (...args: any[]): T;
-}
+export type ClassType =
+  | { new (...args: any[]): any }
+  | StringConstructor
+  | NumberConstructor
+  | BooleanConstructor
+  | BufferConstructor
+  | BigIntConstructor
+  | SymbolConstructor;
 
 export const PropType = {
   String: 'String',
@@ -37,7 +42,7 @@ export type PropDependencyOptions = {
   isNotEqualTo?: string;
 };
 
-export type PropOptions = {
+export type PropValidationOptions = {
   name?: string;
   description?: string;
 
@@ -58,11 +63,6 @@ export type PropOptions = {
    * Array properties require the type option.
    */
   isArray?: boolean;
-
-  /**
-   * Example values
-   */
-  examples?: string[];
 
   /**
    * Defines if the property is required or optional
@@ -108,6 +108,18 @@ export type PropOptions = {
    * Defines format such as email, password, ean, uuid etc.
    */
   format?: string;
+
+  /**
+   * Dependent properties
+   */
+  dependencies?: PropDependencyOptions;
+};
+
+export type PropOptions = PropValidationOptions & {
+  /**
+   * Example values
+   */
+  examples?: string[];
 
   /**
    * Defines if the property is encripted or not

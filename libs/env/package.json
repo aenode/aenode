@@ -1,17 +1,17 @@
 {
-  "name": "@aenode/prop-options",
-  "version": "0.0.2",
-  "description": "Model property options/metadata",
+  "name": "@aenode/env",
+  "version": "0.0.1",
+  "description": "Environment variable keys",
   "keywords": [
     "types"
   ],
   "license": "BSL-1.0",
   "author": {
-    "email": "aenode+aenode+prop-options@proton.me",
+    "email": "aenode+env@proton.me",
     "name": "Ahmet Emrebas",
     "url": "https://aenode.github.io"
   },
-  "homepage": "https://aenode.github.io/aenode/libs/prop-options",
+  "homepage": "https://aenode.github.io/aenode/libs/env",
   "funding": [
     "https://cash.app/$puqlib"
   ],
@@ -39,7 +39,7 @@
     "!**/*.tsbuildinfo"
   ],
   "nx": {
-    "sourceRoot": "libs/prop-options/src",
+    "sourceRoot": "libs/env/src",
     "tags": [
       "lib:types"
     ],

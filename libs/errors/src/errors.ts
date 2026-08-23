@@ -13,6 +13,8 @@ export class BaseCustomError extends Error {
 
 const ERROR_PREFIX = [
   'Required',
+  'RequiredProperty',
+  'RequiredOption',
   'Null',
   'Undefined',
   'EmptyString',
@@ -80,6 +82,8 @@ export const {
   InvalidInputError,
   NullError,
   RequiredError,
+  RequiredPropertyError,
+  RequiredOptionError,
   UndefinedError,
   AccessDeniedError,
   MaxLengthError,
