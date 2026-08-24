@@ -72,12 +72,12 @@ export type PropValidationOptions = {
   /**
    * Defines if the property is the one of the values or enum
    */
-  isIn?: object;
+  isIn?: string[] | number[];
 
   /**
    * Defines if the property is NOT the one of the values or enum
    */
-  isNotIn?: object;
+  isNotIn?: string[] | number[];
 
   /**
    * Defines the minimum allowed numeric value
