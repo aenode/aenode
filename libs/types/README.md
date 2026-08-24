@@ -3,7 +3,7 @@
 
 
 <p align="center">
-  <img   src="https://aenode.github.io/aenode/libs/types/assets/favicon.svg" alt="Aesys Logo" height="128" width="128" style="border-radius: 32px;"/>
+  <img   src="https://aenode.github.io/aenode/libs/types/assets/favicon.svg" alt="Types Logo" height="128" width="128" style="border-radius: 32px;"/>
 </p>
 
 ## ✌ @aenode/types

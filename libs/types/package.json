@@ -1,6 +1,6 @@
 {
   "name": "@aenode/types",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Common types",
   "keywords": [],
   "license": "BSL-1.0",
@@ -9,7 +9,8 @@
     "name": "Ahmet Emrebas",
     "url": "https://aenode.github.io"
   },
-  "homepage": "https://aenode.github.io/aenode/libs/types",
+  "icon": "https://aenode.github.io/aenode/libs/types/assets/favicon.svg",
+  "homepage": "https://aenode.github.io/aenode/libs/type?utm_source=npm",
   "funding": [
     "https://cash.app/$puqlib"
   ],
