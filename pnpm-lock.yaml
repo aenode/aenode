@@ -157,6 +157,9 @@ importers:
       '@swc/helpers':
         specifier: ~0.5.18
         version: 0.5.23
+      class-validator:
+        specifier: 0.15.1
+        version: 0.15.1
     devDependencies:
       '@aenode/errors':
         specifier: workspace:*
@@ -179,9 +182,6 @@ importers:
       class-transformer:
         specifier: ^0.5.1
         version: 0.5.1
-      class-validator:
-        specifier: ^0.15.1
-        version: 0.15.1
       reflect-metadata:
         specifier: ^0.2.2
         version: 0.2.2
