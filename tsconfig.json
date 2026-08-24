@@ -38,6 +38,9 @@
     },
     {
       "path": "./modules/reflect"
+    },
+    {
+      "path": "./apps/api"
     }
   ]
 }
