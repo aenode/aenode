@@ -54,9 +54,11 @@
   },
   "devDependencies": {
     "@aenode/is": "workspace:*",
+    "@aenode/types": "workspace:*",
     "reflect-metadata": "^0.2.2"
   },
   "peerDependencies": {
+    "@aenode/types": "workspace:*",
     "reflect-metadata": "^0.2.2"
   }
 }

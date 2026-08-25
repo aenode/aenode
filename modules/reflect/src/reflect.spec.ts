@@ -1,36 +1,65 @@
+/* eslint-disable @typescript-eslint/consistent-type-imports */
 import 'reflect-metadata';
-import { getType } from './reflect.js';
+//
+import { StringPromise } from '@aenode/types';
+import { getPropertyType, getReturnType } from './reflect.js';
 
 describe('reflect', () => {
-  afterEach(() => {
-    vi.restoreAllMocks();
+  describe('propertyType', () => {
+    it('should get the property type', () => {
+      const Prop: PropertyDecorator = () => ({});
+
+      class Other {
+        @Prop name: string;
+      }
+
+      class OtherArray extends Array<Other> {}
+      class StringArray extends Array<string> {}
+      class Sample {
+        @Prop str: string;
+        @Prop num: number;
+        @Prop bool: boolean;
+        @Prop date: Date;
+        @Prop buffer: Buffer;
+        @Prop other: Other;
+        @Prop others: OtherArray;
+        @Prop strArr: StringArray;
+      }
+
+      const s = new Sample();
+
+      s.strArr = [''];
+
+      expect(getPropertyType(Sample.prototype, 'str')).toEqual(String);
+      expect(getPropertyType(Sample.prototype, 'num')).toEqual(Number);
+      expect(getPropertyType(Sample.prototype, 'bool')).toEqual(Boolean);
+      expect(getPropertyType(Sample.prototype, 'date')).toEqual(Date);
+      expect(getPropertyType(Sample.prototype, 'buffer')).toEqual(Buffer);
+      expect(getPropertyType(Sample.prototype, 'other')).toEqual(Other);
+      expect(getPropertyType(Sample.prototype, 'strArr')).toEqual(StringArray);
+      expect(getPropertyType(Sample.prototype, 'others')).toEqual(OtherArray);
+    });
   });
 
-  describe('propertyType', () => {
-    it('should get the propert type', () => {
-      const fn = vi.fn();
-      function Prop(): PropertyDecorator {
-        return (target, propertyKey) => {
-          const type = getType(target, propertyKey);
-          fn(type);
+  describe('returnType', () => {
+    it('should get the return type', () => {
+      function Method(type?: any): MethodDecorator {
+        return () => {
+          console.log(type);
+          return;
         };
       }
-
       class Sample {
-        @Prop() str: string;
-        @Prop() num: number;
-        @Prop() bool: boolean;
-        @Prop() date: Date;
+        async other(): Promise<string> {
+          return '';
+        }
+        @Method()
+        str(): StringPromise {
+          return this.other();
+        }
       }
 
-      expect(Sample).toBeDefined();
-
-      expect(fn).toHaveBeenCalledWith(String);
-      expect(fn).toHaveBeenCalledWith(Number);
-      expect(fn).toHaveBeenCalledWith(Boolean);
-      expect(fn).toHaveBeenCalledWith(Date);
-
-      expect(fn).toHaveBeenCalledTimes(4);
+      expect(getReturnType(Sample.prototype, 'str')).toEqual(String);
     });
   });
 });

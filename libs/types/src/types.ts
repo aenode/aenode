@@ -26,37 +26,32 @@ export type UniqueKeys<
 export interface ClassType<T = any> {
   new (...args: any[]): T;
 }
-export type NonArrayObject = object;
 
-export type PickRequired<T extends NonArrayObject, K extends keyof T> = Omit<
-  T,
-  K
-> & {
+export type RequiredKeys<T extends object, K extends keyof T> = Omit<T, K> & {
   [P in K]-?: T[K];
 };
 
-export type PickOptional<T extends NonArrayObject, K extends keyof T> = Omit<
-  T,
-  K
-> & {
-  [P in K]: T[K];
+export type OptionalKeys<T extends object, K extends keyof T> = Omit<T, K> & {
+  [P in K]?: T[K];
+};
+
+export type PickRequired<T extends object> = {
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
+  [K in keyof T as {} extends Pick<T, K> ? never : K]: T[K];
+};
+
+export type PickOptional<T extends object> = {
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
+  [K in keyof T as {} extends Pick<T, K> ? K : never]: T[K];
 };
 
 export type Mutable<T, K extends keyof T> = {
   -readonly [P in K]: T extends object ? Mutable<T[P], keyof T[P]> : T[P];
 };
 
-export type Immutable<T, K extends keyof T> = {
-  readonly [P in K]: T extends object ? Immutable<T[P], keyof T[P]> : T[P];
+export type DeepPartial<T extends object> = {
+  [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
 };
-
-export type DeepPartial<T extends NonArrayObject> = {
-  [P in keyof T]?: T[P] extends NonArrayObject ? DeepPartial<T[P]> : T[P];
-};
-
-export function types<T extends string>(value: Some<T>): Some<T> {
-  return value;
-}
 
 export type Names = {
   kebab: string;
@@ -67,3 +62,29 @@ export type Names = {
   title: string;
   sentence: string;
 };
+
+export class StringArray extends Array<string> {
+  static readonly itemType = String;
+}
+export class NumberArray extends Array<string> {
+  static readonly itemType = Number;
+}
+export class BooleanArray extends Array<string> {
+  static readonly itemType = Boolean;
+}
+export class DateArray extends Array<string> {
+  static readonly itemType = Date;
+}
+
+export class StringPromise extends Promise<string> {
+  static readonly itemType = String;
+}
+export class NumberPromise extends Promise<string> {
+  static readonly itemType = Number;
+}
+export class BooleanPromise extends Promise<string> {
+  static readonly itemType = Boolean;
+}
+export class DatePromise extends Array<string> {
+  static readonly itemType = Date;
+}

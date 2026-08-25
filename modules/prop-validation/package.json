@@ -67,6 +67,7 @@
     "@aenode/errors": "workspace:*",
     "@aenode/flow": "workspace:*",
     "@aenode/is": "workspace:*",
+    "@aenode/types": "workspace:*",
     "@aenode/prop-options": "workspace:*",
     "@aenode/reflect": "workspace:*",
     "reflect-metadata": "^0.2.2",

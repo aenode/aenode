@@ -1,14 +1,14 @@
 import 'reflect-metadata';
 //
-import { RequiredOptionError } from '@aenode/errors';
 import { EqualMatcher, PropertyMathcer } from '@aenode/flow';
-import { isNotDefined } from '@aenode/is';
+import type { PropFormat, PropValidationOptions } from '@aenode/prop-options';
+import { getPropertyType } from '@aenode/reflect';
 import {
-  PropType,
-  type PropFormat,
-  type PropValidationOptions,
-} from '@aenode/prop-options';
-import { applyDecorators, getType } from '@aenode/reflect';
+  BooleanArray,
+  DateArray,
+  NumberArray,
+  StringArray,
+} from '@aenode/types';
 import { Exclude, Expose, Type } from 'class-transformer';
 import {
   ArrayMaxSize,
@@ -56,29 +56,6 @@ import {
   type ValidationOptions,
 } from 'class-validator';
 
-export function normalizePropValidaitonOptions(
-  options: PropValidationOptions = {},
-  target: Parameters<PropertyDecorator>[0],
-  propertyKey: Parameters<PropertyDecorator>[1],
-): PropValidationOptions {
-  if (options.isArray === true) {
-    if (isNotDefined(options.type)) {
-      throw new Error(`The type options is required for array properties!`);
-    }
-  }
-
-  if (isNotDefined(options.type)) {
-    const inferedType = getType(target, propertyKey);
-    if (PropType[inferedType.name as PropType] === undefined) {
-      throw new RequiredOptionError(
-        `The type option is required! The infered type is not a known typescript type.`,
-      );
-    }
-  }
-
-  return options;
-}
-
 export function PropFormatValidation(
   format: string,
   validationOptions: ValidationOptions,
@@ -121,16 +98,33 @@ export function PropFormatValidation(
     collectedDecorator?.(...args);
   };
 }
+
 export function PropValidation(
   options: PropValidationOptions = {},
 ): PropertyDecorator {
   return (...args) => {
-    options = normalizePropValidaitonOptions(options, ...args);
+    const inferedType = getPropertyType(args[0], args[1]);
+    options.type ??= () => inferedType;
+    options.isArray ??= /Array/.test(inferedType.name);
+
     const vo: ValidationOptions = { each: options.isArray === true };
+    if (
+      !new Set([
+        String,
+        Number,
+        Boolean,
+        Date,
+        StringArray,
+        NumberArray,
+        BooleanArray,
+        DateArray,
+      ]).has(inferedType as any)
+    ) {
+      Type(() => inferedType)(...args);
+      ValidateNested(vo)(...args);
+    }
 
     const collectedDecorators = new PropertyMathcer(options)
-
-      .isDefined('type', (v) => applyDecorators(Type(v), ValidateNested(vo)))
       .isTrue('isArray', () => IsArray())
       .isTrue(
         'excluded',
@@ -152,10 +146,7 @@ export function PropValidation(
       .isDefined('maxLength', (v) => MaxLength(v, vo))
       .isDefined('pattern', (v) => Matches(new RegExp(v), vo))
 
-      .isDefined('format', () =>
-        PropFormatValidation(options.format as PropFormat, vo),
-      )
-
+      .isDefined('format', (v) => PropFormatValidation(v, vo))
       .isDefined('maxDate', (v) => MaxDate(v, vo))
       .isDefined('minDate', (v) => MinDate(v, vo))
       .isDefined('maxItems', (v) => ArrayMaxSize(v))
