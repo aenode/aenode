@@ -2,7 +2,7 @@
 
 
 <p align="center">
-  <img src="<%- url %>/<%- repoName %>/<%- directory %>/media/favicon.svg" alt="App logo" height="128" width="128" style="border-radius: 32px;" />
+  <img src="<%- url %>/<%- repoName %>/<%- directory %>/assets/favicon.svg" alt="App logo" height="128" width="128" style="border-radius: 32px;" />
 </p>
 
 ## <%- projectName %>

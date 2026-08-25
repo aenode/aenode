@@ -1,3 +1,14 @@
+## 0.0.6 (2026-08-25)
+
+### 🚀 Features
+
+- created resource name extractor function ([78459e7](https://github.com/aenode/aenode/commit/78459e7))
+- created common nestjs decoratos wrappers ([622218d](https://github.com/aenode/aenode/commit/622218d))
+
+### ❤️ Thank You
+
+- AESYS | Ahmet Emrebas
+
 ## 0.0.5 (2026-08-25)
 
 ### 🚀 Features
