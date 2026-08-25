@@ -1,3 +1,24 @@
+## 0.0.4 (2026-08-25)
+
+### 🚀 Features
+
+- created equal-matcher ([5809896](https://github.com/aenode/aenode/commit/5809896))
+- created names utility ([5df0fd1](https://github.com/aenode/aenode/commit/5df0fd1))
+- created reflect and prop-validation libraries ([49e7e86](https://github.com/aenode/aenode/commit/49e7e86))
+- created reflect and prop-validation libraries ([09f6896](https://github.com/aenode/aenode/commit/09f6896))
+- created sample api application ([82bab29](https://github.com/aenode/aenode/commit/82bab29))
+- created prop string valdiation decorator ([a9fa697](https://github.com/aenode/aenode/commit/a9fa697))
+- created prop string valdiation decorator ([faec19d](https://github.com/aenode/aenode/commit/faec19d))
+- fixed the favicon link in packgae.json ([140be64](https://github.com/aenode/aenode/commit/140be64))
+
+### 🩹 Fixes
+
+- fixed favicon paths ([b3416c0](https://github.com/aenode/aenode/commit/b3416c0))
+
+### ❤️ Thank You
+
+- AESYS | Ahmet Emrebas
+
 ## 0.0.2 (2026-08-22)
 
 ### 🚀 Features

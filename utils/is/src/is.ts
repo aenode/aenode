@@ -166,3 +166,12 @@ export function merge<T extends object>(
       return acc;
     }, {} as T);
 }
+
+export function hasNameProperty<T>(value: T): value is T & { name: string } {
+  return (
+    typeof value === 'object' &&
+    value !== null &&
+    Object.hasOwn(value, 'name') &&
+    typeof (value as { name?: unknown }).name === 'string'
+  );
+}

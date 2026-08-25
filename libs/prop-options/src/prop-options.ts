@@ -1,35 +1,44 @@
-export type ClassType =
-  | { new (...args: any[]): any }
-  | StringConstructor
-  | NumberConstructor
-  | BooleanConstructor
-  | BufferConstructor
-  | BigIntConstructor
-  | SymbolConstructor;
+export declare type ClassType<T = any> = {
+  new (...args: any[]): T;
+};
 
 export const PropType = {
   String: 'String',
-  Json: 'Json',
   Number: 'Number',
   Boolean: 'Boolean',
   Date: 'Date',
-  Buffer: 'Buffer',
-  Object: 'Object',
 };
 
 export type PropType = keyof typeof PropType;
 
 export type PropFormat =
   | 'email'
-  | 'password'
   | 'uuid'
+  | 'alpha'
+  | 'alphanumeric'
+  | 'ascii'
+  | 'bic'
+  | 'base32'
+  | 'base64'
+  | 'base58'
+  | 'date'
+  | 'boolean'
+  | 'json'
+  | 'password'
+  | 'btc-address'
+  | 'credit-card'
+  | 'data-uri'
+  | 'currency'
   | 'ean'
-  | 'phone'
-  | 'url'
-  | 'ip4'
-  | 'ip6'
+  | 'hsl'
+  | 'hash'
   | 'jwt'
-  | 'currency';
+  | 'fqdn'
+  | 'isbn'
+  | 'semver'
+  | 'iban'
+  | 'phone'
+  | 'passport-number';
 
 export type PropDependencyOptions = {
   isMoreThan?: string;
@@ -40,16 +49,24 @@ export type PropDependencyOptions = {
 
   isEqualTo?: string;
   isNotEqualTo?: string;
+
+  isBefore?: string;
+
+  isAfter?: string;
 };
 
+export type PropertyFormat = 'email' | 'password';
+
 export type PropValidationOptions = {
+  /**
+   * Property name
+   */
   name?: string;
-  description?: string;
 
   /**
-   * This property is internaly used to store the target type name
+   * Description
    */
-  typeName?: PropType;
+  description?: string;
 
   /**
    * This property is required for object and array properties. Primitive types are infered from the reflect-metadata.
@@ -104,15 +121,32 @@ export type PropValidationOptions = {
    */
   pattern?: string;
 
+  minItems?: number;
+
+  maxItems?: number;
+
   /**
    * Defines format such as email, password, ean, uuid etc.
    */
-  format?: string;
+  format?: PropertyFormat;
+
+  maxDate?: () => Date;
+
+  minDate?: () => Date;
 
   /**
    * Dependent properties
    */
   dependencies?: PropDependencyOptions;
+
+  /**
+   * By default all properties are exposed
+   */
+  excluded?: boolean;
+  /**
+   * Specifies the transform and validation groups that determine swhether this property is included when performing the operation.
+   */
+  groups?: string[];
 };
 
 export type PropOptions = PropValidationOptions & {
@@ -165,9 +199,4 @@ export type PropOptions = PropValidationOptions & {
    * Defines if the property is unique or not
    */
   isUnique?: boolean;
-
-  /**
-   * Specifies the transform and validation groups that determine swhether this property is included when performing the operation.
-   */
-  groups?: string[];
 };

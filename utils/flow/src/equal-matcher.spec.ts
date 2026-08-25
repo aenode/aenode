@@ -16,7 +16,7 @@ describe('EnumMatcher', () => {
         .isEqualTo('0', fn0)
         .isEqualTo('1', fn1)
         .isEqualTo('2', fn2)
-        .done();
+        .collect();
     }
 
     some('0');

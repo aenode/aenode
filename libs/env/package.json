@@ -1,6 +1,6 @@
 {
   "name": "@aenode/env",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "Environment variable keys",
   "keywords": [
     "types"
@@ -11,6 +11,7 @@
     "name": "Ahmet Emrebas",
     "url": "https://aenode.github.io"
   },
+  "icon": "https://aenode.github.io/aenode/libs/env/assets/favicon.svg",
   "homepage": "https://aenode.github.io/aenode/libs/env",
   "funding": [
     "https://cash.app/$puqlib"

@@ -1,6 +1,6 @@
 {
   "name": "@aenode/prop-validation",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "Simplified property validation decorators from class-validator and class-transform",
   "keywords": [
     "types"
@@ -50,8 +50,7 @@
     }
   },
   "dependencies": {
-    "@swc/helpers": "~0.5.18",
-    "class-validator": "0.15.1"
+    "@swc/helpers": "~0.5.18"
   },
   "devDependencies": {
     "@aenode/errors": "workspace:*",
@@ -70,7 +69,8 @@
     "@aenode/is": "workspace:*",
     "@aenode/prop-options": "workspace:*",
     "@aenode/reflect": "workspace:*",
-    "@aenode/types": "workspace:*",
-    "reflect-metadata": "^0.2.2"
+    "reflect-metadata": "^0.2.2",
+    "class-validator": "0.15.1",
+    "class-transformer": "0.5.1"
   }
 }
