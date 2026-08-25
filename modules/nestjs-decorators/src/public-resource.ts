@@ -11,7 +11,7 @@ export function isPublicResource(
   reflector: Reflector,
   context: ExecutionContext,
 ) {
-  return reflector.getAllAndOverride<boolean>(reflector, [
+  return reflector.getAllAndOverride<boolean>(PUBLIC_TOKEN, [
     context.getHandler(),
     context.getClass(),
   ]);

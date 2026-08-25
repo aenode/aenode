@@ -23,7 +23,7 @@
             "  reflector: Reflector,",
             "  context: ExecutionContext,",
             ") {",
-            "  return reflector.get(reflector, context.getClass());",
+            "  return reflector.get($1Token, context.getClass());",
             "}",
             "",
             "",

@@ -8,7 +8,7 @@ export function getResourceName(
   reflector: Reflector,
   context: ExecutionContext,
 ) {
-  return reflector.get(reflector, context.getClass());
+  return reflector.get(RESOURCE_NAME_TOKEN, context.getClass());
 }
 
 export function ResouceName(resourceName?: string): ClassDecorator {

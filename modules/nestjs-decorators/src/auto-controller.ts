@@ -1,6 +1,6 @@
 import { extractResourceName, names } from '@aenode/names';
 import { getReturnType } from '@aenode/reflect';
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Post } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
   ApiInternalServerErrorResponse,
@@ -8,6 +8,7 @@ import {
   ApiOperation,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
+import { ResouceName } from './resource-name.js';
 
 export function CommonMethod(resourceName: string): MethodDecorator {
   return (...args) => {
@@ -17,12 +18,21 @@ export function CommonMethod(resourceName: string): MethodDecorator {
       ApiBadRequestResponse(),
       ApiInternalServerErrorResponse(),
       ApiUnauthorizedResponse(),
-      ApiOperation({ summary: `${resourceName} | ${sentence} ` }),
+      ApiOperation({
+        summary: `${resourceName} | ${sentence} `,
+        operationId: `${resourceName}_${args[1].toString()}`,
+      }),
     ].forEach((d) => d(...args));
   };
 }
 
-export function FindMany(resourceName: string): MethodDecorator {
+export function CreateMethod(resouceName: string): MethodDecorator {
+  return (...args) => {
+    [Post(), CommonMethod(resouceName)].forEach((d) => d(...args));
+  };
+}
+
+export function FindManyMethod(resourceName: string): MethodDecorator {
   return (...args) => {
     [
       Get(),
@@ -32,19 +42,10 @@ export function FindMany(resourceName: string): MethodDecorator {
   };
 }
 
-export function FindBy(resourceName: string, key: string): MethodDecorator {
+export function FindByIdMethod(resourceName: string): MethodDecorator {
   return (...args) => {
     [
-      Get(`:${key}`),
-      CommonMethod(resourceName),
-      ApiOkResponse({ type: () => getReturnType(args[0], args[1]) }),
-    ].forEach((d) => d(...args));
-  };
-}
-export function FindById(resourceName: string): MethodDecorator {
-  return (...args) => {
-    [
-      Get(':id'),
+      Get(`:id`),
       CommonMethod(resourceName),
       ApiOkResponse({ type: () => getReturnType(args[0], args[1]) }),
     ].forEach((d) => d(...args));
@@ -56,8 +57,6 @@ export function AutoController(): ClassDecorator {
     const resouceName = extractResourceName(target.name);
     const { kebab } = names(resouceName);
 
-    Controller(kebab)(target);
-
-    console.log(target);
+    [Controller(kebab), ResouceName(resouceName)].forEach((d) => d(target));
   };
 }

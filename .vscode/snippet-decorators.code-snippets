@@ -51,17 +51,4 @@
         ],
         "scope": "typescript"
     },
-    "decorator class": {
-        "prefix": "decorator class",
-        "body": [
-            "export type $1Options = {$2};",
-            "export function $1(options: $1Options): ClassDecorator {",
-            "  return (...args) => {",
-            "$0",
-            "    return args;",
-            "  };",
-            "}",
-        ],
-        "scope": "typescript"
-    },
 }
