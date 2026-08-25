@@ -1,3 +1,13 @@
+## 0.0.5 (2026-08-25)
+
+### 🚀 Features
+
+- improved the property options normalization ([e502391](https://github.com/aenode/aenode/commit/e502391))
+
+### ❤️ Thank You
+
+- AESYS | Ahmet Emrebas
+
 ## 0.0.4 (2026-08-25)
 
 ### 🚀 Features

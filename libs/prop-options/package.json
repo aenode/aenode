@@ -1,6 +1,6 @@
 {
   "name": "@aenode/prop-options",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Model property options/metadata",
   "keywords": [
     "types"
