@@ -4,6 +4,7 @@ import { files } from '../path/files.js';
 
 /**
  * Copy files recursively by consuming a streaming files generator.
+ *
  * @param sourcePath Base source directory
  * @param targetPath Base destination directory
  * @param pipes Transformation functions for the destination path
