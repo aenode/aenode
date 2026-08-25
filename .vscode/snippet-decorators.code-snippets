@@ -11,5 +11,57 @@
             "}",
         ],
         "scope": "typescript"
-    }
+    },
+    "decorator method": {
+        "prefix": "decorator method",
+        "body": [
+            "export type $1Options = {$2};",
+            "export function $1(options: $1Options): MethodDecorator {",
+            "  return (...args) => {",
+            "$0",
+            "    return args;",
+            "  };",
+            "}",
+        ],
+        "scope": "typescript"
+    },
+    "decorator class": {
+        "prefix": "decorator class",
+        "body": [
+            "export type $1Options = {$2};",
+            "export function $1(options: $1Options): ClassDecorator {",
+            "  return (...args) => {",
+            "$0",
+            "    return args;",
+            "  };",
+            "}",
+        ],
+        "scope": "typescript"
+    },
+    "decorator param": {
+        "prefix": "decorator param",
+        "body": [
+            "export type $1Options = {$2};",
+            "export function $1(options: $1Options): ParameterDecorator {",
+            "  return (...args) => {",
+            "$0",
+            "    return args;",
+            "  };",
+            "}",
+        ],
+        "scope": "typescript"
+    },
+    "decorator class": {
+        "prefix": "decorator class",
+        "body": [
+            "export type $1Options = {$2};",
+            "export function $1(options: $1Options): ClassDecorator {",
+            "  return (...args) => {",
+            "$0",
+            "    return args;",
+            "  };",
+            "}",
+        ],
+        "scope": "typescript"
+    },
 }

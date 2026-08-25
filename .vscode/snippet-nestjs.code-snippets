@@ -9,5 +9,30 @@
             "",
         ],
         "scope": "typescripts"
+    },
+    "metadat functions": {
+        "prefix": "metadata functions",
+        "body": [
+            "import { SetMetadata, type ExecutionContext } from '@nestjs/common';",
+            "import { type Reflector } from '@nestjs/core';",
+            "",
+            "export const $1Token = Symbol('$1_TOKEN');",
+            "",
+            "",
+            "export function get$1(",
+            "  reflector: Reflector,",
+            "  context: ExecutionContext,",
+            ") {",
+            "  return reflector.get(reflector, context.getClass());",
+            "}",
+            "",
+            "",
+            "export function $1(value?: string): ClassDecorator {",
+            "  return (...args) => {",
+            "    SetMetadata($1Token, value)(...args);",
+            "  };",
+            "}",
+        ],
+        "scope": "typescript"
     }
 }
