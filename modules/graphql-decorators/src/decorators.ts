@@ -97,3 +97,15 @@ export function AutoResolver(type: () => Type): ClassDecorator {
     Resolver(type, {})(...args);
   };
 }
+
+export function ArgsInput(type: () => Type): ParameterDecorator {
+  return (...args) => {
+    Args({ name: 'input', type })(...args);
+  };
+}
+
+export function ArgsQuery(type: () => Type): ParameterDecorator {
+  return (...args) => {
+    Args({ name: 'query', type, nullable: true })(...args);
+  };
+}

@@ -1,6 +1,7 @@
 import {
-  Args,
   ArgsId,
+  ArgsInput,
+  ArgsQuery,
   MutationMethod,
   PubSub,
   QueryMethod,
@@ -11,6 +12,7 @@ import { SampleUpdateInput } from './inputs/sample-update-input.js';
 import { Sample } from './inputs/sample.js';
 
 import { Resolver } from '@nestjs/graphql';
+import { SampleQueryArgs } from './inputs/sample-query-args.js';
 
 @Resolver(() => Sample)
 export class SampleResolver {
@@ -18,13 +20,16 @@ export class SampleResolver {
   protected readonly sub = new PubSub();
 
   @QueryMethod(() => [Sample])
-  async findMany() {
-    return this.list;
+  async findMany(@ArgsQuery(() => SampleQueryArgs) query: SampleQueryArgs) {
+    query.skip ??= 0;
+    query.take ??= 20;
+    const till = query.skip + query.take;
+    return this.list.slice(query.skip, till);
   }
 
   @MutationMethod(() => Sample)
   async create(
-    @Args({ name: 'input', type: () => SampleCreateInput })
+    @ArgsInput(() => SampleCreateInput)
     input: SampleCreateInput,
   ) {
     await this.sub.publish('onCreateSample', { onCreateSample: input });
@@ -37,7 +42,7 @@ export class SampleResolver {
   @MutationMethod(() => Sample)
   async update(
     @ArgsId() id: number,
-    @Args({ name: 'input', type: () => SampleUpdateInput })
+    @ArgsInput(() => SampleUpdateInput)
     input: SampleUpdateInput,
   ) {
     await this.sub.publish('onUpdateSample', { onUpdateSample: input });
