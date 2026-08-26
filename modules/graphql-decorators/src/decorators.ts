@@ -1,7 +1,35 @@
 import { extractResourceName } from '@aenode/names';
 import { ParseIntPipe, ParseUUIDPipe, type Type } from '@nestjs/common';
-import { Args, Query, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql';
 
+export function QueryMethod(type: () => Type | Type[]): MethodDecorator {
+  return (...args) => {
+    const className = args[0].constructor.name;
+    const resourceName = extractResourceName(className);
+    const operationName = `${args[1].toString()}${resourceName}`;
+    Query(type, { name: operationName })(...args);
+  };
+}
+
+export function MutationMethod(
+  returnType: () => Type | [Type],
+): MethodDecorator {
+  return (...args) => {
+    const className = args[0].constructor.name;
+    const resourceName = extractResourceName(className);
+    const operationName = `${args[1].toString()}${resourceName}`;
+    Mutation(returnType, { name: operationName })(...args);
+  };
+}
+
+export function SubscriptionMethod(type: () => Type | Type[]): MethodDecorator {
+  return (...args) => {
+    const className = args[0].constructor.name;
+    const resourceName = extractResourceName(className);
+    const operationName = `${args[1].toString()}${resourceName}`;
+    Subscription(type, { name: operationName })(...args);
+  };
+}
 /**
  * GraphQl find-many method decorator
  *

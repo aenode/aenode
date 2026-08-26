@@ -32,10 +32,14 @@
       "default": "./dist/index.js"
     },
     "./graphql": {
-      "@aenode/source": "./src/index.ts",
       "types": "./dist/graphql/index.d.ts",
       "import": "./dist/graphql/index.js",
       "default": "./dist/graphql/index.js"
+    },
+    "./swagger": {
+      "types": "./dist/swagger/index.d.ts",
+      "import": "./dist/swagger/index.js",
+      "default": "./dist/swagger/index.js"
     }
   },
   "files": [

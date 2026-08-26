@@ -104,3 +104,6 @@ minimumReleaseAgeExclude:
   - '@aenode/prop@0.0.1'
   - '@aenode/reflect@0.0.6'
   - '@aenode/types@0.0.6'
+  - '@aenode/names@0.0.6'
+  - '@aenode/nestjs-decorators@0.0.6'
+  - '@aenode/nestjs@0.0.1'
