@@ -1,0 +1,79 @@
+{
+  "name": "@aenode/prop",
+  "version": "0.0.1",
+  "description": "Nestjs/Graphql data transfer object property decorators",
+  "keywords": [
+    "types"
+  ],
+  "license": "BSL-1.0",
+  "author": {
+    "email": "aenode+aenode+prop@proton.me",
+    "name": "Ahmet Emrebas",
+    "url": "https://aenode.github.io"
+  },
+  "homepage": "https://aenode.github.io/aenode/modules/prop",
+  "funding": [
+    "https://cash.app/$puqlib"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "@aenode/source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./restapi": {
+      "types": "./dist/restapi/index.d.ts",
+      "import": "./dist/restapi/index.js",
+      "default": "./dist/restapi/index.js"
+    },
+    "./graphql": {
+      "types": "./dist/graphql/index.d.ts",
+      "import": "./dist/graphql/index.js",
+      "default": "./dist/graphql/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "assets",
+    "bin",
+    "!**/*.tsbuildinfo"
+  ],
+  "nx": {
+    "sourceRoot": "modules/prop/src",
+    "tags": [
+      "lib:module"
+    ],
+    "targets": {
+      "build": {},
+      "lint": {},
+      "doc": {}
+    }
+  },
+  "dependencies": {
+    "@swc/helpers": "~0.5.18"
+  },
+  "devDependencies": {
+    "@aenode/prop-validation": "workspace:*",
+    "@aenode/reflect": "workspace:*",
+    "@aenode/types": "workspace:*",
+    "@nestjs/common": "^11.2.1",
+    "@nestjs/graphql": "^13.4.5",
+    "@nestjs/swagger": "^11.4.7"
+  },
+  "peerDependencies": {
+    "@aenode/prop-validation": "workspace:*",
+    "@aenode/reflect": "workspace:*",
+    "@nestjs/graphql": "^13.4.5",
+    "@nestjs/swagger": "^11.4.7"
+  }
+}

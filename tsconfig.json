@@ -47,6 +47,18 @@
     },
     {
       "path": "./modules/nestjs-helpers"
+    },
+    {
+      "path": "./modules/nestjs"
+    },
+    {
+      "path": "./modules/prop"
+    },
+    {
+      "path": "./modules/graphql"
+    },
+    {
+      "path": "./modules/graphql-decorators"
     }
   ]
 }

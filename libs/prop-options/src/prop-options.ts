@@ -147,6 +147,8 @@ export type PropValidationOptions = {
    * Specifies the transform and validation groups that determine swhether this property is included when performing the operation.
    */
   groups?: string[];
+
+  defaultValue?: any;
 };
 
 export type PropOptions = PropValidationOptions & {

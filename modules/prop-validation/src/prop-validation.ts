@@ -9,7 +9,7 @@ import {
   NumberArray,
   StringArray,
 } from '@aenode/types';
-import { Exclude, Expose, Type } from 'class-transformer';
+import { Exclude, Expose, Transform, Type } from 'class-transformer';
 import {
   ArrayMaxSize,
   ArrayMinSize,
@@ -55,6 +55,8 @@ import {
   ValidateNested,
   type ValidationOptions,
 } from 'class-validator';
+
+export type { PropValidationOptions } from '@aenode/prop-options';
 
 export function PropFormatValidation(
   format: string,
@@ -151,6 +153,12 @@ export function PropValidation(
       .isDefined('minDate', (v) => MinDate(v, vo))
       .isDefined('maxItems', (v) => ArrayMaxSize(v))
       .isDefined('minItems', (v) => ArrayMinSize(v))
+
+      .isDefined('defaultValue', (v) => {
+        return Transform(({ value }) => {
+          return value ?? v;
+        });
+      })
 
       .collect();
 

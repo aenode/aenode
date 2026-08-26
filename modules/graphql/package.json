@@ -1,0 +1,61 @@
+{
+  "name": "@aenode/graphql",
+  "version": "0.0.1",
+  "description": "Common graphql parts",
+  "keywords": [
+    "types"
+  ],
+  "license": "BSL-1.0",
+  "author": {
+    "email": "aenode+aenode+graphql@proton.me",
+    "name": "Ahmet Emrebas",
+    "url": "https://aenode.github.io"
+  },
+  "homepage": "https://aenode.github.io/aenode/modules/graphql",
+  "funding": [
+    "https://cash.app/$puqlib"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "@aenode/source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "assets",
+    "bin",
+    "!**/*.tsbuildinfo"
+  ],
+  "nx": {
+    "sourceRoot": "modules/graphql/src",
+    "tags": [
+      "lib:module"
+    ],
+    "targets": {
+      "build": {},
+      "lint": {},
+      "doc": {}
+    }
+  },
+  "dependencies": {
+    "@swc/helpers": "~0.5.18"
+  },
+  "devDependencies": {
+    "@nestjs/common": "^11.2.1",
+    "@nestjs/core": "^11.2.1",
+    "@nestjs/graphql": "^13.4.5"
+  },
+  "peerDependencies": {}
+}

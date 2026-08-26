@@ -1,5 +1,5 @@
 import { extractResourceName, names } from '@aenode/names';
-import { getReturnType } from '@aenode/reflect';
+import { getMethodNames, getReturnType } from '@aenode/reflect';
 import { Controller, Get, Post } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
@@ -9,6 +9,16 @@ import {
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
 import { ResouceName } from './resource-name.js';
+
+export const MethodName = {
+  findMany: 'findMany',
+  findOneById: 'findOneById',
+  create: 'create',
+  update: 'update',
+  delete: 'delete',
+};
+
+export type MethodName = keyof typeof MethodName;
 
 export function CommonMethod(resourceName: string): MethodDecorator {
   return (...args) => {
@@ -52,11 +62,53 @@ export function FindByIdMethod(resourceName: string): MethodDecorator {
   };
 }
 
+export function AutoMethod(resourceName?: string): MethodDecorator {
+  return (...args) => {
+    const methodName = args[1].toString();
+
+    resourceName ??= extractResourceName(args[0].constructor.name);
+
+    switch (methodName as MethodName) {
+      case 'findMany': {
+        FindManyMethod(resourceName)(...args);
+        break;
+      }
+      case 'findOneById': {
+        FindManyMethod(resourceName)(...args);
+        break;
+      }
+      case 'create': {
+        FindManyMethod(resourceName)(...args);
+        break;
+      }
+      case 'update': {
+        FindManyMethod(resourceName)(...args);
+        break;
+      }
+      case 'delete': {
+        FindManyMethod(resourceName)(...args);
+        break;
+      }
+    }
+  };
+}
+
 export function AutoController(): ClassDecorator {
-  return (target) => {
+  return (target: Parameters<ClassDecorator>[0]) => {
     const resouceName = extractResourceName(target.name);
     const { kebab } = names(resouceName);
 
     [Controller(kebab), ResouceName(resouceName)].forEach((d) => d(target));
+
+    const methodNames = getMethodNames(target.prototype);
+
+    for (const methodName of methodNames) {
+      const descriptor = Object.getOwnPropertyDescriptor(
+        target.prototype,
+        methodName,
+      );
+      if (!descriptor) throw new Error('No descriptor');
+      AutoMethod(resouceName)(target, methodName, descriptor);
+    }
   };
 }
