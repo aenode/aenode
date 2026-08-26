@@ -31,6 +31,7 @@ export async function projectGenerator(
       case 'api':
       case 'plugin':
       case 'cli':
+      case 'prisma':
       case 'gql': {
         return `app:${options.type}`;
       }
@@ -38,7 +39,7 @@ export async function projectGenerator(
         return `lib:${options.type}`;
       }
       case 'module': {
-        return `lib:${options.type}`;
+        return `lib:module`;
       }
       case 'types': {
         return `lib:${options.type}`;
@@ -50,6 +51,7 @@ export async function projectGenerator(
   })();
 
   const allNames = names(name);
+
   generateFiles(tree, commonSource, target, {
     ...options,
     projectName,

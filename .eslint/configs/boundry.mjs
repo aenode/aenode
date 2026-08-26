@@ -10,14 +10,23 @@ export default [
           depConstraints: [
             {
               sourceTag: 'app:system',
-              onlyDependOnLibsWithTags: ['app:api', 'app:gql', 'app:module'],
+              onlyDependOnLibsWithTags: [
+                'app:api',
+                'app:gql',
+                'app:module',
+                'app:prisma',
+              ],
             },
             {
               sourceTag: 'app:api',
-              onlyDependOnLibsWithTags: ['app:cli', 'lib:module'],
+              onlyDependOnLibsWithTags: ['app:cli', 'lib:module', 'app:prisma'],
             },
             {
               sourceTag: 'app:gql',
+              onlyDependOnLibsWithTags: ['app:cli', 'lib:module', 'app:prisma'],
+            },
+            {
+              sourceTag: 'app:prisma',
               onlyDependOnLibsWithTags: ['app:cli', 'lib:module'],
             },
             {

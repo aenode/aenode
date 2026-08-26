@@ -2,7 +2,7 @@
 
 
 <p align="center">
-  <img src="https://aenode.github.io/aenode/apps/api/media/favicon.svg" alt="App logo" height="128" width="128" style="border-radius: 32px;" />
+  <img src="https://aenode.github.io/aenode/apps/api/assets/favicon.svg" alt="App logo" height="128" width="128" style="border-radius: 32px;" />
 </p>
 
 ## @aenode/api

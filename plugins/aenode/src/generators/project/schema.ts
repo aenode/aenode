@@ -7,6 +7,7 @@ export const ProjectType = {
   plugin: 'plugin',
   types: 'types',
   utils: 'utils',
+  prisma: 'prisma',
 };
 
 export type ProjectType = keyof typeof ProjectType;
