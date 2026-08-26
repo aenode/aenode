@@ -1,6 +1,6 @@
 {
   "name": "@aenode/fs",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Nodejs better IO wrapper",
   "keywords": [
     "types"

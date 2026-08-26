@@ -1,6 +1,6 @@
 {
   "name": "@aenode/prop",
-  "version": "0.0.1",
+  "version": "0.0.7",
   "description": "Nestjs/Graphql data transfer object property decorators",
   "keywords": [
     "types"

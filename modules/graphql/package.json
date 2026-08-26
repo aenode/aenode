@@ -1,6 +1,6 @@
 {
   "name": "@aenode/graphql",
-  "version": "0.0.1",
+  "version": "0.0.7",
   "description": "Common graphql parts",
   "keywords": [
     "types"

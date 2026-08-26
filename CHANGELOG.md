@@ -1,3 +1,20 @@
+## 0.0.7 (2026-08-26)
+
+### 🚀 Features
+
+- created resource name extractor function ([78459e7](https://github.com/aenode/aenode/commit/78459e7))
+- created common nestjs decoratos wrappers ([622218d](https://github.com/aenode/aenode/commit/622218d))
+- created metadata decorators ([9920bb5](https://github.com/aenode/aenode/commit/9920bb5))
+- created metadata decorators ([64b0c81](https://github.com/aenode/aenode/commit/64b0c81))
+- created common nestjs/graphql modules ([99f8d1d](https://github.com/aenode/aenode/commit/99f8d1d))
+- created common nestjs/graphql modules ([2072991](https://github.com/aenode/aenode/commit/2072991))
+- centeralized the restapi/graphql componetns, decorators, and moudle form a single dedicated module ([36565a6](https://github.com/aenode/aenode/commit/36565a6))
+- created sample sub/pub ([fc9db38](https://github.com/aenode/aenode/commit/fc9db38))
+
+### ❤️ Thank You
+
+- AESYS | Ahmet Emrebas
+
 ## 0.0.6 (2026-08-25)
 
 ### 🚀 Features
