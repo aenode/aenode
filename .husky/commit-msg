@@ -23,7 +23,6 @@ pnpm nx affected -t build       --tuiAutoExit
 pnpm nx affected -t lint        --tuiAutoExit
 pnpm nx affected -t typecheck   --tuiAutoExit
 pnpm nx affected -t test        --tuiAutoExit
-pnpm nx affected -t doc         --tuiAutoExit
 
 
 
