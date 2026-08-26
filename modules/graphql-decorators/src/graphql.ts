@@ -1,1 +1,8 @@
-export { Args, Query, Resolver } from '@nestjs/graphql';
+export {
+  Args,
+  OmitType,
+  PartialType,
+  PickType,
+  Query,
+  Resolver,
+} from '@nestjs/graphql';

@@ -1,13 +1,13 @@
 import { Module } from '@aenode/nestjs';
 import { AppModule } from '@aenode/nestjs/graphql';
-import { EchoResolver } from './echo/echo.resolver.js';
-
+import { SampleResolver } from './sample/sample.resolver.js';
 @Module({
   imports: [
     AppModule.register({
       imports: [],
+      providers: [SampleResolver],
     }),
   ],
-  providers: [EchoResolver],
+  providers: [],
 })
 export class MainModule {}

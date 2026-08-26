@@ -54,9 +54,11 @@
     "@swc/helpers": "~0.5.18"
   },
   "devDependencies": {
-    "@aenode/nestjs": "workspace:^"
+    "@aenode/nestjs": "workspace:^",
+    "@nestjs/graphql": "^13.4.5"
   },
   "peerDependencies": {
-    "@aenode/nestjs": "workspace:^"
+    "@aenode/nestjs": "workspace:^",
+    "@nestjs/graphql": "^13.4.5"
   }
 }
