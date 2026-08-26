@@ -158,6 +158,9 @@ importers:
         specifier: ~0.5.18
         version: 0.5.23
     devDependencies:
+      '@aenode/graphql-decorators':
+        specifier: workspace:*
+        version: link:../graphql-decorators
       '@aenode/prop':
         specifier: workspace:^
         version: link:../prop

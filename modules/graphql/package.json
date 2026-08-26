@@ -53,6 +53,7 @@
     "@swc/helpers": "~0.5.18"
   },
   "devDependencies": {
+    "@aenode/graphql-decorators": "workspace:*",
     "@aenode/prop": "workspace:^",
     "@apollo/server": "^5.5.1",
     "@nestjs/apollo": "^13.4.5",
@@ -66,6 +67,7 @@
     "graphql": "^17.0.2"
   },
   "peerDependencies": {
+    "@aenode/graphql-decorators": "workspace:*",
     "@aenode/prop": "workspace:^",
     "@apollo/server": "^5.5.1",
     "@nestjs/apollo": "^13.4.5",
