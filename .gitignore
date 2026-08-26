@@ -4,8 +4,11 @@
 dist
 tmp
 out-tsc
+**/generated/*
+
 public/*
 !public/index.html
+
 
 # dependencies
 node_modules

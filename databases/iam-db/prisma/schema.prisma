@@ -18,6 +18,7 @@ model User {
     deletedAt DateTime? @db.Timestamptz(6)
     isActive  Boolean?  @default(true)
 
+    /// @minlength(3) @maxlength(255)
     fullName String
 
     /// @format(email)
