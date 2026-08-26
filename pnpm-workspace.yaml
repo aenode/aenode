@@ -8,6 +8,7 @@ packages:
 
 autoInstallPeers: true
 allowBuilds:
+  '@apollo/protobufjs': true
   '@scarf/scarf': true
   "@swc/core": true
   nx: true
@@ -95,3 +96,11 @@ minimumReleaseAgeExclude:
   - tldts@7.4.10
   - update-browserslist-db@1.3.1
   - ws@8.21.3
+  - '@aenode/errors@0.0.6'
+  - '@aenode/flow@0.0.6'
+  - '@aenode/is@0.0.6'
+  - '@aenode/prop-options@0.0.6'
+  - '@aenode/prop-validation@0.0.6'
+  - '@aenode/prop@0.0.1'
+  - '@aenode/reflect@0.0.6'
+  - '@aenode/types@0.0.6'

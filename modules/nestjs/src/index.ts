@@ -1,1 +1,1 @@
-export * from '@nestjs/common';
+export * from './common/index.js';
