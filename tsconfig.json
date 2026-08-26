@@ -59,6 +59,12 @@
     },
     {
       "path": "./modules/graphql-decorators"
+    },
+    {
+      "path": "./databases/iam-db"
+    },
+    {
+      "path": "./databases/pms-db"
     }
   ]
 }

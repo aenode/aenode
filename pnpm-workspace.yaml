@@ -5,14 +5,18 @@ packages:
   - "utils/*"
   - "clis/*"
   - "plugins/*"
+  - "databases/*"
 
 autoInstallPeers: true
 allowBuilds:
-  '@apollo/protobufjs': true
-  '@scarf/scarf': true
+  "@apollo/protobufjs": true
+  "@scarf/scarf": true
   "@swc/core": true
+  esbuild: true
+  msgpackr-extract: true
   nx: true
   unrs-resolver: true
+  workerd: true
 minimumReleaseAgeExclude:
   - "@babel/generator@7.29.8"
   - "@babel/parser@7.29.8"
@@ -96,14 +100,14 @@ minimumReleaseAgeExclude:
   - tldts@7.4.10
   - update-browserslist-db@1.3.1
   - ws@8.21.3
-  - '@aenode/errors@0.0.6'
-  - '@aenode/flow@0.0.6'
-  - '@aenode/is@0.0.6'
-  - '@aenode/prop-options@0.0.6'
-  - '@aenode/prop-validation@0.0.6'
-  - '@aenode/prop@0.0.1'
-  - '@aenode/reflect@0.0.6'
-  - '@aenode/types@0.0.6'
-  - '@aenode/names@0.0.6'
-  - '@aenode/nestjs-decorators@0.0.6'
-  - '@aenode/nestjs@0.0.1'
+  - "@aenode/errors@0.0.6"
+  - "@aenode/flow@0.0.6"
+  - "@aenode/is@0.0.6"
+  - "@aenode/prop-options@0.0.6"
+  - "@aenode/prop-validation@0.0.6"
+  - "@aenode/prop@0.0.1"
+  - "@aenode/reflect@0.0.6"
+  - "@aenode/types@0.0.6"
+  - "@aenode/names@0.0.6"
+  - "@aenode/nestjs-decorators@0.0.6"
+  - "@aenode/nestjs@0.0.1"
