@@ -15,6 +15,7 @@
   "references": [],
   "exclude": [
     "vitest.config.mts",
+    "prisma.config.ts",
     "src/**/*.spec.ts"
   ]
 }

@@ -10,11 +10,13 @@ packages:
 autoInstallPeers: true
 allowBuilds:
   "@apollo/protobufjs": true
+  '@prisma/engines': true
   "@scarf/scarf": true
   "@swc/core": true
   esbuild: true
   msgpackr-extract: true
   nx: true
+  prisma: true
   unrs-resolver: true
   workerd: true
 minimumReleaseAgeExclude:

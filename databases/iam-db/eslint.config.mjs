@@ -1,3 +1,3 @@
-import Api from '../../.eslint/api.mjs';
+import Prisma from '../../.eslint/prisma.mjs';
 
-export default [...Api];
+export default [...Prisma];

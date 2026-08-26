@@ -32,6 +32,26 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js"
+    },
+    "./browser": {
+      "types": "./dist/generated/prisma/browser.d.ts",
+      "import": "./dist/generated/prisma/browser.js",
+      "default": "./dist/generated/prisma/browser.js"
+    },
+    "./client": {
+      "types": "./dist/generated/prisma/client.d.ts",
+      "import": "./dist/generated/prisma/client.js",
+      "default": "./dist/generated/prisma/client.js"
+    },
+    "./models": {
+      "types": "./dist/generated/prisma/models.d.ts",
+      "import": "./dist/generated/prisma/models.js",
+      "default": "./dist/generated/prisma/models.js"
+    },
+    "./enums": {
+      "types": "./dist/generated/prisma/enums.d.ts",
+      "import": "./dist/generated/prisma/enums.js",
+      "default": "./dist/generated/prisma/enums.js"
     }
   },
   "files": [
@@ -56,5 +76,12 @@
   },
   "dependencies": {
     "@swc/helpers": "~0.5.18"
+  },
+  "devDependencies": {
+    "@prisma/client": "^7.9.0",
+    "dotenv": "^17.4.2"
+  },
+  "peerDependencies": {
+    "@prisma/client": "^7.9.0"
   }
 }
