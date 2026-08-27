@@ -8,6 +8,7 @@ import {
 } from '@nx/devkit';
 import { basename, dirname, join, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { packageVersion } from '../../helpers/index.js';
 import type { ProjectGeneratorSchema } from './schema.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -25,6 +26,11 @@ export async function projectGenerator(
   const commonSource = join(__dirname, 'templates', 'common');
   const source = join(__dirname, 'templates', options.type);
   const target = normalize(options.directory);
+
+  const aenodeVersion =
+    options.orgName === 'aenode'
+      ? 'workspace'
+      : packageVersion('@aenode/aenode');
 
   const tag = (() => {
     switch (options.type) {
@@ -52,20 +58,24 @@ export async function projectGenerator(
 
   const allNames = names(name);
 
+  // Generate common files
   generateFiles(tree, commonSource, target, {
     ...options,
     projectName,
     tag,
     ...allNames,
     name,
+    aenodeVersion,
   });
 
+  // Generate specific files
   generateFiles(tree, source, target, {
     ...options,
     projectName,
     tag,
     ...allNames,
     name,
+    aenodeVersion,
   });
 
   updateJson(tree, 'tsconfig.json', (value) => {
