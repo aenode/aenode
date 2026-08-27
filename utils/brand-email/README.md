@@ -2,7 +2,9 @@
 
 
 <p align="center">
+<a href="https://aenode.github.io?utm_source=npm-brand-email&utm_media=README.md&utm_campaign=social">
   <img src="https://aenode.github.io/aenode/utils/brand-email/assets/favicon.svg" alt="App logo" height="128" width="128" style="border-radius: 32px;" />
+</a>
 </p>
 
 ## @aenode/brand-email

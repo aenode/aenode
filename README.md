@@ -2,11 +2,10 @@
  ![Version](https://img.shields.io/npm/v/@aenode/source)  ![Downloads](https://img.shields.io/npm/dm/@aenode/source)  ![Status](https://img.shields.io/github/actions/workflow/status/aenode/aenode/ci.yml)  ![Size](https://img.shields.io/bundlephobia/min/@aenode/source) 
 
 
-
-<img src="https://aenode.github.io?utm_source=npm&utm_campaign=social" style="position:fixed; width:0px; height:0px" />
-
 <p align="center">
+<a href="https://aenode.github.io?utm_source=github-aenode&utm_media=README.md&utm_campaign=social">
   <img   src="https://aenode.github.io/assets/favicon.svg" alt="Aesys Logo" height="128" width="128" style="border-radius: 32px;"/>
+</a>
 </p>
 
 
