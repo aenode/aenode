@@ -1,3 +1,32 @@
+## 0.0.8 (2026-08-27)
+
+### 🚀 Features
+
+- done ([a7728bd](https://github.com/aenode/aenode/commit/a7728bd))
+- created sample resolver with crud operations ([c98c22c](https://github.com/aenode/aenode/commit/c98c22c))
+- created sample resolver with crud operations ([0abfb22](https://github.com/aenode/aenode/commit/0abfb22))
+- created sample fully functional resolver ([19125ac](https://github.com/aenode/aenode/commit/19125ac))
+- created prisma project generators ([941df0c](https://github.com/aenode/aenode/commit/941df0c))
+- generated prisma projects ([add50ce](https://github.com/aenode/aenode/commit/add50ce))
+- cleaning the prisma 8 (they just deleted the framework :)) ([774e28b](https://github.com/aenode/aenode/commit/774e28b))
+- updated the prisma project generator template ([5b54bbf](https://github.com/aenode/aenode/commit/5b54bbf))
+- moved assets to public directory ([4aef817](https://github.com/aenode/aenode/commit/4aef817))
+- monitization links ([3d1802c](https://github.com/aenode/aenode/commit/3d1802c))
+- fixed the gh-pages ([beb6e97](https://github.com/aenode/aenode/commit/beb6e97))
+- fixed the gh-pages ([76e0441](https://github.com/aenode/aenode/commit/76e0441))
+- fixed the gh-pages ([478a3fb](https://github.com/aenode/aenode/commit/478a3fb))
+- fixed the gh-pages ([1b27dc5](https://github.com/aenode/aenode/commit/1b27dc5))
+- readme links ([2d067b6](https://github.com/aenode/aenode/commit/2d067b6))
+- created base iam database ([10bd0a9](https://github.com/aenode/aenode/commit/10bd0a9))
+- fixed some columns in iam schema ([ce60489](https://github.com/aenode/aenode/commit/ce60489))
+- updated the "workspace:*" version to real version for project generators ([522005d](https://github.com/aenode/aenode/commit/522005d))
+- added new utility command to cli (rename) ([f0866eb](https://github.com/aenode/aenode/commit/f0866eb))
+- added new utility command to cli (rename) ([a401f21](https://github.com/aenode/aenode/commit/a401f21))
+
+### ❤️ Thank You
+
+- AESYS | Ahmet Emrebas
+
 ## 0.0.7 (2026-08-26)
 
 ### 🚀 Features

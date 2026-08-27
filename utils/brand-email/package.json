@@ -1,6 +1,6 @@
 {
   "name": "@aenode/brand-email",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Transform an email address into a branded email, ex. `some@some.com` to `some+your-brand@some.com`",
   "keywords": [
     "utils",

@@ -1,7 +1,7 @@
 {
   "name": "@aenode/aenode",
   "description": "Aenode Cli",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "author": {
     "email": "aenode+cli@proton.me",
     "name": "Ahmet Emrebas",
@@ -94,6 +94,7 @@
     "@aenode/fs": "workspace:*"
   },
   "peerDependencies": {
-    "@aenode/brand-email": "workspace:*"
+    "@aenode/brand-email": "workspace:*",
+    "@aenode/fs": "workspace:*"
   }
 }

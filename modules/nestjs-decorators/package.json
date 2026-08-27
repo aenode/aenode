@@ -1,6 +1,6 @@
 {
   "name": "@aenode/nestjs-decorators",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Nestjs smart/simplified decorators",
   "keywords": [
     "types"

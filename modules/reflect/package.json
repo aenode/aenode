@@ -1,6 +1,6 @@
 {
   "name": "@aenode/reflect",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Helper function for reflect-metadata",
   "keywords": [
     "types"
