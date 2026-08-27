@@ -1,8 +1,9 @@
 ![Version](https://img.shields.io/npm/v/@aenode/iam-db) ![Downloads](https://img.shields.io/npm/dm/@aenode/iam-db) ![Status](https://img.shields.io/github/actions/workflow/status/aenode/aenode/ci.yml) ![Size](https://img.shields.io/bundlephobia/min/@aenode/iam-db)
 
+<img src="https://aenode.github.io?utm_source=npm&utm_campaign=social" style="position:fixed; width:0px; height:0px" />
 
 <p align="center">
-  <img src="https://aenode.github.io/aenode/databases/iam-db/assets/favicon.svg" alt="App logo" height="128" width="128" style="border-radius: 32px;" />
+  <img src="https://aenode.github.io/aenode/databases/iam-db/assets/favicon.svg?utm_source=npm&utm_campaign=social" alt="App logo" height="128" width="128" style="border-radius: 32px;" />
 </p>
 
 ## @aenode/iam-db
