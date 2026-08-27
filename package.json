@@ -2,6 +2,7 @@
   "name": "@aenode/source",
   "version": "0.0.0",
   "license": "BSL-1.0",
+  "homepage": "https://aenode.github.io?utm_source=github&utm_campaing=social",
   "scripts": {
     "prepare": "husky",
     "aenode:prune": "rm -rf node_modules  **/**/node_modules **/**/dist .nx"

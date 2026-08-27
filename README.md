@@ -4,7 +4,7 @@
 
 <p align="center">
 <a href="https://aenode.github.io?utm_source=github-aenode&utm_media=README.md&utm_campaign=social">
-  <img   src="https://aenode.github.io/assets/favicon.svg" alt="Aesys Logo" height="128" width="128" style="border-radius: 32px;"/>
+  <img   src="https://aenode.github.io/aenode/assets/favicon.svg" alt="Aesys Logo" height="128" width="128" style="border-radius: 32px;"/>
 </a>
 </p>
 
