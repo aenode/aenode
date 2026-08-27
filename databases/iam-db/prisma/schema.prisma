@@ -7,10 +7,9 @@ datasource db {
     provider = "postgresql"
 }
 
-model User {
+model App {
     id Int @id @default(autoincrement())
 
-    /// @readonly
     uuid String @unique @default(uuid()) @db.Uuid
 
     createdAt DateTime  @default(now()) @db.Timestamptz(6)
@@ -18,12 +17,130 @@ model User {
     deletedAt DateTime? @db.Timestamptz(6)
     isActive  Boolean?  @default(true)
 
-    /// @minlength(3) @maxlength(255)
+    name        String  @unique @db.VarChar(255)
+    description String? @db.Text
+    url         String? @db.Text
+
+    permissions     Permission[]
+    roles           Role[]
+    rolePermissions RolePermission[]
+    appUsers        AppUser[]
+    userRoles       UserRole[]
+}
+
+model Permission {
+    id Int @id @default(autoincrement())
+
+    createdAt DateTime  @default(now()) @db.Timestamptz(6)
+    updatedAt DateTime  @updatedAt @db.Timestamptz(6)
+    deletedAt DateTime? @db.Timestamptz(6)
+    isActive  Boolean?  @default(true)
+
+    name        String  @db.VarChar(255)
+    description String? @db.Text
+
+    app   App @relation(fields: [appId], references: [id], onDelete: Cascade)
+    appId Int
+
+    rolePermissions RolePermission[]
+
+    @@unique([name, appId])
+    @@unique([appId, id])
+}
+
+model Role {
+    id Int @id @default(autoincrement())
+
+    createdAt DateTime  @default(now()) @db.Timestamptz(6)
+    updatedAt DateTime  @updatedAt @db.Timestamptz(6)
+    deletedAt DateTime? @db.Timestamptz(6)
+    isActive  Boolean?  @default(true)
+
+    app   App @relation(fields: [appId], references: [id], onDelete: Cascade)
+    appId Int
+
+    name String @db.VarChar(255)
+
+    rolePermissions RolePermission[]
+    userRoles       UserRole[]
+
+    @@unique([name, appId])
+    @@unique([appId, id])
+}
+
+model RolePermission {
+    id Int @id @default(autoincrement())
+
+    createdAt DateTime  @default(now()) @db.Timestamptz(6)
+    updatedAt DateTime  @updatedAt @db.Timestamptz(6)
+    deletedAt DateTime? @db.Timestamptz(6)
+    isActive  Boolean?  @default(true)
+
+    app   App @relation(fields: [appId], references: [id], onDelete: Cascade)
+    appId Int
+
+    role   Role @relation(fields: [roleId, appId], references: [id, appId], onDelete: Cascade)
+    roleId Int
+
+    permission   Permission @relation(fields: [permissionId, appId], references: [id, appId], onDelete: Cascade)
+    permissionId Int
+
+    @@unique([appId, roleId, permissionId])
+    @@index([roleId])
+    @@index([permissionId])
+}
+
+model User {
+    id Int @id @default(autoincrement())
+
+    uuid String @unique @default(uuid()) @db.Uuid
+
+    createdAt DateTime  @default(now()) @db.Timestamptz(6)
+    updatedAt DateTime  @updatedAt @db.Timestamptz(6)
+    deletedAt DateTime? @db.Timestamptz(6)
+    isActive  Boolean?  @default(true)
+
     fullName String
-
-    /// @format(email)
     username String @unique
-
-    /// @hash @format(password) 
     password String
+
+    appUsers AppUser[]
+}
+
+model UserRole {
+    id Int @id @default(autoincrement())
+
+    createdAt DateTime  @default(now()) @db.Timestamptz(6)
+    updatedAt DateTime  @updatedAt @db.Timestamptz(6)
+    deletedAt DateTime? @db.Timestamptz(6)
+    isActive  Boolean?  @default(true)
+
+    app   App @relation(fields: [appId], references: [id])
+    appId Int
+
+    user   AppUser @relation(fields: [userId, appId], references: [id, appId])
+    userId Int
+
+    role   Role @relation(fields: [roleId, appId], references: [id, appId], onDelete: Cascade)
+    roleId Int
+}
+
+model AppUser {
+    id Int @id @default(autoincrement())
+
+    createdAt DateTime  @default(now()) @db.Timestamptz(6)
+    updatedAt DateTime  @updatedAt @db.Timestamptz(6)
+    deletedAt DateTime? @db.Timestamptz(6)
+    isActive  Boolean?  @default(true)
+
+    app   App @relation(fields: [appId], references: [id])
+    appId Int
+
+    user   User @relation(fields: [userId], references: [id])
+    userId Int
+
+    userRoles UserRole[]
+
+    @@unique([appId, id])
+    @@unique([userId, appId])
 }

@@ -51,7 +51,13 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  User: 'User'
+  App: 'App',
+  Permission: 'Permission',
+  Role: 'Role',
+  RolePermission: 'RolePermission',
+  User: 'User',
+  UserRole: 'UserRole',
+  AppUser: 'AppUser'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -70,6 +76,62 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+export const AppScalarFieldEnum = {
+  id: 'id',
+  uuid: 'uuid',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt',
+  isActive: 'isActive',
+  name: 'name',
+  description: 'description',
+  url: 'url'
+} as const
+
+export type AppScalarFieldEnum = (typeof AppScalarFieldEnum)[keyof typeof AppScalarFieldEnum]
+
+
+export const PermissionScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt',
+  isActive: 'isActive',
+  name: 'name',
+  description: 'description',
+  appId: 'appId'
+} as const
+
+export type PermissionScalarFieldEnum = (typeof PermissionScalarFieldEnum)[keyof typeof PermissionScalarFieldEnum]
+
+
+export const RoleScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt',
+  isActive: 'isActive',
+  appId: 'appId',
+  name: 'name'
+} as const
+
+export type RoleScalarFieldEnum = (typeof RoleScalarFieldEnum)[keyof typeof RoleScalarFieldEnum]
+
+
+export const RolePermissionScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt',
+  isActive: 'isActive',
+  appId: 'appId',
+  roleId: 'roleId',
+  permissionId: 'permissionId'
+} as const
+
+export type RolePermissionScalarFieldEnum = (typeof RolePermissionScalarFieldEnum)[keyof typeof RolePermissionScalarFieldEnum]
+
+
 export const UserScalarFieldEnum = {
   id: 'id',
   uuid: 'uuid',
@@ -83,6 +145,33 @@ export const UserScalarFieldEnum = {
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const UserRoleScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt',
+  isActive: 'isActive',
+  appId: 'appId',
+  userId: 'userId',
+  roleId: 'roleId'
+} as const
+
+export type UserRoleScalarFieldEnum = (typeof UserRoleScalarFieldEnum)[keyof typeof UserRoleScalarFieldEnum]
+
+
+export const AppUserScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  deletedAt: 'deletedAt',
+  isActive: 'isActive',
+  appId: 'appId',
+  userId: 'userId'
+} as const
+
+export type AppUserScalarFieldEnum = (typeof AppUserScalarFieldEnum)[keyof typeof AppUserScalarFieldEnum]
 
 
 export const SortOrder = {
