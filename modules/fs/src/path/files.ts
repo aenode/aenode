@@ -22,7 +22,7 @@ export async function* files(rootPath: string): AsyncGenerator<Dirent> {
   try {
     // opendir streams directory entries instead of loading them all at once
     dir = await opendir(rootPath);
-  } catch (err) {
+  } catch {
     // Handle or ignore permission errors/missing folders
     return;
   }

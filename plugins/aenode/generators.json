@@ -4,6 +4,11 @@
       "factory": "./dist/generators/project/project.js",
       "schema": "./dist/generators/project/schema.json",
       "description": "project generator"
+    },
+    "resolver": {
+      "factory": "./../plugins/aenode/src/generators/resolver/resolver",
+      "schema": "./../plugins/aenode/src/generators/resolver/schema.json",
+      "description": "resolver generator"
     }
   }
 }
