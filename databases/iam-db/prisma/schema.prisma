@@ -100,9 +100,11 @@ model User {
     deletedAt DateTime? @db.Timestamptz(6)
     isActive  Boolean?  @default(true)
 
-    fullName String
-    username String @unique
+    fullName String @db.VarChar(255)
+    username String @unique @db.VarChar(255)
     password String
+
+    lastLogin DateTime? @db.Timestamptz(6)
 
     appUsers AppUser[]
 }
