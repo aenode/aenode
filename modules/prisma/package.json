@@ -1,0 +1,76 @@
+{
+  "name": "@aenode/prisma",
+  "version": "0.0.1",
+  "description": "Nestjs prisma module",
+  "keywords": [
+    "types"
+  ],
+  "license": "BSL-1.0",
+  "author": {
+    "email": "aenode+aenode+prisma@proton.me",
+    "name": "Ahmet Emrebas",
+    "url": "https://aenode.github.io"
+  },
+  "homepage": "https://aenode.github.io/aenode/modules/prisma",
+  "funding": [
+    "https://cash.app/$puqlib"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "@aenode/source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./pg": {
+      "types": "./dist/pg/index.d.ts",
+      "import": "./dist/pg/index.js",
+      "default": "./dist/pg/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "assets",
+    "bin",
+    "!**/*.tsbuildinfo"
+  ],
+  "nx": {
+    "sourceRoot": "modules/prisma/src",
+    "tags": [
+      "lib:module"
+    ],
+    "targets": {
+      "build": {},
+      "lint": {},
+      "doc": {}
+    }
+  },
+  "dependencies": {
+    "@swc/helpers": "~0.5.18"
+  },
+  "devDependencies": {
+    "@aenode/env": "workspace:*",
+    "@aenode/names": "workspace:*",
+    "@nestjs/common": "^11.2.1",
+    "@nestjs/config": "^4.0.4",
+    "@prisma/adapter-pg": "^7.10.0",
+    "@prisma/client": "^7.9.0",
+    "dotenv": "^17.4.2"
+  },
+  "peerDependencies": {
+    "@aenode/env": "workspace:*",
+    "@aenode/names": "workspace:*",
+    "@nestjs/common": "^11.2.1",
+    "@nestjs/config": "^4.0.4",
+    "@prisma/adapter-pg": "^7.10.0"
+  }
+}

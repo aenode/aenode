@@ -34,5 +34,33 @@
             "}",
         ],
         "scope": "typescript"
+    },
+    "provider": {
+        "prefix": "provider",
+        "body": [
+            "import { Inject, type Provider } from '@nestjs/common';",
+            "",
+            "export function get$1Token() {",
+            "  return '';",
+            "}",
+            "",
+            "export function provide$1(): Provider {",
+            "  return {",
+            "    provide: get$1Token(),",
+            "    useFactory() {",
+            "      return {",
+            "       $0",
+            "   };",
+            "    },",
+            "  };",
+            "}",
+            "",
+            "export function Inject$1(): ParameterDecorator {",
+            "  return (...args) => {",
+            "    Inject(get$1Token())(...args);",
+            "  };",
+            "}",
+        ],
+        "scope": "typescript"
     }
 }

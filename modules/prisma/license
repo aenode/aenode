@@ -1,0 +1,70 @@
+# AESYS COMMERCIAL SOFTWARE LICENSE AGREEMENT
+
+**Version 1.0**
+
+**IMPORTANT — READ CAREFULLY:** This Commercial Software License Agreement ("Agreement") is a legally binding contract between the Licensor ("Licensor", "Author", or "We") and the individual or legal entity purchasing or acquiring a license ("Licensee" or "You") for the software, libraries, modules, source code, and associated documentation collectively known as **AESYS** (the "Software").
+
+By downloading, installing, copying, accessing, or otherwise using the Software, You agree to be bound by the terms of this Agreement. If You do not agree to the terms of this Agreement, do not download, install, copy, or use the Software.
+
+---
+
+### 1. GRANT OF LICENSE
+
+Subject to the terms and conditions of this Agreement and the full payment of any applicable license fees, Licensor grants Licensee a non-exclusive, non-transferable, non-sublicensable, worldwide right to:
+
+1. Install, execute, and use the Software libraries and modules to build, test, and deploy software applications, services, or internal platforms ("Derived Products").
+2. Modify, adapt, or extend the source code of the Software solely for incorporation into Licensee's Derived Products.
+
+---
+
+### 2. RESTRICTIONS AND PROHIBITED USES
+
+Except as expressly authorized in Section 1, Licensee shall **NOT**:
+
+1. **No Open-Source or Free Distribution:** Redistribute, publish, sub-license, rent, lease, convey, or otherwise make the Software—or any portion, modification, or derivative work thereof—available under any open-source, freeware, or copyleft license (including but not limited to MIT, Apache, GPL, AGPL, or BSD).
+2. **No Direct Resale or Competition:** Sell, resell, license, sublicense, redistribute, or host the Software (or modified versions of the Software) as a standalone product, component library, module suite, SDK, SaaS framework, or starter kit that directly competes with the Software.
+3. **No Source Code Exposure:** Expose, distribute, or leak the original or modified source code of the Software to any third party, public repository, or unauthorized entity.
+4. **No Reverse Engineering of Proprietary Assets:** Reverse engineer, decompile, or disassemble any compiled binaries or obfuscated assets provided with the Software, except to the extent permitted by applicable mandatory law.
+5. **No Removal of Notices:** Remove, alter, or obscure any copyright, trademark, or proprietary rights notices contained in or on the Software.
+
+---
+
+### 3. INTELLECTUAL PROPERTY RIGHTS
+
+1. **Ownership:** The Software, including all code, structure, architecture, design, documentation, and intellectual property rights therein, remains the exclusive property of the Licensor.
+2. **No Transfer of Title:** This Agreement is a license for use, not a sale of the Software. No title to or ownership of the Software (or any intellectual property rights therein) is transferred to Licensee.
+3. **Derived Works:** Any modifications, enhancements, or derivative works created by Licensee based on the Software remain subject to the terms of this Agreement and may not be extracted or distributed independently of Licensee’s permitted Derived Products.
+
+---
+
+### 4. FEES AND AUDIT RIGHTS
+
+1. **Payment:** Access to and right to use the Software is conditioned upon full payment of the applicable commercial license fees established by the Licensor.
+2. **Verification:** Licensor reserves the right to request reasonable proof or documentation from Licensee to audit compliance with the terms of this Agreement.
+
+---
+
+### 5. TERMINATION
+
+1. **Termination for Cause:** This Agreement and the license granted hereunder will terminate immediately and automatically without notice from Licensor if Licensee breaches any provision of this Agreement.
+2. **Effect of Termination:** Upon termination, Licensee must immediately cease all use, deployment, and distribution of the Software and permanently delete and destroy all copies of the Software in Licensee's possession or control. Sections 2, 3, 6, 7, and 8 shall survive termination.
+
+---
+
+### 6. NO WARRANTY (DISCLAIMER)
+
+THE SOFTWARE IS PROVIDED **"AS IS"**, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT. IN NO EVENT SHALL THE LICENSOR OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+---
+
+### 7. LIMITATION OF LIABILITY
+
+TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL THE LICENSOR BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR ANY LOSS OF PROFITS, REVENUE, DATA, OR USE INCURRED BY LICENSEE OR ANY THIRD PARTY, WHETHER IN AN ACTION IN CONTRACT OR TORT, EVEN IF LICENSOR HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES. LICENSOR’S AGGREGATE LIABILITY UNDER THIS AGREEMENT SHALL NOT EXCEED THE TOTAL LICENSE FEES PAID BY LICENSEE FOR THE SOFTWARE IN THE TWELVE (12) MONTHS PRECEDING THE CLAIM.
+
+---
+
+### 8. GENERAL PROVISIONS
+
+1. **Governing Law:** This Agreement shall be governed by and construed in accordance with applicable laws, without regard to its conflict of law principles.
+2. **Severability:** If any provision of this Agreement is held to be invalid or unenforceable, that provision shall be enforced to the maximum extent permissible, and the remaining provisions shall remain in full force and effect.
+3. **Entire Agreement:** This Agreement constitutes the entire agreement between the parties with respect to the Software and supersedes all prior or contemporaneous understandings regarding such subject matter.
