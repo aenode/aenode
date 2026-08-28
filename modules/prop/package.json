@@ -74,6 +74,7 @@
     "@aenode/prop-validation": "workspace:*",
     "@aenode/reflect": "workspace:*",
     "@nestjs/graphql": "^13.4.5",
-    "@nestjs/swagger": "^11.4.7"
+    "@nestjs/swagger": "^11.4.7",
+    "@aenode/types": "0.0.9"
   }
 }

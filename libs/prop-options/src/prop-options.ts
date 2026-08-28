@@ -1,4 +1,6 @@
-export declare type ClassType<T = any> = {
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+export type ClassType<T = any> = {
   new (...args: any[]): T;
 };
 
@@ -53,10 +55,20 @@ export type PropDependencyOptions = {
   isBefore?: string;
 
   isAfter?: string;
+
+  required?: string[];
+
+  notWith?: string[];
 };
 
 export type PropertyFormat = 'email' | 'password';
 
+export const PropertyType = {
+  String: String,
+  Number: Number,
+  Boolean: Boolean,
+  Date: Date,
+};
 export type PropValidationOptions = {
   /**
    * Property name
@@ -69,11 +81,26 @@ export type PropValidationOptions = {
   description?: string;
 
   /**
-   * This property is required for object and array properties. Primitive types are infered from the reflect-metadata.
+   * Primitive property type
    *
    * @returns
    */
-  type?: () => ClassType;
+  type?: () =>
+    | StringConstructor
+    | NumberConstructor
+    | BooleanConstructor
+    | DateConstructor;
+
+  /**
+   * Object type
+   * @returns
+   */
+  object?: () => ClassType;
+
+  /**
+   * Enum type
+   */
+  enum?: () => object;
 
   /**
    * Defines if the property is a type of array or not.
@@ -121,8 +148,14 @@ export type PropValidationOptions = {
    */
   pattern?: string;
 
+  /**
+   * Defines minimum allowed number of items in an array
+   */
   minItems?: number;
 
+  /**
+   * Defines maximum allowed number of items in an array
+   */
   maxItems?: number;
 
   /**
@@ -130,8 +163,16 @@ export type PropValidationOptions = {
    */
   format?: PropertyFormat;
 
+  /**
+   * Maximum allowed date
+   * @returns
+   */
   maxDate?: () => Date;
 
+  /**
+   * Minimum allowed date
+   * @returns
+   */
   minDate?: () => Date;
 
   /**

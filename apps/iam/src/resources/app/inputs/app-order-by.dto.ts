@@ -1,11 +1,11 @@
 import { Prisma } from '@aenode/iam-db/client';
 import {
-  OrderCountDto,
+  InputType,
   PropOrder,
   PropOrderCount,
+  SortCountDto,
   SortOrder,
 } from '@aenode/nestjs/graphql';
-import { InputType } from '@nestjs/graphql';
 
 @InputType()
 export class AppOrderByDto
@@ -21,9 +21,9 @@ export class AppOrderByDto
   @PropOrder() description: SortOrder;
   @PropOrder() url: SortOrder;
 
-  @PropOrderCount() permissions: OrderCountDto;
-  @PropOrderCount() roles: OrderCountDto;
-  @PropOrderCount() rolePermissions: OrderCountDto;
-  @PropOrderCount() appUsers: OrderCountDto;
-  @PropOrderCount() userRoles: OrderCountDto;
+  @PropOrderCount() permissions: SortCountDto;
+  @PropOrderCount() roles: SortCountDto;
+  @PropOrderCount() rolePermissions: SortCountDto;
+  @PropOrderCount() appUsers: SortCountDto;
+  @PropOrderCount() userRoles: SortCountDto;
 }

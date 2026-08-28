@@ -1,5 +1,6 @@
-import type { ClassType } from '@aenode/types';
 import 'reflect-metadata';
+//
+import type { ClassType } from '@aenode/types';
 
 /**
  * Get property type from reflection (design:type)

@@ -13,11 +13,17 @@ import { Field } from '@nestjs/graphql';
  */
 export function Prop(options: PropValidationOptions = {}): PropertyDecorator {
   return (...args) => {
-    const required = options.isRequired === true;
+    const nullable = options.isRequired !== true;
     PropValidation(options)(...args);
 
-    Field(options.type ?? (() => getPropertyType(args[0], args[1])), {
-      nullable: required === false,
-    })(...args);
+    const { type: primitiveType, object: objectType, enum: enumType } = options;
+
+    const type =
+      primitiveType ??
+      enumType ??
+      objectType ??
+      (() => getPropertyType(args[0], args[1]));
+
+    Field(type, { nullable })(...args);
   };
 }

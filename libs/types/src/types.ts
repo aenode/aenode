@@ -63,28 +63,9 @@ export type Names = {
   sentence: string;
 };
 
-export class StringArray extends Array<string> {
-  static readonly itemType = String;
-}
-export class NumberArray extends Array<string> {
-  static readonly itemType = Number;
-}
-export class BooleanArray extends Array<string> {
-  static readonly itemType = Boolean;
-}
-export class DateArray extends Array<string> {
-  static readonly itemType = Date;
-}
+export const SortOrder = {
+  asc: 'asc',
+  desc: 'desc',
+};
 
-export class StringPromise extends Promise<string> {
-  static readonly itemType = String;
-}
-export class NumberPromise extends Promise<string> {
-  static readonly itemType = Number;
-}
-export class BooleanPromise extends Promise<string> {
-  static readonly itemType = Boolean;
-}
-export class DatePromise extends Array<string> {
-  static readonly itemType = Date;
-}
+export type SortOrder = keyof typeof SortOrder;

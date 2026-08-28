@@ -20,7 +20,8 @@ describe('ObjectValidation', () => {
       }
 
       class Sample {
-        @PropValidation({ ...options, type: () => SubSample }) value: SubSample;
+        @PropValidation({ ...options, object: () => SubSample })
+        value: SubSample;
       }
       const errors = transformAndValidate(Sample, value);
       expect(errors).toEqual([]);

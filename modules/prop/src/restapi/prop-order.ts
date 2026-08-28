@@ -1,11 +1,8 @@
-import { PropValidation } from '@aenode/prop-validation';
-import { ApiProperty } from '@nestjs/swagger';
+import { SortOrder } from '@aenode/types';
+import { Prop } from './prop.js';
 
 export function PropOrder(): PropertyDecorator {
   return (...args) => {
-    PropValidation({ isIn: ['asc', 'desc'] })(...args);
-    ApiProperty({ enum: ['asc', 'desc'], required: false, nullable: true })(
-      ...args,
-    );
+    Prop({ enum: () => SortOrder })(...args);
   };
 }

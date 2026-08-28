@@ -118,9 +118,6 @@ importers:
       '@aenode/nestjs':
         specifier: workspace:^
         version: link:../../modules/nestjs
-      '@nestjs/graphql':
-        specifier: ^13.4.5
-        version: 13.4.5(@nestjs/common@11.2.1(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)(supports-color@8.1.1))(@nestjs/core@11.2.1)(class-transformer@0.5.1)(class-validator@0.15.1)(graphql@16.14.2)(reflect-metadata@0.2.2)
 
   apps/iam:
     dependencies:
@@ -137,9 +134,6 @@ importers:
       '@aenode/prisma':
         specifier: workspace:*
         version: link:../../modules/prisma
-      '@nestjs/graphql':
-        specifier: ^13.4.5
-        version: 13.4.5(@nestjs/common@11.2.1(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)(supports-color@8.1.1))(@nestjs/core@11.2.1)(class-transformer@0.5.1)(class-validator@0.15.1)(graphql@16.14.2)(reflect-metadata@0.2.2)
 
   databases/iam-db:
     dependencies:

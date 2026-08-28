@@ -1,18 +1,8 @@
-import { PropValidation } from '@aenode/prop-validation';
-import { Field, registerEnumType } from '@nestjs/graphql';
-
-export enum SortOrder {
-  asc = 'asc',
-  desc = 'desc',
-}
-
-registerEnumType(SortOrder, {
-  name: 'SortOrder',
-});
+import { SortOrder } from '@aenode/types';
+import { Prop } from './prop.js';
 
 export function PropOrder(): PropertyDecorator {
   return (...args) => {
-    PropValidation({ isIn: Object.keys(SortOrder) })(...args);
-    Field(() => SortOrder, { nullable: true })(...args);
+    Prop({ enum: () => SortOrder })(...args);
   };
 }

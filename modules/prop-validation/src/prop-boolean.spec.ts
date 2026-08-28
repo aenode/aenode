@@ -16,7 +16,7 @@ describe('BooleanValidation', () => {
       ${{} as PropValidationOptions} | ${{ value: 'false' }}
     `('$options with $value', ({ options, value }) => {
       class Sample {
-        @PropValidation(options) value: number;
+        @PropValidation(options) value: boolean;
       }
       const errors = transformAndValidate(Sample, value);
       expect(errors).toEqual([]);

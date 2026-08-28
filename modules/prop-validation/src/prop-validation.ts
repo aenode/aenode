@@ -1,14 +1,8 @@
 import 'reflect-metadata';
 //
 import { EqualMatcher, PropertyMathcer } from '@aenode/flow';
+import { isDefined } from '@aenode/is';
 import type { PropFormat, PropValidationOptions } from '@aenode/prop-options';
-import { getPropertyType } from '@aenode/reflect';
-import {
-  BooleanArray,
-  DateArray,
-  NumberArray,
-  StringArray,
-} from '@aenode/types';
 import { Exclude, Expose, Transform, Type } from 'class-transformer';
 import {
   ArrayMaxSize,
@@ -29,6 +23,7 @@ import {
   IsDefined,
   IsEAN,
   IsEmail,
+  IsEnum,
   IsFQDN,
   IsHash,
   IsHSL,
@@ -105,28 +100,21 @@ export function PropValidation(
   options: PropValidationOptions = {},
 ): PropertyDecorator {
   return (...args) => {
-    const inferedType = getPropertyType(args[0], args[1]);
-    options.type ??= () => inferedType;
-    options.isArray ??= /Array/.test(inferedType.name);
-
+    const { type: primitiveType, enum: enumType, object: objectType } = options;
     const vo: ValidationOptions = { each: options.isArray === true };
 
-    if (options.isIn === undefined && options.isNotIn === undefined)
-      if (
-        !new Set([
-          String,
-          Number,
-          Boolean,
-          Date,
-          StringArray,
-          NumberArray,
-          BooleanArray,
-          DateArray,
-        ]).has(inferedType as any)
-      ) {
-        Type(() => inferedType)(...args);
-        ValidateNested(vo)(...args);
-      }
+    if (isDefined(primitiveType)) {
+      Type(primitiveType)(...args);
+    } else if (isDefined(enumType)) {
+      IsEnum(enumType, vo)(...args);
+    } else if (isDefined(objectType)) {
+      Type(objectType)(...args);
+      ValidateNested(vo)(...args);
+    } else if (options.isArray) {
+      throw new Error(
+        'One of type, enum, or object must be provided for array properties!',
+      );
+    }
 
     const collectedDecorators = new PropertyMathcer(options)
       .isTrue('isArray', () => IsArray())
@@ -156,11 +144,11 @@ export function PropValidation(
       .isDefined('maxItems', (v) => ArrayMaxSize(v))
       .isDefined('minItems', (v) => ArrayMinSize(v))
 
-      .isDefined('defaultValue', (v) => {
-        return Transform(({ value }) => {
+      .isDefined('defaultValue', (v) =>
+        Transform(({ value }) => {
           return value ?? v;
-        });
-      })
+        }),
+      )
 
       .collect();
 

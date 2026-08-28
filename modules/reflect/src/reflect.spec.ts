@@ -1,8 +1,6 @@
-/* eslint-disable @typescript-eslint/consistent-type-imports */
 import 'reflect-metadata';
 //
-import { StringPromise } from '@aenode/types';
-import { getPropertyType, getReturnType } from './reflect.js';
+import { getPropertyType } from './reflect.js';
 
 describe('reflect', () => {
   describe('propertyType', () => {
@@ -38,28 +36,6 @@ describe('reflect', () => {
       expect(getPropertyType(Sample.prototype, 'other')).toEqual(Other);
       expect(getPropertyType(Sample.prototype, 'strArr')).toEqual(StringArray);
       expect(getPropertyType(Sample.prototype, 'others')).toEqual(OtherArray);
-    });
-  });
-
-  describe('returnType', () => {
-    it('should get the return type', () => {
-      function Method(type?: any): MethodDecorator {
-        return () => {
-          console.log(type);
-          return;
-        };
-      }
-      class Sample {
-        async other(): Promise<string> {
-          return '';
-        }
-        @Method()
-        str(): StringPromise {
-          return this.other();
-        }
-      }
-
-      expect(getReturnType(Sample.prototype, 'str')).toEqual(String);
     });
   });
 });
