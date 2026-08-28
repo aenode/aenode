@@ -57,11 +57,13 @@
   "devDependencies": {
     "@aenode/iam-db": "workspace:*",
     "@aenode/nestjs": "workspace:^",
+    "@aenode/prisma": "workspace:*",
     "@nestjs/graphql": "^13.4.5"
   },
   "peerDependencies": {
     "@aenode/iam-db": "workspace:*",
     "@aenode/nestjs": "workspace:^",
+    "@aenode/prisma": "workspace:*",
     "@nestjs/graphql": "^13.4.5"
   }
 }

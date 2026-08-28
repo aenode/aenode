@@ -77,7 +77,7 @@ export function FindArgs(type: () => Type): ParameterDecorator {
  */
 export function ArgsId(): ParameterDecorator {
   return (...args) => {
-    Args({ type: () => Number, name: 'entityId' }, ParseIntPipe)(...args);
+    Args({ type: () => Number, name: 'id' }, ParseIntPipe)(...args);
   };
 }
 
@@ -88,7 +88,7 @@ export function ArgsId(): ParameterDecorator {
  */
 export function ArgsUuid(): ParameterDecorator {
   return (...args) => {
-    Args({ type: () => String, name: 'entityId' }, ParseUUIDPipe)(...args);
+    Args({ type: () => String, name: 'id' }, ParseUUIDPipe)(...args);
   };
 }
 
@@ -100,7 +100,7 @@ export function AutoResolver(type: () => Type): ClassDecorator {
 
 export function ArgsInput(type: () => Type): ParameterDecorator {
   return (...args) => {
-    Args({ name: 'input', type })(...args);
+    Args({ name: 'data', type })(...args);
   };
 }
 

@@ -12,7 +12,7 @@ import { SampleUpdateInput } from './inputs/sample-update-input.js';
 import { Sample } from './inputs/sample.js';
 
 import { Resolver } from '@nestjs/graphql';
-import { SampleQueryArgs } from './inputs/sample-query-args.js';
+import { SampleFindManyArgs } from './inputs/sample-find-many-args.js';
 
 @Resolver(() => Sample)
 export class SampleResolver {
@@ -20,7 +20,9 @@ export class SampleResolver {
   protected readonly sub = new PubSub();
 
   @QueryMethod(() => [Sample])
-  async findMany(@ArgsQuery(() => SampleQueryArgs) query: SampleQueryArgs) {
+  async findMany(
+    @ArgsQuery(() => SampleFindManyArgs) query: SampleFindManyArgs,
+  ) {
     query.skip ??= 0;
     query.take ??= 20;
     const till = query.skip + query.take;

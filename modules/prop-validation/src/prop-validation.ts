@@ -110,21 +110,23 @@ export function PropValidation(
     options.isArray ??= /Array/.test(inferedType.name);
 
     const vo: ValidationOptions = { each: options.isArray === true };
-    if (
-      !new Set([
-        String,
-        Number,
-        Boolean,
-        Date,
-        StringArray,
-        NumberArray,
-        BooleanArray,
-        DateArray,
-      ]).has(inferedType as any)
-    ) {
-      Type(() => inferedType)(...args);
-      ValidateNested(vo)(...args);
-    }
+
+    if (options.isIn === undefined && options.isNotIn === undefined)
+      if (
+        !new Set([
+          String,
+          Number,
+          Boolean,
+          Date,
+          StringArray,
+          NumberArray,
+          BooleanArray,
+          DateArray,
+        ]).has(inferedType as any)
+      ) {
+        Type(() => inferedType)(...args);
+        ValidateNested(vo)(...args);
+      }
 
     const collectedDecorators = new PropertyMathcer(options)
       .isTrue('isArray', () => IsArray())

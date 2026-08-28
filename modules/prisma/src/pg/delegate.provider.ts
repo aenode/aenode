@@ -27,8 +27,8 @@ export function provideDelegate(
   return {
     provide: getDelegateToken(modelName, name),
     inject: [getClientToken(name)],
-    useFactory(client: any) {
-      return client[modelName];
+    useFactory(client) {
+      return client[names(modelName).camel];
     },
   };
 }

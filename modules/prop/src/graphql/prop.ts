@@ -15,7 +15,8 @@ export function Prop(options: PropValidationOptions = {}): PropertyDecorator {
   return (...args) => {
     const required = options.isRequired === true;
     PropValidation(options)(...args);
-    Field(() => getPropertyType(args[0], args[1]), {
+
+    Field(options.type ?? (() => getPropertyType(args[0], args[1])), {
       nullable: required === false,
     })(...args);
   };

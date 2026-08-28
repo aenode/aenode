@@ -1,12 +1,11 @@
 import { Module } from '@aenode/nestjs';
 import { AppModule } from '@aenode/nestjs/graphql';
-import { SampleResolver } from './sample/sample.resolver.js';
+import { ResourceModule } from '../resources/resource.module.js';
 
 @Module({
   imports: [
     AppModule.register({
-      imports: [],
-      providers: [SampleResolver],
+      imports: [ResourceModule],
     }),
   ],
   providers: [],

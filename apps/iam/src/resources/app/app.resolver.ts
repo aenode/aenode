@@ -1,72 +1,68 @@
+import { Prisma } from '@aenode/iam-db/client';
 import {
   ArgsId,
   ArgsInput,
   ArgsQuery,
-  MutationMethod,
+  Mutation,
   PubSub,
-  QueryMethod,
-  SubscriptionMethod,
+  Query,
+  Resolver,
+  Subscription,
 } from '@aenode/nestjs/graphql';
-import { AppCreateInput } from './inputs/app-create-input.js';
-import { AppUpdateInput } from './inputs/app-update-input.js';
-import { App } from './inputs/app.js';
+import { InjectDelegate } from '@aenode/prisma/pg';
+import { AppCreateDto } from './inputs/app-create.dto.js';
+import { AppFindManyArgsDto } from './inputs/app-find-many-args.dto.js';
+import { AppReadDto } from './inputs/app-read.dto.js';
+import { AppUpdateDto } from './inputs/app-update.dto.js';
 
-import { Resolver } from '@nestjs/graphql';
-import { AppQueryArgs } from './inputs/app-query-args.js';
-
-@Resolver(() => App)
+@Resolver(() => AppReadDto)
 export class AppResolver {
-  protected readonly list: Partial<App>[] = [];
+  protected readonly list: Partial<AppReadDto>[] = [];
   protected readonly sub = new PubSub();
 
-  @QueryMethod(() => [App])
-  async findMany(@ArgsQuery(() => AppQueryArgs) query: AppQueryArgs) {
-    query.skip ??= 0;
-    query.take ??= 20;
-    const till = query.skip + query.take;
-    return this.list.slice(query.skip, till);
-  }
+  constructor(
+    @InjectDelegate(Prisma.ModelName.App)
+    protected readonly delegate: Prisma.AppDelegate,
+  ) {}
 
-  @MutationMethod(() => App)
-  async create(
-    @ArgsInput(() => AppCreateInput)
-    input: AppCreateInput,
+  @Query(() => [AppReadDto], { nullable: true })
+  protected findManyApp(
+    @ArgsQuery(() => AppFindManyArgsDto) query: AppFindManyArgsDto,
   ) {
-    await this.sub.publish('onCreateApp', { onCreateApp: input });
-    const newLength = this.list.push({ ...input, id: this.list.length + 1 });
-    const created = this.list[newLength - 1];
-
-    return created;
+    return this.delegate.findMany(query);
   }
 
-  @MutationMethod(() => App)
-  async update(
+  @Query(() => AppReadDto, { nullable: true })
+  protected findAppById(@ArgsId() id: number) {
+    return this.delegate.findUnique({ where: { id } });
+  }
+
+  @Mutation(() => AppReadDto)
+  protected createApp(@ArgsInput(() => AppCreateDto) data: AppCreateDto) {
+    return this.delegate.create({ data });
+  }
+
+  @Mutation(() => AppReadDto)
+  protected updateAppById(
     @ArgsId() id: number,
-    @ArgsInput(() => AppUpdateInput)
-    input: AppUpdateInput,
+    @ArgsInput(() => AppUpdateDto)
+    data: AppUpdateDto,
   ) {
-    await this.sub.publish('onUpdateApp', { onUpdateApp: input });
-
-    const index = this.list.findIndex((e) => e.id === id);
-    this.list[index] = { ...this.list[index], ...input };
-    return this.list[index];
+    return this.delegate.update({ where: { id }, data });
   }
 
-  @MutationMethod(() => App)
-  async delete(@ArgsId() id: number) {
-    const index = this.list.findIndex((e) => e.id === id);
-    const value = this.list[index];
-    this.list.splice(index, 1);
-    return value;
+  @Mutation(() => AppReadDto)
+  protected deleteAppById(@ArgsId() id: number) {
+    return this.delegate.delete({ where: { id } });
   }
 
-  @SubscriptionMethod(() => App)
-  onCreate() {
+  @Subscription(() => AppReadDto)
+  protected onCreatedApp() {
     return this.sub.asyncIterableIterator('onCreateApp');
   }
 
-  @SubscriptionMethod(() => App)
-  onUpdate() {
+  @Subscription(() => AppReadDto)
+  protected onUpdatedApp() {
     return this.sub.asyncIterableIterator('onUpdateApp');
   }
 }
