@@ -8,6 +8,7 @@
     "typescript"
   ],
   "files.associations": {
+    "*.template": "plaintext",
     "*.sh.*": "shellscript",
     "*.ts.*": "typescript",
     "*.mts.*": "typescript",
