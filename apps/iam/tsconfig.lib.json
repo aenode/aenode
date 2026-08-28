@@ -10,6 +10,9 @@
   "include": ["src/**/*.ts"],
   "references": [
     {
+      "path": "../../modules/prisma/tsconfig.lib.json"
+    },
+    {
       "path": "../../modules/nestjs/tsconfig.lib.json"
     },
     {
