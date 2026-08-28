@@ -1,10 +1,10 @@
 import { ObjectType, Prop, StringArray } from '@aenode/nestjs/graphql';
 
 /**
- * Sample object
+ * <%- className %> object
  */
 @ObjectType()
-export class Sample {
+export class <%- className %> {
   @Prop() id?: number;
   @Prop() name?: string;
   @Prop() description?: string;

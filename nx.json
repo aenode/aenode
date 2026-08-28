@@ -117,6 +117,9 @@
       "url": "https://aenode.github.io",
       "version": "0.0.1"
     },
+    "@aenode/aenode:resolver": {
+      "directory": "resources"
+    },
     "@nx/js:library": {
       "publishable": true,
       "bundler": "swc",

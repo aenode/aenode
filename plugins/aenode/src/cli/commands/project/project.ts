@@ -2,7 +2,7 @@ import { input } from '@inquirer/prompts';
 import { type Command } from 'commander';
 
 export function project(program: Command) {
-  program
+  return program
     .command('project')
     .description('Generate projects')
     .option('-t, --type <string>', 'Project type')

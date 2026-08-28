@@ -1,7 +1,7 @@
 import { type Command } from 'commander';
 
 export function bye(program: Command) {
-  program
+  return program
     .command('bye')
     .requiredOption('-n, --name <string>')
     .action(({ name }) => {

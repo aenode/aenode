@@ -4,15 +4,34 @@
   "title": "",
   "type": "object",
   "properties": {
+    "project": {
+      "type": "string",
+      "description": "Project name",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What project would you like to use?"
+    },
+    "directory": {
+      "type": "string",
+      "description": "Resource directory",
+      "$default": {
+        "$source": "argv",
+        "index": 1
+      },
+      "x-prompt": "What directory would you like to use?"
+    },
+
     "name": {
       "type": "string",
       "description": "Resource name",
       "$default": {
         "$source": "argv",
-        "index": 0
+        "index": 2
       },
       "x-prompt": "What name would you like to use?"
     }
   },
-  "required": ["name"]
+  "required": ["project", "directory", "name"]
 }

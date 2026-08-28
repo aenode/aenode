@@ -1,24 +1,38 @@
+import { NotFoundError } from '@aenode/errors';
 import {
-  addProjectConfiguration,
   formatFiles,
   generateFiles,
+  joinPathFragments,
+  names,
+  readProjectConfiguration,
   type Tree,
 } from '@nx/devkit';
-import * as path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import type { ResolverGeneratorSchema } from './schema.js';
+import path from 'node:path';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export async function resolverGenerator(
   tree: Tree,
   options: ResolverGeneratorSchema,
 ) {
-  const projectRoot = `libs/${options.name}`;
-  addProjectConfiguration(tree, options.name, {
-    root: projectRoot,
-    projectType: 'library',
-    sourceRoot: `${projectRoot}/src`,
-    targets: {},
+  const foundProject = readProjectConfiguration(tree, options.project);
+  if (!foundProject.sourceRoot) {
+    throw new NotFoundError(
+      `sourceRoot configuration is not set for the project ${options.project}`,
+    );
+  }
+
+  const sourceDirectory = path.join(__dirname, 'files');
+  const targetDirectory = joinPathFragments(
+    foundProject.sourceRoot,
+    options.directory,
+  );
+
+  generateFiles(tree, sourceDirectory, targetDirectory, {
+    ...names(options.name),
   });
-  generateFiles(tree, path.join(__dirname, 'files'), projectRoot, options);
   await formatFiles(tree);
 }
 

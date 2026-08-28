@@ -1,0 +1,5 @@
+import { InputType, PartialType } from '@aenode/nestjs/graphql';
+import { <%- className %>CreateInput } from './<%- fileName %>-create-input.js';
+
+@InputType()
+export class <%- className %>UpdateInput extends PartialType(<%- className %>CreateInput) {}

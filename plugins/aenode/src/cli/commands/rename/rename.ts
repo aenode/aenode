@@ -6,12 +6,13 @@ import { relative } from 'node:path';
 import { cwd } from 'node:process';
 
 export function rename(program: Command) {
-  program
+  return program
     .command('rename')
     .description('Rename files names by given placeholder and new value')
     .requiredOption('-p, --placeholder <string>', 'Placeholder')
     .requiredOption('-v, --value <string>', 'New value')
     .option('-r, --recursive', 'Include sub directories', false)
+
     .action(async ({ placeholder, value, recursive }) => {
       const changes: [string, string, string][] = [];
 

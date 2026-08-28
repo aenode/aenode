@@ -8,6 +8,7 @@ export * from './read/read-json-file.js';
 export * from './read/read-text-file.js';
 export * from './read/read-yaml-file.js';
 export * from './update/update-json-file.js';
+export * from './update/update-text-file.js';
 export * from './update/update-yaml-file.js';
 export * from './write/append-text-file.js';
 export * from './write/write-json-file.js';

@@ -1,7 +1,8 @@
 import { input } from '@inquirer/prompts';
 import { type Command } from 'commander';
+
 export function hello(program: Command) {
-  program
+  return program
     .command('hello')
     .option('-n, --name <string>', 'Required name')
 

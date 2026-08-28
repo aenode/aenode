@@ -33,6 +33,7 @@ const ERROR_PREFIX = [
   'NotNumber',
   'NotDate',
   'NotArray',
+  'NotFound',
 ] as const;
 
 type ErrorClassName<T extends string> = `${T}Error`;
@@ -97,4 +98,5 @@ export const {
   NotNumberError,
   NotStringError,
   TimeoutError,
+  NotFoundError,
 } = Errors;

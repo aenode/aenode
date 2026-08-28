@@ -1,0 +1,72 @@
+import {
+  ArgsId,
+  ArgsInput,
+  ArgsQuery,
+  MutationMethod,
+  PubSub,
+  QueryMethod,
+  SubscriptionMethod,
+} from '@aenode/nestjs/graphql';
+import { <%- className %>CreateInput } from './inputs/<%- fileName %>-create-input.js';
+import { <%- className %>UpdateInput } from './inputs/<%- fileName %>-update-input.js';
+import { <%- className %> } from './inputs/<%- fileName %>.js';
+
+import { Resolver } from '@nestjs/graphql';
+import { <%- className %>QueryArgs } from './inputs/<%- fileName %>-query-args.js';
+
+@Resolver(() => <%- className %>)
+export class <%- className %>Resolver {
+  protected readonly list: Partial<<%- className %>>[] = [];
+  protected readonly sub = new PubSub();
+
+  @QueryMethod(() => [<%- className %>])
+  async findMany(@ArgsQuery(() => <%- className %>QueryArgs) query: <%- className %>QueryArgs) {
+    query.skip ??= 0;
+    query.take ??= 20;
+    const till = query.skip + query.take;
+    return this.list.slice(query.skip, till);
+  }
+
+  @MutationMethod(() => <%- className %>)
+  async create(
+    @ArgsInput(() => <%- className %>CreateInput)
+    input: <%- className %>CreateInput,
+  ) {
+    await this.sub.publish('onCreate<%- className %>', { onCreate<%- className %>: input });
+    const newLength = this.list.push({ ...input, id: this.list.length + 1 });
+    const created = this.list[newLength - 1];
+
+    return created;
+  }
+
+  @MutationMethod(() => <%- className %>)
+  async update(
+    @ArgsId() id: number,
+    @ArgsInput(() => <%- className %>UpdateInput)
+    input: <%- className %>UpdateInput,
+  ) {
+    await this.sub.publish('onUpdate<%- className %>', { onUpdate<%- className %>: input });
+
+    const index = this.list.findIndex((e) => e.id === id);
+    this.list[index] = { ...this.list[index], ...input };
+    return this.list[index];
+  }
+
+  @MutationMethod(() => <%- className %>)
+  async delete(@ArgsId() id: number) {
+    const index = this.list.findIndex((e) => e.id === id);
+    const value = this.list[index];
+    this.list.splice(index, 1);
+    return value;
+  }
+
+  @SubscriptionMethod(() => <%- className %>)
+  onCreate() {
+    return this.sub.asyncIterableIterator('onCreate<%- className %>');
+  }
+
+  @SubscriptionMethod(() => <%- className %>)
+  onUpdate() {
+    return this.sub.asyncIterableIterator('onUpdate<%- className %>');
+  }
+}
