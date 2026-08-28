@@ -1,6 +1,6 @@
 {
   "name": "@aenode/prisma",
-  "version": "0.0.1",
+  "version": "0.0.9",
   "description": "Nestjs prisma module",
   "keywords": [
     "types"
@@ -35,6 +35,11 @@
       "types": "./dist/pg/index.d.ts",
       "import": "./dist/pg/index.js",
       "default": "./dist/pg/index.js"
+    },
+    "./sqlite": {
+      "types": "./dist/sqlite/index.d.ts",
+      "import": "./dist/sqlite/index.js",
+      "default": "./dist/sqlite/index.js"
     }
   },
   "files": [
@@ -62,8 +67,11 @@
     "@aenode/names": "workspace:*",
     "@nestjs/common": "^11.2.1",
     "@nestjs/config": "^4.0.4",
+    "@prisma/adapter-better-sqlite3": "^7.10.0",
     "@prisma/adapter-pg": "^7.10.0",
     "@prisma/client": "^7.9.0",
+    "@types/better-sqlite3": "^7.6.13",
+    "better-sqlite3": "^12.11.1",
     "dotenv": "^17.4.2"
   },
   "peerDependencies": {
@@ -71,6 +79,8 @@
     "@aenode/names": "workspace:*",
     "@nestjs/common": "^11.2.1",
     "@nestjs/config": "^4.0.4",
-    "@prisma/adapter-pg": "^7.10.0"
+    "@prisma/adapter-better-sqlite3": "^7.10.0",
+    "@prisma/adapter-pg": "^7.10.0",
+    "better-sqlite3": "^12.11.1"
   }
 }

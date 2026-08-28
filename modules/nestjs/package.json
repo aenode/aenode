@@ -1,6 +1,6 @@
 {
   "name": "@aenode/nestjs",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Nestjs modules",
   "keywords": [
     "types"

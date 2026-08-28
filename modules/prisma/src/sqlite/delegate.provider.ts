@@ -5,6 +5,7 @@ import { getClientToken } from './client.provider.js';
 
 /**
  * Get the prisma client token
+ *
  * @param modelName model name
  * @param name optinoal client name
  * @returns

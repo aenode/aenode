@@ -1,4 +1,5 @@
 import { Env } from '@aenode/env';
+import { token } from '@aenode/names';
 import { Inject, type Provider, type Type } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PrismaPg } from '@prisma/adapter-pg';
@@ -10,7 +11,7 @@ import { PrismaPg } from '@prisma/adapter-pg';
  * @returns
  */
 export function getClientToken(name = Env.DEFAULT) {
-  return `${name}_PG_PRISMA_CLIENT`;
+  return token(name, 'pg prisma client');
 }
 
 /**
