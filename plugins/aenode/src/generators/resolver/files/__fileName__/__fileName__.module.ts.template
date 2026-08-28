@@ -1,0 +1,7 @@
+import { Module } from '@aenode/nestjs';
+import { <%- className %>Resolver } from './<%- fileName %>.resolver.js';
+
+@Module({
+  providers: [<%- className %>Resolver],
+})
+export class <%- className %>Module {}
