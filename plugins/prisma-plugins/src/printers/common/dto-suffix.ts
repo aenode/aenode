@@ -1,4 +1,4 @@
-export const DtoSuffix = {
+export const ClassNameSuffix = {
   CreateDto: 'CreateDto',
   UpdateDto: 'UpdateDto',
   FindManyArgsDto: 'FindManyArgsDto',
@@ -11,4 +11,4 @@ export const DtoSuffix = {
   ListWhereDto: 'ListWhereDto',
 };
 
-export type DtoSuffix = keyof typeof DtoSuffix;
+export type ClassNameSuffix = keyof typeof ClassNameSuffix;

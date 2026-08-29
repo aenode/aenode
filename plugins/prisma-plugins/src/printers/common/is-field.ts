@@ -26,7 +26,11 @@ export function isTimestampField(field: DMMF.Field) {
  * @returns
  */
 export function isIdField(field: DMMF.Field) {
-  return field.isId || (field.default as DMMF.FieldDefault)?.name === 'uuid';
+  return (
+    field.isId ||
+    (field.default as DMMF.FieldDefault)?.name === 'uuid' ||
+    (field.default as DMMF.FieldDefault)?.name === 'autoincrement'
+  );
 }
 
 export function hasRequiredAnnotation(field: DMMF.Field) {
@@ -63,17 +67,18 @@ export function isRequiredField(field: DMMF.Field) {
 }
 
 export function isCreateDtoField(field: DMMF.Field) {
-  if (isInternalField(field) || isIdField(field) || isTimestampField(field)) {
-    return false;
-  }
-  return true;
+  return !(
+    isInternalField(field) ||
+    isIdField(field) ||
+    isTimestampField(field)
+  );
 }
 
-export function isRedOnlyField(field: DMMF.Field): boolean {
+export function isReadOnlyField(field: DMMF.Field): boolean {
   return /@readonly/i.test(field.documentation ?? '');
 }
 
-export function isWriteOnly(field: DMMF.Field): boolean {
+export function isWriteOnlyField(field: DMMF.Field): boolean {
   return /@writeonly/i.test(field.documentation ?? '');
 }
 
@@ -84,7 +89,7 @@ export function isWriteOnly(field: DMMF.Field): boolean {
  */
 export function isUpdateDtoField(field: DMMF.Field) {
   if (isCreateDtoField(field)) {
-    if (isWriteOnly(field)) {
+    if (isWriteOnlyField(field) || isReadOnlyField(field)) {
       return false;
     }
     return true;
