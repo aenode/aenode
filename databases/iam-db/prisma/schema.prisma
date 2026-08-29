@@ -13,8 +13,7 @@ datasource db {
 }
 
 model App {
-    id Int @id @default(autoincrement())
-
+    id   Int    @id @default(autoincrement())
     uuid String @unique @default(uuid()) @db.Uuid
 
     createdAt DateTime  @default(now()) @db.Timestamptz(6)
@@ -44,7 +43,7 @@ model Permission {
     name        String  @db.VarChar(255)
     description String? @db.Text
 
-    app   App @relation(fields: [appId], references: [id], onDelete: Cascade)
+    app   App @relation(fields: [appId], references: [id], onDelete: Cascade, onUpdate: Cascade)
     appId Int
 
     rolePermissions RolePermission[]
@@ -61,7 +60,7 @@ model Role {
     deletedAt DateTime? @db.Timestamptz(6)
     isActive  Boolean?  @default(true)
 
-    app   App @relation(fields: [appId], references: [id], onDelete: Cascade)
+    app   App @relation(fields: [appId], references: [id], onDelete: Cascade, onUpdate: Cascade)
     appId Int
 
     name String @db.VarChar(255)
@@ -81,13 +80,13 @@ model RolePermission {
     deletedAt DateTime? @db.Timestamptz(6)
     isActive  Boolean?  @default(true)
 
-    app   App @relation(fields: [appId], references: [id], onDelete: Cascade)
+    app   App @relation(fields: [appId], references: [id], onDelete: Cascade, onUpdate: Cascade)
     appId Int
 
-    role   Role @relation(fields: [roleId, appId], references: [id, appId], onDelete: Cascade)
+    role   Role @relation(fields: [roleId, appId], references: [id, appId], onDelete: Cascade, onUpdate: Cascade)
     roleId Int
 
-    permission   Permission @relation(fields: [permissionId, appId], references: [id, appId], onDelete: Cascade)
+    permission   Permission @relation(fields: [permissionId, appId], references: [id, appId], onDelete: Cascade, onUpdate: Cascade)
     permissionId Int
 
     @@unique([appId, roleId, permissionId])
@@ -128,7 +127,7 @@ model UserRole {
     user   AppUser @relation(fields: [userId, appId], references: [id, appId])
     userId Int
 
-    role   Role @relation(fields: [roleId, appId], references: [id, appId], onDelete: Cascade)
+    role   Role @relation(fields: [roleId, appId], references: [id, appId], onDelete: Cascade, onUpdate: Cascade)
     roleId Int
 }
 
@@ -140,10 +139,10 @@ model AppUser {
     deletedAt DateTime? @db.Timestamptz(6)
     isActive  Boolean?  @default(true)
 
-    app   App @relation(fields: [appId], references: [id])
+    app   App @relation(fields: [appId], references: [id], onDelete: Cascade, onUpdate: Cascade)
     appId Int
 
-    user   User @relation(fields: [userId], references: [id])
+    user   User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
     userId Int
 
     userRoles UserRole[]

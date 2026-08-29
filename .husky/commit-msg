@@ -18,11 +18,11 @@ if ! echo "$COMMIT_MSG" | grep -qE "$PATTERN"; then
   exit 1
 fi
 
-
-pnpm nx affected -t build 
-pnpm nx affected -t lint
-pnpm nx affected -t typecheck
-pnpm nx affected -t test
+pnpm nx run-many -t prisma:generate
+pnpm nx run-many -t build
+pnpm nx run-many -t lint
+pnpm nx run-many -t typecheck
+pnpm nx run-many -t test
 
 
 
