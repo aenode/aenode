@@ -3,11 +3,12 @@ import { AppIncludeDto } from './app-include.dto.js';
 import { AppOmitDto } from './app-omit.dto.js';
 import { AppOrderByDto } from './app-order-by.dto.js';
 import { AppSelectDto } from './app-select.dto.js';
+import { AppWhereDto } from './app-where.dto.js';
 
 @InputType()
 export class AppFindManyArgsDto {
   @Prop({ min: 1, defaultValue: 20 }) take?: number;
-  @Prop({ min: 0, defaultValue: 20 }) skip?: number;
+  @Prop({ min: 0, defaultValue: 0 }) skip?: number;
 
   @Prop({ object: () => AppOrderByDto }) orderBy?: AppOrderByDto;
 
@@ -28,4 +29,6 @@ export class AppFindManyArgsDto {
     dependencies: { notWith: ['select', 'omit'] },
   })
   include?: AppIncludeDto;
+
+  @Prop({ object: () => AppWhereDto }) where?: AppWhereDto;
 }

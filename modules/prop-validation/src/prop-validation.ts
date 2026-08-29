@@ -106,7 +106,7 @@ export function PropValidation(
     if (isDefined(primitiveType)) {
       Type(primitiveType)(...args);
     } else if (isDefined(enumType)) {
-      IsEnum(enumType, vo)(...args);
+      IsEnum(enumType(), vo)(...args);
     } else if (isDefined(objectType)) {
       Type(objectType)(...args);
       ValidateNested(vo)(...args);
@@ -117,6 +117,13 @@ export function PropValidation(
     }
 
     const collectedDecorators = new PropertyMathcer(options)
+
+      .isDefined('defaultValue', (v) =>
+        Transform(({ value }) => {
+          return value ?? v;
+        }),
+      )
+
       .isTrue('isArray', () => IsArray())
       .isTrue(
         'excluded',
@@ -143,12 +150,6 @@ export function PropValidation(
       .isDefined('minDate', (v) => MinDate(v, vo))
       .isDefined('maxItems', (v) => ArrayMaxSize(v))
       .isDefined('minItems', (v) => ArrayMinSize(v))
-
-      .isDefined('defaultValue', (v) =>
-        Transform(({ value }) => {
-          return value ?? v;
-        }),
-      )
 
       .collect();
 

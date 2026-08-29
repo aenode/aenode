@@ -24,6 +24,6 @@ export function Prop(options: PropValidationOptions = {}): PropertyDecorator {
       objectType ??
       (() => getPropertyType(args[0], args[1]));
 
-    Field(type, { nullable })(...args);
+    Field(type, { defaultValue: options.defaultValue, nullable })(...args);
   };
 }

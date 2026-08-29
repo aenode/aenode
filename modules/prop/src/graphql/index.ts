@@ -1,6 +1,7 @@
 import './register-enums.js';
 
 // @index(['./**/*.ts', '!./**/*.spec.ts'], f => `export * from '${f.path}.js'`)
+export * from './filter-dtos.js';
 export * from './input-type.js';
 export * from './object-type.js';
 export * from './prop-order-count.js';
