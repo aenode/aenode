@@ -1,6 +1,6 @@
 {
   "name": "@aenode/prop-validation",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "Simplified property validation decorators from class-validator and class-transform",
   "keywords": [
     "types"

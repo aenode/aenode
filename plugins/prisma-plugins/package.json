@@ -1,17 +1,17 @@
 {
-  "name": "@aenode/is",
+  "name": "@aenode/prisma-plugins",
   "version": "0.0.10",
-  "description": "Common validation and transformation functions to stream line the conditional statements and transforming values",
+  "description": "Prisma plugins",
   "keywords": [
     "types"
   ],
   "license": "BSL-1.0",
   "author": {
-    "email": "aenode+is@proton.me",
+    "email": "aenode+aenode+prisma-plugins@proton.me",
     "name": "Ahmet Emrebas",
     "url": "https://aenode.github.io"
   },
-  "homepage": "https://aenode.github.io/aenode/utils/is",
+  "homepage": "https://aenode.github.io/aenode/plugins/prisma-plugins",
   "funding": [
     "https://cash.app/$puqlib"
   ],
@@ -38,10 +38,14 @@
     "bin",
     "!**/*.tsbuildinfo"
   ],
+  "bin": {
+    "dto": "./bin/controller.mjs",
+    "base-service": "./bin/resolver.mjs"
+  },
   "nx": {
-    "sourceRoot": "utils/is/src",
+    "sourceRoot": "plugins/prisma-plugins/src",
     "tags": [
-      "lib:utils"
+      "lib:plugin"
     ],
     "targets": {
       "build": {},
@@ -53,11 +57,11 @@
     "@swc/helpers": "~0.5.18"
   },
   "devDependencies": {
-    "@aenode/errors": "workspace:*",
-    "@aenode/types": "workspace:*"
+    "@prisma/client": "^7.9.0",
+    "@prisma/generator-helper": "^7.10.0",
+    "dotenv": "^17.4.2"
   },
   "peerDependencies": {
-    "@aenode/types": "workspace:*",
-    "@aenode/errors": "workspace:*"
+    "@prisma/generator-helper": "^7.10.0"
   }
 }

@@ -489,6 +489,22 @@ importers:
         specifier: workspace:*
         version: link:../../modules/fs
 
+  plugins/prisma-plugins:
+    dependencies:
+      '@swc/helpers':
+        specifier: ~0.5.18
+        version: 0.5.23
+    devDependencies:
+      '@prisma/client':
+        specifier: ^7.9.0
+        version: 7.9.0(prisma@7.9.0(@types/react@19.2.18)(better-sqlite3@13.0.3)(magicast@0.5.4)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(typescript@6.0.3))(typescript@6.0.3)
+      '@prisma/generator-helper':
+        specifier: ^7.10.0
+        version: 7.10.0
+      dotenv:
+        specifier: ^17.4.2
+        version: 17.4.2
+
   utils/brand-email:
     dependencies:
       '@swc/helpers':
@@ -2416,6 +2432,9 @@ packages:
   '@prisma/dev@0.24.14':
     resolution: {integrity: sha512-NhFO49O2JPTdzYiLHvceQn/HiwmcKF/iGV39ko3CpYsoGqS3rz3ko6gzuxFSIeHNwNJeuNcDexyyGeTO3DW80A==}
 
+  '@prisma/dmmf@7.10.0':
+    resolution: {integrity: sha512-TSw3Vo+TFKGRXNH/D2/M755Vm9rD3h3F0xoFfexPvEcPunQWlxUmj5VU/k8Pe3afQ4jFjUVBxem+/+A7YFwvsg==}
+
   '@prisma/driver-adapter-utils@7.10.0':
     resolution: {integrity: sha512-u8zkcRLlaryO652T4qavBg0HmzNW5tSKdsCn6hc1PhWAp/J6k0vrxLuUs+b9o+HcjsK7Dfa01o4OFSn0frauJA==}
 
@@ -2427,6 +2446,12 @@ packages:
 
   '@prisma/fetch-engine@7.9.0':
     resolution: {integrity: sha512-F0XlIgjbE3EywRVR/HpCerNI/dxo40vK66tHcWpsWYwH/Jk9+FsICEzATeMsZ7bdnpZz93hkD4sAb5rKLsCCpA==}
+
+  '@prisma/generator-helper@7.10.0':
+    resolution: {integrity: sha512-hEOsOo4pxmsJJjw64hu8Yh2PYYl3cvoSQT0xMDKkYDmgRNBARshnjrJJ/DJT35iFEsoej5ndViEpHmt3G3Aeaw==}
+
+  '@prisma/generator@7.10.0':
+    resolution: {integrity: sha512-GJfd4E7buRlOjc4FT1Sfo9SW4zlzYbmkmGy6OVWedzsZdBA4C+ommdfDDmMc8ZcokccpUmZK/zJ1A3tdR0tKFg==}
 
   '@prisma/get-platform@7.2.0':
     resolution: {integrity: sha512-k1V0l0Td1732EHpAfi2eySTezyllok9dXb6UQanajkJQzPUGi3vO2z7jdkz67SypFTdmbnyGYxvEvYZdZsMAVA==}
@@ -9319,6 +9344,8 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
+  '@prisma/dmmf@7.10.0': {}
+
   '@prisma/driver-adapter-utils@7.10.0':
     dependencies:
       '@prisma/debug': 7.10.0
@@ -9337,6 +9364,14 @@ snapshots:
       '@prisma/debug': 7.9.0
       '@prisma/engines-version': 7.9.0-1.e922089b7d7502aff4249d5da3420f6fa55fc6ad
       '@prisma/get-platform': 7.9.0
+
+  '@prisma/generator-helper@7.10.0':
+    dependencies:
+      '@prisma/debug': 7.10.0
+      '@prisma/dmmf': 7.10.0
+      '@prisma/generator': 7.10.0
+
+  '@prisma/generator@7.10.0': {}
 
   '@prisma/get-platform@7.2.0':
     dependencies:

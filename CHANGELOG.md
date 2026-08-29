@@ -1,3 +1,27 @@
+## 0.0.10 (2026-08-29)
+
+### 🚀 Features
+
+- created resolver generators ([29a416a](https://github.com/aenode/aenode/commit/29a416a))
+- associated the .template files with plaintext ([179c566](https://github.com/aenode/aenode/commit/179c566))
+- add reference to errors library in tsconfig.lib.json ([df93d37](https://github.com/aenode/aenode/commit/df93d37))
+- add module template for resolver generation ([6e0d6d1](https://github.com/aenode/aenode/commit/6e0d6d1))
+- implement IAM module with resolver, inputs, and environment configuration ([8490800](https://github.com/aenode/aenode/commit/8490800))
+- add reference to iam-db tsconfig in IAM module ([6ea8c7e](https://github.com/aenode/aenode/commit/6ea8c7e))
+- created prisma module ([4786739](https://github.com/aenode/aenode/commit/4786739))
+- enhance IAM module with Prisma integration and new input types ([59d636f](https://github.com/aenode/aenode/commit/59d636f))
+- add Prisma reference to IAM module tsconfig ([2ffca8f](https://github.com/aenode/aenode/commit/2ffca8f))
+- created a complete resolver with all data transfer objects; ([186cad5](https://github.com/aenode/aenode/commit/186cad5))
+- created a complete resolver with all data transfer objects; ([99ca65a](https://github.com/aenode/aenode/commit/99ca65a))
+
+### 🩹 Fixes
+
+- fixed the gql resource module template ([1d0eb06](https://github.com/aenode/aenode/commit/1d0eb06))
+
+### ❤️ Thank You
+
+- AESYS | Ahmet Emrebas
+
 ## 0.0.9 (2026-08-28)
 
 ### 🚀 Features
