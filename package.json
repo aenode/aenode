@@ -2,6 +2,7 @@
   "name": "@aenode/source",
   "version": "0.0.0",
   "license": "BSL-1.0",
+  "description": "Aenode tools, libraries, and projects",
   "homepage": "https://aenode.github.io?utm_source=github&utm_campaing=social",
   "scripts": {
     "prepare": "husky",
@@ -20,7 +21,7 @@
     "@swc/cli": "~0.8.1",
     "@swc/core": "~1.15.5",
     "@swc/helpers": "~0.5.18",
-    "@types/node": "^22.0.0",
+    "@types/node": "^26.4.0",
     "@typescript-eslint/eslint-plugin": "^8.67.0",
     "@vitest/coverage-v8": "~4.1.0",
     "chokidar": "^5.0.0",

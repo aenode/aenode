@@ -19,7 +19,7 @@ if ! echo "$COMMIT_MSG" | grep -qE "$PATTERN"; then
 fi
 
 
-pnpm nx affected -t build
+pnpm nx affected -t build 
 pnpm nx affected -t lint
 pnpm nx affected -t typecheck
 pnpm nx affected -t test

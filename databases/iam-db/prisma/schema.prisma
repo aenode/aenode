@@ -3,6 +3,11 @@ generator client {
     output   = "../src/generated/prisma"
 }
 
+generator resolver {
+    provider = "resolver"
+    output   = "../../apps/iam/src/resources"
+}
+
 datasource db {
     provider = "postgresql"
 }
