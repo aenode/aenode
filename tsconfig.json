@@ -68,6 +68,9 @@
     },
     {
       "path": "./modules/prisma"
+    },
+    {
+      "path": "./plugins/prisma-plugins"
     }
   ]
 }
