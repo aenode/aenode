@@ -106,6 +106,10 @@
       "inputs": ["production", "^production"]
     }
   },
+  "tui": {
+    "autoExit": 3,
+    "enabled": true
+  },
   "generators": {
     "@aenode/aenode:project": {
       "orgName": "aenode",
