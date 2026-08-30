@@ -4,14 +4,14 @@ export type ClassType<T = any> = {
   new (...args: any[]): T;
 };
 
-export const PropType = {
-  String: 'String',
-  Number: 'Number',
-  Boolean: 'Boolean',
-  Date: 'Date',
-};
+// export const PropType = {
+//   String: 'String',
+//   Number: 'Number',
+//   Boolean: 'Boolean',
+//   Date: 'Date',
+// };
 
-export type PropType = keyof typeof PropType;
+// export type PropType = keyof typeof PropType;
 
 export type PropFormat =
   | 'email'
@@ -189,6 +189,9 @@ export type PropValidationOptions = {
    */
   groups?: string[];
 
+  /**
+   * Default value
+   */
   defaultValue?: any;
 };
 
@@ -216,12 +219,12 @@ export type PropOptions = PropValidationOptions & {
   /**
    * Defines if the property is readonly that is ignored by the update operation
    */
-  isReadonly?: boolean;
+  isReadOnly?: boolean;
 
   /**
    * Defines if the propery is writeonly that is ignored by the read operations
    */
-  isWriteonly?: boolean;
+  isWriteOnly?: boolean;
 
   /**
    * Defines if the property is one of created, updated, or deleted at timestamps

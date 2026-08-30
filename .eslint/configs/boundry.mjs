@@ -27,7 +27,7 @@ export default [
             },
             {
               sourceTag: 'app:prisma',
-              onlyDependOnLibsWithTags: ['app:cli', 'lib:module'],
+              onlyDependOnLibsWithTags: ['app:cli', 'lib:module', 'lib:plugin'],
             },
             {
               sourceTag: 'app:cli',
@@ -53,6 +53,12 @@ export default [
                 'lib:types',
               ],
             },
+
+            {
+              sourceTag: 'lib:plugin',
+              onlyDependOnLibsWithTags: ['lib:utils', 'lib:types'],
+            },
+
             {
               sourceTag: 'lib:utils',
               onlyDependOnLibsWithTags: ['lib:types'],
