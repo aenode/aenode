@@ -4,24 +4,13 @@ import type { ClassNameSuffix } from './dto-suffix.js';
 export function printDtoClass(
   model: DMMF.Model,
   classNameSuffix: ClassNameSuffix,
-  fieldFilterFn: (field: DMMF.Field) => boolean,
-  importPrinerFn: (model: DMMF.Model) => string,
+  importPrinterFn: (model: DMMF.Model) => string,
   classDecoratorPrinterFn: (model: DMMF.Model) => string,
-  fieldDecoratorPritnerFn: (model: DMMF.Model, field: DMMF.Field) => string,
-  fieldPrinterFn: (model: DMMF.Model, field: DMMF.Field) => string,
 ) {
-  const printedFields = model.fields
-    .filter((field) => fieldFilterFn(field))
-    .map((field) => {
-      return [
-        fieldDecoratorPritnerFn(model, field),
-        fieldPrinterFn(model, field),
-      ].join(' ');
-    })
-    .join('\n');
+  const printedFields = '';
 
   return [
-    importPrinerFn(model),
+    importPrinterFn(model),
     classDecoratorPrinterFn(model),
     `export class ${model.name}${classNameSuffix} {`,
     printedFields,
