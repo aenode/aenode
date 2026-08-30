@@ -11,6 +11,9 @@
   "references": [
     {
       "path": "../../libs/prop-options/tsconfig.lib.json"
+    },
+    {
+      "path": "../../utils/is/tsconfig.lib.json"
     }
   ],
   "exclude": ["vitest.config.mts", "src/**/*.spec.ts"]
