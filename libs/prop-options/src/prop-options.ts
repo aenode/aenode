@@ -227,6 +227,16 @@ export type PropOptions = PropValidationOptions & {
   isWriteOnly?: boolean;
 
   /**
+   * Defines if the relation property is able to be included in include operation
+   */
+  isIncluded?: boolean;
+
+  /**
+   * Defines if the relation property is able to be included in slect operation
+   */
+  isSelected?: boolean;
+
+  /**
    * Defines if the property is one of created, updated, or deleted at timestamps
    */
   isTimestamp?: boolean;

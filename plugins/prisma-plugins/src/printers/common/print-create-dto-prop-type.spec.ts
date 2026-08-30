@@ -1,5 +1,5 @@
 import type { DMMF } from '@prisma/generator-helper';
-import { printCreateDtoPropType } from './print-create-dto-prop-type.js';
+import { propType } from './dto-prop-type.js';
 
 describe('printCreateDtoPropType', () => {
   it.each`
@@ -17,6 +17,6 @@ describe('printCreateDtoPropType', () => {
     ${{ name: 'name', kind: 'scalar', type: 'Bool', isList: true } as DMMF.Field}    | ${'boolean[]'}
     ${{ name: 'name', kind: 'enum', type: 'Some', isList: true } as DMMF.Field}      | ${'P.$Enums.Some[]'}
   `('printCreateDtoPropType($field) -> $expected', ({ field, expected }) => {
-    expect(printCreateDtoPropType(field)).toEqual(expected);
+    expect(propType(field)).toEqual(expected);
   });
 });

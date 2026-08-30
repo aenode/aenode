@@ -498,6 +498,9 @@ importers:
         specifier: ~0.5.18
         version: 0.5.23
     devDependencies:
+      '@aenode/is':
+        specifier: workspace:*
+        version: link:../../utils/is
       '@aenode/prop-options':
         specifier: workspace:*
         version: link:../../libs/prop-options

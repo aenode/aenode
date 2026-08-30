@@ -1,6 +1,6 @@
 import type { DMMF } from '@prisma/generator-helper';
 
-function __printCreateDtoPropType(field: DMMF.Field): string {
+function __propType(field: DMMF.Field): string {
   switch (field.kind) {
     case 'scalar': {
       switch (field.type) {
@@ -29,15 +29,12 @@ function __printCreateDtoPropType(field: DMMF.Field): string {
     }
     case 'unsupported':
     case 'object': {
-      console.warn(
-        'printCreateDtoType is not able to print object/unsupported field',
-      );
-      return 'unkown';
+      throw new Error('this method is only for scalar/enum types');
     }
   }
 }
 
-export function printCreateDtoPropType(field: DMMF.Field): string {
+export function propType(field: DMMF.Field): string {
   const arrayMark = field.isList ? '[]' : '';
-  return `${__printCreateDtoPropType(field)}${arrayMark}`;
+  return `${__propType(field)}${arrayMark}`;
 }
