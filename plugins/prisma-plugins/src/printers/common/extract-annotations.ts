@@ -8,7 +8,7 @@ export function hasAnnotation(documentation: string, annotationName: string) {
   return undefined;
 }
 
-export function getAnnotationValue(
+export function getAnnotationNumberValue(
   documentation: string,
   annotationName: string,
 ): string | undefined {
@@ -24,14 +24,34 @@ export function getAnnotationValue(
 
 export function getAnnotationStringValue(
   documentation: string,
-  annotaitonName: string,
-) {
-  const result = getAnnotationValue(documentation, annotaitonName);
+  annotationName: string,
+): string | undefined {
+  const matches = documentation.match(
+    new RegExp(`@${annotationName}\\((\\w+)\\)`, 'i'),
+  );
 
-  if (result) {
-    return `'${result}'`;
+  if (matches && matches[1]) {
+    return `'${matches[1]}'`;
   }
+  return undefined;
+}
 
+export function getAnnotationArrayStringValue(
+  documentation: string,
+  annotationName: string,
+): string | undefined {
+  const matches = documentation.match(
+    new RegExp(`@${annotationName}\\((\\w+)\\)`, 'i'),
+  );
+
+  if (matches && matches[1]) {
+    const preresult = `${matches[1]
+      .split(',')
+      .map((e) => `'${e}'`)
+      .join(', ')}`;
+
+    return `[ ${preresult} ]`;
+  }
   return undefined;
 }
 
@@ -40,8 +60,12 @@ export type StringPropOptionsRecord = Partial<
 >;
 
 export function extractAnnotations(
-  documentation: string,
-): StringPropOptionsRecord {
+  documentation?: string,
+): StringPropOptionsRecord | undefined {
+  if (!documentation) {
+    return undefined;
+  }
+
   const annotations: StringPropOptionsRecord = {
     isRequired: hasAnnotation(documentation, 'required'),
     isInternal: hasAnnotation(documentation, 'internal'),
@@ -49,18 +73,21 @@ export function extractAnnotations(
     isWriteOnly: hasAnnotation(documentation, 'writeonly'),
     isEncriped: hasAnnotation(documentation, 'encript'),
     isHashed: hasAnnotation(documentation, 'hash'),
+    excluded: hasAnnotation(documentation, 'excluded'),
 
     isIncluded: hasAnnotation(documentation, 'include'),
     isSelected: hasAnnotation(documentation, 'select'),
 
-    minLength: getAnnotationValue(documentation, 'minLength'),
-    maxLength: getAnnotationValue(documentation, 'maxLength'),
-    min: getAnnotationValue(documentation, 'min'),
-    max: getAnnotationValue(documentation, 'max'),
-    maxItems: getAnnotationValue(documentation, 'maxitems'),
-    minItems: getAnnotationValue(documentation, 'minitems'),
+    minLength: getAnnotationNumberValue(documentation, 'minLength'),
+    maxLength: getAnnotationNumberValue(documentation, 'maxLength'),
+    min: getAnnotationNumberValue(documentation, 'min'),
+    max: getAnnotationNumberValue(documentation, 'max'),
+    maxItems: getAnnotationNumberValue(documentation, 'maxitems'),
+    minItems: getAnnotationNumberValue(documentation, 'minitems'),
     pattern: getAnnotationStringValue(documentation, 'pattern'),
     format: getAnnotationStringValue(documentation, 'format'),
+    isIn: getAnnotationArrayStringValue(documentation, 'isIn'),
+    isNotIn: getAnnotationArrayStringValue(documentation, 'isNotIn'),
   };
 
   return pickDefinedValue(annotations);

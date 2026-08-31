@@ -68,6 +68,7 @@ export function isRequiredField(field: DMMF.Field) {
 
 export function isCreateDtoField(field: DMMF.Field) {
   return !(
+    field.kind === 'object' ||
     isInternalField(field) ||
     isIdField(field) ||
     isTimestampField(field)

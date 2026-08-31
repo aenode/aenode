@@ -1,5 +1,11 @@
 import type { DMMF } from '@prisma/generator-helper';
 
+/**
+ * Print typescript box type. This is for type option in prop decorator options.
+ *
+ * @param field
+ * @returns
+ */
 export function scalarBoxType(field: DMMF.Field): string {
   if (field.kind !== 'scalar') {
     throw new Error('field must be scalar');

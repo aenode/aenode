@@ -147,6 +147,8 @@ model AppUser {
 
     userRoles UserRole[]
 
+    operations String[]
+
     @@unique([appId, id])
     @@unique([userId, appId])
 }

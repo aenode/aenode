@@ -498,9 +498,18 @@ importers:
         specifier: ~0.5.18
         version: 0.5.23
     devDependencies:
+      '@aenode/flow':
+        specifier: workspace:*
+        version: link:../../utils/flow
+      '@aenode/fs':
+        specifier: workspace:*
+        version: link:../../modules/fs
       '@aenode/is':
         specifier: workspace:*
         version: link:../../utils/is
+      '@aenode/names':
+        specifier: workspace:*
+        version: link:../../utils/names
       '@aenode/prop-options':
         specifier: workspace:*
         version: link:../../libs/prop-options

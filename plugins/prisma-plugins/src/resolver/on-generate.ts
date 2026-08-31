@@ -1,5 +1,21 @@
+import { names } from '@aenode/names';
 import type { GeneratorOptions } from '@prisma/generator-helper';
+import { join } from 'node:path';
+import { printCreateDtoClass } from '../printers/print-create-dto-class.js';
 
 export default async function onGenerate(options: GeneratorOptions) {
-  console.log(options.dmmf.datamodel.models.map((e) => e.name));
+  const output = options.generator.output?.value;
+  if (!output) throw new Error('output is required!');
+
+  for (const model of options.dmmf.datamodel.models) {
+    const { kebab } = names(model.name);
+    const fileName = `${kebab}-create.dto.ts`;
+    const filepath = join(output, kebab, fileName);
+    const code = printCreateDtoClass(model);
+
+    console.log('---------------------------------------');
+    console.log(filepath);
+    console.log(code);
+    console.log('---------------------------------------');
+  }
 }

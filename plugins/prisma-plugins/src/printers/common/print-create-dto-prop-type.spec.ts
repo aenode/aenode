@@ -1,5 +1,5 @@
 import type { DMMF } from '@prisma/generator-helper';
-import { propType } from './dto-prop-type.js';
+import { propType } from './prop-type.js';
 
 describe('printCreateDtoPropType', () => {
   it.each`

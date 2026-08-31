@@ -1,6 +1,6 @@
 {
   "name": "@aenode/prisma-plugins",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "Prisma plugins",
   "keywords": [
     "types"
@@ -57,7 +57,10 @@
     "@swc/helpers": "~0.5.18"
   },
   "devDependencies": {
+    "@aenode/flow": "workspace:*",
+    "@aenode/fs": "workspace:*",
     "@aenode/is": "workspace:*",
+    "@aenode/names": "workspace:*",
     "@aenode/prop-options": "workspace:*",
     "@prisma/client": "^7.9.0",
     "@prisma/generator-helper": "^7.10.0",
@@ -65,6 +68,7 @@
   },
   "peerDependencies": {
     "@aenode/is": "workspace:*",
+    "@aenode/names": "workspace:*",
     "@aenode/prop-options": "workspace:*",
     "@prisma/generator-helper": "^7.10.0"
   }

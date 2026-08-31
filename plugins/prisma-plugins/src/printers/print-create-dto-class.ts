@@ -1,21 +1,41 @@
-import type { PropOptions } from '@aenode/prop-options';
 import type { DMMF } from '@prisma/generator-helper';
-import { isRequiredField } from './common/is-field.js';
+import { isCreateDtoField, isRequiredField } from './common/is-field.js';
 
-export function __printCreateDtoPropertyOptions(
-  field: DMMF.Field,
-): PropOptions {
-  const options: PropOptions = {};
-  const isRequired = isRequiredField(field);
-  if (isRequired === true) options.isRequired = true;
+import { names } from '@aenode/names';
+import { ClassNameSuffix } from './common/dto-suffix.js';
+import { propDecoratorOptions } from './common/prop-decorator-options.js';
+import { propDecorator } from './common/prop-decorator.js';
+import { propDefinition } from './common/prop-definition.js';
+import { propType } from './common/prop-type.js';
 
-  return options;
-}
+export function printCreateDtoClass(
+  model: DMMF.Model,
+  classImports = '',
+  classDecorator = '',
+) {
+  const { pascal: modelName } = names(model.name);
 
-export function printCreateDtoPropDecoratorOptions(field: DMMF.Field) {
-  return JSON.stringify(__printCreateDtoPropertyOptions(field));
-}
+  const createDtoFields = model.fields.filter((field) =>
+    isCreateDtoField(field),
+  );
 
-export function printCreateDtoClass(model: DMMF.Model) {
-  return `${model.name}`;
+  const properties = createDtoFields
+    .map((field) => {
+      return [
+        ' ',
+        propDecorator(propDecoratorOptions(field)),
+        propDefinition(field, isRequiredField(field), propType(field)),
+      ].join(' ');
+    })
+    .join('\n');
+
+  return [
+    classImports,
+    classDecorator,
+    `export class ${modelName}${ClassNameSuffix.CreateDto} {`,
+    properties,
+    '}',
+  ]
+    .filter((e) => e)
+    .join('\n');
 }

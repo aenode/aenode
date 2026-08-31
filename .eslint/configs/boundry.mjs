@@ -56,7 +56,11 @@ export default [
 
             {
               sourceTag: 'lib:plugin',
-              onlyDependOnLibsWithTags: ['lib:utils', 'lib:types'],
+              onlyDependOnLibsWithTags: [
+                'lib:module',
+                'lib:utils',
+                'lib:types',
+              ],
             },
 
             {
