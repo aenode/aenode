@@ -7,7 +7,7 @@ import type { DMMF } from '@prisma/generator-helper';
  * @returns
  */
 export function isInternalField(field: DMMF.Field) {
-  return /@internal/.test(field.documentation ?? '');
+  return /@internal/i.test(field.documentation ?? '');
 }
 
 /**
@@ -34,8 +34,17 @@ export function isIdField(field: DMMF.Field) {
 }
 
 export function hasRequiredAnnotation(field: DMMF.Field) {
-  return /@required/.test(field.documentation ?? '');
+  return /@required/i.test(field.documentation ?? '');
 }
+
+export function hasEncriptedAnnotaiton(field: DMMF.Field) {
+  return /@encript/i.test(field.documentation ?? '');
+}
+
+export function hasHashAnnotation(field: DMMF.Field) {
+  return /@hash/i.test(field.documentation ?? '');
+}
+
 /**
  * Check the field is required
  *
@@ -59,7 +68,7 @@ export function isRequiredField(field: DMMF.Field) {
       } else {
         return (
           field.isRequired === true ||
-          /@required/.test(field.documentation ?? '')
+          /@required/i.test(field.documentation ?? '')
         );
       }
     }

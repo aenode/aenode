@@ -1,4 +1,5 @@
 export const ClassNameSuffix = {
+  ReadDto: 'ReadDto',
   CreateDto: 'CreateDto',
   UpdateDto: 'UpdateDto',
   FindManyArgsDto: 'FindManyArgsDto',
