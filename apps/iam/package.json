@@ -1,6 +1,6 @@
 {
   "name": "@aenode/iam",
-  "version": "0.0.10",
+  "version": "0.0.13",
   "description": "Identity and access management api",
   "keywords": [
     "iam",

@@ -1,3 +1,26 @@
+## 0.0.13 (2026-08-31)
+
+### 🚀 Features
+
+- add prisma-plugins module with generator and resolver functionality ([2cfe271](https://github.com/aenode/aenode/commit/2cfe271))
+- created field checker ([2250952](https://github.com/aenode/aenode/commit/2250952))
+- add @aenode/prisma-plugins as a dependency in package.json and pnpm-lock.yaml ([cebfca6](https://github.com/aenode/aenode/commit/cebfca6))
+- created the common printer helpers ([9117ee4](https://github.com/aenode/aenode/commit/9117ee4))
+- add printer functions for class decorators, DTO imports, field decorators, and field definitions ([6dff2c4](https://github.com/aenode/aenode/commit/6dff2c4))
+- update ESLint configuration and refactor prop options; add new printer functions for DTOs ([4c01cc0](https://github.com/aenode/aenode/commit/4c01cc0))
+- working of annotation extraction ([933c507](https://github.com/aenode/aenode/commit/933c507))
+- working of annotation extraction ([b8cec24](https://github.com/aenode/aenode/commit/b8cec24))
+- created created dto printer ([75135af](https://github.com/aenode/aenode/commit/75135af))
+- created created dto printer ([4d46921](https://github.com/aenode/aenode/commit/4d46921))
+- created read and created dto ([9673035](https://github.com/aenode/aenode/commit/9673035))
+- created the read, create, and update dto classes ([55c8631](https://github.com/aenode/aenode/commit/55c8631))
+- created the read, create, and update dto classes ([bfb8a2a](https://github.com/aenode/aenode/commit/bfb8a2a))
+- created where dto printer ([41e39fe](https://github.com/aenode/aenode/commit/41e39fe))
+
+### ❤️ Thank You
+
+- AESYS | Ahmet Emrebas
+
 ## 0.0.10 (2026-08-29)
 
 ### 🚀 Features

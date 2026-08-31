@@ -1,6 +1,6 @@
 {
   "name": "@aenode/flow",
-  "version": "0.0.10",
+  "version": "0.0.13",
   "description": "Conditional workflows",
   "keywords": [
     "types"
