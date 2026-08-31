@@ -10,11 +10,11 @@ import { propType } from './common/prop-type.js';
 export function printCreateDtoClass(model: DMMF.Model) {
   const { pascal: modelName } = names(model.name);
 
-  const createDtoFields = model.fields.filter((field) =>
+  const filteredFields = model.fields.filter((field) =>
     isCreateDtoField(field),
   );
 
-  const properties = createDtoFields
+  const properties = filteredFields
     .map((field) => {
       return [
         ' ',
@@ -25,14 +25,15 @@ export function printCreateDtoClass(model: DMMF.Model) {
     .join('\n');
 
   const createDtoName = `${modelName}${ClassNameSuffix.CreateDto}`;
-  const updateDtoName = `${modelName}${ClassNameSuffix.UpdateDto}`;
+
+  const hasEnum = filteredFields.some((e) => e.kind === 'enum');
 
   const imports = [
-    `import { Prop, InputType } from '@aenode/nestjs/graphql';`,
-    `import * as P from '../../prisma/client.js';`,
+    `import { Prop, InputType, PartialType } from '@aenode/nestjs/graphql';`,
+    hasEnum ? `import * as P from '../../prisma/client.js';` : '',
   ].join('\n');
 
-  const classDecorator = '@InputType()';
+  const classDecorator = ['', '@InputType()'].join('\n');
 
   return [
     imports,
@@ -41,7 +42,8 @@ export function printCreateDtoClass(model: DMMF.Model) {
     properties,
     '}',
 
-    `export class ${modelName}${ClassNameSuffix.UpdateDto} extends PartialType(${updateDtoName}) { } `,
+    classDecorator,
+    `export class ${modelName}${ClassNameSuffix.UpdateDto} extends PartialType(${createDtoName}) { } `,
   ]
     .filter((e) => e)
     .join('\n');

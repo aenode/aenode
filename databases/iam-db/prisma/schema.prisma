@@ -5,7 +5,7 @@ generator client {
 
 generator resolver {
     provider = "resolver"
-    output   = "../../apps/iam/src/resources"
+    output   = "../../../apps/iam/src/resources"
 }
 
 datasource db {

@@ -1,3 +1,4 @@
+import { writeTextFile } from '@aenode/fs';
 import { names } from '@aenode/names';
 import type { GeneratorOptions } from '@prisma/generator-helper';
 import { join } from 'node:path';
@@ -16,11 +17,7 @@ export default async function onGenerate(options: GeneratorOptions) {
       const filepath = join(output, kebab, fileName);
       const code = printReadDtoClass(model);
 
-      console.log('ReadDto');
-      console.log(filepath);
-      console.log(code);
-      console.log('---------------------------------------');
-
+      await writeTextFile(filepath, code);
       break ReadDtoPrinter;
     }
 
@@ -30,11 +27,7 @@ export default async function onGenerate(options: GeneratorOptions) {
       const filepath = join(output, kebab, fileName);
       const code = printCreateDtoClass(model);
 
-      console.log('CreaetDto');
-      console.log(filepath);
-      console.log(code);
-      console.log('---------------------------------------');
-
+      await writeTextFile(filepath, code);
       break CreateDtoPrinter;
     }
   }

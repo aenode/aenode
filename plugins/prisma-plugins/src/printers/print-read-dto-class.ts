@@ -38,9 +38,10 @@ export function printReadDtoClass(model: DMMF.Model) {
 
   const dtoName = `${modelName}${ClassNameSuffix.ReadDto}`;
 
+  const hasEnum = filteredFields.some((e) => e.kind === 'enum');
   const imports = [
     `import { Prop, ObjectType } from '@aenode/nestjs/graphql';`,
-    `import * as P from '../../prisma/client.js';`,
+    hasEnum ? `import * as P from '../../prisma/client.js';` : '',
   ].join('\n');
 
   const classDecorator = '@ObjectType()';

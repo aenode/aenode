@@ -67,6 +67,7 @@
     "dotenv": "^17.4.2"
   },
   "peerDependencies": {
+    "@aenode/fs": "workspace:*",
     "@aenode/is": "workspace:*",
     "@aenode/names": "workspace:*",
     "@aenode/prop-options": "workspace:*",
