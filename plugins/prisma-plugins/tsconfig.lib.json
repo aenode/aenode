@@ -10,7 +10,16 @@
   "include": ["src/**/*.ts"],
   "references": [
     {
+      "path": "../../modules/fs/tsconfig.lib.json"
+    },
+    {
+      "path": "../../utils/flow/tsconfig.lib.json"
+    },
+    {
       "path": "../../libs/prop-options/tsconfig.lib.json"
+    },
+    {
+      "path": "../../utils/names/tsconfig.lib.json"
     },
     {
       "path": "../../utils/is/tsconfig.lib.json"
