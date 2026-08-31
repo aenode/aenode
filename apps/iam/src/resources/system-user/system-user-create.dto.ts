@@ -7,6 +7,7 @@ export class SystemUserCreateDto {
   @Prop({ isRequired: true }) username: string;
   @Prop({ format: 'password', isRequired: true }) password: string;
   @Prop({ enum: ()=>P.$Enums.SystemRole, isRequired: true }) role: P.$Enums.SystemRole;
+  @Prop({ enum: ()=>P.$Enums.SystemRole, isArray: true }) roles: P.$Enums.SystemRole[];
 }
 
 @InputType()

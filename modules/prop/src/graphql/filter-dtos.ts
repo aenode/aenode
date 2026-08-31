@@ -54,3 +54,36 @@ export class StringFilterDto {
   mode?: QueryMode = QueryMode.insensitive;
   @Prop({ object: () => StringFilterDto }) not?: StringFilterDto;
 }
+
+@InputType()
+export class StringArrayFilterDto {
+  @Prop() isEmpty?: boolean;
+  @Prop({ type: () => String, isArray: true }) has?: string;
+  @Prop({ type: () => String, isArray: true }) equals?: string[];
+  @Prop({ type: () => String, isArray: true }) hasEvery?: string[];
+  @Prop({ type: () => String, isArray: true }) hasSome?: string[];
+}
+
+@InputType()
+export class BooleanArrayFilterDto {
+  @Prop() isEmpty?: boolean;
+  @Prop({ type: () => Boolean, isArray: true }) equals?: boolean[];
+  @Prop({ type: () => Boolean, isArray: true }) hasEvery?: boolean[];
+  @Prop({ type: () => Boolean, isArray: true }) hasSome?: boolean[];
+}
+
+@InputType()
+export class IntArrayFilterDto {
+  @Prop() isEmpty?: boolean;
+  @Prop({ type: () => Number, isArray: true }) has?: number;
+  @Prop({ type: () => Number, isArray: true }) equals?: number[];
+  @Prop({ type: () => Number, isArray: true }) hasEvery?: number[];
+  @Prop({ type: () => Number, isArray: true }) hasSome?: number[];
+}
+
+@InputType()
+export class JsonFilterDto {
+  @Prop({ enum: () => QueryMode }) mode?: QueryMode;
+  @Prop({ type: () => String }) string_contains?: string;
+  @Prop({ object: () => JsonFilterDto }) not: JsonFilterDto;
+}

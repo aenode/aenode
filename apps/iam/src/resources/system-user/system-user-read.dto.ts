@@ -10,4 +10,5 @@ export class SystemUserReadDto {
   @Prop() username?: string;
   @Prop({ format: 'password' }) password?: string;
   @Prop({ enum: ()=>P.$Enums.SystemRole }) role?: P.$Enums.SystemRole;
+  @Prop({ enum: ()=>P.$Enums.SystemRole, isArray: true }) roles?: P.$Enums.SystemRole[];
 }

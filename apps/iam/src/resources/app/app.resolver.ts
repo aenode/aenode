@@ -1,4 +1,4 @@
-import { Prisma } from '@aenode/iam-db/client';
+import { Prisma, PrismaClient } from '@aenode/iam-db/client';
 import {
   ArgsId,
   ArgsInput,
@@ -9,7 +9,7 @@ import {
   Resolver,
   Subscription,
 } from '@aenode/nestjs/graphql';
-import { InjectDelegate } from '@aenode/prisma/pg';
+import { InjectClient, InjectDelegate } from '@aenode/prisma/pg';
 import { AppCreateDto } from './inputs/app-create.dto.js';
 import { AppFindManyArgsDto } from './inputs/app-find-many-args.dto.js';
 import { AppReadDto } from './inputs/app-read.dto.js';
@@ -21,9 +21,20 @@ export class AppResolver {
   protected readonly sub = new PubSub();
 
   constructor(
+    @InjectClient() protected readonly client: PrismaClient,
     @InjectDelegate(Prisma.ModelName.App)
     protected readonly delegate: Prisma.AppDelegate,
-  ) {}
+  ) {
+    this.client.systemUser.findMany({
+      where: { roles: { equals: ['Admin'], has: 'Admin' } },
+    });
+
+    this.client.user.findMany({
+      where: {
+        appUsers: {},
+      },
+    });
+  }
 
   @Query(() => [AppReadDto], { nullable: true })
   protected findManyApp(

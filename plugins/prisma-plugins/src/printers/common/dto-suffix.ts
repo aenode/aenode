@@ -9,7 +9,9 @@ export const ClassNameSuffix = {
   OmitDto: 'OmitDto',
   IncludeDto: 'IncludeDto',
   WhereDto: 'WhereDto',
-  ListWhereDto: 'ListWhereDto',
+  ArrayWhereDto: 'ArrayWhereDto',
+  EnumFilterDto: 'EnumFilterDto',
+  EnumArrayFilterDto: 'EnumArrayFilterDto',
 };
 
 export type ClassNameSuffix = keyof typeof ClassNameSuffix;

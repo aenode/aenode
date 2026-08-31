@@ -10,4 +10,5 @@ export class AppUserReadDto {
   @Prop() appId?: number;
   @Prop() userId?: number;
   @Prop({ type: ()=>String, isArray: true }) operations?: string[];
+  @Prop() notes?: string;
 }

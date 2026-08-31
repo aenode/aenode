@@ -134,14 +134,17 @@ export function isSelectField(field: DMMF.Field) {
 }
 
 /**
- * Check the field is marked with "@where" annotation or not
+ * Check the field is queryable. For object/relation field "@where" annotation is required to include the field in query operation.
+ *
  * @param field
  * @returns
  */
 export function isWhereField(field: DMMF.Field): boolean {
-  if (field.kind !== 'object') {
-    throw new Error(`This is for object fields`);
+  if (isInternalField(field)) {
+    return false;
   }
-
-  return /@where/i.test(field.documentation ?? '');
+  if (field.kind === 'object') {
+    return /@where/i.test(field.documentation ?? '');
+  }
+  return true;
 }

@@ -149,6 +149,8 @@ model AppUser {
 
     operations String[]
 
+    notes Json?
+
     @@unique([appId, id])
     @@unique([userId, appId])
 }
@@ -173,4 +175,6 @@ model SystemUser {
     password String
 
     role SystemRole
+
+    roles SystemRole[]
 }
