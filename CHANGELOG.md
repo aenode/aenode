@@ -1,3 +1,14 @@
+## 0.0.17 (2026-09-01)
+
+### 🚀 Features
+
+- created read, create, update, and where dtos ([dac3cfe](https://github.com/aenode/aenode/commit/dac3cfe))
+- enhance DTO generation with new printer functions and update MainModule to use DTOs ([2331d9c](https://github.com/aenode/aenode/commit/2331d9c))
+
+### ❤️ Thank You
+
+- AESYS | Ahmet Emrebas
+
 ## 0.0.13 (2026-08-31)
 
 ### 🚀 Features
