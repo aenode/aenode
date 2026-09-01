@@ -65,7 +65,7 @@ model Role {
 
     name String @db.VarChar(255)
 
-    rolePermissions RolePermission[]
+    rolePermissions RolePermission[] /// @include
     userRoles       UserRole[]
 
     @@unique([name, appId])

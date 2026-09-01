@@ -1,4 +1,5 @@
 import { PrismaClient } from '@aenode/iam-db/client';
+import { AppUserFindManyArgsDto } from '@aenode/iam-db/dtos';
 import { Module } from '@aenode/nestjs';
 import { AppModule } from '@aenode/nestjs/graphql';
 import { PrismaModule } from '@aenode/prisma/pg';
@@ -12,8 +13,6 @@ import { PrismaModule } from '@aenode/prisma/pg';
 })
 export class MainModule {
   constructor(protected readonly client: PrismaClient) {
-    client.appUser.findMany({
-      select: { userRoles: {} },
-    });
+    client.appUser.findMany(new AppUserFindManyArgsDto());
   }
 }

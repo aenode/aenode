@@ -114,10 +114,10 @@ export function isUpdateDtoField(field: DMMF.Field) {
  * @returns
  */
 export function isIncludeField(field: DMMF.Field) {
-  if (field.kind !== 'object') {
-    throw new Error(`This is for object fields`);
+  if (field.kind === 'object') {
+    return /@include/i.test(field.documentation ?? '');
   }
-  return /@include/i.test(field.documentation ?? '');
+  return false;
 }
 
 /**
@@ -127,12 +127,24 @@ export function isIncludeField(field: DMMF.Field) {
  * @returns
  */
 export function isSelectField(field: DMMF.Field) {
-  if (field.kind !== 'object') {
-    throw new Error(`This is for object fields`);
+  if (field.kind === 'object') {
+    return /@select|@include/i.test(field.documentation ?? '');
   }
-  return /@select/i.test(field.documentation ?? '');
+
+  if (
+    isInternalField(field) ||
+    hasHashAnnotation(field) ||
+    hasEncriptedAnnotaiton(field)
+  ) {
+    return false;
+  }
+
+  return true;
 }
 
+export function isOmitField(field: DMMF.Field) {
+  return field.kind !== 'object';
+}
 /**
  * Check the field is queryable. For object/relation field "@where" annotation is required to include the field in query operation.
  *
@@ -144,7 +156,7 @@ export function isWhereField(field: DMMF.Field): boolean {
     return false;
   }
   if (field.kind === 'object') {
-    return /@where/i.test(field.documentation ?? '');
+    return /@where|@include/i.test(field.documentation ?? '');
   }
   return true;
 }
