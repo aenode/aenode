@@ -46,12 +46,12 @@ export function propWhereType(field: DMMF.Field): string {
     }
     case 'enum': {
       if (field.isList) {
-        return `E.${field.type}${ClassNameSuffix.EnumArrayFilterDto}`;
+        return `${field.type}${ClassNameSuffix.EnumArrayFilterDto}`;
       }
-      return `E.${field.type}${ClassNameSuffix.EnumFilterDto}`;
+      return `${field.type}${ClassNameSuffix.EnumFilterDto}`;
     }
     case 'unsupported': {
-      throw new Error('Unsupported field type');
+      return 'unkown';
     }
   }
 }

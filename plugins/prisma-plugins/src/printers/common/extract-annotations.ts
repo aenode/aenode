@@ -1,4 +1,4 @@
-import { pickDefinedValue } from '@aenode/is';
+import { pick, pickDefinedValue } from '@aenode/is';
 import type { PropOptions } from '@aenode/prop-options';
 
 export function hasAnnotation(documentation: string, annotationName: string) {
@@ -58,6 +58,26 @@ export function getAnnotationArrayStringValue(
 export type StringPropOptionsRecord = Partial<
   Record<keyof PropOptions, string | undefined>
 >;
+
+export function pickValidationAnnotaitons(
+  annotaions: StringPropOptionsRecord,
+): StringPropOptionsRecord {
+  return pick(annotaions, [
+    'defaultValue',
+    'format',
+    'max',
+    'min',
+    'minLength',
+    'maxLength',
+    'maxDate',
+    'minDate',
+    'pattern',
+    'maxItems',
+    'minItems',
+    'isIn',
+    'isNotIn',
+  ]);
+}
 
 export function extractAnnotations(
   documentation?: string,

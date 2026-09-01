@@ -1,7 +1,11 @@
 import type { DMMF } from '@prisma/generator-helper';
+import { ClassNameSuffix } from './dto-suffix.js';
 
-function __propType(field: DMMF.Field): string {
+export function propSingularType(field: DMMF.Field): string {
   switch (field.kind) {
+    case 'object': {
+      return `${field.type}${ClassNameSuffix.ReadDto}`;
+    }
     case 'scalar': {
       switch (field.type) {
         case 'String': {
@@ -27,14 +31,13 @@ function __propType(field: DMMF.Field): string {
     case 'enum': {
       return `P.$Enums.${field.type}`;
     }
-    case 'unsupported':
-    case 'object': {
-      throw new Error('this method is only for scalar/enum types');
+    case 'unsupported': {
+      return 'unkown';
     }
   }
 }
 
 export function propType(field: DMMF.Field): string {
   const arrayMark = field.isList ? '[]' : '';
-  return `${__propType(field)}${arrayMark}`;
+  return `${propSingularType(field)}${arrayMark}`;
 }

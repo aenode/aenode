@@ -1,6 +1,6 @@
 {
   "name": "@aenode/prisma-plugins",
-  "version": "0.0.13",
+  "version": "0.0.13-t0",
   "description": "Prisma plugins",
   "keywords": [
     "types"
@@ -39,8 +39,9 @@
     "!**/*.tsbuildinfo"
   ],
   "bin": {
-    "controller": "./bin/controller.mjs",
-    "resolver": "./bin/resolver.mjs"
+    "aenode-graphql": "./bin/aenode-graphql.mjs",
+    "aenode-controller": "./bin/aenode-controller.mjs",
+    "aenode-resolver": "./bin/aenode-resolver.mjs"
   },
   "nx": {
     "sourceRoot": "plugins/prisma-plugins/src",

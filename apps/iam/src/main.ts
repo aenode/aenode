@@ -1,6 +1,6 @@
 import { ConfigService, Logger, NestFactory } from '@aenode/nestjs';
 import { DocumentBuilder, SwaggerModule } from '@aenode/nestjs/swagger';
-import { MainModule } from './app/main.module.js';
+import { MainModule } from './main.module.js';
 
 function config(configService: ConfigService) {
   const env = (key: string, defaultValue?: string | number) =>

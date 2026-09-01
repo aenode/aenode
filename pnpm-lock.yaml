@@ -141,6 +141,9 @@ importers:
         specifier: ~0.5.18
         version: 0.5.23
     devDependencies:
+      '@aenode/nestjs':
+        specifier: workspace:*
+        version: link:../../modules/nestjs
       '@aenode/prisma-plugins':
         specifier: workspace:*
         version: link:../../plugins/prisma-plugins

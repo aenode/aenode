@@ -62,7 +62,11 @@ export function pick<T extends object, K extends readonly (keyof T)[]>(
 ): Pick<T, IndexType<K>> {
   return keysToPick.reduce(
     (acc, key) => {
-      Object.assign(acc, { [key]: value[key as IndexType<K>] });
+      const preValue = value[key as IndexType<K>];
+
+      if (preValue !== undefined && preValue !== null) {
+        Object.assign(acc, { [key]: value[key as IndexType<K>] });
+      }
 
       return acc;
     },

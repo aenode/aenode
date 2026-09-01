@@ -25,7 +25,9 @@ export function scalarBoxType(field: DMMF.Field): string {
     case 'DateTime': {
       return 'Date';
     }
-  }
 
-  throw new Error('Cannot match the field.type for any scalar type');
+    default: {
+      return 'unkown';
+    }
+  }
 }

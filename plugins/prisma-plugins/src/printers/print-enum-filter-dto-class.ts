@@ -38,9 +38,5 @@ export function printEnumFilterDtos(enums: DMMF.DatamodelEnum[]) {
     ])
     .join('\n');
 
-  return [
-    `import { Prop, InputType} from '@aenode/nestjs/graphql';`,
-    `import * as P from '../../prisma/client.js';`,
-    preResult,
-  ].join('\n');
+  return [preResult].join('\n');
 }

@@ -24,17 +24,7 @@ export class AppResolver {
     @InjectClient() protected readonly client: PrismaClient,
     @InjectDelegate(Prisma.ModelName.App)
     protected readonly delegate: Prisma.AppDelegate,
-  ) {
-    this.client.systemUser.findMany({
-      where: { roles: { equals: ['Admin'], has: 'Admin' } },
-    });
-
-    this.client.user.findMany({
-      where: {
-        appUsers: {},
-      },
-    });
-  }
+  ) {}
 
   @Query(() => [AppReadDto], { nullable: true })
   protected findManyApp(

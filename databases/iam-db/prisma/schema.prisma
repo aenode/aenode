@@ -3,9 +3,9 @@ generator client {
     output   = "../src/generated/prisma"
 }
 
-generator resolver {
-    provider = "resolver"
-    output   = "../../../apps/iam/src/resources"
+generator aenodeGraphql {
+    provider = "aenode-graphql"
+    output   = "../src/generated/dtos"
 }
 
 datasource db {
@@ -83,10 +83,10 @@ model RolePermission {
     app   App @relation(fields: [appId], references: [id], onDelete: Cascade, onUpdate: Cascade)
     appId Int
 
-    role   Role @relation(fields: [roleId, appId], references: [id, appId], onDelete: Cascade, onUpdate: Cascade)
+    role   Role @relation(fields: [appId, roleId], references: [appId, id], onDelete: Cascade, onUpdate: Cascade)
     roleId Int
 
-    permission   Permission @relation(fields: [permissionId, appId], references: [id, appId], onDelete: Cascade, onUpdate: Cascade)
+    permission   Permission @relation(fields: [appId, permissionId], references: [appId, id], onDelete: Cascade, onUpdate: Cascade)
     permissionId Int
 
     @@unique([appId, roleId, permissionId])
@@ -121,14 +121,18 @@ model UserRole {
     deletedAt DateTime? @db.Timestamptz(6)
     isActive  Boolean?  @default(true)
 
-    app   App @relation(fields: [appId], references: [id])
+    app   App @relation(fields: [appId], references: [id], onDelete: Cascade, onUpdate: Cascade)
     appId Int
 
-    user   AppUser @relation(fields: [userId, appId], references: [id, appId])
+    user   AppUser @relation(fields: [appId, userId], references: [appId, id], onDelete: Cascade, onUpdate: Cascade)
     userId Int
 
-    role   Role @relation(fields: [roleId, appId], references: [id, appId], onDelete: Cascade, onUpdate: Cascade)
+    role   Role @relation(fields: [appId, roleId], references: [appId, id], onDelete: Cascade, onUpdate: Cascade)
     roleId Int
+
+    @@unique([appId, userId, roleId])
+    @@index([appId, userId])
+    @@index([appId, roleId])
 }
 
 model AppUser {
@@ -142,39 +146,11 @@ model AppUser {
     app   App @relation(fields: [appId], references: [id], onDelete: Cascade, onUpdate: Cascade)
     appId Int
 
-    user   User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+    user   User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade) /// @include
     userId Int
 
-    userRoles UserRole[]
-
-    operations String[]
-
-    notes Json?
+    userRoles UserRole[] /// @include 
 
     @@unique([appId, id])
     @@unique([userId, appId])
-}
-
-enum SystemRole {
-    Superuser
-    Admin
-    Editor
-}
-
-model SystemUser {
-    id Int @id @default(autoincrement())
-
-    createdAt DateTime  @default(now()) @db.Timestamptz(6)
-    updatedAt DateTime  @updatedAt @db.Timestamptz(6)
-    deletedAt DateTime? @db.Timestamptz(6)
-    isActive  Boolean?  @default(true)
-
-    username String @unique
-
-    /// @format(password)
-    password String
-
-    role SystemRole
-
-    roles SystemRole[]
 }

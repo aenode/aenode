@@ -1,6 +1,10 @@
 import type { PropOptions } from '@aenode/prop-options';
 import type { DMMF } from '@prisma/generator-helper';
-import { extractAnnotations } from './extract-annotations.js';
+import {
+  extractAnnotations,
+  pickValidationAnnotaitons,
+} from './extract-annotations.js';
+import { propSingularType } from './prop-type.js';
 import { scalarBoxType } from './scalar-box-type.js';
 
 /**
@@ -21,13 +25,13 @@ export function propDecoratorOptions(
 
   SetTypes: {
     if (field.kind === 'enum') {
-      push('enum', `()=>P.$Enums.${field.type}`);
+      push('enum', `()=>${propSingularType(field)}`);
     } else if (field.kind === 'scalar') {
       if (isArray) {
         push('type', `()=>${scalarBoxType(field)}`);
       }
-    } else {
-      throw new Error('only for scalar/enum types');
+    } else if (field.kind === 'object') {
+      push('object', `()=>${propSingularType(field)}`);
     }
 
     if (isArray === true) {
@@ -40,7 +44,9 @@ export function propDecoratorOptions(
   const annotations = extractAnnotations(field.documentation ?? '');
 
   if (annotations) {
-    for (const [key, value] of Object.entries(annotations)) {
+    for (const [key, value] of Object.entries(
+      pickValidationAnnotaitons(annotations),
+    )) {
       push(key as keyof PropOptions, value);
     }
   }

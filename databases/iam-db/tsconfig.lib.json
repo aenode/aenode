@@ -11,6 +11,9 @@
   "references": [
     {
       "path": "../../plugins/prisma-plugins/tsconfig.lib.json"
+    },
+    {
+      "path": "../../modules/nestjs/tsconfig.lib.json"
     }
   ],
   "exclude": ["vitest.config.mts", "prisma.config.ts", "src/**/*.spec.ts"]

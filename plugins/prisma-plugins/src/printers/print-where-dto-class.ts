@@ -26,17 +26,7 @@ export function printWhereDtoClass(
     })
     .join('\n');
 
-  const hasEnum = filterdFields.some((e) => e.kind === 'enum');
-
-  return [
-    `import { Prop, InputType }  from "@aenode/nestjs/graphql"`,
-    `import *  as F  from "@aenode/nestjs/graphql"`,
-    hasEnum ? `import *  as E  from "../common/enum-filters.js"` : '',
-    classDecorator,
-    `export class ${dtoName} {`,
-    properties,
-    `} `,
-  ]
+  return [classDecorator, `export class ${dtoName} {`, properties, `} `]
     .filter((e) => e)
     .join('\n');
 }

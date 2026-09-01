@@ -26,17 +26,9 @@ export function printCreateDtoClass(model: DMMF.Model) {
 
   const createDtoName = `${modelName}${ClassNameSuffix.CreateDto}`;
 
-  const hasEnum = filteredFields.some((e) => e.kind === 'enum');
-
-  const imports = [
-    `import { Prop, InputType, PartialType } from '@aenode/nestjs/graphql';`,
-    hasEnum ? `import * as P from '../../prisma/client.js';` : '',
-  ].join('\n');
-
   const classDecorator = ['', '@InputType()'].join('\n');
 
   return [
-    imports,
     classDecorator,
     `export class ${createDtoName} {`,
     properties,

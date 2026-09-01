@@ -4,6 +4,7 @@ import { ClassNameSuffix } from './common/dto-suffix.js';
 import {
   hasEncriptedAnnotaiton,
   hasHashAnnotation,
+  isIncludeField,
   isInternalField,
 } from './common/is-field.js';
 import { propDecoratorOptions } from './common/prop-decorator-options.js';
@@ -15,11 +16,14 @@ export function printReadDtoClass(model: DMMF.Model) {
   const { pascal: modelName } = names(model.name);
 
   const filteredFields = model.fields.filter((field) => {
+    if (field.kind === 'object') {
+      return isIncludeField(field);
+    }
+
     if (
       isInternalField(field) ||
       hasEncriptedAnnotaiton(field) ||
-      hasHashAnnotation(field) ||
-      field.kind === 'object'
+      hasHashAnnotation(field)
     ) {
       return false;
     }
@@ -38,15 +42,9 @@ export function printReadDtoClass(model: DMMF.Model) {
 
   const dtoName = `${modelName}${ClassNameSuffix.ReadDto}`;
 
-  const hasEnum = filteredFields.some((e) => e.kind === 'enum');
-  const imports = [
-    `import { Prop, ObjectType } from '@aenode/nestjs/graphql';`,
-    hasEnum ? `import * as P from '../../prisma/client.js';` : '',
-  ].join('\n');
-
   const classDecorator = '@ObjectType()';
 
-  return [imports, classDecorator, `export class ${dtoName} {`, properties, '}']
+  return [classDecorator, `export class ${dtoName} {`, properties, '}']
     .filter((e) => e)
     .join('\n');
 }
