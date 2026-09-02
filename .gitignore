@@ -3,6 +3,7 @@
 # compiled output
 dist
 tmp/*
+!.gitkeep
 out-tsc
 **/generated
 
