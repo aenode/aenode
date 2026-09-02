@@ -1,6 +1,6 @@
 {
   "name": "@aenode/prisma-plugins",
-  "version": "0.0.17",
+  "version": "0.0.19",
   "description": "Prisma plugins",
   "keywords": [
     "types"

@@ -1,3 +1,13 @@
+## 0.0.19 (2026-09-02)
+
+### 🚀 Features
+
+- enhance IAM module with UserRole management and update SWC configurations ([7857801](https://github.com/aenode/aenode/commit/7857801))
+
+### ❤️ Thank You
+
+- AESYS | Ahmet Emrebas
+
 ## 0.0.17 (2026-09-01)
 
 ### 🚀 Features

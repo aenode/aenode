@@ -1,7 +1,7 @@
 {
   "name": "@aenode/aenode",
   "description": "Aenode Cli",
-  "version": "0.0.17",
+  "version": "0.0.19",
   "author": {
     "email": "aenode+cli@proton.me",
     "name": "Ahmet Emrebas",

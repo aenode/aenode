@@ -1,6 +1,6 @@
 {
   "name": "@aenode/names",
-  "version": "0.0.17",
+  "version": "0.0.19",
   "description": "Utility function to create text variants",
   "keywords": [
     "names",
