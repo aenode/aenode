@@ -6,8 +6,8 @@ import type { DMMF } from '@prisma/generator-helper';
  * @param field
  * @returns
  */
-export function isInternalField(field: DMMF.Field) {
-  return /@internal/i.test(field.documentation ?? '');
+export function hasInternalAnnotation(field: DMMF.Field) {
+  return /@internal|@hidden/i.test(field.documentation ?? '');
 }
 
 /**
@@ -61,34 +61,45 @@ export function isRequiredField(field: DMMF.Field) {
     case 'scalar': {
       if (
         isIdField(field) ||
-        isInternalField(field) ||
+        hasInternalAnnotation(field) ||
         isTimestampField(field)
       ) {
         return false;
       } else {
-        return (
-          field.isRequired === true ||
-          /@required/i.test(field.documentation ?? '')
-        );
+        return field.isRequired === true || hasRequiredAnnotation(field);
       }
     }
   }
 }
-
+export function isReadDtoField(field: DMMF.Field) {
+  if (hasInternalAnnotation(field)) {
+    return false;
+  }
+  switch (field.kind) {
+    case 'object': {
+      return isIncludeField(field);
+    }
+    case 'scalar':
+    case 'enum':
+    case 'unsupported': {
+      return true;
+    }
+  }
+}
 export function isCreateDtoField(field: DMMF.Field) {
   return !(
     field.kind === 'object' ||
-    isInternalField(field) ||
+    hasInternalAnnotation(field) ||
     isIdField(field) ||
     isTimestampField(field)
   );
 }
 
-export function isReadOnlyField(field: DMMF.Field): boolean {
+export function hasReadonlyAnnotation(field: DMMF.Field): boolean {
   return /@readonly/i.test(field.documentation ?? '');
 }
 
-export function isWriteOnlyField(field: DMMF.Field): boolean {
+export function hasWriteOnlyAnnotation(field: DMMF.Field): boolean {
   return /@writeonly/i.test(field.documentation ?? '');
 }
 
@@ -99,10 +110,7 @@ export function isWriteOnlyField(field: DMMF.Field): boolean {
  */
 export function isUpdateDtoField(field: DMMF.Field) {
   if (isCreateDtoField(field)) {
-    if (isWriteOnlyField(field) || isReadOnlyField(field)) {
-      return false;
-    }
-    return true;
+    return !(hasWriteOnlyAnnotation(field) || hasReadonlyAnnotation(field));
   }
   return false;
 }
@@ -115,8 +123,9 @@ export function isUpdateDtoField(field: DMMF.Field) {
  */
 export function isIncludeField(field: DMMF.Field) {
   if (field.kind === 'object') {
-    return /@include/i.test(field.documentation ?? '');
+    return hasIncludeAnnotation(field);
   }
+
   return false;
 }
 
@@ -128,22 +137,28 @@ export function isIncludeField(field: DMMF.Field) {
  */
 export function isSelectField(field: DMMF.Field) {
   if (field.kind === 'object') {
-    return /@select|@include/i.test(field.documentation ?? '');
+    return isIncludeField(field);
   }
+  return !hasInternalAnnotation(field);
+}
 
+export function isOmitField(field: DMMF.Field) {
   if (
-    isInternalField(field) ||
+    hasInternalAnnotation(field) ||
     hasHashAnnotation(field) ||
     hasEncriptedAnnotaiton(field)
   ) {
     return false;
   }
-
-  return true;
+  return field.kind !== 'object';
 }
 
-export function isOmitField(field: DMMF.Field) {
-  return field.kind !== 'object';
+export function hasIncludeAnnotation(field: DMMF.Field) {
+  return /@include|@select/i.test(field.documentation ?? '');
+}
+
+export function hasWhereAnnotation(field: DMMF.Field) {
+  return /@where/i.test(field.documentation ?? '');
 }
 /**
  * Check the field is queryable. For object/relation field "@where" annotation is required to include the field in query operation.
@@ -152,11 +167,20 @@ export function isOmitField(field: DMMF.Field) {
  * @returns
  */
 export function isWhereField(field: DMMF.Field): boolean {
-  if (isInternalField(field)) {
+  if (field.kind === 'object') {
+    return hasIncludeAnnotation(field) || hasWhereAnnotation(field);
+  }
+  return !hasInternalAnnotation(field);
+}
+
+export function isOrderByField(field: DMMF.Field): boolean {
+  if (field.kind === 'object') {
+    return isIncludeField(field);
+  }
+
+  if (hasInternalAnnotation(field)) {
     return false;
   }
-  if (field.kind === 'object') {
-    return /@where|@include/i.test(field.documentation ?? '');
-  }
+
   return true;
 }

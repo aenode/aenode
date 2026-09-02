@@ -1,18 +1,20 @@
 import type { DMMF } from '@prisma/generator-helper';
 import { ClassNameSuffix } from './dto-suffix.js';
 
-export function propSelectType(field: DMMF.Field): string {
+export function propOrderByType(field: DMMF.Field): string {
   switch (field.kind) {
     case 'object': {
       if (field.isList) {
-        return `${field.type}${ClassNameSuffix.FindManyArgsDto}`;
+        return `F.SortCountDto`;
       }
-      return `${field.type}${ClassNameSuffix.FindOneArgsDto}`;
+      return `${field.type}${ClassNameSuffix.OrderByDto}`;
     }
     case 'scalar':
-    case 'enum':
+    case 'enum': {
+      return `F.SortOrder`;
+    }
     case 'unsupported': {
-      return 'boolean';
+      return 'unkown';
     }
   }
 }

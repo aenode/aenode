@@ -108,7 +108,7 @@ export function PropValidation(
     } else if (isDefined(enumType)) {
       IsEnum(enumType(), vo)(...args);
     } else if (isDefined(objectType)) {
-      Type(objectType)(...args);
+      Type(() => objectType())(...args);
       ValidateNested(vo)(...args);
     } else if (options.isArray) {
       throw new Error(

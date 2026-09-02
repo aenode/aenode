@@ -1,5 +1,5 @@
 import type { DMMF } from '@prisma/generator-helper';
-import { isReadOnlyField } from './is-field.js';
+import { hasReadonlyAnnotation } from './is-field.js';
 
 describe('isReadOnlyField', () => {
   it.each`
@@ -8,6 +8,6 @@ describe('isReadOnlyField', () => {
     ${{ documentation: '@readOnly' } as DMMF.Field} | ${true}
     ${{} as DMMF.Field}                             | ${false}
   `('isReadOnlyField($field) -> $expected', ({ field, expected }) => {
-    expect(isReadOnlyField(field)).toEqual(expected);
+    expect(hasReadonlyAnnotation(field)).toEqual(expected);
   });
 });

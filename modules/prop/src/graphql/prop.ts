@@ -2,7 +2,6 @@ import {
   PropValidation,
   type PropValidationOptions,
 } from '@aenode/prop-validation';
-import { getPropertyType } from '@aenode/reflect';
 import { Field } from '@nestjs/graphql';
 
 /**
@@ -18,12 +17,14 @@ export function Prop(options: PropValidationOptions = {}): PropertyDecorator {
 
     const { type: primitiveType, object: objectType, enum: enumType } = options;
 
-    const type =
-      primitiveType ??
-      enumType ??
-      objectType ??
-      (() => getPropertyType(args[0], args[1]));
+    const type = primitiveType ?? enumType ?? objectType;
 
-    Field(type, { defaultValue: options.defaultValue, nullable })(...args);
+    if (type) {
+      Field(() => type(), { defaultValue: options.defaultValue, nullable })(
+        ...args,
+      );
+    } else {
+      Field({ defaultValue: options.defaultValue, nullable })(...args);
+    }
   };
 }

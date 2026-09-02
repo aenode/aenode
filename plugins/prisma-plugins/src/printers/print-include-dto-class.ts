@@ -10,11 +10,21 @@ export function printIncludeDtoClass(
   const className = `${model.name}${ClassNameSuffix.IncludeDto}`;
   const filteredFields = model.fields.filter((field) => isIncludeField(field));
 
+  if (filteredFields.length === 0) {
+    return '';
+  }
+
   const properties = filteredFields
     .map((field) => propSelect(field))
     .join('\n');
 
-  return [classDecorator, `export class ${className} {`, properties, `}`]
+  return [
+    classDecorator,
+    `export class ${className} {`,
+    `@Prop({ type: ()=>Boolean }) _count?: boolean;`,
+    properties,
+    `}`,
+  ]
     .filter((e) => e)
     .join('\n');
 }

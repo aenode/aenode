@@ -43,7 +43,7 @@ importers:
         specifier: ~1.15.5
         version: 1.15.47(@swc/helpers@0.5.23)
       '@swc/helpers':
-        specifier: ~0.5.18
+        specifier: ~0.5.23
         version: 0.5.23
       '@types/node':
         specifier: ^26.4.0
@@ -138,7 +138,7 @@ importers:
   databases/iam-db:
     dependencies:
       '@swc/helpers':
-        specifier: ~0.5.18
+        specifier: ~0.5.23
         version: 0.5.23
     devDependencies:
       '@aenode/nestjs':

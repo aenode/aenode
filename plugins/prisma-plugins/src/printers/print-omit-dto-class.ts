@@ -10,6 +10,10 @@ export function printOmitDtoClass(
   const className = `${model.name}${ClassNameSuffix.OmitDto}`;
   const filteredFields = model.fields.filter((field) => isOmitField(field));
 
+  if (filteredFields.length === 0) {
+    return '';
+  }
+
   const properties = filteredFields
     .map((field) => propSelect(field))
     .join('\n');

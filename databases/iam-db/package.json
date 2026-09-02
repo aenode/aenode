@@ -80,7 +80,7 @@
     }
   },
   "dependencies": {
-    "@swc/helpers": "~0.5.18"
+    "@swc/helpers": "~0.5.23"
   },
   "devDependencies": {
     "@aenode/nestjs": "workspace:*",

@@ -9,7 +9,7 @@ export function propSelectDecoratorOptions(field: DMMF.Field) {
     case 'scalar':
     case 'enum':
     case 'unsupported': {
-      return '';
+      return '{ type: ()=>Boolean }';
     }
   }
 }

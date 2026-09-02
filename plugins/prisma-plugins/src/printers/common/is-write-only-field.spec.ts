@@ -1,5 +1,5 @@
 import type { DMMF } from '@prisma/generator-helper';
-import { isWriteOnlyField } from './is-field.js';
+import { hasWriteOnlyAnnotation } from './is-field.js';
 
 describe('isWriteOnlyField', () => {
   it.each`
@@ -10,6 +10,6 @@ describe('isWriteOnlyField', () => {
     ${{ documentation: '' } as DMMF.Field}           | ${false}
     ${{} as DMMF.Field}                              | ${false}
   `('isWriteOnlyField($field) -> $expected', ({ field, expected }) => {
-    expect(isWriteOnlyField(field)).toEqual(expected);
+    expect(hasWriteOnlyAnnotation(field)).toEqual(expected);
   });
 });

@@ -16,9 +16,11 @@ export function scalarBoxType(field: DMMF.Field): string {
       return 'String';
     }
     case 'Decimal':
-    case 'Flaot': {
+    case 'Flaot':
+    case 'Int': {
       return 'Number';
     }
+    case 'Bool':
     case 'Boolean': {
       return 'Boolean';
     }

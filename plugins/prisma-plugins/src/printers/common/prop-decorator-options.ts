@@ -27,9 +27,7 @@ export function propDecoratorOptions(
     if (field.kind === 'enum') {
       push('enum', `()=>${propSingularType(field)}`);
     } else if (field.kind === 'scalar') {
-      if (isArray) {
-        push('type', `()=>${scalarBoxType(field)}`);
-      }
+      push('type', `()=>${scalarBoxType(field)}`);
     } else if (field.kind === 'object') {
       push('object', `()=>${propSingularType(field)}`);
     }

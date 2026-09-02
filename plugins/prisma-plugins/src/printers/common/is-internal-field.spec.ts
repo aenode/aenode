@@ -1,5 +1,5 @@
 import type { DMMF } from '@prisma/generator-helper';
-import { isInternalField } from './is-field.js';
+import { hasInternalAnnotation } from './is-field.js';
 
 describe('isInternalField', () => {
   it.each`
@@ -7,6 +7,6 @@ describe('isInternalField', () => {
     ${{ documentation: '@internal' } as DMMF.Field} | ${true}
     ${{} as DMMF.Field}                             | ${false}
   `('isInternalField($field) -> $expected', ({ field, expected }) => {
-    expect(isInternalField(field)).toEqual(expected);
+    expect(hasInternalAnnotation(field)).toEqual(expected);
   });
 });
