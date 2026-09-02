@@ -1,10 +1,11 @@
 import { writeTextFile } from '@aenode/fs';
 import { names } from '@aenode/names';
-import type { GeneratorOptions } from '@prisma/generator-helper';
+import type { DMMF, GeneratorOptions } from '@prisma/generator-helper';
 import { join } from 'node:path';
 import {
   printResolverClass,
   printResolverModule,
+  printResourceModule,
 } from '../printers/print-resolver.js';
 
 export default async function onGenerate(options: GeneratorOptions) {
@@ -29,5 +30,11 @@ export default async function onGenerate(options: GeneratorOptions) {
       await writeTextFile(join(output, kebab, `${kebab}.module.ts`), code);
       break Module;
     }
+  }
+
+  ResourceModule: {
+    const code = printResourceModule(models as DMMF.Model[]);
+    await writeTextFile(join(output, 'resource.module.ts'), code);
+    break ResourceModule;
   }
 }

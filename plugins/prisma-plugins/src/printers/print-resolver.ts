@@ -21,7 +21,7 @@ export function printResolverClass(model: DMMF.Model) {
   const modelName = model.name;
 
   return [
-    `import { Prisma, PrismaClient } from '@aenode/iam-db/client';`,
+    `import { Prisma } from '@aenode/iam-db/client';`,
     `import * as Dtos from '@aenode/iam-db/dtos';`,
     `import {`,
     `  ArgsId,`,
@@ -33,7 +33,7 @@ export function printResolverClass(model: DMMF.Model) {
     `  Resolver,`,
     `  Subscription,`,
     `} from '@aenode/nestjs/graphql';`,
-    `import { InjectClient, InjectDelegate } from '@aenode/prisma/pg';`,
+    `import {  InjectDelegate } from '@aenode/prisma/pg';`,
 
     `@Resolver(() => Dtos.${modelName}ReadDto)`,
     `export class ${modelName}Resolver {`,
@@ -101,5 +101,25 @@ export function printResolverClass(model: DMMF.Model) {
     `return this.sub.asyncIterableIterator('onUpdate${modelName}');`,
     `  }`,
     `}`,
+  ].join('\n');
+}
+
+export function printResourceModule(models: DMMF.Model[]) {
+  const modules = models.map((m) => `${m.name}Module`).join(',');
+  const imports = models
+    .map((m) => names(m.name))
+    .map(
+      (n) =>
+        `import { ${n.pascal}Module } from './${n.kebab}/${n.kebab}.module.js';`,
+    )
+    .join('\n');
+  return [
+    `import { Module } from "@aenode/nestjs";`,
+    imports,
+    ``,
+    `@Module({ `,
+    `    imports: [ ${modules} ]`,
+    `})`,
+    `export class ResourceModule { }`,
   ].join('\n');
 }

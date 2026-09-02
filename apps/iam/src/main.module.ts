@@ -2,12 +2,12 @@ import { PrismaClient } from '@aenode/iam-db/client';
 import { Module } from '@aenode/nestjs';
 import { AppModule } from '@aenode/nestjs/graphql';
 import { InjectClient, PrismaModule } from '@aenode/prisma/pg';
-import { UserRoleModule } from './resources/user-role/user-role.module.js';
+import { ResourceModule } from './generated/resources/resource.module.js';
 
 @Module({
   imports: [
     AppModule.register({
-      imports: [PrismaModule.forRoot(PrismaClient), UserRoleModule],
+      imports: [PrismaModule.forRoot(PrismaClient), ResourceModule],
     }),
   ],
 })

@@ -20,9 +20,15 @@ export function Prop(options: PropValidationOptions = {}): PropertyDecorator {
     const type = primitiveType ?? enumType ?? objectType;
 
     if (type) {
-      Field(() => type(), { defaultValue: options.defaultValue, nullable })(
-        ...args,
-      );
+      if (options.isArray) {
+        Field(() => [type()], { defaultValue: options.defaultValue, nullable })(
+          ...args,
+        );
+      } else {
+        Field(() => type(), { defaultValue: options.defaultValue, nullable })(
+          ...args,
+        );
+      }
     } else {
       Field({ defaultValue: options.defaultValue, nullable })(...args);
     }

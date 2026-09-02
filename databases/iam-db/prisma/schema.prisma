@@ -9,8 +9,8 @@ generator aenodeGraphql {
 }
 
 generator aenodeResolver {
-    provider = "aenode-graphql"
-    output   = "../../../apps/iam/src/resources"
+    provider = "aenode-resolver"
+    output   = "../../../apps/iam/src/generated/resources"
 }
 
 datasource db {

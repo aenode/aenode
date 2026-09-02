@@ -51,6 +51,7 @@ jobs:
           max_attempts: 3
           retry_wait_seconds: 5
           command: |
+            pnpm nx run-many -t prisma:generate 
             pnpm nx run-many -t build --projects="tag:lib:*,tag:app:cli,tag:app:plugin"  
             pnpm nx run-many -t doc   --projects="tag:lib:*,tag:app:cli,tag:app:plugin"
 
