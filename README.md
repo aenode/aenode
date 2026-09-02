@@ -1,5 +1,5 @@
 
- ![Version](https://img.shields.io/npm/v/@aenode/source)  ![Downloads](https://img.shields.io/npm/dm/@aenode/source)  ![Status](https://img.shields.io/github/actions/workflow/status/aenode/aenode/ci.yml)  ![Size](https://img.shields.io/bundlephobia/min/@aenode/source) 
+ ![Version](https://img.shields.io/npm/v/@aenode/aenode)  ![Downloads](https://img.shields.io/npm/dm/@aenode/aenode)  ![Status](https://img.shields.io/github/actions/workflow/status/aenode/aenode/ci.yml)  ![Size](https://img.shields.io/bundlephobia/min/@aenode/aenode) 
 
 
 <p align="center">
@@ -9,20 +9,20 @@
 </p>
 
 
-## ✌ @aenode/source
+## ✌ @aenode/aenode
 
 A set of packages, modules, and tools for aenode.
 
 ## Install 
 
 ```sh 
-  pnpm add @aenode/source 
+  pnpm add @aenode/aenode 
 ```
 
 
 ## 💖 Support My Work
 
-If you find my open-source contributions or the **@aenode/source** project helpful, consider supporting my work. Your sponsorship helps me maintain these projects and explore new enterprise patterns.
+If you find my open-source contributions or the **@aenode/aenode** project helpful, consider supporting my work. Your sponsorship helps me maintain these projects and explore new enterprise patterns.
 
 [![FundMe](https://img.shields.io/badge/Sponsor%20me-%23EA4AAA.svg?style=for-the-badge&logo=github-sponsors&logoColor=white)](https://cash.app/$puqlib)
 
