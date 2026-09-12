@@ -1,3 +1,0 @@
-import Gql from '../../.eslint/gql.mjs';
-
-export default [...Gql];

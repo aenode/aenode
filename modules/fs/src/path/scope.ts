@@ -1,6 +1,5 @@
 import { AccessDeniedError } from '@aenode/errors';
-import { resolve as __resolve } from 'node:path';
-import { normalize } from './normalize.js';
+import { resolve as __resolve, join } from 'node:path';
 
 /**
  * Create a scoped resolver that resolves path segments and compre the absolute result with the {@link scopedPath}.
@@ -10,10 +9,10 @@ import { normalize } from './normalize.js';
  * @returns -- {@link ScopedResolver}
  */
 export function scope(scopedPath: string): typeof __resolve {
-  const scopeRoot = __resolve(normalize(scopedPath));
+  const scopeRoot = __resolve(join(scopedPath));
 
   return (...segments: string[]) => {
-    const targetPath = __resolve(normalize(...segments));
+    const targetPath = __resolve(join(...segments));
 
     if (targetPath.startsWith(scopeRoot + '/') || targetPath === scopeRoot) {
       return targetPath;

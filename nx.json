@@ -74,21 +74,21 @@
     "prisma:migrate": {
       "executor": "nx:run-commands",
       "options": {
-        "commands": ["pnpm prisma migrate dev --name=updated"],
+        "commands": ["bunx prisma migrate dev --name=updated"],
         "cwd": "{projectRoot}"
       }
     },
     "prisma:generate": {
       "executor": "nx:run-commands",
       "options": {
-        "commands": ["pnpm prisma generate"],
+        "commands": ["bunx prisma generate"],
         "cwd": "{projectRoot}"
       }
     },
     "prisma:reset": {
       "executor": "nx:run-commands",
       "options": {
-        "commands": ["pnpm prisma migrate reset"],
+        "commands": ["bunx prisma migrate reset"],
         "cwd": "{projectRoot}"
       }
     },
@@ -121,20 +121,11 @@
       "email": "aenode+aenode@proton.me",
       "url": "https://aenode.github.io",
       "version": "0.0.1"
-    },
-    "@aenode/aenode:resolver": {
-      "directory": "resources"
-    },
-    "@nx/js:library": {
-      "publishable": true,
-      "bundler": "swc",
-      "linter": "eslint",
-      "unitTestRunner": "vitest"
     }
   },
   "release": {
     "version": {
-      "preVersionCommand": "pnpm dlx nx run-many -t build"
+      "preVersionCommand": "bunx  nx run-many -t build"
     }
   }
 }

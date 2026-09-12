@@ -2,6 +2,10 @@ import { copyFile, mkdir } from 'node:fs/promises';
 import { dirname, join, relative } from 'node:path';
 import { files } from '../path/files.js';
 
+export type CopyFilesOptions = {
+  dry?: boolean;
+};
+
 /**
  * Copy files recursively by consuming a streaming files generator.
  *
@@ -12,21 +16,23 @@ import { files } from '../path/files.js';
 export async function* copyFiles(
   sourcePath: string,
   targetPath: string,
-  ...fullFilePathPipe: ((fullFilePath: string) => string)[]
+  options: CopyFilesOptions = {},
 ): AsyncGenerator<string, void, unknown> {
-  // Consume the stream of file paths directly
-  const foundFiles = files(sourcePath);
+  const sourceFilePaths = files(sourcePath);
 
-  for await (const entry of foundFiles) {
+  for await (const entry of sourceFilePaths) {
     const fullSourcePath = join(entry.parentPath, entry.name);
     const relativeSourcePath = relative(sourcePath, fullSourcePath);
+    const fullTargetPath = join(targetPath, relativeSourcePath);
+    const targetDirectoryPath = dirname(fullTargetPath);
 
-    const fullTargetPath = fullFilePathPipe.reduce<string>(
-      (acc, p) => {
-        return p(acc);
-      },
-      join(targetPath, relativeSourcePath),
-    );
+    // Dry run
+    if (options.dry) {
+      console.log(`[DRY] created ${targetDirectoryPath} created`);
+      console.log(`[DRY] copied ${fullSourcePath} to ${fullTargetPath}`);
+      yield fullTargetPath;
+      continue;
+    }
 
     await mkdir(dirname(fullTargetPath), { recursive: true });
     await copyFile(fullSourcePath, fullTargetPath);

@@ -2,11 +2,12 @@
   "compilerOptions": {
     "strict": true,
     "composite": true,
-    "lib": [
-      "es2022"
-    ],
     "types": [
-      "node"
+      "node",
+      "@types/node",
+    ],
+    "lib": [
+      "ESNext"
     ],
     "declarationMap": true,
     "emitDeclarationOnly": true,

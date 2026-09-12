@@ -7,25 +7,24 @@ export type FilesOptions = { recursive?: boolean };
 /**
  * High-performance, streaming directory traversal using Async Generators.
  * Memory footprint stays near zero regardless of whether there are 10 or 1,000,000 files.
+ *
  * @param rootPath The directory to traverse
  */
 export async function* files(
   rootPath: string,
   options?: FilesOptions,
 ): AsyncGenerator<Dirent> {
-  const dir = await opendir(rootPath);
+  const allDridents = await opendir(rootPath);
 
-  for await (const entry of dir) {
-    const entryPath = join(rootPath, entry.name);
-
-    if (entry.isDirectory()) {
+  for await (const drident of allDridents) {
+    if (drident.isDirectory()) {
       // Recursively yield files from subdirectories without deep stacking arrays
       if (options?.recursive === true) {
-        yield* files(entryPath, options);
+        yield* files(join(rootPath, drident.name), options);
       }
-    } else if (entry.isFile()) {
+    } else if (drident.isFile()) {
       // Immediately stream the file path out to the consumer
-      yield entry;
+      yield drident;
     }
   }
 }

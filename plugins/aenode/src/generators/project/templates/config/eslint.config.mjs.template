@@ -1,0 +1,3 @@
+import base from '../../.eslint/<% type %>.mjs';
+
+export default [...baes];

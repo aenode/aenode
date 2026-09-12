@@ -1,10 +1,13 @@
 import { workspaceRoot } from '@nx/devkit';
-import { resolve } from 'node:path';
+import { join } from 'node:path';
+import { describe, it } from 'vitest';
 import { files } from './files.js';
+
 describe('files', () => {
   it('shold list files', async () => {
     console.log('Startting....');
-    for await (const file of files(resolve(workspaceRoot, 'tmp'), {
+
+    for await (const file of files(join(workspaceRoot, 'tmp'), {
       recursive: true,
     })) {
       console.log(file);

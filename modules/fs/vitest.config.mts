@@ -1,9 +1,7 @@
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig(() => ({
-  root: dirname(fileURLToPath(import.meta.url)),
+  root: import.meta.dirname,
   cacheDir: '../../node_modules/.vite/modules/fs',
   test: {
     name: '@aenode/fs',

@@ -23,7 +23,8 @@ export async function projectGenerator(
 
   options.email = brandEmail(options.email, name);
 
-  const commonSource = join(__dirname, 'templates', 'common');
+  const configSource = join(__dirname, 'templates', 'config');
+
   const source = join(__dirname, 'templates', options.type);
   const target = normalize(options.directory);
 
@@ -59,7 +60,7 @@ export async function projectGenerator(
   const allNames = names(name);
 
   // Generate common files
-  generateFiles(tree, commonSource, target, {
+  generateFiles(tree, configSource, target, {
     ...options,
     projectName,
     tag,
@@ -82,7 +83,9 @@ export async function projectGenerator(
     value.references ??= [];
 
     const referencePath = `./${options.directory}`;
-    if (!value.references.find((e: any) => e.path === referencePath)) {
+    if (
+      !value.references.find((e: { path: string }) => e.path === referencePath)
+    ) {
       value.references.push({
         path: referencePath,
       });

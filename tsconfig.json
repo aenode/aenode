@@ -71,6 +71,9 @@
     },
     {
       "path": "./plugins/prisma-plugins"
+    },
+    {
+      "path": "./libs/log"
     }
   ]
 }
