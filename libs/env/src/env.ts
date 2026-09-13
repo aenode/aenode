@@ -1,12 +1,47 @@
 export class EnvApp {
+  /**
+   * App id
+   */
+  static readonly ID = 'APP_ID';
+
+  /**
+   * App name
+   */
   static readonly NAME = 'APP_NAME';
+
+  /**
+   * App port
+   */
   static readonly PORT = 'APP_PORT';
+
+  /**
+   * App jwt secret
+   */
   static readonly JWT = 'APP_JWT';
+  /**
+   * App root username
+   */
   static readonly USERANME = 'APP_USERANME';
+
+  /**
+   * App root user password
+   */
   static readonly PASSWORD = 'APP_PASSWORD';
+
+  /**
+   * App profile
+   */
   static readonly PROFILE = 'APP_PROFILE';
+
+  /**
+   * App log level
+   */
+  static readonly LOG = 'APP_LOG';
 }
 
+/**
+ * Postgrtes pool options environement variables
+ */
 export class EnvDBPool {
   /**
    * The maximum number of clients/connections allowed in this pool.	Default is usually 10. Don't set this higher than your PostgreSQL server's max_connections limit.
@@ -46,10 +81,29 @@ export class EnvDBPool {
 }
 
 export class EnvDB {
+  /**
+   * database username
+   */
   static readonly USERNAME = 'DB_USERNAME';
+
+  /**
+   * Database password
+   */
   static readonly PASSWORD = 'DB_PASSWORD';
+
+  /**
+   * Database schema name
+   */
   static readonly SCHEMA = 'DB_SCHEMA';
+
+  /**
+   * Database url
+   */
   static readonly URL = 'DB_URL';
+
+  /**
+   * Database pool env
+   */
   static readonly POOL = EnvDBPool;
 }
 
@@ -59,13 +113,38 @@ export class EnvDB {
 export class Env {
   static readonly DEFAULT = 'default';
 
+  /**
+   * App environement variables
+   */
   static readonly APP = EnvApp;
+
+  /**
+   * Db environment variables
+   */
   static readonly DB = EnvDB;
 
+  /**
+   * as miliseconds
+   */
   static readonly D_1_SECOND = 1000;
+  /**
+   * as miliseconds
+   */
   static readonly D_5_SECONDS = this.D_1_SECOND * 5;
+  /**
+   * as miliseconds
+   */
   static readonly D_10_SECONDS = this.D_1_SECOND * 10;
+  /**
+   * as miliseconds
+   */
   static readonly D_20_SECONDS = this.D_1_SECOND * 20;
+  /**
+   * as miliseconds
+   */
   static readonly D_1_MINUTE = this.D_1_SECOND * 60;
+  /**
+   * as miliseconds
+   */
   static readonly D_5_MINUTES = this.D_1_MINUTE * 5;
 }

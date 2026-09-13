@@ -34,9 +34,9 @@
       "default": "./dist/index.js"
     },
     "./dtos": {
-      "types": "./dist/generated/dtos/index.d.ts",
-      "import": "./dist/generated/dtos/index.js",
-      "default": "./dist/generated/dtos/index.js"
+      "types": "./dist/generated/graphql/index.d.ts",
+      "import": "./dist/generated/graphql/index.js",
+      "default": "./dist/generated/graphql/index.js"
     },
     "./browser": {
       "types": "./dist/generated/prisma/browser.d.ts",

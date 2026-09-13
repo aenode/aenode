@@ -1,16 +1,18 @@
 {
   "compilerOptions": {
+    "strict": true,
     "composite": true,
-    "declarationMap": true,
-    "emitDeclarationOnly": true,
-    "importHelpers": true,
-    "isolatedModules": true,
     "lib": [
       "es2022"
     ],
     "types": [
       "node"
     ],
+    "declarationMap": true,
+    "emitDeclarationOnly": true,
+    "importHelpers": true,
+    "isolatedModules": true,
+    "target": "esnext",
     "module": "nodenext",
     "moduleResolution": "nodenext",
     "noEmitOnError": true,
@@ -27,10 +29,5 @@
     "verbatimModuleSyntax": true,
     "noUncheckedIndexedAccess": true,
     "noImplicitThis": true,
-    "strict": true,
-    "target": "es2022",
-    "customConditions": [
-      "@aenode/source"
-    ]
   }
 }
