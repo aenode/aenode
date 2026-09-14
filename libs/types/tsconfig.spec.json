@@ -1,21 +1,10 @@
 {
-  "extends": "../../tsconfig.base.json",
+  "extends": "../../tsconfig.spec.json",
   "compilerOptions": {
     "outDir": "./out-tsc/vitest",
-    "types": [
-      "vitest/globals",
-      "vitest/importMeta",
-      "vite/client",
-      "node",
-      "vitest"
-    ],
-    "forceConsistentCasingInFileNames": true
+    "tsBuildInfoFile": "./out-tsc/tsconfig.spec.tsbuildinfo"
   },
-  "include": [
-    "vitest.config.mts",
-    "src/**/*.spec.ts",
-    "src/**/*.d.ts"
-  ],
+  "include": ["./vitest.config.mts", "./src/**/*.ts"],
   "references": [
     {
       "path": "./tsconfig.lib.json"

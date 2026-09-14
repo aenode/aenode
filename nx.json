@@ -15,7 +15,8 @@
       "plugin": "@nx/js/typescript",
       "options": {
         "typecheck": {
-          "targetName": "typecheck"
+          "targetName": "typecheck",
+          "configName": "tsconfig.lib.json"
         },
         "buildtypes": {
           "targetName": "buildtypes",

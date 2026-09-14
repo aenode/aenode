@@ -18,7 +18,5 @@
     "type": "nodenext"
   },
   "sourceMaps": true,
-  "exclude": [
-    ".*\\.spec.ts$"
-  ]
+  "exclude": [".*\\.spec.ts$"]
 }

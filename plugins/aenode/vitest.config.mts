@@ -2,14 +2,14 @@ import { defineConfig } from 'vitest/config';
 
 export default defineConfig(() => ({
   root: import.meta.dirname,
-  cacheDir: '../../node_modules/.vite/plugins/aenode',
+  cacheDir: '../../node_modules/.vite/@aenode/aenode',
   test: {
     name: '@aenode/aenode',
     watch: false,
     globals: true,
-    include: ['src/**/*.spec.ts'],
+    include: ['./src/**/*.spec.ts'],
     coverage: {
-      reportsDirectory: './dist/vitest/coverage'
+      reportsDirectory: './out-tsc/vitest/coverage',
     },
   },
 }));

@@ -44,7 +44,7 @@ export function provideClient(client: Type, name = Env.DEFAULT): Provider {
         Env.D_5_MINUTES,
       );
 
-      const MAX = config.getOrThrow(Env.DB.POOL.max, 10);
+      const MAX = config.getOrThrow(Env.DB.POOL.MAX, 10);
 
       const MAX_USES = config.getOrThrow(Env.DB.POOL.MAX_USES, 7500);
 

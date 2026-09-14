@@ -2,17 +2,14 @@ import { defineConfig } from 'vitest/config';
 
 export default defineConfig(() => ({
   root: import.meta.dirname,
-  cacheDir: '../../node_modules/.vite/modules/fs',
+  cacheDir: '../../node_modules/.vite/@aenode/fs',
   test: {
     name: '@aenode/fs',
     watch: false,
     globals: true,
-    environment: 'jsdom',
-    include: ['src/**/*.spec.ts'],
-    reporters: ['default'],
+    include: ['./src/**/*.spec.ts'],
     coverage: {
-      reportsDirectory: './test-output/vitest/coverage',
-      provider: 'v8' as const,
+      reportsDirectory: './out-tsc/vitest/coverage',
     },
   },
 }));

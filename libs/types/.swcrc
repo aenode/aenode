@@ -1,6 +1,6 @@
 {
   "jsc": {
-    "target": "es2017",
+    "target": "esnext",
     "parser": {
       "syntax": "typescript",
       "decorators": true,
@@ -15,11 +15,8 @@
     "loose": false
   },
   "module": {
-    "type": "es6"
+    "type": "nodenext"
   },
   "sourceMaps": true,
-  "exclude": [
-    ".*\\.spec.ts$",
-    ".*.js$"
-  ]
+  "exclude": [".*\\.spec.ts$"]
 }

@@ -1,15 +1,13 @@
 {
-    "extends": "../../tsconfig.spec.json",
-    "compilerOptions": {
-        "outDir": "./out-tsc/vitest",
-    },
-    "include": [
-        "vitest.config.mts",
-        "src/**/*.spec.ts",
-    ],
-    "references": [
-        {
-            "path": "./tsconfig.lib.json"
-        }
-    ]
+  "extends": "../../tsconfig.spec.json",
+  "compilerOptions": {
+    "outDir": "./out-tsc/vitest",
+    "tsBuildInfoFile": "./out-tsc/tsconfig.spec.tsbuildinfo"
+  },
+  "include": ["./vitest.config.mts", "./src/**/*.ts"],
+  "references": [
+    {
+      "path": "./tsconfig.lib.json"
+    }
+  ]
 }

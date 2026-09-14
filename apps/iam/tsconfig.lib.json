@@ -1,23 +1,10 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "rootDir": "src",
-    "outDir": "dist",
-    "tsBuildInfoFile": "dist/tsconfig.lib.tsbuildinfo",
-    "emitDeclarationOnly": true,
-    "types": ["node"]
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "tsBuildInfoFile": "./dist/tsconfig.lib.tsbuildinfo"
   },
-  "include": ["src/**/*.ts"],
-  "references": [
-    {
-      "path": "../../modules/prisma/tsconfig.lib.json"
-    },
-    {
-      "path": "../../modules/nestjs/tsconfig.lib.json"
-    },
-    {
-      "path": "../../databases/iam-db/tsconfig.lib.json"
-    }
-  ],
-  "exclude": ["vitest.config.mts", "src/**/*.spec.ts"]
+  "include": ["./src/**/*.ts"],
+  "exclude": ["./src/**/*.spec.ts"]
 }
