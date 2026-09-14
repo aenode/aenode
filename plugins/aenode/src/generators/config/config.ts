@@ -1,11 +1,10 @@
 import {
   formatFiles,
   generateFiles,
-  readProjectConfiguration,
+  getProjects,
   type Tree
 } from '@nx/devkit';
 import * as path from 'node:path';
-import type { ConfigGeneratorSchema } from './schema.js';
 
 /**
  * Generate swc, eslint, tsconfig, and vitest configurations for the project.
@@ -14,15 +13,17 @@ import type { ConfigGeneratorSchema } from './schema.js';
  * @param options 
  */
 export async function configGenerator(
-  tree: Tree,
-  options: ConfigGeneratorSchema,
+  tree: Tree
 ) {
 
-  const config = readProjectConfiguration(tree, options.project);
+  const projects = getProjects(tree);
 
-  const projectName = config.name;
+  for (const [name, project] of projects) {
+    generateFiles(tree, path.join(__dirname, 'files'), project.root, { projectName: name });
 
-  generateFiles(tree, path.join(__dirname, 'files'), config.root, { projectName });
+  }
+
+
   await formatFiles(tree);
 }
 
