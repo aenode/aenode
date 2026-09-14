@@ -9,7 +9,7 @@ export default defineConfig(() => ({
     globals: true,
     include: ['src/**/*.spec.ts'],
     coverage: {
-      reportsDirectory: './dist/vitest/coverage'
+      reportsDirectory: './dist/vitest/coverage',
     },
   },
 }));
