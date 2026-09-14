@@ -2,7 +2,8 @@
   "extends": "../../tsconfig.spec.json",
   "compilerOptions": {
     "rootDir": "./src",
-    "outDir": "./out-tsc/vitest"
+    "outDir": "./out-tsc/vitest",
+    "tsBuildInfoFile": "./out-tsc/tsconfig.spec.tsbuildinfo"
   },
   "references": [
     {
