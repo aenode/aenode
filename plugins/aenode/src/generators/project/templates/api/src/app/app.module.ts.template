@@ -1,0 +1,6 @@
+import { CommonModule, Module } from '@aenode/nest/common';
+
+@Module({
+  imports: [CommonModule]
+})
+export class AppModule { }

@@ -38,6 +38,9 @@
     "bin",
     "!**/*.tsbuildinfo"
   ],
+  "bin": {
+    "<%- fileName %>": "./bin/<%- fileName %>.mjs"
+  },
   "nx": {
     "sourceRoot": "<%- directory %>/src",
     "tags": [

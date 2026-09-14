@@ -5,6 +5,12 @@ import fs from 'node:fs/promises';
 import { relative } from 'node:path';
 import { cwd } from 'node:process';
 
+
+export type RenameOptions = {
+  placeholder: string;
+  value: string;
+  recursive: boolean
+}
 export function rename(program: Command) {
   return program
     .command('rename')
@@ -13,14 +19,19 @@ export function rename(program: Command) {
     .requiredOption('-v, --value <string>', 'New value')
     .option('-r, --recursive', 'Include sub directories', false)
 
-    .action(async ({ placeholder, value, recursive }) => {
-      const changes: [string, string, string][] = [];
+    .action(async (options: RenameOptions) => {
 
+      if (options.value.includes('=')) { throw new Error("Filename cannot contain = symbol!") }
+
+      const { placeholder, recursive, value } = options
+      const changes: [string, string, string][] = [];
       const resolve = scope(cwd());
+
+
 
       visitingFiles: for await (const file of files(cwd(), { recursive })) {
         if (file.isFile()) {
-          const newFileName = file.name.replace(placeholder, () => value);
+          const newFileName = file.name.split(placeholder).join(value);
 
           if (file.name === newFileName) {
             continue visitingFiles;

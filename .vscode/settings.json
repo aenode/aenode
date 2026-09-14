@@ -8,7 +8,12 @@
     "typescript"
   ],
   "files.associations": {
-    "*.template": "plaintext",
+    "*.json.template": "json",
+    "*.swcrc.template": "json",
+    "*.ts.template": "typescript",
+    ".env.template": "env",
+    ".env": "env",
+    ".config": "yaml,env",
     "*.sh.*": "shellscript",
     "*.ts.*": "typescript",
     "*.mts.*": "typescript",
@@ -39,7 +44,7 @@
     "editor.defaultFormatter": "redhat.vscode-yaml"
   },
   "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "vscode.typescript-language-features"
   },
   "editor.codeActionsOnSave": {
     "source.sort.json": "never",

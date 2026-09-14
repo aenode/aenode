@@ -9,6 +9,11 @@
       "factory": "./../plugins/aenode/src/generators/resolver/resolver",
       "schema": "./../plugins/aenode/src/generators/resolver/schema.json",
       "description": "resolver generator"
+    },
+    "config": {
+      "factory": "./../plugins/aenode/src/generators/config/config",
+      "schema": "./../plugins/aenode/src/generators/config/schema.json",
+      "description": "config generator"
     }
   }
 }
