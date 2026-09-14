@@ -7,9 +7,9 @@ export default defineConfig(() => ({
     name: '<%- projectName %>',
     watch: false,
     globals: true,
-    include: ['src/**/*.spec.ts'],
+    include: ['./src/**/*.spec.ts'],
     coverage: {
-      reportsDirectory: './dist/vitest/coverage',
+      reportsDirectory: './out-tsc/vitest/coverage',
     },
   },
 }));
