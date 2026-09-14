@@ -1,3 +1,3 @@
-import Lib from '../../.eslint/lib.mjs';
+import base from '../../.eslint/lib.mjs';
 
-export default [...Lib];
+export default [...base];

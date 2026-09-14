@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { getParamType, getReturnType } from './reflect.js';
 
 /* eslint-disable @typescript-eslint/no-empty-function */

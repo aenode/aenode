@@ -6,26 +6,25 @@ import {
   updateJson,
   type Tree,
 } from '@nx/devkit';
-import { basename, dirname, join, normalize } from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { packageVersion } from '../../helpers/index.js';
-import type { ProjectGeneratorSchema } from './schema.js';
+import { basename, join, normalize } from 'node:path';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+import { packageVersion, rootProjectVersion } from '../../helpers/index.js';
+import type { ProjectGeneratorSchema } from './schema.js';
 
 export async function projectGenerator(
   tree: Tree,
   options: ProjectGeneratorSchema,
 ) {
   const name = basename(options.directory);
+
   options.directory = normalize(options.directory);
   const projectName = `@${options.orgName}/${name}`;
 
   options.email = brandEmail(options.email, name);
 
-  const configSource = join(__dirname, 'templates', 'config');
+  const configSource = join(import.meta.dirname, 'templates', 'config');
 
-  const source = join(__dirname, 'templates', options.type);
+  const source = join(import.meta.dirname, 'templates', options.type);
   const target = normalize(options.directory);
 
   const aenodeVersion =
@@ -59,6 +58,8 @@ export async function projectGenerator(
 
   const allNames = names(name);
 
+  const version = options.version ?? (await rootProjectVersion());
+
   // Generate common files
   generateFiles(tree, configSource, target, {
     ...options,
@@ -67,6 +68,7 @@ export async function projectGenerator(
     ...allNames,
     name,
     aenodeVersion,
+    version,
   });
 
   // Generate specific files
@@ -76,7 +78,7 @@ export async function projectGenerator(
     tag,
     ...allNames,
     name,
-    aenodeVersion,
+    version,
   });
 
   updateJson(tree, 'tsconfig.json', (value) => {

@@ -22,4 +22,5 @@ export interface ProjectGeneratorSchema {
   url: string;
   repoName: string;
   username: string;
+  version: string;
 }

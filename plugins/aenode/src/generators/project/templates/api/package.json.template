@@ -58,10 +58,12 @@
   },
   "devDependencies": {
     "@aenode/nestjs": "<%- aenodeVersion %>:^",
-    "@nestjs/graphql": "^13.4.5"
+    "@nestjs/graphql": "^13.4.5",
+    "<%- projectName %>-db": "<% -aenodeVersion %>:^"
   },
   "peerDependencies": {
     "@aenode/nestjs": "<%- aenodeVersion %>:^",
-    "@nestjs/graphql": "^13.4.5"
+    "@nestjs/graphql": "^13.4.5",
+    "<%- projectName %>-db": "<% -aenodeVersion %>:^"
   }
 }
