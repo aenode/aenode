@@ -1,2 +1,0 @@
-- [ ] add ico/svg favicon for each project. 
-- [ ] Add the icon path to the tyepdoc script `--favicon {projectRoot}/assets/favicon.jpeg`
