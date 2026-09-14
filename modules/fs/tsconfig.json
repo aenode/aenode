@@ -2,6 +2,12 @@
   "extends": "../../tsconfig.base.json",
   "references": [
     {
+      "path": "../../libs/log"
+    },
+    {
+      "path": "../../libs/errors"
+    },
+    {
       "path": "./tsconfig.lib.json"
     },
     {

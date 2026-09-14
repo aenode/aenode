@@ -2,6 +2,9 @@
   "extends": "../../tsconfig.base.json",
   "references": [
     {
+      "path": "../../modules/nestjs"
+    },
+    {
       "path": "./tsconfig.lib.json"
     },
     {

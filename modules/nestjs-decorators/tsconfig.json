@@ -2,6 +2,15 @@
   "extends": "../../tsconfig.base.json",
   "references": [
     {
+      "path": "../nestjs-helpers"
+    },
+    {
+      "path": "../reflect"
+    },
+    {
+      "path": "../../utils/names"
+    },
+    {
       "path": "./tsconfig.lib.json"
     },
     {

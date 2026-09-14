@@ -2,6 +2,18 @@
   "extends": "../../tsconfig.base.json",
   "references": [
     {
+      "path": "../../libs/types"
+    },
+    {
+      "path": "../prop"
+    },
+    {
+      "path": "../nestjs-decorators"
+    },
+    {
+      "path": "../graphql"
+    },
+    {
       "path": "./tsconfig.lib.json"
     },
     {

@@ -6,5 +6,16 @@
     "tsBuildInfoFile": "./dist/tsconfig.lib.tsbuildinfo"
   },
   "include": ["./src/**/*.ts"],
-  "exclude": ["./src/**/*.spec.ts"]
+  "exclude": ["./src/**/*.spec.ts"],
+  "references": [
+    {
+      "path": "../../modules/prisma/tsconfig.lib.json"
+    },
+    {
+      "path": "../../modules/nestjs/tsconfig.lib.json"
+    },
+    {
+      "path": "../../databases/iam-db/tsconfig.lib.json"
+    }
+  ]
 }

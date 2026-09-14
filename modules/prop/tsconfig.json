@@ -2,6 +2,15 @@
   "extends": "../../tsconfig.base.json",
   "references": [
     {
+      "path": "../../libs/types"
+    },
+    {
+      "path": "../reflect"
+    },
+    {
+      "path": "../prop-validation"
+    },
+    {
       "path": "./tsconfig.lib.json"
     },
     {
