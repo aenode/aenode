@@ -44,7 +44,7 @@
     "editor.defaultFormatter": "redhat.vscode-yaml"
   },
   "[typescript]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "editor.codeActionsOnSave": {
     "source.sort.json": "never",
