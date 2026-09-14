@@ -1,6 +1,4 @@
 import 'reflect-metadata';
-//
-import type { ClassType } from '@aenode/types';
 
 /**
  * Get property type from reflection (design:type)
@@ -9,33 +7,72 @@ import type { ClassType } from '@aenode/types';
  * @param propertyKey
  * @returns
  */
-export function getPropertyType(
-  target: object,
-  propertyKey: string | symbol,
-): ClassType {
-  const type = Reflect.getMetadata('design:type', target, propertyKey);
-
-  return type.itemType ?? type;
+export function getPropType(target: object, propertyKey: string | symbol) {
+  return Reflect.getMetadata('design:type', target, propertyKey);
 }
 
 /**
  * Get the return type of {@link methodName}
+ *
  * @key design:returntype
  * @param target
  * @param methodName
  * @returns
  */
-export function getReturnType(
-  target: object,
-  methodName: string | symbol,
-): ClassType[] {
-  const type = Reflect.getMetadata('design:returntype', target, methodName);
-  return type.itemType ?? type;
+export function getReturnType(target: object, methodName: string | symbol) {
+  return Reflect.getMetadata('design:returntype', target, methodName);
 }
 
-export function getParamTypes(
-  target: object,
-  methodName: string | symbol,
-): ClassType[] {
+export function getParamType(target: object, methodName: string | symbol) {
   return Reflect.getMetadata('design:paramtypes', target, methodName);
+}
+
+export function getMethodNames<T extends { prototype: object }>(
+  target: T,
+): string[] {
+  const names = new Set<string>();
+
+  let prototype = target.prototype;
+
+  while (prototype && prototype !== Object.prototype) {
+    for (const name of Object.getOwnPropertyNames(prototype)) {
+      if (
+        name !== 'constructor' &&
+        typeof Object.getOwnPropertyDescriptor(prototype, name)?.value ===
+          'function'
+      ) {
+        names.add(name);
+      }
+    }
+
+    prototype = Object.getPrototypeOf(prototype);
+  }
+
+  return [...names];
+}
+
+export function getPropertyNames<T extends { prototype: object }>(
+  target: T,
+): string[] {
+  const names = new Set<string>();
+
+  let prototype = target.prototype;
+
+  while (prototype && prototype !== Object.prototype) {
+    for (const name of Object.getOwnPropertyNames(prototype)) {
+      if (name === 'constructor') {
+        continue;
+      }
+
+      const descriptor = Object.getOwnPropertyDescriptor(prototype, name);
+
+      if (descriptor && typeof descriptor.value !== 'function') {
+        names.add(name);
+      }
+    }
+
+    prototype = Object.getPrototypeOf(prototype);
+  }
+
+  return [...names];
 }
