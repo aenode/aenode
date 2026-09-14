@@ -35,11 +35,10 @@ jobs:
           max_attempts: 3
           retry_wait_seconds: 5
           command: |
-            pnpm nx run-many -t prisma:generate 
-            pnpm nx run-many -t build     --projects="tag:lib:*,tag:app:cli,tag:app:plugin"
-            pnpm nx run-many -t lint      --projects="tag:lib:*,tag:app:cli,tag:app:plugin"
-            pnpm nx run-many -t typecheck --projects="tag:lib:*,tag:app:cli,tag:app:plugin"
-            pnpm nx run-many -t test      --projects="tag:lib:*,tag:app:cli,tag:app:plugin"
+            bunx  nx run-many -t build
+            bunx  nx run-many -t lint
+            bunx  nx run-many -t typecheck
+            bunx  nx run-many -t test
 
       - name: Finish
         run: pnpm exec nx fix-ci
