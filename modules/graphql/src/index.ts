@@ -6,5 +6,4 @@ export * from './global-validation-pipe.js';
 export * from './gql-cache.interceptor.js';
 export * from './graphql.js';
 export * from './integration.js';
-export * from './prop.js';
 export * from './sub-pub.js';

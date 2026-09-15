@@ -3,16 +3,6 @@ generator client {
     output   = "../src/generated/prisma"
 }
 
-generator aenodeGraphql {
-    provider = "aenode-graphql"
-    output   = "../src/generated/graphql"
-}
-
-generator aenodeResolver {
-    provider = "aenode-resolver"
-    output   = "../../../apps/iam/src/generated/resources"
-}
-
 datasource db {
     provider = "postgresql"
 }

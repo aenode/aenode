@@ -6,4 +6,3 @@ export * from './config.js';
 export * from './core.js';
 export * from './global-validation-pipe.js';
 export * from './nestjs-decorators.js';
-export * from './prop.js';

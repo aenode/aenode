@@ -46,30 +46,15 @@
     "targets": {
       "build": {},
       "lint": {},
-      "doc": {}
+      "doc": {},
+      "test": {}
     }
   },
   "dependencies": {
-    "@swc/helpers": "~0.5.18"
-  },
-  "devDependencies": {
-    "@aenode/errors": "workspace:*",
-    "@aenode/flow": "workspace:*",
-    "@aenode/is": "workspace:*",
-    "@aenode/prop-options": "workspace:*",
+    "@swc/helpers": "~0.5.18",
     "@aenode/reflect": "workspace:*",
-    "@aenode/types": "workspace:*",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.15.1",
     "reflect-metadata": "^0.2.2"
-  },
-  "peerDependencies": {
-    "@aenode/errors": "workspace:*",
-    "@aenode/flow": "workspace:*",
-    "@aenode/is": "workspace:*",
-    "@aenode/prop-options": "workspace:*",
-    "reflect-metadata": "^0.2.2",
-    "class-validator": "0.15.1",
-    "class-transformer": "0.5.1"
   }
 }

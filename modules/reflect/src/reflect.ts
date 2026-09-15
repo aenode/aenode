@@ -7,8 +7,15 @@ import 'reflect-metadata';
  * @param propertyKey
  * @returns
  */
-export function getPropType(target: object, propertyKey: string | symbol) {
-  return Reflect.getMetadata('design:type', target, propertyKey);
+export function getPropType(
+  target: object,
+  propertyKey: string | symbol,
+): { name: string } {
+  const type = Reflect.getMetadata('design:type', target, propertyKey);
+  if (type === undefined) {
+    throw new Error('Could not resolve type');
+  }
+  return type;
 }
 
 /**

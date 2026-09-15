@@ -1,1 +1,0 @@
-# RestAPI/Swagger Property Decorators

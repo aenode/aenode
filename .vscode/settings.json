@@ -48,7 +48,6 @@
   },
   "editor.codeActionsOnSave": {
     "source.sort.json": "never",
-    "eslint.fixAll": "always",
     "source.fixAll.eslint": "always",
     "source.organizeImports": "always",
     "source.sortImports": "always",
