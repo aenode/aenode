@@ -22,9 +22,6 @@
       "path": "./utils/is"
     },
     {
-      "path": "./libs/prop-options"
-    },
-    {
       "path": "./utils/flow"
     },
     {
@@ -38,24 +35,6 @@
     },
     {
       "path": "./modules/reflect"
-    },
-    {
-      "path": "./apps/api"
-    },
-    {
-      "path": "./modules/nestjs-decorators"
-    },
-    {
-      "path": "./modules/nestjs-helpers"
-    },
-    {
-      "path": "./modules/nestjs"
-    },
-    {
-      "path": "./modules/graphql"
-    },
-    {
-      "path": "./modules/graphql-decorators"
     },
     {
       "path": "./databases/iam-db"

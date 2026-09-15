@@ -2,21 +2,6 @@
   "extends": "../../tsconfig.base.json",
   "references": [
     {
-      "path": "../../utils/flow"
-    },
-    {
-      "path": "../../libs/prop-options"
-    },
-    {
-      "path": "../../utils/names"
-    },
-    {
-      "path": "../../utils/is"
-    },
-    {
-      "path": "../../modules/fs"
-    },
-    {
       "path": "./tsconfig.lib.json"
     },
     {

@@ -2,15 +2,6 @@
   "extends": "../../tsconfig.base.json",
   "references": [
     {
-      "path": "../../modules/prisma"
-    },
-    {
-      "path": "../../modules/nestjs"
-    },
-    {
-      "path": "../../databases/iam-db"
-    },
-    {
       "path": "./tsconfig.lib.json"
     },
     {

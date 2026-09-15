@@ -2,24 +2,6 @@
   "extends": "../../tsconfig.base.json",
   "references": [
     {
-      "path": "../../libs/types"
-    },
-    {
-      "path": "../reflect"
-    },
-    {
-      "path": "../../libs/prop-options"
-    },
-    {
-      "path": "../../utils/is"
-    },
-    {
-      "path": "../../utils/flow"
-    },
-    {
-      "path": "../../libs/errors"
-    },
-    {
       "path": "./tsconfig.lib.json"
     },
     {

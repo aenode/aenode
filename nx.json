@@ -16,7 +16,8 @@
       "options": {
         "typecheck": {
           "targetName": "typecheck",
-          "configName": "tsconfig.lib.json"
+          "configName": "tsconfig.lib.json",
+          "tsBuildInfoFile": "{projectRoot}/dist/tsconfig.lib.tsbuildinfo"
         },
         "buildtypes": {
           "targetName": "buildtypes",
@@ -37,7 +38,8 @@
       "options": {
         "testTargetName": "test",
         "ciTargetName": "test-ci",
-        "testMode": "watch"
+        "testMode": "watch",
+        "tsBuildInfoFile": "tsconfig.tsbuildinfo"
       }
     }
   ],
@@ -60,16 +62,18 @@
         "outputPath": "{projectRoot}/dist",
         "main": "{projectRoot}/src/index.ts",
         "tsConfig": "{projectRoot}/tsconfig.lib.json",
+
+        "tsBuildInfoFile": "{projectRoot}/dist/tsconfig.lib.tsbuildinfo",
         "skipTypeCheck": false,
         "stripLeadingPaths": true
       },
       "dependsOn": ["^build"]
     },
     "serve": {
-      "executor": "@nx/js:node",
+      "executor": "nx:run-commands",
       "options": {
-        "buildTarget": "build",
-        "watch": true
+        "command": "bun src/main.ts",
+        "cwd": "{projectRoot}"
       }
     },
     "prisma:migrate": {
@@ -107,11 +111,7 @@
       "inputs": ["production", "^production"]
     }
   },
-  "tui": {
-    "autoExit": 3,
-    "enabled": true
-  },
-  "useDaemonProcess": false,
+  "useDaemonProcess": true,
   "generators": {
     "@aenode/aenode:project": {
       "orgName": "aenode",

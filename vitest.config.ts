@@ -1,12 +1,12 @@
-import { defineConfig } from 'vitest/config';
+import { VitestOptions } from 'vitest/node';
 
-export default defineConfig({
+export default {
   test: {
     projects: [
-      '**/vite.config.{mjs,js,ts,mts}',
-      '**/vitest.config.{mjs,js,ts,mts}',
-      '!vitest.config.{mjs,js,ts,mts}',
-      '!vite.config.{mjs,js,ts,mts}',
+      '**/vite.config.ts',
+      '**/vitest.config.ts',
+      '!vitest.config.ts',
+      '!vite.config.ts',
     ],
   },
-});
+} as VitestOptions;

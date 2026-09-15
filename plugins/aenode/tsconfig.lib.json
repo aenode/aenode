@@ -6,16 +6,5 @@
     "tsBuildInfoFile": "./dist/tsconfig.lib.tsbuildinfo"
   },
   "include": ["./src/**/*.ts"],
-  "exclude": ["./src/**/*.spec.ts"],
-  "references": [
-    {
-      "path": "../../modules/fs/tsconfig.lib.json"
-    },
-    {
-      "path": "../../libs/errors/tsconfig.lib.json"
-    },
-    {
-      "path": "../../utils/brand-email/tsconfig.lib.json"
-    }
-  ]
+  "exclude": ["./src/**/*.spec.ts"]
 }

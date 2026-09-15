@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export class BaseCustomError extends Error {
   public readonly code: string;
   public readonly extras: unknown[];

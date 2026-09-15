@@ -2,15 +2,6 @@
   "extends": "../../tsconfig.base.json",
   "references": [
     {
-      "path": "../../modules/fs"
-    },
-    {
-      "path": "../../libs/errors"
-    },
-    {
-      "path": "../../utils/brand-email"
-    },
-    {
       "path": "./tsconfig.lib.json"
     },
     {

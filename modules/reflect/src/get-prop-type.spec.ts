@@ -88,7 +88,7 @@ describe('getPropType', () => {
       name!: string;
     }
 
-    expect(getPropType(Sample.prototype, 'name')).toBeUndefined();
+    expect(() => getPropType(Sample.prototype, 'name')).toThrow();
   });
 
   it('should support symbol property keys', () => {

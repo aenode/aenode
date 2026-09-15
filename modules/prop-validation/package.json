@@ -51,7 +51,9 @@
     }
   },
   "dependencies": {
-    "@swc/helpers": "~0.5.18",
+    "@swc/helpers": "~0.5.18"
+  },
+  "peerDependencies": {
     "@aenode/reflect": "workspace:*",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.15.1",

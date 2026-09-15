@@ -54,14 +54,6 @@
   "dependencies": {
     "@swc/helpers": "~0.5.18"
   },
-  "devDependencies": {
-    "@aenode/iam-db": "workspace:*",
-    "@aenode/nestjs": "workspace:^",
-    "@aenode/prisma": "workspace:*"
-  },
-  "peerDependencies": {
-    "@aenode/iam-db": "workspace:*",
-    "@aenode/nestjs": "workspace:^",
-    "@aenode/prisma": "workspace:*"
-  }
+  "devDependencies": {},
+  "peerDependencies": {}
 }

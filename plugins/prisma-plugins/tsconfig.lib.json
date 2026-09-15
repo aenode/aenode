@@ -6,22 +6,5 @@
     "tsBuildInfoFile": "./dist/tsconfig.lib.tsbuildinfo"
   },
   "include": ["./src/**/*.ts"],
-  "exclude": ["./src/**/*.spec.ts"],
-  "references": [
-    {
-      "path": "../../utils/flow/tsconfig.lib.json"
-    },
-    {
-      "path": "../../libs/prop-options/tsconfig.lib.json"
-    },
-    {
-      "path": "../../utils/names/tsconfig.lib.json"
-    },
-    {
-      "path": "../../utils/is/tsconfig.lib.json"
-    },
-    {
-      "path": "../../modules/fs/tsconfig.lib.json"
-    }
-  ]
+  "exclude": ["./src/**/*.spec.ts"]
 }
