@@ -5,6 +5,7 @@ import {
   type ValidationOptions,
 } from 'class-validator';
 import type { PropOptions } from './prop-options.js';
+import { ToDateTransformer } from './transformers/to-date-transformer.js';
 
 export function __Date(
   options: PropOptions,
@@ -17,6 +18,7 @@ export function __Date(
     const push = (decorator: PropertyDecorator) => decorators.push(decorator);
 
     push(IsDate(validationOptions));
+    push(ToDateTransformer());
 
     if (typeof min === 'function' || min instanceof Date)
       push(MinDate(min, validationOptions));

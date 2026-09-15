@@ -3,18 +3,21 @@ import { validateSync } from 'class-validator';
 import type { PropOptions as O } from './prop-options.js';
 import { Prop } from './prop.js';
 
-describe('String', () => {
-  describe('Valid string', () => {
+describe('object', () => {
+  describe('Valid object', () => {
     it.each`
-      options                  | value
-      ${{} as O}               | ${{ param: undefined }}
-      ${{} as O}               | ${{ param: null }}
-      ${{} as O}               | ${{ param: '' }}
-      ${{ minLength: 3 } as O} | ${{ param: '123' }}
-      ${{ maxLength: 5 } as O} | ${{ param: '1234' }}
+      options    | value
+      ${{} as O} | ${{ pram: undefined }}
+      ${{} as O} | ${{ pram: null }}
+      ${{} as O} | ${{ pram: { name: '' } }}
+      ${{} as O} | ${{ pram: { name: 'some' } }}
     `('should validate $value with $options', ({ options, value }) => {
+      class SubSample {
+        @Prop()
+        name: string;
+      }
       class Sample {
-        @Prop(options) param: string;
+        @Prop(options) pram: SubSample;
       }
 
       const instance = plainToInstance(Sample, value, {
@@ -29,16 +32,19 @@ describe('String', () => {
     });
   });
 
-  describe('Invalid string', () => {
+  describe('Invalid object', () => {
     it.each`
-      options                    | value                   | errors
-      ${{ required: true } as O} | ${{ param: undefined }} | ${['isDefined', 'isString']}
-      ${{ required: true } as O} | ${{ param: null }}      | ${['isDefined', 'isString']}
-      ${{ minLength: 4 } as O}   | ${{ param: '123' }}     | ${['minLength']}
-      ${{ maxLength: 3 } as O}   | ${{ param: '1234' }}    | ${['maxLength']}
+      options                    | value                    | errors
+      ${{ required: true } as O} | ${{ pram: undefined }}   | ${['isDefined']}
+      ${{ required: true } as O} | ${{ pram: null }}        | ${['isDefined']}
+      ${{ required: true } as O} | ${{ pram: { name: 1 } }} | ${['isString']}
     `('should validate $value with $options', ({ options, value, errors }) => {
+      class SubSample {
+        @Prop()
+        name: string;
+      }
       class Sample {
-        @Prop(options) param: string;
+        @Prop(options) pram: SubSample;
       }
 
       const instance = plainToInstance(Sample, value, {
@@ -48,8 +54,10 @@ describe('String', () => {
       });
 
       const foundErrors = validateSync(instance);
+
       const cons = foundErrors
-        .flatMap((e) => Object.keys(e.constraints ?? {}))
+        .flatMap((e) => [e, ...(e.children ?? [])])
+        .flatMap((e) => [...Object.keys(e.constraints ?? {})])
         .filter((e) => e);
 
       expect(cons).toEqual(errors);

@@ -6,6 +6,7 @@ import {
   type ValidationOptions,
 } from 'class-validator';
 import type { NumberFormat, PropOptions } from './prop-options.js';
+import { ToNumberTransformer } from './transformers/to-number-transformer.js';
 
 export function __NumberFormat(
   format: NumberFormat,
@@ -21,6 +22,7 @@ export function __NumberFormat(
     }
   };
 }
+
 export function __Number(
   options: PropOptions,
   validationOptions: ValidationOptions,
@@ -37,6 +39,8 @@ export function __Number(
         validationOptions,
       ),
     );
+
+    push(ToNumberTransformer());
 
     if (typeof min === 'number') push(Min(min, validationOptions));
     if (typeof max === 'number') push(Max(max, validationOptions));

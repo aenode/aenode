@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 //
 import { getPropType } from '@aenode/reflect';
+import type { ClassConstructor } from 'class-transformer';
 import type { ValidationOptions } from 'class-validator';
 import { __Boolean } from './boolean.js';
 import { __Common } from './common.js';
@@ -51,7 +52,11 @@ export function Prop(options: PropOptions = {}): PropertyDecorator {
         break;
       }
       default: {
-        __Object(options, validationOptions)(...args);
+        __Object(
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          { ...options, type: () => type as ClassConstructor<any> },
+          validationOptions,
+        )(...args);
         break;
       }
     }

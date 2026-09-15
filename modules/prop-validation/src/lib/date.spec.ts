@@ -3,18 +3,17 @@ import { validateSync } from 'class-validator';
 import type { PropOptions as O } from './prop-options.js';
 import { Prop } from './prop.js';
 
-describe('String', () => {
-  describe('Valid string', () => {
+describe('date', () => {
+  describe('Valid date', () => {
     it.each`
-      options                  | value
-      ${{} as O}               | ${{ param: undefined }}
-      ${{} as O}               | ${{ param: null }}
-      ${{} as O}               | ${{ param: '' }}
-      ${{ minLength: 3 } as O} | ${{ param: '123' }}
-      ${{ maxLength: 5 } as O} | ${{ param: '1234' }}
+      options    | value
+      ${{} as O} | ${{ pram: undefined }}
+      ${{} as O} | ${{ pram: null }}
+      ${{} as O} | ${{ pram: new Date() }}
+      ${{} as O} | ${{ pram: new Date().toISOString() }}
     `('should validate $value with $options', ({ options, value }) => {
       class Sample {
-        @Prop(options) param: string;
+        @Prop(options) pram: Date;
       }
 
       const instance = plainToInstance(Sample, value, {
@@ -29,16 +28,19 @@ describe('String', () => {
     });
   });
 
-  describe('Invalid string', () => {
+  describe('Invalid date', () => {
     it.each`
-      options                    | value                   | errors
-      ${{ required: true } as O} | ${{ param: undefined }} | ${['isDefined', 'isString']}
-      ${{ required: true } as O} | ${{ param: null }}      | ${['isDefined', 'isString']}
-      ${{ minLength: 4 } as O}   | ${{ param: '123' }}     | ${['minLength']}
-      ${{ maxLength: 3 } as O}   | ${{ param: '1234' }}    | ${['maxLength']}
+      options                    | value                                  | errors
+      ${{ required: true } as O} | ${{ pram: undefined }}                 | ${['isDefined', 'isDate']}
+      ${{ required: true } as O} | ${{ pram: null }}                      | ${['isDefined', 'isDate']}
+      ${{} as O}                 | ${{ pram: 3 }}                         | ${['isDate']}
+      ${{} as O}                 | ${{ pram: 'true' }}                    | ${['isDate']}
+      ${{} as O}                 | ${{ pram: 'false' }}                   | ${['isDate']}
+      ${{} as O}                 | ${{ pram: new Date().toString() }}     | ${['isDate']}
+      ${{} as O}                 | ${{ pram: new Date().toDateString() }} | ${['isDate']}
     `('should validate $value with $options', ({ options, value, errors }) => {
       class Sample {
-        @Prop(options) param: string;
+        @Prop(options) pram: Date;
       }
 
       const instance = plainToInstance(Sample, value, {

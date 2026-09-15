@@ -1,7 +1,7 @@
 {
   "name": "@aenode/reflect",
   "version": "0.0.23",
-  "description": "Helper function for reflect-metadata",
+  "description": "Utilities for inspecting TypeScript classes, properties, methods, parameters, and return types at runtime using JavaScript reflection and TypeScript decorator metadata.",
   "keywords": [
     "types"
   ],

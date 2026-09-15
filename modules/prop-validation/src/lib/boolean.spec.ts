@@ -3,18 +3,24 @@ import { validateSync } from 'class-validator';
 import type { PropOptions as O } from './prop-options.js';
 import { Prop } from './prop.js';
 
-describe('String', () => {
-  describe('Valid string', () => {
+describe('boolean', () => {
+  describe('Valid boolean', () => {
     it.each`
-      options                  | value
-      ${{} as O}               | ${{ param: undefined }}
-      ${{} as O}               | ${{ param: null }}
-      ${{} as O}               | ${{ param: '' }}
-      ${{ minLength: 3 } as O} | ${{ param: '123' }}
-      ${{ maxLength: 5 } as O} | ${{ param: '1234' }}
+      options    | value
+      ${{} as O} | ${{ pram: undefined }}
+      ${{} as O} | ${{ pram: null }}
+      ${{} as O} | ${{ pram: true }}
+      ${{} as O} | ${{ pram: false }}
+      ${{} as O} | ${{ pram: 'false' }}
+      ${{} as O} | ${{ pram: 'true' }}
+      ${{} as O} | ${{ pram: 'False' }}
+      ${{} as O} | ${{ pram: 'True' }}
+      ${{} as O} | ${{ pram: '1' }}
+      ${{} as O} | ${{ pram: '0' }}
+      ${{} as O} | ${{ pram: '-1' }}
     `('should validate $value with $options', ({ options, value }) => {
       class Sample {
-        @Prop(options) param: string;
+        @Prop(options) pram: boolean;
       }
 
       const instance = plainToInstance(Sample, value, {
@@ -29,16 +35,16 @@ describe('String', () => {
     });
   });
 
-  describe('Invalid string', () => {
+  describe('Invalid boolean', () => {
     it.each`
-      options                    | value                   | errors
-      ${{ required: true } as O} | ${{ param: undefined }} | ${['isDefined', 'isString']}
-      ${{ required: true } as O} | ${{ param: null }}      | ${['isDefined', 'isString']}
-      ${{ minLength: 4 } as O}   | ${{ param: '123' }}     | ${['minLength']}
-      ${{ maxLength: 3 } as O}   | ${{ param: '1234' }}    | ${['maxLength']}
+      options                    | value                  | errors
+      ${{ required: true } as O} | ${{ pram: undefined }} | ${['isDefined', 'isBoolean']}
+      ${{ required: true } as O} | ${{ pram: null }}      | ${['isDefined', 'isBoolean']}
+      ${{} as O}                 | ${{ pram: 3 }}         | ${['isBoolean']}
+      ${{} as O}                 | ${{ pram: 'some' }}    | ${['isBoolean']}
     `('should validate $value with $options', ({ options, value, errors }) => {
       class Sample {
-        @Prop(options) param: string;
+        @Prop(options) pram: boolean;
       }
 
       const instance = plainToInstance(Sample, value, {
