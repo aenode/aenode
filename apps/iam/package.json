@@ -52,7 +52,9 @@
     }
   },
   "dependencies": {
+    "@aenode/iam-db": "workspace:*",
     "@aenode/nest": "workspace:*",
+    "@aenode/prisma": "workspace:*",
     "@swc/helpers": "~0.5.18"
   }
 }

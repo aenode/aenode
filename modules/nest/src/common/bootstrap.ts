@@ -81,5 +81,5 @@ export async function bootstrap(module: Type): Promise<void> {
   await app.listen(APP_PORT);
   const URL = await app.getUrl();
 
-  logger.log(`App is up and running at ${URL}`);
+  logger.log(`App is up and running at ${URL}/docs`);
 }

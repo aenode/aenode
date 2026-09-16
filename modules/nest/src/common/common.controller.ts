@@ -4,7 +4,7 @@ import { Controller, Get } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { ApiOkResponse } from '@nestjs/swagger';
 import { Prop } from '../decorators/index.js';
-import { Public } from '../decorators/public.js';
+import { Public } from '../decorators/metadata/public.js';
 
 export class InfoDto {
   @Prop() appId: string;
