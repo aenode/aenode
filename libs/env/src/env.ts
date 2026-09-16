@@ -19,12 +19,26 @@ export class EnvApp {
    */
   static readonly PORT = 'APP_PORT';
 
+  /**
+   * Allowed origins
+   */
   static readonly ORIGIN = 'APP_ORIGIN';
+
+  /**
+   * Api prefix such as 'api'
+   */
+  static readonly PREFIX = 'APP_PREFIX';
+
+  /**
+   * Swagger/Scalar path
+   */
+  static readonly DOCS = 'APP_DOCS';
 
   /**
    * App jwt secret
    */
   static readonly JWT = 'APP_JWT';
+
   /**
    * App root username
    */

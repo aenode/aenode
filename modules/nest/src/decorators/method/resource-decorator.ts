@@ -1,4 +1,3 @@
-import type { StringArray } from '@aenode/prop-validation';
 import { Controller, Delete, Get, Post, Put, type Type } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
@@ -7,13 +6,11 @@ import {
   ApiNotFoundResponse,
   ApiOkResponse,
   ApiOperation,
+  ApiParam,
   ApiUnauthorizedResponse,
 } from '@nestjs/swagger';
-import { Prop } from '../prop/prop.js';
-
-export class ValiationErrorDto {
-  @Prop() errors: StringArray;
-}
+import { InputValiationErrorDto } from '../../validation/input-validation-error.dto.js';
+import { MessageDto } from '../../validation/message.dto.js';
 
 export class ResourceDecorator {
   constructor(
@@ -32,10 +29,20 @@ export class ResourceDecorator {
       [
         ApiBadRequestResponse({
           description: 'Invalid input',
-          type: ValiationErrorDto,
+          type: InputValiationErrorDto,
+          example: new InputValiationErrorDto(),
+          isArray: true,
         }),
-        ApiUnauthorizedResponse({ description: 'Unauthorized request' }),
-        ApiInternalServerErrorResponse({ description: 'Internal error' }),
+        ApiUnauthorizedResponse({
+          type: MessageDto,
+          example: new MessageDto(),
+          description: 'Unauthorized ',
+        }),
+        ApiInternalServerErrorResponse({
+          type: MessageDto,
+          example: new MessageDto(),
+          description: 'Internal error',
+        }),
       ].forEach((d) => d(...args));
     };
   }
@@ -48,7 +55,11 @@ export class ResourceDecorator {
         this.Common(),
         Post(),
         ApiOperation({ summary }),
-        ApiCreatedResponse({ type: this.responseType }),
+        ApiCreatedResponse({
+          type: this.responseType,
+          example: new this.responseType(),
+          description: 'Created',
+        }),
       ].forEach((d) => d(...args));
     };
   }
@@ -61,7 +72,11 @@ export class ResourceDecorator {
         this.Common(),
         Get(),
         ApiOperation({ summary }),
-        ApiOkResponse({ type: [this.responseType] }),
+        ApiOkResponse({
+          type: [this.responseType],
+          example: [new this.responseType()],
+          description: 'Found',
+        }),
       ].forEach((d) => d(...args));
     };
   }
@@ -73,9 +88,18 @@ export class ResourceDecorator {
       [
         this.Common(),
         Get(':id'),
+        ApiParam({ type: Number, name: 'id', description: 'Unique entry id' }),
         ApiOperation({ summary }),
-        ApiOkResponse({ type: this.responseType }),
-        ApiNotFoundResponse({ description: 'Not found' }),
+        ApiOkResponse({
+          type: this.responseType,
+          example: new this.responseType(),
+          description: 'Found',
+        }),
+        ApiNotFoundResponse({
+          type: MessageDto,
+          example: new MessageDto(),
+          description: 'Not found',
+        }),
       ].forEach((d) => d(...args));
     };
   }
@@ -87,9 +111,18 @@ export class ResourceDecorator {
       [
         this.Common(),
         Put(':id'),
+        ApiParam({ type: Number, name: 'id', description: 'Unique entry id' }),
         ApiOperation({ summary }),
-        ApiOkResponse({ type: this.responseType }),
-        ApiNotFoundResponse(),
+        ApiOkResponse({
+          type: this.responseType,
+          example: new this.responseType(),
+          description: 'Updated',
+        }),
+        ApiNotFoundResponse({
+          type: MessageDto,
+          example: new MessageDto(),
+          description: 'Not found',
+        }),
       ].forEach((d) => d(...args));
     };
   }
@@ -101,9 +134,18 @@ export class ResourceDecorator {
       [
         this.Common(),
         Delete(':id'),
+        ApiParam({ type: Number, name: 'id', description: 'Unique entry id' }),
         ApiOperation({ summary }),
-        ApiOkResponse({ type: this.responseType }),
-        ApiNotFoundResponse(),
+        ApiOkResponse({
+          type: this.responseType,
+          example: new this.responseType(),
+          description: 'Deleted',
+        }),
+        ApiNotFoundResponse({
+          type: MessageDto,
+          example: new MessageDto(),
+          description: 'Not found',
+        }),
       ].forEach((d) => d(...args));
     };
   }

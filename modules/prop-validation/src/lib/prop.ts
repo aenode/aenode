@@ -8,13 +8,7 @@ import { __Common } from './common.js';
 import { __Date } from './date.js';
 import { __Number } from './number.js';
 import { __Object } from './object.js';
-import {
-  BooleanArray,
-  DateArray,
-  NumberArray,
-  StringArray,
-  type PropValidationOptions,
-} from './prop-options.js';
+import { type PropValidationOptions } from './prop-options.js';
 import { __String } from './string.js';
 
 export function PropValidation(
@@ -32,24 +26,24 @@ export function PropValidation(
 
     __Common(options, validationOptions)(...args);
 
-    switch (type) {
-      case StringArray:
-      case String: {
+    switch (type.name) {
+      case 'StringArray':
+      case 'String': {
         __String(options, validationOptions)(...args);
         break;
       }
-      case NumberArray:
-      case Number: {
+      case 'NumberArray':
+      case 'Number': {
         __Number(options, validationOptions)(...args);
         break;
       }
-      case BooleanArray:
-      case Boolean: {
+      case 'BooleanArray':
+      case 'Boolean': {
         __Boolean(options, validationOptions)(...args);
         break;
       }
-      case DateArray:
-      case Date: {
+      case 'DateArray':
+      case 'Date': {
         __Date(options, validationOptions)(...args);
         break;
       }

@@ -1,8 +1,6 @@
 import {
-  BadRequestException,
   ClassSerializerInterceptor,
   Logger,
-  ValidationPipe,
   VersioningType,
   type Type,
 } from '@nestjs/common';
@@ -12,52 +10,41 @@ import { NestFactory, Reflector } from '@nestjs/core';
 import type { NestExpressApplication } from '@nestjs/platform-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { apiReference } from '@scalar/nestjs-api-reference';
+import type { NextFunction, Request, Response } from 'express';
 import helmet from 'helmet';
-import type { IncomingMessage, ServerResponse } from 'node:http';
+import { globalValidationPipe } from '../validation/global-validation.pipe.js';
 import { getConfig } from './get-config.js';
 
 export async function bootstrap(module: Type): Promise<void> {
   const app = await NestFactory.create<NestExpressApplication>(module, {});
 
   const configService = app.get(ConfigService);
-  const { APP_ID, APP_ORIGIN, APP_PORT, APP_DESCRIPTION } =
-    getConfig(configService);
+  const {
+    APP_ID,
+    APP_ORIGIN,
+    APP_PORT,
+    APP_DESCRIPTION,
+    APP_PREFIX,
+    APP_DOCS,
+  } = getConfig(configService);
 
-  app.enableVersioning({ type: VersioningType.URI });
+  app.enableVersioning({ type: VersioningType.URI, defaultVersion: '1' });
 
+  app.setGlobalPrefix(APP_PREFIX);
   app.enableCors({
     origin: APP_ORIGIN ?? '*',
     credentials: true,
   } as CorsOptions);
 
-  app.use(
-    (
-      req: IncomingMessage,
-      res: ServerResponse<IncomingMessage>,
-      next: (err?: unknown) => void,
-    ) => {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      if ((req as any).path.startsWith('/docs')) {
-        return helmet({ contentSecurityPolicy: false })(req, res, next);
-      }
-      return helmet()(req, res, next);
-    },
-  );
+  app.use((req: Request, res: Response, next: NextFunction) => {
+    if (req.path.startsWith(APP_DOCS)) {
+      return helmet({ contentSecurityPolicy: false })(req, res, next);
+    }
+    return helmet()(req, res, next);
+  });
 
-  app.useGlobalPipes(
-    new ValidationPipe({
-      transform: true,
-      validationError: { target: false, value: true },
-      transformOptions: {
-        exposeDefaultValues: true,
-        exposeUnsetFields: false,
-        excludeExtraneousValues: true,
-      },
-      exceptionFactory(errors) {
-        throw new BadRequestException({ errors });
-      },
-    }),
-  );
+  app.useGlobalPipes(globalValidationPipe);
+
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
 
   const swaggerConfig = new DocumentBuilder()
@@ -69,7 +56,7 @@ export async function bootstrap(module: Type): Promise<void> {
   const swaggerDoc = SwaggerModule.createDocument(app, swaggerConfig);
 
   app.use(
-    '/docs',
+    APP_DOCS,
     apiReference({
       content: swaggerDoc,
     }),

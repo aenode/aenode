@@ -1,12 +1,12 @@
 import { PartialType, PickType, Prop } from '@aenode/nest';
 
 export class ScopeDto {
-  @Prop({ description: 'Primary unique id' }) id?: number;
-  @Prop({ description: 'Timestamp' }) createdAt?: Date;
-  @Prop({ description: 'Timestamp' }) updatedAt?: Date;
-  @Prop({ description: 'Timestamp' }) deletedAt?: Date;
+  @Prop({ description: 'Primary unique id' }) id = 1;
+  @Prop({ description: 'Timestamp' }) createdAt: Date = new Date();
+  @Prop({ description: 'Timestamp' }) updatedAt: Date = new Date();
+  @Prop({ description: 'Timestamp' }) deletedAt: Date = new Date();
 
-  @Prop({ description: 'Unique scope name' }) name: string;
+  @Prop({ description: 'Unique scope name' }) name = 'scope name';
 }
 
 export class ScopeCreateDto extends PickType(ScopeDto, ['name']) {

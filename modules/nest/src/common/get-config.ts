@@ -13,5 +13,7 @@ export function getConfig(config: ConfigService) {
     APP_USERNAME: config.getOrThrow<string>(Env.APP.USERNAME),
     APP_PASSWORD: config.getOrThrow<string>(Env.APP.PASSWORD),
     APP_ORIGIN: config.getOrThrow<string>(Env.APP.ORIGIN),
+    APP_PREFIX: config.getOrThrow<string>(Env.APP.PREFIX, 'api'),
+    APP_DOCS: config.get<string>(Env.APP.DOCS, '/docs'),
   };
 }
