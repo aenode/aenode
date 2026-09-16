@@ -72,7 +72,7 @@
     "serve": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "bun src/main.ts",
+        "command": "bun --watch src/main.ts ",
         "cwd": "{projectRoot}"
       }
     },

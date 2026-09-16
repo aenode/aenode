@@ -52,8 +52,7 @@
     }
   },
   "dependencies": {
+    "@aenode/nest": "workspace:*",
     "@swc/helpers": "~0.5.18"
-  },
-  "devDependencies": {},
-  "peerDependencies": {}
+  }
 }

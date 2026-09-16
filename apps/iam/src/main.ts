@@ -1,5 +1,4 @@
-export function main() {
-  console.log('Hello');
-}
+import { bootstrap } from '@aenode/nest';
+import { AppModule } from './app/app.module.js';
 
-main();
+bootstrap(AppModule);

@@ -7,8 +7,4 @@ export function getPublic(reflector: Reflector, context: ExecutionContext) {
   return reflector.get(PublicToken, context.getClass());
 }
 
-export function Public(value?: string): ClassDecorator {
-  return (...args) => {
-    SetMetadata(PublicToken, value)(...args);
-  };
-}
+export const Public = () => SetMetadata(PublicToken, true);

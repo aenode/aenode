@@ -28,7 +28,7 @@ export class EnvApp {
   /**
    * App root username
    */
-  static readonly USERANME = 'APP_USERANME';
+  static readonly USERNAME = 'APP_USERNAME';
 
   /**
    * App root user password
