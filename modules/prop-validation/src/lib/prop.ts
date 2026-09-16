@@ -2,7 +2,7 @@ import 'reflect-metadata';
 //
 import { getPropType } from '@aenode/reflect';
 import type { ClassConstructor } from 'class-transformer';
-import type { ValidationOptions } from 'class-validator';
+import { IsEnum, IsIn, IsNotIn, type ValidationOptions } from 'class-validator';
 import { __Boolean } from './boolean.js';
 import { __Common } from './common.js';
 import { __Date } from './date.js';
@@ -16,7 +16,7 @@ export function PropValidation(
 ): PropertyDecorator {
   return (...args) => {
     const type = getPropType(args[0], args[1]);
-    const isArray = type.name.endsWith('Array');
+    const isArray = type?.name?.endsWith('Array') || options.isArray === true;
 
     const validationOptions: ValidationOptions = {
       each: isArray,
@@ -26,34 +26,45 @@ export function PropValidation(
 
     __Common(options, validationOptions)(...args);
 
-    switch (type.name) {
-      case 'StringArray':
-      case 'String': {
-        __String(options, validationOptions)(...args);
-        break;
+    // Static values
+    if (options.enum || options.isIn) {
+      if (options.enum) {
+        IsEnum(options.enum, validationOptions)(...args);
+      } else if (options.isIn) {
+        IsIn(options.isIn, validationOptions);
+      } else if (options.isNotIn) {
+        IsNotIn(options.isNotIn, validationOptions);
       }
-      case 'NumberArray':
-      case 'Number': {
-        __Number(options, validationOptions)(...args);
-        break;
-      }
-      case 'BooleanArray':
-      case 'Boolean': {
-        __Boolean(options, validationOptions)(...args);
-        break;
-      }
-      case 'DateArray':
-      case 'Date': {
-        __Date(options, validationOptions)(...args);
-        break;
-      }
-      default: {
-        __Object(
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          { ...options, type: () => type as ClassConstructor<any> },
-          validationOptions,
-        )(...args);
-        break;
+    } else {
+      switch (type.name) {
+        case 'StringArray':
+        case 'String': {
+          __String(options, validationOptions)(...args);
+          break;
+        }
+        case 'NumberArray':
+        case 'Number': {
+          __Number(options, validationOptions)(...args);
+          break;
+        }
+        case 'BooleanArray':
+        case 'Boolean': {
+          __Boolean(options, validationOptions)(...args);
+          break;
+        }
+        case 'DateArray':
+        case 'Date': {
+          __Date(options, validationOptions)(...args);
+          break;
+        }
+        default: {
+          __Object(
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            { ...options, type: () => type as ClassConstructor<any> },
+            validationOptions,
+          )(...args);
+          break;
+        }
       }
     }
   };

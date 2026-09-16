@@ -20,6 +20,7 @@ export class DateArray extends Array<string> {
 export type PropType = <T>() => ClassConstructor<T>;
 
 export type StringFormat =
+  | 'name'
   | 'email'
   | 'password'
   | 'ean'
@@ -39,6 +40,7 @@ export type PropValidationOptions = {
   required?: boolean;
   minLength?: number;
   maxLength?: number;
+  enum?: object;
   max?: number | Date | (() => Date);
   min?: number | Date | (() => Date);
   format?: PropFormat;
@@ -50,4 +52,5 @@ export type PropValidationOptions = {
   lessThenEqualTo?: string | string[];
   groups?: string[];
   validateIf?: ValidationOptions['validateIf'];
+  default?: unknown;
 };

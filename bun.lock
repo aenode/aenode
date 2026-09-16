@@ -131,6 +131,7 @@
         "@scalar/nestjs-api-reference": "~1.2.18",
         "@swc/helpers": "~0.5.18",
         "cache-manager": "7.2.9",
+        "class-transformer": "^0.5.1",
         "express": "^5.2.1",
         "helmet": "~8.3.0",
       },
@@ -142,9 +143,6 @@
       "name": "@aenode/prisma",
       "version": "0.0.23",
       "dependencies": {
-        "@swc/helpers": "~0.5.18",
-      },
-      "devDependencies": {
         "@aenode/env": "workspace:*",
         "@aenode/names": "workspace:*",
         "@nestjs/common": "~12.0.0",
@@ -152,18 +150,12 @@
         "@prisma/adapter-better-sqlite3": "^7.10.0",
         "@prisma/adapter-pg": "^7.10.0",
         "@prisma/client": "^7.9.0",
-        "@types/better-sqlite3": "^7.6.13",
+        "@swc/helpers": "~0.5.18",
         "better-sqlite3": "^12.11.1",
-        "dotenv": "^17.4.2",
       },
-      "peerDependencies": {
-        "@aenode/env": "workspace:*",
-        "@aenode/names": "workspace:*",
-        "@nestjs/common": "~12.0.0",
-        "@nestjs/config": "~12.0.0",
-        "@prisma/adapter-better-sqlite3": "^7.10.0",
-        "@prisma/adapter-pg": "^7.10.0",
-        "better-sqlite3": "^12.11.1",
+      "devDependencies": {
+        "@types/better-sqlite3": "^7.6.13",
+        "dotenv": "^17.4.2",
       },
     },
     "modules/prop-validation": {

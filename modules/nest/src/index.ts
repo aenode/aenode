@@ -12,6 +12,8 @@ export * from './common/get-config.js';
 export * from './decorators/metadata/public.js';
 export * from './decorators/method/get-by-id.js';
 export * from './decorators/method/get-many.js';
+export * from './decorators/method/param-id.js';
+export * from './decorators/method/param-uuid.js';
 export * from './decorators/method/resource-decorator.js';
 export * from './decorators/prop/prop-options.js';
 export * from './decorators/prop/prop.js';

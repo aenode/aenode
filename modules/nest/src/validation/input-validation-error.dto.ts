@@ -1,13 +1,15 @@
 import { Prop } from '../decorators/index.js';
 
 export class InputValiationErrorDto {
-  @Prop({ description: 'Property name' }) property?: string;
-  @Prop({ description: 'Contaraint name' }) constraint?: string;
-  @Prop({ description: 'Property name' }) message: string;
+  @Prop({ description: 'Property name', example: 'username' })
+  property?: string;
 
-  constructor(value?: InputValiationErrorDto) {
-    if (value) {
-      Object.assign(this, value);
-    }
-  }
+  @Prop({ description: 'Contaraint name', example: 'isEmail' })
+  constraint?: string;
+
+  @Prop({
+    description: 'Property name',
+    example: 'Username must be a valid email',
+  })
+  message: string;
 }

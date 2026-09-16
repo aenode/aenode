@@ -2,18 +2,39 @@ import { Prisma } from '@aenode/iam-db/client';
 import { Injectable } from '@aenode/nest';
 import { InjectDelegate } from '@aenode/prisma/pg';
 import type { ScopeCreateDto } from './scope.input.js';
+import type { ScopeQueryDto } from './scope.query.js';
 
 @Injectable()
 export class ScopeService {
+  private readonly searchables = [
+    Prisma.ScopeScalarFieldEnum.name,
+    Prisma.ScopeScalarFieldEnum.description,
+  ];
   constructor(
     @InjectDelegate(Prisma.ModelName.Scope)
     protected readonly delegate: Prisma.ScopeDelegate,
   ) {}
 
-  async findMany() {
+  private toSearchQuery(search?: string) {
+    return this.searchables.reduce(
+      (acc, s) => {
+        acc[s] = {
+          contains: search,
+          mode: 'insensitive',
+        } as Prisma.StringFilter;
+        return acc;
+      },
+      {} as Record<string, Prisma.StringFilter>,
+    );
+  }
+
+  async findMany(query: ScopeQueryDto) {
+    const { orderBy, orderDir, skip, take, search } = query;
     const result = await this.delegate.findMany({
-      where: { deletedAt: null },
-      select: { id: true, name: true },
+      where: { deletedAt: null, ...this.toSearchQuery(search) },
+      take,
+      skip,
+      orderBy: { [orderBy]: orderDir },
     });
 
     return result;

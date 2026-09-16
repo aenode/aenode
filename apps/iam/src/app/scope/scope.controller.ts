@@ -1,44 +1,35 @@
-import { Body, Param, ParseIntPipe } from '@aenode/nest';
-import { ResourceDecorator } from '@aenode/nest/decorators';
-import { ScopeCreateDto, ScopeDto, ScopeUpdateDto } from './scope.input.js';
+import { Body, Query } from '@aenode/nest';
+import { Autowire, ParamId } from '@aenode/nest/decorators';
+import { ScopeCreateDto, ScopeReadDto, ScopeUpdateDto } from './scope.input.js';
+import { ScopeQueryDto } from './scope.query.js';
 import { ScopeService } from './scope.service.js';
 
-const C = new ResourceDecorator({
+@Autowire({
   name: 'scope',
-  readDto: ScopeDto,
+  readDto: ScopeReadDto,
   createDto: ScopeCreateDto,
   updateDto: ScopeUpdateDto,
-});
-
-@C.Controller()
+})
 export class ScopeController {
   constructor(protected readonly service: ScopeService) {}
 
-  @C.PostOne()
   createOne(@Body() data: ScopeCreateDto) {
     return this.service.create(data);
   }
 
-  @C.GetMany()
-  findMany() {
-    return this.service.findMany();
+  findMany(@Query() query: ScopeQueryDto) {
+    return this.service.findMany(query);
   }
 
-  @C.GetOneById()
-  findOneById(@Param('id', ParseIntPipe) id: number) {
+  findOneById(@ParamId() id: number) {
     return this.service.findOneById(id);
   }
 
-  @C.PutOneById()
-  updateOneById(
-    @Param('id', ParseIntPipe) id: number,
-    @Body() data: ScopeUpdateDto,
-  ) {
+  updateOneById(@ParamId() id: number, @Body() data: ScopeUpdateDto) {
     return this.service.updateOneById(id, data);
   }
 
-  @C.DeleteOneById()
-  deleteOneById(@Param('id', ParseIntPipe) id: number) {
+  deleteOneById(@ParamId() id: number) {
     return this.service.softDeleteOneById(id);
   }
 }

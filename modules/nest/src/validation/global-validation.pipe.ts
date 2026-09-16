@@ -5,7 +5,6 @@ export const globalValidationPipe = new ValidationPipe({
   transform: true,
   validationError: { target: false, value: true },
   transformOptions: {
-    // Default values are used for example
     exposeDefaultValues: false,
     exposeUnsetFields: false,
     excludeExtraneousValues: true,

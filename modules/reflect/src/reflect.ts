@@ -58,6 +58,25 @@ export function getMethodNames<T extends { prototype: object }>(
   return [...names];
 }
 
+export function getMethodDescriptor(
+  target: object,
+  methodName: string | symbol,
+): PropertyDescriptor | undefined {
+  let prototype: object | null = target;
+
+  while (prototype && prototype !== Object.prototype) {
+    const descriptor = Object.getOwnPropertyDescriptor(prototype, methodName);
+
+    if (descriptor) {
+      return descriptor;
+    }
+
+    prototype = Reflect.getPrototypeOf(prototype);
+  }
+
+  return undefined;
+}
+
 export function getPropertyNames<T extends { prototype: object }>(
   target: T,
 ): string[] {

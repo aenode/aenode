@@ -14,6 +14,11 @@ export function __StringFormat(
 ): PropertyDecorator {
   return (...args) => {
     switch (format) {
+      case 'name': {
+        MaxLength(255, validationOptions)(...args);
+        MinLength(3, validationOptions)(...args);
+        break;
+      }
       case 'email': {
         IsEmail(undefined, validationOptions)(...args);
         break;
