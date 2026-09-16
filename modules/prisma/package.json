@@ -65,8 +65,8 @@
   "devDependencies": {
     "@aenode/env": "workspace:*",
     "@aenode/names": "workspace:*",
-    "@nestjs/common": "^11.2.1",
-    "@nestjs/config": "^4.0.4",
+    "@nestjs/common": "~12.0.0",
+    "@nestjs/config": "~12.0.0",
     "@prisma/adapter-better-sqlite3": "^7.10.0",
     "@prisma/adapter-pg": "^7.10.0",
     "@prisma/client": "^7.9.0",
@@ -77,8 +77,8 @@
   "peerDependencies": {
     "@aenode/env": "workspace:*",
     "@aenode/names": "workspace:*",
-    "@nestjs/common": "^11.2.1",
-    "@nestjs/config": "^4.0.4",
+    "@nestjs/common": "~12.0.0",
+    "@nestjs/config": "~12.0.0",
     "@prisma/adapter-better-sqlite3": "^7.10.0",
     "@prisma/adapter-pg": "^7.10.0",
     "better-sqlite3": "^12.11.1"

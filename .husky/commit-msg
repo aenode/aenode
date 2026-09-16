@@ -18,10 +18,10 @@ if ! echo "$COMMIT_MSG" | grep -qE "$PATTERN"; then
   exit 1
 fi
 
-# bunx  nx run-many -t build
-# bunx  nx run-many -t lint
-# bunx  nx run-many -t typecheck
-# bunx  nx run-many -t test
+bunx  nx run-many -t build
+bunx  nx run-many -t lint
+bunx  nx run-many -t typecheck
+bunx  nx run-many -t test
 
 
 

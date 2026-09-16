@@ -1,5 +1,7 @@
+export * from '@nestjs/cache-manager';
 export * from '@nestjs/common';
 export * from '@nestjs/core';
+export * from '@nestjs/event-emitter';
 
 // @index(['./**/*.ts', '!./**/*.spec.ts', '!./**/index.ts'], f => `export * from '${f.path}.js'`)
 export * from './common/bootstrap.js';
