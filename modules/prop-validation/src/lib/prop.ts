@@ -13,11 +13,13 @@ import {
   DateArray,
   NumberArray,
   StringArray,
-  type PropOptions,
+  type PropValidationOptions,
 } from './prop-options.js';
 import { __String } from './string.js';
 
-export function Prop(options: PropOptions = {}): PropertyDecorator {
+export function PropValidation(
+  options: PropValidationOptions = {},
+): PropertyDecorator {
   return (...args) => {
     const type = getPropType(args[0], args[1]);
     const isArray = type.name.endsWith('Array');

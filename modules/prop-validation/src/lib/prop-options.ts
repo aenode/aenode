@@ -33,8 +33,7 @@ export type NumberFormat = 'int' | 'integer';
 
 export type PropFormat = StringFormat | NumberFormat;
 
-export type PropOptions = {
-  desc?: string;
+export type PropValidationOptions = {
   type?: PropType;
   isArray?: boolean;
   required?: boolean;

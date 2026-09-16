@@ -1,10 +1,10 @@
 import { Type } from 'class-transformer';
 import { ValidateNested, type ValidationOptions } from 'class-validator';
-import type { PropOptions } from './prop-options.js';
+import type { PropValidationOptions } from './prop-options.js';
 import { ToObjectTransformer } from './transformers/to-object-transformer.js';
 
 export function __Object(
-  options: PropOptions,
+  options: PropValidationOptions,
   validationOptions: ValidationOptions,
 ): PropertyDecorator {
   return (...args) => {

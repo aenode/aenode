@@ -46,10 +46,10 @@
       "path": "./modules/prisma"
     },
     {
-      "path": "./plugins/prisma-plugins"
+      "path": "./libs/log"
     },
     {
-      "path": "./libs/log"
+      "path": "./modules/nest"
     }
   ]
 }

@@ -5,7 +5,7 @@
     "tsBuildInfoFile": "./out-tsc/tsconfig.spec.tsbuildinfo"
   },
   "include": [
-    "./vitest.config.mts",
+    "./vitest.config.ts",
     "./src/**/*.ts"
   ],
   "references": [

@@ -10,9 +10,16 @@ export class EnvApp {
   static readonly NAME = 'APP_NAME';
 
   /**
+   * Short description for the app
+   */
+  static readonly DESCRIPTION = 'APP_DESCRIPTION';
+
+  /**
    * App port
    */
   static readonly PORT = 'APP_PORT';
+
+  static readonly ORIGIN = 'APP_ORIGIN';
 
   /**
    * App jwt secret

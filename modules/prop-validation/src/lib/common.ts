@@ -1,9 +1,9 @@
 import { Expose } from 'class-transformer';
 import { IsDefined, IsOptional, type ValidationOptions } from 'class-validator';
-import type { PropOptions } from './prop-options.js';
+import type { PropValidationOptions } from './prop-options.js';
 
 export function __Common(
-  options: PropOptions,
+  options: PropValidationOptions,
   _validationOptions: ValidationOptions,
 ): PropertyDecorator {
   return (...args) => {

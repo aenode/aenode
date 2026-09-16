@@ -6,7 +6,7 @@ import {
   MinLength,
   type ValidationOptions,
 } from 'class-validator';
-import type { PropFormat, PropOptions } from './prop-options.js';
+import type { PropFormat, PropValidationOptions } from './prop-options.js';
 
 export function __StringFormat(
   format: PropFormat,
@@ -32,7 +32,7 @@ export function __StringFormat(
 }
 
 export function __String(
-  options: PropOptions,
+  options: PropValidationOptions,
   validationOptions: ValidationOptions,
 ): PropertyDecorator {
   return (...args) => {

@@ -4,11 +4,11 @@ import {
   MinDate,
   type ValidationOptions,
 } from 'class-validator';
-import type { PropOptions } from './prop-options.js';
+import type { PropValidationOptions } from './prop-options.js';
 import { ToDateTransformer } from './transformers/to-date-transformer.js';
 
 export function __Date(
-  options: PropOptions,
+  options: PropValidationOptions,
   validationOptions: ValidationOptions,
 ): PropertyDecorator {
   return (...args) => {

@@ -1,9 +1,0 @@
-import type { GeneratorManifest } from '@prisma/generator-helper';
-
-export default function onManifest(): GeneratorManifest {
-  return {
-    prettyName: 'Graphql object/input generator',
-    defaultOutput: '../src/generated/graphql',
-    requiresGenerators: ['prisma-client'],
-  };
-}

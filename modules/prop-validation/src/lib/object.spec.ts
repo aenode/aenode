@@ -1,7 +1,7 @@
 import { plainToInstance } from 'class-transformer';
 import { validateSync } from 'class-validator';
-import type { PropOptions as O } from './prop-options.js';
-import { Prop } from './prop.js';
+import type { PropValidationOptions as O } from './prop-options.js';
+import { PropValidation } from './prop.js';
 
 describe('object', () => {
   describe('Valid object', () => {
@@ -13,11 +13,11 @@ describe('object', () => {
       ${{} as O} | ${{ pram: { name: 'some' } }}
     `('should validate $value with $options', ({ options, value }) => {
       class SubSample {
-        @Prop()
+        @PropValidation()
         name: string;
       }
       class Sample {
-        @Prop(options) pram: SubSample;
+        @PropValidation(options) pram: SubSample;
       }
 
       const instance = plainToInstance(Sample, value, {
@@ -40,11 +40,11 @@ describe('object', () => {
       ${{ required: true } as O} | ${{ pram: { name: 1 } }} | ${['isString']}
     `('should validate $value with $options', ({ options, value, errors }) => {
       class SubSample {
-        @Prop()
+        @PropValidation()
         name: string;
       }
       class Sample {
-        @Prop(options) pram: SubSample;
+        @PropValidation(options) pram: SubSample;
       }
 
       const instance = plainToInstance(Sample, value, {

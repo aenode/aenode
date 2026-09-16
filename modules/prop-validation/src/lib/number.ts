@@ -5,7 +5,7 @@ import {
   Min,
   type ValidationOptions,
 } from 'class-validator';
-import type { NumberFormat, PropOptions } from './prop-options.js';
+import type { NumberFormat, PropValidationOptions } from './prop-options.js';
 import { ToNumberTransformer } from './transformers/to-number-transformer.js';
 
 export function __NumberFormat(
@@ -24,7 +24,7 @@ export function __NumberFormat(
 }
 
 export function __Number(
-  options: PropOptions,
+  options: PropValidationOptions,
   validationOptions: ValidationOptions,
 ): PropertyDecorator {
   return (...args) => {

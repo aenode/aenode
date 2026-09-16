@@ -4,7 +4,7 @@
     "outDir": "./out-tsc/vitest",
     "tsBuildInfoFile": "./out-tsc/tsconfig.spec.tsbuildinfo"
   },
-  "include": ["./vitest.config.mts", "./src/**/*.ts"],
+  "include": ["./vitest.config.ts", "./src/**/*.ts"],
   "references": [
     {
       "path": "./tsconfig.lib.json"
