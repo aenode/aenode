@@ -12,12 +12,30 @@ import {
 import { InputValiationErrorDto } from '../../validation/input-validation-error.dto.js';
 import { MessageDto } from '../../validation/message.dto.js';
 
+export type ResourceDecoratorOptions = {
+  name: string;
+  readDto: Type;
+  createDto: Type;
+  updateDto: Type;
+};
 export class ResourceDecorator {
-  constructor(
-    protected readonly resouceName: string,
-    protected readonly responseType: Type,
-  ) {}
+  constructor(protected readonly options: ResourceDecoratorOptions) {}
 
+  protected get resouceName() {
+    return this.options.name;
+  }
+
+  protected get readDto() {
+    return this.options.readDto;
+  }
+
+  protected get createDto() {
+    return this.options.createDto;
+  }
+
+  protected get updateDto() {
+    return this.options.updateDto;
+  }
   Controller(): ClassDecorator {
     return (...args) => {
       Controller(this.resouceName)(...args);
@@ -30,7 +48,7 @@ export class ResourceDecorator {
         ApiBadRequestResponse({
           description: 'Invalid input',
           type: InputValiationErrorDto,
-          example: new InputValiationErrorDto(),
+          example: [new InputValiationErrorDto()],
           isArray: true,
         }),
         ApiUnauthorizedResponse({
@@ -56,8 +74,8 @@ export class ResourceDecorator {
         Post(),
         ApiOperation({ summary }),
         ApiCreatedResponse({
-          type: this.responseType,
-          example: new this.responseType(),
+          type: this.readDto,
+          example: new this.readDto(),
           description: 'Created',
         }),
       ].forEach((d) => d(...args));
@@ -73,8 +91,8 @@ export class ResourceDecorator {
         Get(),
         ApiOperation({ summary }),
         ApiOkResponse({
-          type: [this.responseType],
-          example: [new this.responseType()],
+          type: [this.readDto],
+          example: [new this.readDto()],
           description: 'Found',
         }),
       ].forEach((d) => d(...args));
@@ -91,8 +109,8 @@ export class ResourceDecorator {
         ApiParam({ type: Number, name: 'id', description: 'Unique entry id' }),
         ApiOperation({ summary }),
         ApiOkResponse({
-          type: this.responseType,
-          example: new this.responseType(),
+          type: this.readDto,
+          example: new this.readDto(),
           description: 'Found',
         }),
         ApiNotFoundResponse({
@@ -114,8 +132,8 @@ export class ResourceDecorator {
         ApiParam({ type: Number, name: 'id', description: 'Unique entry id' }),
         ApiOperation({ summary }),
         ApiOkResponse({
-          type: this.responseType,
-          example: new this.responseType(),
+          type: this.readDto,
+          example: new this.readDto(),
           description: 'Updated',
         }),
         ApiNotFoundResponse({
@@ -137,8 +155,8 @@ export class ResourceDecorator {
         ApiParam({ type: Number, name: 'id', description: 'Unique entry id' }),
         ApiOperation({ summary }),
         ApiOkResponse({
-          type: this.responseType,
-          example: new this.responseType(),
+          type: this.readDto,
+          example: new this.readDto(),
           description: 'Deleted',
         }),
         ApiNotFoundResponse({

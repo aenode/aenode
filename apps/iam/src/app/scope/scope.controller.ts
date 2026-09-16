@@ -3,7 +3,12 @@ import { ResourceDecorator } from '@aenode/nest/decorators';
 import { ScopeCreateDto, ScopeDto, ScopeUpdateDto } from './scope.input.js';
 import { ScopeService } from './scope.service.js';
 
-const C = new ResourceDecorator('scope', ScopeDto);
+const C = new ResourceDecorator({
+  name: 'scope',
+  readDto: ScopeDto,
+  createDto: ScopeCreateDto,
+  updateDto: ScopeUpdateDto,
+});
 
 @C.Controller()
 export class ScopeController {

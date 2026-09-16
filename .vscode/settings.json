@@ -54,5 +54,8 @@
     "source.removeUnused.ts": "explicit",
     "source.organizeImports": "always",
     "source.addMissingImports.ts": "always"
+  },
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma"
   }
 }

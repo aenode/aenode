@@ -2,7 +2,12 @@ import {
   ClassSerializerInterceptor,
   Logger,
   VersioningType,
+  type CanActivate,
+  type ExceptionFilter,
+  type NestInterceptor,
+  type NestMiddleware,
   type Type,
+  type ValidationPipe,
 } from '@nestjs/common';
 import type { CorsOptions } from '@nestjs/common/internal';
 import { ConfigService } from '@nestjs/config';
@@ -15,8 +20,19 @@ import helmet from 'helmet';
 import { globalValidationPipe } from '../validation/global-validation.pipe.js';
 import { getConfig } from './get-config.js';
 
-export async function bootstrap(module: Type): Promise<void> {
-  const app = await NestFactory.create<NestExpressApplication>(module, {});
+export type BootstrapOptions = {
+  module: Type;
+  filters?: Type<ExceptionFilter>[];
+  middlewares?: Type<NestMiddleware>[];
+  pipes?: Type<ValidationPipe>[];
+  interceptors?: Type<NestInterceptor>[];
+  guards?: Type<CanActivate>[];
+};
+export async function bootstrap(options: BootstrapOptions): Promise<void> {
+  const app = await NestFactory.create<NestExpressApplication>(
+    options.module,
+    {},
+  );
 
   const configService = app.get(ConfigService);
   const {
@@ -45,7 +61,28 @@ export async function bootstrap(module: Type): Promise<void> {
 
   app.useGlobalPipes(globalValidationPipe);
 
-  app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
+  app.useGlobalInterceptors(
+    new ClassSerializerInterceptor(app.get(Reflector, { strict: true })),
+  );
+
+  if (options.interceptors) {
+    app.useGlobalInterceptors(...options.interceptors.map((v) => app.get(v)));
+  }
+
+  if (options.middlewares) {
+    app.use(...options.middlewares.map((v) => new v()));
+  }
+
+  if (options.filters) {
+    app.useGlobalFilters(...options.filters.map((v) => new v()));
+  }
+  if (options.pipes) {
+    app.useGlobalPipes(...options.pipes.map((v) => new v()));
+  }
+
+  if (options.guards) {
+    app.useGlobalGuards(...options.guards.map((v) => new v()));
+  }
 
   const swaggerConfig = new DocumentBuilder()
     .setTitle(APP_ID)
@@ -55,12 +92,7 @@ export async function bootstrap(module: Type): Promise<void> {
 
   const swaggerDoc = SwaggerModule.createDocument(app, swaggerConfig);
 
-  app.use(
-    APP_DOCS,
-    apiReference({
-      content: swaggerDoc,
-    }),
-  );
+  app.use(APP_DOCS, apiReference({ content: swaggerDoc }));
 
   app.enableShutdownHooks();
 

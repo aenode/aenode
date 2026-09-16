@@ -18,5 +18,7 @@ model Scope {
     // Application name
     name String @unique
 
+    description String?
+
     @@map("scopes")
 }
