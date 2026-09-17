@@ -1,0 +1,86 @@
+import { Prisma } from '@aenode/iam-db';
+import {
+  Autowire,
+  BaseDto,
+  createQueryClass,
+  PartialType,
+  PickType,
+  Prop,
+} from '@aenode/nest';
+
+export type <%- className %>Delegate = Prisma.<%- className %>Delegate;
+
+export const <%- className %>ModelName = '<%- className %>';
+export const <%- className %>SingularPath = '<%- propertyName %>';
+export const <%- className %>PluralPath = '<%- propertyName %>s';
+
+export const <%- className %>Field = Prisma.<%- className %>ScalarFieldEnum;
+export type <%- className %>Field = keyof typeof <%- className %>Field;
+
+export const <%- className %>SearchFields = [
+  <%- className %>Field.name,
+  <%- className %>Field.description,
+] as const;
+
+export const <%- className %>CreateFields = [
+  <%- className %>Field.name,
+  <%- className %>Field.description,
+] as const;
+
+export class <%- className %>QueryDto extends createQueryClass(
+  '<%- className %>QueryDto',
+  <%- className %>Field,
+) {}
+
+export class <%- className %>Dto extends BaseDto implements Prisma.<%- className %>Model {
+  @Prop({
+    required: true,
+    format: 'name',
+    description: 'Unique <%- propertyName %> name',
+    example: 'iam',
+  })
+  name: string;
+
+  @Prop({
+    maxLength: 400,
+    description: '<%- className %> description',
+    example: 'Identity and access management',
+  })
+  description: string;
+}
+export class <%- className %>CreateDto extends PickType(<%- className %>Dto, <%- className %>CreateFields) {}
+
+export class <%- className %>UpdateDto extends PartialType(<%- className %>CreateDto) {}
+
+export function <%- className %>ControllerDecorator(): ClassDecorator {
+  return (target) => {
+    Autowire({
+      name: '<%- propertyName %>s',
+      dto: <%- className %>Dto,
+      createDto: <%- className %>CreateDto,
+      updateDto: <%- className %>UpdateDto,
+    })(target);
+  };
+}
+
+export function to<%- className %>SearchQuery(search: string | undefined) {
+  return <%- className %>SearchFields.reduce(
+    (acc, s) => {
+      acc[s] = {
+        contains: search,
+        mode: 'insensitive',
+      } as Prisma.StringFilter;
+      return acc;
+    },
+    {} as Record<string, Prisma.StringFilter>,
+  );
+}
+
+export function to<%- className %>WhereObject(
+  search: string | undefined,
+): Prisma.<%- className %>WhereInput {
+  return {
+    deletedAt: null,
+    ...to<%- className %>SearchQuery(search),
+  };
+}

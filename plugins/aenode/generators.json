@@ -9,6 +9,11 @@
       "factory": "./../plugins/aenode/src/generators/config/config",
       "schema": "./../plugins/aenode/src/generators/config/schema.json",
       "description": "config generator"
+    },
+    "controller": {
+      "factory": "./dist/generators/controller/controller.js",
+      "schema": "./dist/generators/controller/schema.json",
+      "description": "controller generator"
     }
   }
 }

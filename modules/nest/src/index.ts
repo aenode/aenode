@@ -21,7 +21,7 @@ export * from './decorators/prop/prop.js';
 export * from './decorators/prop/to-api-property-options.js';
 export * from './peers.js';
 export * from './validation/base-entity.dto.js';
-export * from './validation/base-queryt.dto.js';
+export * from './validation/create-query-dto.js';
 export * from './validation/exception-factory.js';
 export * from './validation/global-validation.pipe.js';
 export * from './validation/input-validation-error.dto.js';

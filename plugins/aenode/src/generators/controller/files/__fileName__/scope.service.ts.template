@@ -1,0 +1,51 @@
+import { Injectable } from '@aenode/nest';
+import { InjectDelegate } from '@aenode/prisma/pg';
+import * as D from './<%- fileName %>.js';
+
+@Injectable()
+export class <%- className %>Service {
+  constructor(
+    @InjectDelegate(D.<%- className %>ModelName)
+    protected readonly delegate: D.<%- className %>Delegate,
+  ) {}
+
+  async findMany(query: D.<%- className %>QueryDto) {
+    const { orderBy, orderDir, skip, take, search } = query;
+    const where = D.to<%- className %>WhereObject(search);
+    const foundItems = await this.delegate.findMany({
+      where,
+      take,
+      skip,
+      orderBy: { [orderBy]: orderDir },
+    });
+
+    return foundItems;
+  }
+
+  async findOneById(id: number) {
+    return await this.delegate.findUniqueOrThrow({ where: { id } });
+  }
+
+  create(data: D.<%- className %>CreateDto) {
+    return this.delegate.create({ data });
+  }
+
+  updateOneById(id: number, data: D.<%- className %>UpdateDto) {
+    return this.delegate.update({ where: { id }, data });
+  }
+
+  hardDeleteOneById(id: number) {
+    return this.delegate.delete({ where: { id } });
+  }
+
+  softDeleteOneById(id: number) {
+    return this.delegate.update({
+      where: { id },
+      data: { deletedAt: new Date() },
+    });
+  }
+
+  resoverOneById(id: number) {
+    return this.delegate.update({ where: { id }, data: { deletedAt: null } });
+  }
+}

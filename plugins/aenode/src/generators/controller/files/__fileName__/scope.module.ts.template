@@ -1,0 +1,13 @@
+import { Module } from '@aenode/nest';
+import { PrismaModule } from '@aenode/prisma/pg';
+import { <%- className %>Controller } from './<%- fileName %>.controller.js';
+import { <%- className %>ModelName } from './<%- fileName %>.js';
+import { <%- className %>Service } from './<%- fileName %>.service.js';
+
+@Module({
+  imports: [PrismaModule.forFeature([<%- className %>ModelName])],
+  controllers: [<%- className %>Controller],
+  providers: [<%- className %>Service],
+  exports: [<%- className %>Service],
+})
+export class <%- className %>Module {}

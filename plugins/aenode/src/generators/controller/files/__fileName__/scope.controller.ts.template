@@ -1,0 +1,28 @@
+import { Body, ParamId, Query } from '@aenode/nest';
+import * as D from './<%- fileName %>.js';
+import { <%- className %>Service } from './<%- fileName %>.service.js';
+
+@D.<%- className %>ControllerDecorator()
+export class <%- className %>Controller {
+  constructor(protected readonly service: <%- className %>Service) {}
+
+  createOne(data: D.<%- className %>CreateDto) {
+    return this.service.create(data);
+  }
+
+  findMany(@Query() query: D.<%- className %>QueryDto) {
+    return this.service.findMany(query);
+  }
+
+  findOneById(@ParamId() id: number) {
+    return this.service.findOneById(id);
+  }
+
+  updateOneById(@ParamId() id: number, @Body() data: D.<%- className %>UpdateDto) {
+    return this.service.updateOneById(id, data);
+  }
+
+  deleteOneById(@ParamId() id: number) {
+    return this.service.softDeleteOneById(id);
+  }
+}

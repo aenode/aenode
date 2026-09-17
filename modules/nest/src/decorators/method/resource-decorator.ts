@@ -15,7 +15,7 @@ import { MessageDto } from '../../validation/message.dto.js';
 
 export type ResourceDecoratorOptions = {
   name: string;
-  readDto: Type;
+  dto: Type;
   createDto: Type;
   updateDto: Type;
 };
@@ -27,7 +27,7 @@ export class ResourceDecorator {
   }
 
   protected get readDto() {
-    return this.options.readDto;
+    return this.options.dto;
   }
 
   protected get createDto() {
@@ -205,7 +205,7 @@ export class ResourceDecorator {
         Delete(':id'),
         ApiParam({ type: Number, name: 'id', description: 'Unique entry id' }),
         ApiOperation({ summary }),
-        ApiOkResponse({ type: this.options.readDto }),
+        ApiOkResponse({ type: this.options.dto }),
         ApiNotFoundResponse({
           type: MessageDto,
           description: 'Not found',

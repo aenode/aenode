@@ -1,23 +1,16 @@
-import { Body, Query } from '@aenode/nest';
-import type { CrudController } from '@aenode/nest/common';
-import { Autowire, ParamId } from '@aenode/nest/decorators';
-import * as D from './scope.dto.js';
+import { Body, ParamId, Query } from '@aenode/nest';
+import * as D from './scope.js';
 import { ScopeService } from './scope.service.js';
 
-@Autowire({
-  name: 'scope',
-  readDto: D.ScopeReadDto,
-  createDto: D.ScopeCreateDto,
-  updateDto: D.ScopeUpdateDto,
-})
-export class ScopeController implements CrudController {
+@D.ScopeControllerDecorator()
+export class ScopeController {
   constructor(protected readonly service: ScopeService) {}
 
   createOne(data: D.ScopeCreateDto) {
     return this.service.create(data);
   }
 
-  findMany(@Query() query: D.ScopeFindManyDto) {
+  findMany(@Query() query: D.ScopeQueryDto) {
     return this.service.findMany(query);
   }
 
