@@ -7,6 +7,17 @@ datasource db {
     provider = "postgresql"
 }
 
+model User {
+    id        Int       @id @default(autoincrement())
+    uuid      String    @default(uuid(7)) @db.Uuid
+    createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+    updatedAt DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+    deletedAt DateTime? @map("deleted_at") @db.Timestamptz(6)
+
+    username String @unique
+    password String
+}
+
 // Generally application name
 model Scope {
     id Int @id @default(autoincrement())
@@ -15,10 +26,52 @@ model Scope {
     updatedAt DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
     deletedAt DateTime? @map("deleted_at") @db.Timestamptz(6)
 
-    // Application name
-    name String @unique
-
+    name        String  @unique
     description String?
 
     @@map("scopes")
+}
+
+model Role {
+    id Int @id @default(autoincrement())
+
+    createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+    updatedAt DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+    deletedAt DateTime? @map("deleted_at") @db.Timestamptz(6)
+
+    name            String           @unique
+    description     String?
+    rolePermissions RolePermission[]
+
+    @@map("roles")
+}
+
+model Permission {
+    id Int @id @default(autoincrement())
+
+    createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+    updatedAt DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+    deletedAt DateTime? @map("deleted_at") @db.Timestamptz(6)
+
+    name            String           @unique
+    description     String?
+    rolePermissions RolePermission[]
+
+    @@map("permissions")
+}
+
+model RolePermission {
+    id Int @id @default(autoincrement())
+
+    createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+    updatedAt DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
+    deletedAt DateTime? @map("deleted_at") @db.Timestamptz(6)
+
+    role   Role @relation(fields: [roleId], references: [id])
+    roleId Int  @map("role_id")
+
+    permission   Permission @relation(fields: [permissionId], references: [id])
+    permissionId Int        @map("permission_id")
+
+    @@unique([roleId, permissionId])
 }

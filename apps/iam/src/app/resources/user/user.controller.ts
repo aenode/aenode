@@ -1,16 +1,16 @@
 import { Body, ParamId, Query } from '@aenode/nest';
-import * as D from './scope.js';
-import { ScopeService } from './scope.service.js';
+import * as D from './user.js';
+import { UserService } from './user.service.js';
 
-@D.ScopeControllerDecorator()
-export class ScopeController {
-  constructor(protected readonly service: ScopeService) {}
+@D.UserControllerDecorator()
+export class UserController {
+  constructor(protected readonly service: UserService) {}
 
-  createOne(@Body() data: D.ScopeCreateDto) {
+  createOne(@Body() data: D.UserCreateDto) {
     return this.service.create(data);
   }
 
-  findMany(@Query() query: D.ScopeQueryDto) {
+  findMany(@Query() query: D.UserQueryDto) {
     return this.service.findMany(query);
   }
 
@@ -18,7 +18,7 @@ export class ScopeController {
     return this.service.findOneById(id);
   }
 
-  updateOneById(@ParamId() id: number, @Body() data: D.ScopeUpdateDto) {
+  updateOneById(@ParamId() id: number, @Body() data: D.UserUpdateDto) {
     return this.service.updateOneById(id, data);
   }
 

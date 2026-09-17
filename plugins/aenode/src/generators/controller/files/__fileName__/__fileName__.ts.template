@@ -32,7 +32,7 @@ export class <%- className %>QueryDto extends createQueryClass(
   <%- className %>Field,
 ) {}
 
-export class <%- className %>Dto extends BaseDto implements Prisma.<%- className %>Model {
+export class <%- className %>Dto extends BaseDto {
   @Prop({
     required: true,
     format: 'name',

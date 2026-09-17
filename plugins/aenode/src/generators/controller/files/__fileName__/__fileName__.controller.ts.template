@@ -6,7 +6,7 @@ import { <%- className %>Service } from './<%- fileName %>.service.js';
 export class <%- className %>Controller {
   constructor(protected readonly service: <%- className %>Service) {}
 
-  createOne(data: D.<%- className %>CreateDto) {
+  createOne( @Body() data: D.<%- className %>CreateDto) {
     return this.service.create(data);
   }
 

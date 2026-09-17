@@ -32,7 +32,7 @@ export class ScopeQueryDto extends createQueryClass(
   ScopeField,
 ) {}
 
-export class ScopeDto extends BaseDto implements Prisma.ScopeModel {
+export class ScopeDto extends BaseDto {
   @Prop({
     required: true,
     format: 'name',
