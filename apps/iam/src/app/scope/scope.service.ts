@@ -1,8 +1,8 @@
 import { Prisma } from '@aenode/iam-db/client';
+import type { ScopeWhereInput } from '@aenode/iam-db/models';
 import { Injectable } from '@aenode/nest';
 import { InjectDelegate } from '@aenode/prisma/pg';
-import type { ScopeCreateDto } from './scope.input.js';
-import type { ScopeQueryDto } from './scope.query.js';
+import type { ScopeCreateDto, ScopeFindManyDto } from './scope.dto.js';
 
 @Injectable()
 export class ScopeService {
@@ -15,7 +15,7 @@ export class ScopeService {
     protected readonly delegate: Prisma.ScopeDelegate,
   ) {}
 
-  private toSearchQuery(search?: string) {
+  private toSearchQuery(search: string | undefined) {
     return this.searchables.reduce(
       (acc, s) => {
         acc[s] = {
@@ -28,10 +28,17 @@ export class ScopeService {
     );
   }
 
-  async findMany(query: ScopeQueryDto) {
+  protected toWhere(search: string | undefined): ScopeWhereInput {
+    return {
+      deletedAt: null,
+      ...this.toSearchQuery(search),
+    };
+  }
+
+  async findMany(query: ScopeFindManyDto) {
     const { orderBy, orderDir, skip, take, search } = query;
     const result = await this.delegate.findMany({
-      where: { deletedAt: null, ...this.toSearchQuery(search) },
+      where: this.toWhere(search),
       take,
       skip,
       orderBy: { [orderBy]: orderDir },

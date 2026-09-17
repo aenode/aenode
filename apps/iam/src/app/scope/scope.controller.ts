@@ -1,23 +1,23 @@
 import { Body, Query } from '@aenode/nest';
+import type { CrudController } from '@aenode/nest/common';
 import { Autowire, ParamId } from '@aenode/nest/decorators';
-import { ScopeCreateDto, ScopeReadDto, ScopeUpdateDto } from './scope.input.js';
-import { ScopeQueryDto } from './scope.query.js';
+import * as D from './scope.dto.js';
 import { ScopeService } from './scope.service.js';
 
 @Autowire({
   name: 'scope',
-  readDto: ScopeReadDto,
-  createDto: ScopeCreateDto,
-  updateDto: ScopeUpdateDto,
+  readDto: D.ScopeReadDto,
+  createDto: D.ScopeCreateDto,
+  updateDto: D.ScopeUpdateDto,
 })
-export class ScopeController {
+export class ScopeController implements CrudController {
   constructor(protected readonly service: ScopeService) {}
 
-  createOne(@Body() data: ScopeCreateDto) {
+  createOne(data: D.ScopeCreateDto) {
     return this.service.create(data);
   }
 
-  findMany(@Query() query: ScopeQueryDto) {
+  findMany(@Query() query: D.ScopeFindManyDto) {
     return this.service.findMany(query);
   }
 
@@ -25,7 +25,7 @@ export class ScopeController {
     return this.service.findOneById(id);
   }
 
-  updateOneById(@ParamId() id: number, @Body() data: ScopeUpdateDto) {
+  updateOneById(@ParamId() id: number, @Body() data: D.ScopeUpdateDto) {
     return this.service.updateOneById(id, data);
   }
 

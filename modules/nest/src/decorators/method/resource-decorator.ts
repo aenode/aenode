@@ -60,35 +60,35 @@ export class ResourceDecorator {
     return (target) => {
       this.Controller()(target);
 
-      const prototype = target.prototype;
+      const currentTarget = target.prototype;
       const methods = getMethodNames(target);
 
-      for (const methodName of methods) {
-        const decorator = this.getMethodDecorator(methodName);
+      for (const propertyKey of methods) {
+        const decorator = this.getMethodDecorator(propertyKey);
 
         if (!decorator) {
           continue;
         }
 
-        const descriptor = getMethodDescriptor(prototype, methodName);
+        const descriptor = getMethodDescriptor(currentTarget, propertyKey);
 
         if (!descriptor) {
           continue;
         }
 
-        decorator(prototype, methodName, descriptor);
+        decorator(currentTarget, propertyKey, descriptor);
       }
     };
   }
 
   Controller(): ClassDecorator {
-    return (...args) => {
-      Controller(this.resouceName)(...args);
+    return (target) => {
+      Controller(this.resouceName)(target);
     };
   }
 
   protected CommonMethod(): MethodDecorator {
-    return (...args) => {
+    return (target, propertyKey, descriptor) => {
       [
         ApiBadRequestResponse({
           description: 'Invalid input',
@@ -103,12 +103,12 @@ export class ResourceDecorator {
           type: MessageDto,
           description: 'Internal error',
         }),
-      ].forEach((d) => d(...args));
+      ].forEach((d) => d(target, propertyKey, descriptor));
     };
   }
 
   PostOne(): MethodDecorator {
-    return (...args) => {
+    return (target, propertyKey, descriptor) => {
       const summary = `Create one ${this.resouceName}`;
 
       [
@@ -119,15 +119,16 @@ export class ResourceDecorator {
           type: this.readDto,
           description: 'Created',
         }),
-      ].forEach((d) => d(...args));
+      ].forEach((d) => d(target, propertyKey, descriptor));
     };
   }
+
   createOne() {
     return this.PostOne();
   }
 
   GetMany(): MethodDecorator {
-    return (...args) => {
+    return (target, propertyKey, descriptor) => {
       const summary = `Find  many ${this.resouceName}`;
 
       [
@@ -138,7 +139,7 @@ export class ResourceDecorator {
           type: [this.readDto],
           description: 'Found',
         }),
-      ].forEach((d) => d(...args));
+      ].forEach((d) => d(target, propertyKey, descriptor));
     };
   }
 
@@ -147,7 +148,7 @@ export class ResourceDecorator {
   }
 
   GetOneById(): MethodDecorator {
-    return (...args) => {
+    return (target, propertyKey, descriptor) => {
       const summary = `Find ${this.resouceName} by id`;
 
       [
@@ -163,7 +164,7 @@ export class ResourceDecorator {
           type: MessageDto,
           description: 'Not found',
         }),
-      ].forEach((d) => d(...args));
+      ].forEach((d) => d(target, propertyKey, descriptor));
     };
   }
 
@@ -172,7 +173,7 @@ export class ResourceDecorator {
   }
 
   PutOneById(): MethodDecorator {
-    return (...args) => {
+    return (target, propertyKey, descriptor) => {
       const summary = `Update ${this.resouceName} by id`;
 
       [
@@ -188,7 +189,7 @@ export class ResourceDecorator {
           type: MessageDto,
           description: 'Not found',
         }),
-      ].forEach((d) => d(...args));
+      ].forEach((d) => d(target, propertyKey, descriptor));
     };
   }
   updateOneById() {
@@ -196,7 +197,7 @@ export class ResourceDecorator {
   }
 
   DeleteOneById(): MethodDecorator {
-    return (...args) => {
+    return (target, propertyKey, descriptor) => {
       const summary = `Delete ${this.resouceName} by id`;
 
       [
@@ -209,7 +210,7 @@ export class ResourceDecorator {
           type: MessageDto,
           description: 'Not found',
         }),
-      ].forEach((d) => d(...args));
+      ].forEach((d) => d(target, propertyKey, descriptor));
     };
   }
 
@@ -219,7 +220,7 @@ export class ResourceDecorator {
 }
 
 export function Autowire(options: ResourceDecoratorOptions): ClassDecorator {
-  return (...args) => {
-    new ResourceDecorator(options).Autowire()(...args);
+  return (target) => {
+    new ResourceDecorator(options).Autowire()(target);
   };
 }
