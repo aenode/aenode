@@ -1,0 +1,7 @@
+import { <%- propertyName %> } from './<%- fileName %>.js';
+
+describe('<%- propertyName %>', () => {
+  it('should work', () => {
+    expect(<%- propertyName %>()).toEqual('common');
+  });
+});

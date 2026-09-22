@@ -1,0 +1,3 @@
+import baseConfig from '../../.eslint/<%- projectType %>.mjs';
+
+export default [...baseConfig];

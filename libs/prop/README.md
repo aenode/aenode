@@ -1,3 +1,3 @@
-# @aenode/common
+# @aenode/prop
 
 -[ ] Add documentation

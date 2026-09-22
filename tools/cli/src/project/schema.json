@@ -4,15 +4,24 @@
   "title": "",
   "type": "object",
   "properties": {
-    "directory": {
+    "projectType": {
       "type": "string",
       "description": "",
       "$default": {
         "$source": "argv",
         "index": 0
       },
+      "x-prompt": "What project-type would you like to use?"
+    },
+    "directory": {
+      "type": "string",
+      "description": "",
+      "$default": {
+        "$source": "argv",
+        "index": 1
+      },
       "x-prompt": "What directory would you like to use?"
     }
   },
-  "required": ["directory"]
+  "required": ["projectType", "directory"]
 }

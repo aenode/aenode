@@ -1,0 +1,38 @@
+{
+  "name": "@aenode/prop",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "bun": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "!**/*.tsbuildinfo"
+  ],
+  "nx": {
+    "sourceRoot": "libs/prop/src",
+    "tags": [
+      "lib:lib"
+    ],
+    "targets": {
+      "build": {},
+      "lint": {},
+      "test": {},
+      "doc": {}
+    }
+  },
+  "dependencies": {
+    "@swc/helpers": "~0.5.18",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.15.1"
+  }
+}

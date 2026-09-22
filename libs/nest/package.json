@@ -1,0 +1,48 @@
+{
+  "name": "@aenode/nest",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "bun": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./common": {
+      "bun": "./src/common/index.ts",
+      "types": "./dist/common/index.d.ts",
+      "import": "./dist/common/index.js",
+      "default": "./dist/common/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "!**/*.tsbuildinfo"
+  ],
+  "nx": {
+    "sourceRoot": "libs/nest/src",
+    "tags": [
+      "lib:lib"
+    ],
+    "targets": {
+      "build": {},
+      "lint": {},
+      "test": {},
+      "doc": {}
+    }
+  },
+  "dependencies": {
+    "@nestjs/cache-manager": "^12.0.0",
+    "@nestjs/common": "^12.0.4",
+    "@nestjs/config": "^12.0.0",
+    "@nestjs/core": "^12.0.4",
+    "@nestjs/event-emitter": "^12.0.1",
+    "@nestjs/swagger": "^12.0.1",
+    "@swc/helpers": "~0.5.18"
+  }
+}

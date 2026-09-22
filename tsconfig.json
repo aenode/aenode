@@ -8,6 +8,15 @@
     },
     {
       "path": "./libs/common"
+    },
+    {
+      "path": "./apps/iam"
+    },
+    {
+      "path": "./libs/nest"
+    },
+    {
+      "path": "./libs/prop"
     }
   ]
 }
