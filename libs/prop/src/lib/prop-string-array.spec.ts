@@ -6,7 +6,7 @@ import { v4, v7 } from 'uuid';
 import type { PropOptions } from './prop-options.js';
 import { PropValidation } from './prop.js';
 
-describe('Array String Validation ', () => {
+describe('String Array Validation ', () => {
   it.each`
     options                                                | value                                                               | errors
     ${{ type: String } as PropOptions}                     | ${{ value: undefined }}                                             | ${[]}

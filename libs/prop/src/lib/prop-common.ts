@@ -13,6 +13,7 @@ export function __PropCommon(
     DefaultValueTransformer(options)(...args);
 
     Expose({ groups: options.groups })(...args);
+
     if (required !== true) {
       IsOptional(validationOptions)(...args);
     }
