@@ -10,7 +10,7 @@
   "include": ["src/**/*.ts"],
   "references": [
     {
-      "path": "../../libs/common/tsconfig.lib.json"
+      "path": "../../libs/nest/tsconfig.lib.json"
     }
   ],
   "exclude": [
