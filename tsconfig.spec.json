@@ -1,0 +1,19 @@
+{
+  "extends": [
+    "./tsconfig.base.json"
+  ],
+  "compilerOptions": {
+    "strict": true,
+    "composite": true,
+    "types": [
+      "vitest/globals",
+      "vitest/importMeta",
+      "vitest",
+      "@types/node"
+    ],
+    "lib": [
+      "ESNext"
+    ],
+    "forceConsistentCasingInFileNames": true,
+  }
+}

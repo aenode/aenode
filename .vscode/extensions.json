@@ -1,0 +1,17 @@
+{
+  "recommendations": [
+    "nrwl.angular-console",
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "aaron-bond.better-comments",
+    "yzhang.markdown-all-in-one",
+    "redhat.vscode-yaml",
+    "IronGeek.vscode-env",
+    "JayFong.generate-index",
+    "Prisma.prisma",
+    "PKief.material-icon-theme",
+    "DigitalBrainstem.javascript-ejs-support",
+    "cweijan.vscode-postgresql-client2",
+    "vitest.explorer"
+  ]
+}

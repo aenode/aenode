@@ -1,0 +1,132 @@
+{
+  "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "analytics": false,
+  "namedInputs": {
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "production": [
+      "default",
+      "!{projectRoot}/**/?(*.)+(spec|test).[jt]s?(x)?(.snap)",
+      "!{projectRoot}/tsconfig.spec.json"
+    ],
+    "sharedGlobals": []
+  },
+  "plugins": [
+    {
+      "plugin": "@nx/js/typescript",
+      "options": {
+        "typecheck": {
+          "targetName": "typecheck",
+          "configName": "tsconfig.lib.json",
+          "tsBuildInfoFile": "{projectRoot}/dist/tsconfig.lib.tsbuildinfo"
+        },
+        "buildtypes": {
+          "targetName": "buildtypes",
+          "configName": "tsconfig.lib.json",
+          "buildDepsName": "build-deps",
+          "watchDepsName": "watch-deps"
+        }
+      }
+    },
+    {
+      "plugin": "@nx/eslint/plugin",
+      "options": {
+        "targetName": "lint"
+      }
+    },
+    {
+      "plugin": "@nx/vitest",
+      "options": {
+        "testTargetName": "test",
+        "ciTargetName": "test-ci",
+        "testMode": "watch",
+        "tsBuildInfoFile": "tsconfig.tsbuildinfo"
+      }
+    }
+  ],
+  "neverConnectToCloud": true,
+  "targetDefaults": {
+    "@nx/js:swc": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
+    },
+    "test": {
+      "dependsOn": ["^build"]
+    },
+    "build": {
+      "cache": true,
+      "executor": "@nx/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "clean": true,
+        "outputPath": "{projectRoot}/dist",
+        "main": "{projectRoot}/src/index.ts",
+        "tsConfig": "{projectRoot}/tsconfig.lib.json",
+
+        "tsBuildInfoFile": "{projectRoot}/dist/tsconfig.lib.tsbuildinfo",
+        "skipTypeCheck": false,
+        "stripLeadingPaths": true
+      },
+      "dependsOn": ["^build"]
+    },
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "bun --watch src/main.ts ",
+        "cwd": "{projectRoot}"
+      }
+    },
+    "prisma:migrate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["bunx prisma migrate dev --name=updated"],
+        "cwd": "{projectRoot}"
+      }
+    },
+    "prisma:generate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["bunx prisma generate"],
+        "cwd": "{projectRoot}"
+      }
+    },
+    "prisma:reset": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": ["bunx prisma migrate reset"],
+        "cwd": "{projectRoot}"
+      }
+    },
+    "doc": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "typedoc --entryPointStrategy expand {projectRoot}/src --out public/{projectRoot} --tsconfig {projectRoot}/tsconfig.lib.json --favicon {projectRoot}/assets/favicon.svg"
+        ]
+      }
+    },
+    "@nx/js:tsc": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
+    }
+  },
+  "useDaemonProcess": true,
+  "generators": {
+    "@aenode/aenode:project": {
+      "orgName": "aenode",
+      "repoName": "aenode",
+      "username": "aenode",
+      "fullName": "Ahmet Emrebas",
+      "funding": "https://cash.app/$puqlib",
+      "email": "aenode+aenode@proton.me",
+      "url": "https://aenode.github.io",
+      "version": "0.0.1"
+    }
+  },
+  "release": {
+    "version": {
+      "preVersionCommand": "bunx  nx run-many -t build"
+    }
+  }
+}

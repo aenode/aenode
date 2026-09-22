@@ -1,0 +1,74 @@
+{
+  "name": "@aenode/source",
+  "version": "0.0.0",
+  "license": "BSL-1.0",
+  "description": "Aenode tools, libraries, and projects",
+  "homepage": "https://aenode.github.io?utm_source=github&utm_campaing=social",
+  "scripts": {
+    "prepare": "husky",
+    "x:prune": "rm -rf bun.lock node_modules  **/**/**/node_modules **/**/**/dist **/**/**/out-tsc .nx",
+    "x:ssh": "sh -c 'NAME=\"$1\"; PASSPHRASE=\"$2\"; ssh-keygen -t ed25519 -C \"$NAME\" -f \"$HOME/.ssh/$NAME\" -N \"$PASSPHRASE\" && ssh-add \"$HOME/.ssh/$NAME\" && cat \"$HOME/.ssh/$NAME.pub\"' --"
+  },
+  "private": true,
+  "packageManager": "bun@1.4.2",
+  "devDependencies": {
+    "@aenode/aenode": "workspace:*",
+    "@eslint/js": "^9.8.0",
+    "@nx/eslint": "23.2.1",
+    "@nx/eslint-plugin": "23.2.1",
+    "@nx/js": "23.2.1",
+    "@nx/plugin": "23.2.1",
+    "@nx/vitest": "23.2.1",
+    "@swc-node/register": "~1.11.1",
+    "@swc/cli": "~0.8.1",
+    "@swc/core": "~1.15.5",
+    "@swc/helpers": "~0.5.23",
+    "@types/node": "^26.4.0",
+    "@typescript-eslint/eslint-plugin": "^8.70.0",
+    "@typescript-eslint/parser": "^8.70.0",
+    "@vitest/coverage-v8": "~4.1.0",
+    "chokidar": "^5.0.0",
+    "eslint": "^9.8.0",
+    "eslint-config-prettier": "^10.0.0",
+    "eslint-plugin-unicorn": "^72.0.0",
+    "eslint-plugin-unused-imports": "^4.4.1",
+    "husky": "^9.1.7",
+    "jsdom": "^27.1.0",
+    "jsonc-eslint-parser": "^2.1.0",
+    "nx": "23.2.1",
+    "prettier": "~3.6.2",
+    "prisma": "7.9.0",
+    "tslib": "^2.3.0",
+    "typedoc": "^0.28.20",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.58.0",
+    "verdaccio": "^6.3.2",
+    "vite": "^8.0.0",
+    "vitest": "^5.0.0"
+  },
+  "nx": {
+    "includedScripts": [],
+    "targets": {
+      "local-registry": {
+        "executor": "@nx/js:verdaccio",
+        "options": {
+          "port": 4873,
+          "config": ".verdaccio/config.yml",
+          "storage": "tmp/local-registry/storage"
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "@nx/devkit": "23.2.1"
+  },
+  "workspaces": [
+    "libs/**",
+    "modules/**",
+    "utils/**",
+    "databases/**",
+    "apps/**",
+    "plugins/**"
+  ],
+  "trustedDependencies": []
+}

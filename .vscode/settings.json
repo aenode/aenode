@@ -1,0 +1,61 @@
+{
+  "eslint.useFlatConfig": true,
+  "editor.formatOnSave": true,
+  "eslint.enable": true,
+  "eslint.validate": [
+    "json",
+    "javascript",
+    "typescript"
+  ],
+  "files.associations": {
+    "*.json.template": "json",
+    "*.swcrc.template": "json",
+    "*.ts.template": "typescript",
+    ".env.template": "env",
+    ".env": "env",
+    ".config": "yaml,env",
+    "*.sh.*": "shellscript",
+    "*.ts.*": "typescript",
+    "*.mts.*": "typescript",
+    "*.cts.*": "typescript",
+    "*.js.*": "javascript",
+    "*.mjs.*": "javascript",
+    "*.cjs.*": "javascript",
+    "*.json.*": "json",
+    "*.md.*": "markdown",
+    "*license": "markdown",
+    "*license.*": "markdown"
+  },
+  "eslint.workingDirectories": [
+    {
+      "mode": "auto"
+    }
+  ],
+  "github.copilot.enable": {
+    "*": false
+  },
+  "[dotenv]": {
+    "editor.defaultFormatter": "IronGeek.vscode-env"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.sort.json": "never",
+    "source.fixAll.eslint": "always",
+    "source.sortImports": "always",
+    "source.removeUnused.ts": "explicit",
+    "source.organizeImports": "always",
+    "source.addMissingImports.ts": "always"
+  },
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma"
+  }
+}
