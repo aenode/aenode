@@ -4,14 +4,21 @@ import {
   MinDate,
   type ValidationOptions,
 } from 'class-validator';
-import { DefaultValueTransformer } from './default-value-transformer.js';
+import { __PropCommon } from './prop-common.js';
 import type { PropDateOptions } from './prop-options.js';
 
-export function PropDate(
+export function PropDate(options: PropDateOptions): PropertyDecorator {
+  return (...args) => {
+    __PropDate(options)(...args);
+  };
+}
+
+export function __PropDate(
   options?: PropDateOptions,
   validationOptions?: ValidationOptions,
 ): PropertyDecorator {
   return (...args) => {
+    options ??= {};
     const type = Reflect.getMetadata('design:type', ...args);
     validationOptions ??= {
       each: options?.isArray ?? type === Array,
@@ -20,10 +27,10 @@ export function PropDate(
 
     const { min, max } = options ?? {};
 
-    DefaultValueTransformer(options)(...args);
+    __PropCommon(options, validationOptions)(...args);
     IsDate(validationOptions)(...args);
 
-    if (min) MinDate(min, validationOptions);
-    if (max) MaxDate(max, validationOptions);
+    if (min) MinDate(min, validationOptions)(...args);
+    if (max) MaxDate(max, validationOptions)(...args);
   };
 }

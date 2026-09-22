@@ -13,11 +13,11 @@ export type PropType =
 
 export type PropCommonOptions<DefualtValue> = {
   type?: PropType;
+  required?: boolean;
   groups?: string[];
+  description?: string;
 } & (
   | {
-      required?: boolean;
-      description?: string;
       isArray?: false;
       defaultValue?: DefualtValue;
     }
@@ -61,6 +61,11 @@ export type PropDateOptions = {
   isNotIn?: DateType[];
 } & PropCommonOptions<Date>;
 
+export type PropEnumOptions = {
+  type?: 'Enum';
+  enum: object;
+} & PropCommonOptions<string>;
+
 export type PropObjectOptions = {
   type?: () => ClassConstructor<unknown>;
 } & PropCommonOptions<object>;
@@ -70,4 +75,5 @@ export type PropOptions =
   | PropNumberOptions
   | PropBooleanOptions
   | PropDateOptions
+  | PropEnumOptions
   | PropObjectOptions;

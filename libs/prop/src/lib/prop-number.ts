@@ -1,8 +1,13 @@
 import { IsNumber, Max, Min, type ValidationOptions } from 'class-validator';
-import { DefaultValueTransformer } from './default-value-transformer.js';
 import type { PropNumberOptions } from './prop-options.js';
 
-export function PropNumber(
+export function PropNumber(options: PropNumberOptions): PropertyDecorator {
+  return (...args) => {
+    __PropNumber(options)(...args);
+  };
+}
+
+export function __PropNumber(
   options: PropNumberOptions,
   validationOptions?: ValidationOptions,
 ): PropertyDecorator {
@@ -16,7 +21,6 @@ export function PropNumber(
     const { min, max } = options;
 
     IsNumber(undefined, validationOptions)(...args);
-    DefaultValueTransformer(options)(...args);
 
     if (min !== undefined) Min(min, validationOptions)(...args);
     if (max !== undefined) Max(max, validationOptions)(...args);

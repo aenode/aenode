@@ -2,15 +2,16 @@ import {
   IsEmail,
   IsIn,
   IsNotIn,
+  IsString,
   IsStrongPassword,
   MaxLength,
   MinLength,
   type ValidationOptions,
 } from 'class-validator';
-import { DefaultValueTransformer } from './default-value-transformer.js';
+import { __PropCommon } from './prop-common.js';
 import type { PropStringOptions, StringFormat } from './prop-options.js';
 
-export function PropStringFormat(
+export function __PropStringFormat(
   format: StringFormat,
   validationOptions: ValidationOptions,
 ): PropertyDecorator {
@@ -30,12 +31,18 @@ export function PropStringFormat(
     }
   };
 }
+export function PropString(options: PropStringOptions): PropertyDecorator {
+  return (...args) => {
+    __PropString(options)(...args);
+  };
+}
 
-export function PropString(
+export function __PropString(
   options?: PropStringOptions,
   validationOptions?: ValidationOptions,
 ): PropertyDecorator {
   return (...args) => {
+    options ??= {};
     const type = Reflect.getMetadata('design:type', ...args);
     validationOptions ??= {
       each: options?.isArray ?? type === Array,
@@ -44,10 +51,11 @@ export function PropString(
 
     const { format, isIn, isNotIn, maxLength, minLength } = options ?? {};
 
-    DefaultValueTransformer(options)(...args);
+    __PropCommon(options, validationOptions)(...args);
+    IsString(validationOptions)(...args);
 
     if (format) {
-      PropStringFormat(format, validationOptions)(...args);
+      __PropStringFormat(format, validationOptions)(...args);
     }
 
     if (isIn) {

@@ -1,9 +1,15 @@
 import { Type } from 'class-transformer';
 import { ValidateNested, type ValidationOptions } from 'class-validator';
-import { DefaultValueTransformer } from './default-value-transformer.js';
+import { __PropCommon } from './prop-common.js';
 import type { PropObjectOptions } from './prop-options.js';
 
-export function PropObject(
+export function PropObject(options: PropObjectOptions): PropertyDecorator {
+  return (...args) => {
+    __PropObject(options)(...args);
+  };
+}
+
+export function __PropObject(
   options?: PropObjectOptions,
   validationOptions?: ValidationOptions,
 ): PropertyDecorator {
@@ -16,7 +22,8 @@ export function PropObject(
     };
 
     options.type ??= () => type;
-    DefaultValueTransformer(options)(...args);
+
+    __PropCommon(options, validationOptions)(...args);
     Type(options.type)(...args);
     ValidateNested(validationOptions)(...args);
   };
