@@ -1,9 +1,14 @@
 import {
+  IsDataURI,
+  IsEAN,
   IsEmail,
   IsIn,
+  IsJSON,
   IsNotIn,
   IsString,
   IsStrongPassword,
+  IsUrl,
+  IsUUID,
   MaxLength,
   MinLength,
   type ValidationOptions,
@@ -25,12 +30,41 @@ export function __PropStringFormat(
         IsStrongPassword(undefined, validationOptions)(...args);
         break;
       }
-      case 'uuid':
-      case 'name':
-      case 'json':
+      case 'uuid4':
+      case 'uuid': {
+        IsUUID('4', validationOptions)(...args);
+        break;
+      }
+      case 'uuid7': {
+        IsUUID('7', validationOptions)(...args);
+        break;
+      }
+      case 'ean': {
+        IsEAN(validationOptions)(...args);
+
+        break;
+      }
+      case 'name': {
+        MinLength(3, validationOptions)(...args);
+        MinLength(255, validationOptions)(...args);
+        break;
+      }
+      case 'json': {
+        IsJSON(validationOptions)(...args);
+        break;
+      }
+      case 'data-uri': {
+        IsDataURI(validationOptions)(...args);
+        break;
+      }
+      case 'url': {
+        IsUrl(undefined, validationOptions)(...args);
+        break;
+      }
     }
   };
 }
+
 export function PropString(options: PropStringOptions): PropertyDecorator {
   return (...args) => {
     __PropString(options)(...args);

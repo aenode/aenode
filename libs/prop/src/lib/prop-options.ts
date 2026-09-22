@@ -1,6 +1,18 @@
 import type { ClassConstructor } from 'class-transformer';
 import 'reflect-metadata';
-export type StringFormat = 'email' | 'password' | 'uuid' | 'name' | 'json';
+
+export type StringFormat =
+  | 'email'
+  | 'password'
+  | 'uuid'
+  | 'uuid4'
+  | 'uuid7'
+  | 'name'
+  | 'ean'
+  | 'json'
+  | 'url'
+  | 'data-uri';
+
 export type NumberFormat = 'integer' | 'positive' | 'percent';
 export type PropFormat = StringFormat | NumberFormat;
 
