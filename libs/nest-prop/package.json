@@ -1,5 +1,5 @@
 {
-  "name": "@aenode/prop",
+  "name": "@aenode/nest-prop",
   "version": "0.0.1",
   "type": "module",
   "main": "./dist/index.js",
@@ -19,7 +19,7 @@
     "!**/*.tsbuildinfo"
   ],
   "nx": {
-    "sourceRoot": "libs/prop/src",
+    "sourceRoot": "libs/nest-prop/src",
     "tags": [
       "lib:lib"
     ],
@@ -31,9 +31,6 @@
     }
   },
   "dependencies": {
-    "@swc/helpers": "~0.5.18",
-    "class-transformer": "^0.5.1",
-    "class-validator": "^0.15.1",
-    "reflect-metadata": "^0.2.2"
+    "@swc/helpers": "~0.5.18"
   }
 }
