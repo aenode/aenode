@@ -15,15 +15,25 @@ export function __PropObject(
 ): PropertyDecorator {
   return (...args) => {
     options ??= {};
-    const type = Reflect.getMetadata('design:type', ...args);
+    const inferedType = Reflect.getMetadata('design:type', ...args);
+    const isArrayType = inferedType === Array;
+
+    if (isArrayType) {
+      if (!options.type) {
+        throw new Error('Could not resolve the object type');
+      }
+    } else {
+      options.type = () => inferedType;
+    }
+
     validationOptions ??= {
-      each: options?.isArray ?? type === Array,
+      each: options?.isArray ?? isArrayType,
       groups: options?.groups,
     };
 
     __PropCommon(options, validationOptions)(...args);
 
-    Type(() => type)(...args);
+    Type(options.type)(...args);
     ValidateNested(validationOptions)(...args);
   };
 }
