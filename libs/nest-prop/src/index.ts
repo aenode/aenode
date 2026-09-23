@@ -1,1 +1,1 @@
-export * from './lib/nest-prop.js';
+export * from './lib/prop.js';

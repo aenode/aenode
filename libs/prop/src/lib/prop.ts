@@ -11,12 +11,14 @@ import {
   type PropEnumOptions,
   type PropNumberOptions,
   type PropObjectOptions,
-  type PropOptions,
   type PropStringOptions,
+  type PropValidationOptions,
 } from './prop-options.js';
 import { __PropString } from './prop-string.js';
 
-export function PropValidation(options?: PropOptions): PropertyDecorator {
+export function PropValidation(
+  options?: PropValidationOptions,
+): PropertyDecorator {
   options ??= {};
 
   return (...args) => {

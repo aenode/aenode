@@ -36,9 +36,9 @@ export function __PropNumber(
   validationOptions?: ValidationOptions,
 ): PropertyDecorator {
   return (...args) => {
-    const type = Reflect.getMetadata('design:type', ...args);
+    const inferedType = Reflect.getMetadata('design:type', ...args);
     validationOptions ??= {
-      each: options?.isArray ?? type === Array,
+      each: inferedType === Array,
       groups: options?.groups,
     };
 

@@ -19,13 +19,13 @@ export function __PropDate(
 ): PropertyDecorator {
   return (...args) => {
     options ??= {};
-    const type = Reflect.getMetadata('design:type', ...args);
+    const inferedType = Reflect.getMetadata('design:type', ...args);
     validationOptions ??= {
-      each: options?.isArray ?? type === Array,
+      each: inferedType === Array,
       groups: options?.groups,
     };
 
-    const { min, max } = options ?? {};
+    const { minDate: min, maxDate: max } = options ?? {};
 
     __PropCommon(options, validationOptions)(...args);
     IsDate(validationOptions)(...args);

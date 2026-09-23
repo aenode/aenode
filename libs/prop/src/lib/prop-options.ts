@@ -24,69 +24,65 @@ export type PropType =
   | ClassConstructor<unknown>
   | (() => ClassConstructor<unknown>);
 
-export type PropCommonOptions<DefualtValue> = {
+export type PropCommonOptions = {
   type?: PropType;
   required?: boolean;
   groups?: string[];
   description?: string;
-} & (
-  | {
-      isArray?: false;
-      defaultValue?: DefualtValue;
-    }
-  | {
-      isArray: true;
-      maxItems?: number;
-      minItems?: number;
-      defaultValue?: DefualtValue[];
-    }
-);
+
+  maxItems?: number;
+  minItems?: number;
+  defaultValue?: unknown;
+};
 
 export type PropStringOptions = {
-  type?: StringConstructor;
   format?: StringFormat;
   minLength?: number;
   maxLength?: number;
   isIn?: string[];
   isNotIn?: string[];
-} & PropCommonOptions<string>;
+} & PropCommonOptions;
 
 export type PropNumberOptions = {
-  type?: NumberConstructor;
   format?: NumberFormat;
   min?: number;
   max?: number;
   isIn?: number[];
   isNotIn?: number[];
-} & PropCommonOptions<number>;
+} & PropCommonOptions;
 
-export type PropBooleanOptions = {
-  type?: BooleanConstructor;
-} & PropCommonOptions<boolean>;
+export type PropBooleanOptions = {} & PropCommonOptions;
 
 export type DateType = Date | (() => Date);
 
 export type PropDateOptions = {
   type?: Date;
-  min?: DateType;
-  max?: DateType;
+  minDate?: DateType;
+  maxDate?: DateType;
   isIn?: DateType[];
   isNotIn?: DateType[];
-} & PropCommonOptions<Date>;
+} & PropCommonOptions;
 
 export type PropEnumOptions = {
-  type?: 'Enum';
   enum: object;
-} & PropCommonOptions<string>;
+} & PropCommonOptions;
 
 export type PropObjectOptions = {
   type?: () => ClassConstructor<unknown>;
-} & PropCommonOptions<object>;
+} & PropCommonOptions;
 
-export type PropOptions =
-  | PropStringOptions
-  | PropNumberOptions
-  | PropBooleanOptions
-  | PropDateOptions
-  | PropEnumOptions
-  | PropObjectOptions;
+export type PropValidationOptions = {
+  type?: PropType;
+  enum?: object;
+  format?: PropFormat;
+  min?: number;
+  max?: number;
+  minLength?: number;
+  maxLength?: number;
+  minDate?: DateType;
+  maxDate?: DateType;
+  isIn?: unknown[];
+  isNotIn?: unknown[];
+  example?: unknown;
+  examples?: Record<string, unknown>;
+} & PropCommonOptions;

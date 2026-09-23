@@ -77,9 +77,9 @@ export function __PropString(
 ): PropertyDecorator {
   return (...args) => {
     options ??= {};
-    const type = Reflect.getMetadata('design:type', ...args);
+    const inferedType = Reflect.getMetadata('design:type', ...args);
     validationOptions ??= {
-      each: options?.isArray ?? type === Array,
+      each: inferedType === Array,
       groups: options?.groups,
     };
 

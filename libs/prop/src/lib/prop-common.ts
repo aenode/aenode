@@ -1,10 +1,10 @@
 import { Expose } from 'class-transformer';
 import { IsDefined, IsOptional, type ValidationOptions } from 'class-validator';
 import { DefaultValueTransformer } from './default-value-transformer.js';
-import type { PropOptions } from './prop-options.js';
+import type { PropValidationOptions } from './prop-options.js';
 
 export function __PropCommon(
-  options: PropOptions,
+  options: PropValidationOptions,
   validationOptions: ValidationOptions,
 ): PropertyDecorator {
   return (...args) => {

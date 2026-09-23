@@ -27,7 +27,7 @@ export function __PropObject(
     }
 
     validationOptions ??= {
-      each: options?.isArray ?? isArrayType,
+      each: isArrayType,
       groups: options?.groups,
     };
 

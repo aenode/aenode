@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import type { PropOptions } from './prop-options.js';
+import type { PropValidationOptions } from './prop-options.js';
 import { PropValidation } from './prop.js';
 import { transformAndValidate } from './test-helpers.js';
 
@@ -8,13 +8,13 @@ describe('Object Validation', () => {
     @PropValidation() name: string;
   }
   it.each`
-    options                                               | value                      | errors
-    ${{} as PropOptions}                                  | ${{ value: undefined }}    | ${[]}
-    ${{} as PropOptions}                                  | ${{ value: null }}         | ${[]}
-    ${{ type: () => Obj, required: true } as PropOptions} | ${{ value: undefined }}    | ${['isDefined']}
-    ${{ type: () => Obj, required: true } as PropOptions} | ${{ value: null }}         | ${['isDefined', 'nestedValidation']}
-    ${{} as PropOptions}                                  | ${{ value: { name: '' } }} | ${[]}
-    ${{} as PropOptions}                                  | ${{ value: { name: '' } }} | ${[]}
+    options                                                         | value                      | errors
+    ${{} as PropValidationOptions}                                  | ${{ value: undefined }}    | ${[]}
+    ${{} as PropValidationOptions}                                  | ${{ value: null }}         | ${[]}
+    ${{ type: () => Obj, required: true } as PropValidationOptions} | ${{ value: undefined }}    | ${['isDefined']}
+    ${{ type: () => Obj, required: true } as PropValidationOptions} | ${{ value: null }}         | ${['isDefined', 'nestedValidation']}
+    ${{} as PropValidationOptions}                                  | ${{ value: { name: '' } }} | ${[]}
+    ${{} as PropValidationOptions}                                  | ${{ value: { name: '' } }} | ${[]}
   `(
     'PropValidation($options) should validate $value',
     ({ options, value, errors }) => {

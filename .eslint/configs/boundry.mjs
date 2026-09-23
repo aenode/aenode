@@ -14,7 +14,7 @@ export default [
             },
             {
               sourceTag: 'lib:*',
-              onlyDependOnLibsWithTags: ['lib:types'],
+              onlyDependOnLibsWithTags: ['lib:*'],
             },
           ],
         },
