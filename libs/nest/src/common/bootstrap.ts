@@ -8,9 +8,8 @@ export async function bootstrap(appModule: Type) {
   const app = await NestFactory.create(appModule);
   const conf = app.get(ConfigService);
 
-  const APP_NAME = conf.get<string>('APP_NAME', 'Unkown');
-  const PORT = conf.get<number>('PORT', 3000);
-
+  const APP_NAME = conf.getOrThrow<string>('APP_NAME');
+  const PORT = conf.getOrThrow<number>('PORT');
   const logger = new Logger(APP_NAME);
 
   app.setGlobalPrefix('api');
@@ -34,6 +33,7 @@ export async function bootstrap(appModule: Type) {
     await app.listen(PORT);
     const URL = await app.getUrl();
     logger.log(`${APP_NAME} app is runing at ${URL}`);
+    logger.log(`${APP_NAME} swagger is runing at ${URL}/docs`);
     break Start;
   }
 }
