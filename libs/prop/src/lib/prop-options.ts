@@ -21,6 +21,7 @@ export type PropType =
   | NumberConstructor
   | BooleanConstructor
   | DateConstructor
+  | ClassConstructor<unknown>
   | (() => ClassConstructor<unknown>);
 
 export type PropCommonOptions<DefualtValue> = {

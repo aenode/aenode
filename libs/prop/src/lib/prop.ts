@@ -1,3 +1,4 @@
+import { IsArray } from 'class-validator';
 import 'reflect-metadata';
 import { __PropBoolean } from './prop-boolean.js';
 import { __PropDate } from './prop-date.js';
@@ -21,12 +22,12 @@ export function PropValidation(options?: PropOptions): PropertyDecorator {
   return (...args) => {
     const inferedType = Reflect.getMetadata('design:type', ...args);
 
-    if (
-      inferedType === Array &&
-      !options.type &&
-      !(options as PropEnumOptions).enum
-    ) {
-      throw new Error('type or enum options is required for array properties ');
+    if (inferedType === Array) {
+      IsArray()(...args);
+
+      if (!options.type && !(options as PropEnumOptions).enum) {
+        throw new Error('Array properties must provide type or enum option');
+      }
     }
 
     options.type ??= inferedType;

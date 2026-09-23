@@ -1,5 +1,4 @@
 import { IsBoolean, type ValidationOptions } from 'class-validator';
-import { DefaultValueTransformer } from './default-value-transformer.js';
 import { __PropCommon } from './prop-common.js';
 import type { PropBooleanOptions } from './prop-options.js';
 
@@ -21,6 +20,5 @@ export function __PropBoolean(
     };
     __PropCommon(options, validationOptions)(...args);
     IsBoolean(validationOptions)(...args);
-    DefaultValueTransformer(options)(...args);
   };
 }

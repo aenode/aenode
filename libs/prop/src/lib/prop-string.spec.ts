@@ -1,16 +1,17 @@
 import { faker } from '@faker-js/faker';
-import { plainToInstance } from 'class-transformer';
-import { validateSync } from 'class-validator';
 import 'reflect-metadata';
 import { v4, v7 } from 'uuid';
 import type { PropOptions } from './prop-options.js';
 import { PropValidation } from './prop.js';
+import { transformAndValidate } from './test-helpers.js';
 
 describe('String Value Validation', () => {
   it.each`
     options                                  | value                                                             | errors
     ${{} as PropOptions}                     | ${{ value: undefined }}                                           | ${[]}
     ${{} as PropOptions}                     | ${{ value: null }}                                                | ${[]}
+    ${{ required: true } as PropOptions}     | ${{ value: undefined }}                                           | ${['isString', 'isDefined']}
+    ${{ required: true } as PropOptions}     | ${{ value: null }}                                                | ${['isString', 'isDefined']}
     ${{} as PropOptions}                     | ${{ value: '' }}                                                  | ${[]}
     ${{} as PropOptions}                     | ${{ value: ' ' }}                                                 | ${[]}
     ${{ minLength: 5 } as PropOptions}       | ${{ value: faker.string.sample(5) }}                              | ${[]}
@@ -23,6 +24,10 @@ describe('String Value Validation', () => {
     ${{ format: 'url' } as PropOptions}      | ${{ value: faker.internet.url() }}                                | ${[]}
     ${{ format: 'data-uri' } as PropOptions} | ${{ value: faker.image.dataUri() }}                               | ${[]}
     ${{ format: 'ean' } as PropOptions}      | ${{ value: faker.commerce.isbn({ variant: 13, separator: '' }) }} | ${[]}
+    ${{} as PropOptions}                     | ${{ value: 1 }}                                                   | ${['isString']}
+    ${{} as PropOptions}                     | ${{ value: true }}                                                | ${['isString']}
+    ${{} as PropOptions}                     | ${{ value: {} }}                                                  | ${['isString']}
+    ${{} as PropOptions}                     | ${{ value: [] }}                                                  | ${['isString']}
     ${{ format: 'password' } as PropOptions} | ${{ value: 'some' }}                                              | ${['isStrongPassword']}
     ${{ format: 'email' } as PropOptions}    | ${{ value: 'some' }}                                              | ${['isEmail']}
     ${{ format: 'uuid' } as PropOptions}     | ${{ value: 'some' }}                                              | ${['isUuid']}
@@ -40,16 +45,8 @@ describe('String Value Validation', () => {
         @PropValidation(options) value: string;
       }
 
-      const instance = plainToInstance(Sample, value, {
-        excludeExtraneousValues: true,
-      });
-      const foundErrors = validateSync(instance, {});
-
-      const foundConstraints = foundErrors
-        .flatMap((e) => [e, ...(e.children ?? [])])
-        .flatMap((e) => {
-          return Object.keys(e.constraints ?? {});
-        });
+      const foundConstraints = transformAndValidate(Sample, value);
+      expect(foundConstraints.sort()).toEqual(errors.sort());
       expect(foundConstraints.sort()).toEqual(errors.sort());
     },
   );

@@ -1,16 +1,19 @@
 import { faker } from '@faker-js/faker';
-import { plainToInstance } from 'class-transformer';
-import { validateSync } from 'class-validator';
 import 'reflect-metadata';
 import { v4, v7 } from 'uuid';
 import type { PropOptions } from './prop-options.js';
 import { PropValidation } from './prop.js';
+import { transformAndValidate } from './test-helpers.js';
 
 describe('String Array Validation ', () => {
   it.each`
     options                                                | value                                                               | errors
     ${{ type: String } as PropOptions}                     | ${{ value: undefined }}                                             | ${[]}
     ${{ type: String } as PropOptions}                     | ${{ value: null }}                                                  | ${[]}
+    ${{ type: String, required: true } as PropOptions}     | ${{ value: undefined }}                                             | ${['isString', 'isArray', 'isDefined']}
+    ${{ type: String, required: true } as PropOptions}     | ${{ value: null }}                                                  | ${['isString', 'isArray', 'isDefined']}
+    ${{ type: String, required: true } as PropOptions}     | ${{ value: [undefined] }}                                           | ${['isString', 'isDefined']}
+    ${{ type: String, required: true } as PropOptions}     | ${{ value: [null] }}                                                | ${['isString', 'isDefined']}
     ${{ type: String } as PropOptions}                     | ${{ value: [''] }}                                                  | ${[]}
     ${{ type: String } as PropOptions}                     | ${{ value: [' '] }}                                                 | ${[]}
     ${{ type: String, minLength: 5 } as PropOptions}       | ${{ value: [faker.string.sample(5)] }}                              | ${[]}
@@ -40,16 +43,8 @@ describe('String Array Validation ', () => {
         @PropValidation(options) value: string[];
       }
 
-      const instance = plainToInstance(Sample, value, {
-        excludeExtraneousValues: true,
-      });
-      const foundErrors = validateSync(instance, {});
-
-      const foundConstraints = foundErrors
-        .flatMap((e) => [e, ...(e.children ?? [])])
-        .flatMap((e) => {
-          return Object.keys(e.constraints ?? {});
-        });
+      const foundConstraints = transformAndValidate(Sample, value);
+      expect(foundConstraints.sort()).toEqual(errors.sort());
       expect(foundConstraints.sort()).toEqual(errors.sort());
     },
   );

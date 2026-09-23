@@ -1,14 +1,14 @@
-import { plainToInstance } from 'class-transformer';
-import { validateSync } from 'class-validator';
-import 'reflect-metadata';
 import type { PropOptions } from './prop-options.js';
 import { PropValidation } from './prop.js';
+import { transformAndValidate } from './test-helpers.js';
 
 describe('Number Validation', () => {
   it.each`
     options                                 | value                   | errors
     ${{} as PropOptions}                    | ${{ value: undefined }} | ${[]}
     ${{} as PropOptions}                    | ${{ value: null }}      | ${[]}
+    ${{ required: true } as PropOptions}    | ${{ value: undefined }} | ${['isNumber', 'isDefined']}
+    ${{ required: true } as PropOptions}    | ${{ value: null }}      | ${['isNumber', 'isDefined']}
     ${{} as PropOptions}                    | ${{ value: 1 }}         | ${[]}
     ${{} as PropOptions}                    | ${{ value: -1 }}        | ${[]}
     ${{ format: 'percent' } as PropOptions} | ${{ value: 0 }}         | ${[]}
@@ -27,16 +27,8 @@ describe('Number Validation', () => {
         @PropValidation(options) value: number;
       }
 
-      const instance = plainToInstance(Sample, value, {
-        excludeExtraneousValues: true,
-      });
-      const foundErrors = validateSync(instance, {});
-
-      const foundConstraints = foundErrors
-        .flatMap((e) => [e, ...(e.children ?? [])])
-        .flatMap((e) => {
-          return Object.keys(e.constraints ?? {});
-        });
+      const foundConstraints = transformAndValidate(Sample, value);
+      expect(foundConstraints.sort()).toEqual(errors.sort());
       expect(foundConstraints.sort()).toEqual(errors.sort());
     },
   );

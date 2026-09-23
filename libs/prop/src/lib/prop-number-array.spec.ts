@@ -1,14 +1,15 @@
-import { plainToInstance } from 'class-transformer';
-import { validateSync } from 'class-validator';
 import 'reflect-metadata';
 import type { PropOptions } from './prop-options.js';
 import { PropValidation } from './prop.js';
+import { transformAndValidate } from './test-helpers.js';
 
 describe('Number Array Validation', () => {
   it.each`
     options                                               | value                   | errors
     ${{ type: Number } as PropOptions}                    | ${{ value: undefined }} | ${[]}
     ${{ type: Number } as PropOptions}                    | ${{ value: null }}      | ${[]}
+    ${{ type: Number, required: true } as PropOptions}    | ${{ value: undefined }} | ${['isNumber', 'isDefined', 'isArray']}
+    ${{ type: Number, required: true } as PropOptions}    | ${{ value: null }}      | ${['isNumber', 'isDefined', 'isArray']}
     ${{ type: Number } as PropOptions}                    | ${{ value: [1] }}       | ${[]}
     ${{ type: Number } as PropOptions}                    | ${{ value: [-1] }}      | ${[]}
     ${{ type: Number, format: 'percent' } as PropOptions} | ${{ value: [0] }}       | ${[]}
@@ -23,16 +24,8 @@ describe('Number Array Validation', () => {
         @PropValidation(options) value: number[];
       }
 
-      const instance = plainToInstance(Sample, value, {
-        excludeExtraneousValues: true,
-      });
-      const foundErrors = validateSync(instance, {});
-
-      const foundConstraints = foundErrors
-        .flatMap((e) => [e, ...(e.children ?? [])])
-        .flatMap((e) => {
-          return Object.keys(e.constraints ?? {});
-        });
+      const foundConstraints = transformAndValidate(Sample, value);
+      expect(foundConstraints.sort()).toEqual(errors.sort());
       expect(foundConstraints.sort()).toEqual(errors.sort());
     },
   );

@@ -21,10 +21,9 @@ export function __PropObject(
       groups: options?.groups,
     };
 
-    options.type ??= () => type;
-
     __PropCommon(options, validationOptions)(...args);
-    Type(options.type)(...args);
+
+    Type(() => type)(...args);
     ValidateNested(validationOptions)(...args);
   };
 }
