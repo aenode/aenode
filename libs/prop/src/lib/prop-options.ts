@@ -69,6 +69,7 @@ export type PropEnumOptions = {
 
 export type PropObjectOptions = {
   type?: () => ClassConstructor<unknown>;
+  isArray?: boolean;
 } & PropCommonOptions;
 
 export type PropValidationOptions = {

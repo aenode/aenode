@@ -16,6 +16,13 @@ import {
 } from './prop-options.js';
 import { __PropString } from './prop-string.js';
 
+/**
+ * DTO class property validation decorator.
+ *
+ * @important for circler objects use ProjectObjectValidation decorator.
+ * @param options validation options {@link PropValidationOptions}
+ * @returns a property decorator
+ */
 export function PropValidation(
   options?: PropValidationOptions,
 ): PropertyDecorator {
