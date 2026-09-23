@@ -2,7 +2,7 @@ import { faker } from '@faker-js/faker';
 import 'reflect-metadata';
 import { v4, v7 } from 'uuid';
 import type { PropValidationOptions } from './prop-options.js';
-import { PropValidation } from './prop.js';
+import { PropValidation } from './prop-validation.js';
 import { transformAndValidate } from './test-helpers.js';
 
 describe('String Array Validation ', () => {

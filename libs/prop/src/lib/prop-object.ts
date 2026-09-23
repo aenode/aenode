@@ -3,7 +3,7 @@ import { ValidateNested, type ValidationOptions } from 'class-validator';
 import { __PropCommon } from './prop-common.js';
 import type { PropObjectOptions } from './prop-options.js';
 
-export function PropObjectValidation(
+export function PropObject(
   options: PropObjectOptions & Required<Pick<PropObjectOptions, 'type'>>,
 ): PropertyDecorator {
   return (...args) => {

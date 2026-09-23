@@ -10,9 +10,8 @@ export function __PropCommon(
   return (...args) => {
     const { required } = options;
 
-    DefaultValueTransformer(options)(...args);
-
     Expose({ groups: options.groups })(...args);
+    DefaultValueTransformer(options)(...args);
 
     if (required === true) {
       IsDefined(validationOptions)(...args);

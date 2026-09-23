@@ -64,7 +64,8 @@ export type PropDateOptions = {
 } & PropCommonOptions;
 
 export type PropEnumOptions = {
-  enum: object;
+  enum?: object;
+  isIn?: (string | number)[];
 } & PropCommonOptions;
 
 export type PropObjectOptions = {

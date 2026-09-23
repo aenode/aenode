@@ -1,4 +1,4 @@
-import { IsEnum, type ValidationOptions } from 'class-validator';
+import { IsEnum, IsIn, type ValidationOptions } from 'class-validator';
 import { __PropCommon } from './prop-common.js';
 import type { PropEnumOptions } from './prop-options.js';
 
@@ -20,6 +20,15 @@ export function __PropEnum(
     };
 
     __PropCommon(options, validationOptions)(...args);
-    IsEnum(options.enum, validationOptions)(...args);
+
+    if (options.enum) {
+      IsEnum(options.enum, validationOptions)(...args);
+    } else if (options.isIn) {
+      IsIn(options.isIn, validationOptions)(...args);
+    } else {
+      throw new Error(
+        `${args[0].constructor.name}.${args[1].toString()} should provide enum or isIn option.`,
+      );
+    }
   };
 }
