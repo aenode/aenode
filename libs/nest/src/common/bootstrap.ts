@@ -7,7 +7,7 @@ import {
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import type { ValiationErrorDto } from '../dtos/validation-error.dto.js';
+import type { ValiationErrorDto } from '../dtos/common.js';
 
 export async function bootstrap(appModule: Type) {
   const app = await NestFactory.create(appModule);
@@ -30,10 +30,11 @@ export async function bootstrap(appModule: Type) {
         exposeUnsetFields: false,
       },
       exceptionFactory(validationErrors) {
-        const errors = validationErrors.flatMap((e) => {
-          return Object.entries(e.constraints ?? {}).map(
+        const errors = validationErrors.flatMap((error) => {
+          return Object.entries(error.constraints ?? {}).map(
             ([constraint, message]) => {
               return {
+                property: error.property,
                 constraint,
                 message,
               } as ValiationErrorDto;

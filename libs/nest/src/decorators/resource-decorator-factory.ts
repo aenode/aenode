@@ -1,12 +1,17 @@
 import { Controller, Delete, Get, Post, Put, type Type } from '@nestjs/common';
 import {
+  ApiBadRequestResponse,
   ApiBearerAuth,
+  ApiInternalServerErrorResponse,
   ApiNotFoundResponse,
   ApiOkResponse,
   ApiOperation,
   ApiUnprocessableEntityResponse,
 } from '@nestjs/swagger';
-import { ValidationErorResponseDto } from '../dtos/validation-error.dto.js';
+import {
+  ResponseMessageDto,
+  ValidationErorResponseDto,
+} from '../dtos/common.js';
 
 export type ResourceDecoratorFactoryOptions = {
   singularPath: string;
@@ -54,6 +59,13 @@ export class ResourceDecoratorFactory {
     return this.options.findResponseType ?? this.options.responseType;
   }
 
+  private CommonResponse(): MethodDecorator {
+    return (...args) => {
+      ApiInternalServerErrorResponse({ type: ResponseMessageDto })(...args);
+      ApiBadRequestResponse({ type: ResponseMessageDto })(...args);
+    };
+  }
+
   Controller(): ClassDecorator {
     return (...args) => {
       Controller()(...args);
@@ -68,11 +80,13 @@ export class ResourceDecoratorFactory {
    */
   Create(): MethodDecorator {
     return (...args) => {
+      this.CommonResponse()(...args);
       ApiOperation({ summary: 'Create item' })(...args);
       ApiOkResponse({ type: this.createResponseType })(...args);
       ApiUnprocessableEntityResponse({ type: ValidationErorResponseDto })(
         ...args,
       );
+
       Post(this.singularPath)(...args);
     };
   }
@@ -83,6 +97,8 @@ export class ResourceDecoratorFactory {
    */
   Find(): MethodDecorator {
     return (...args) => {
+      this.CommonResponse()(...args);
+
       ApiOperation({ summary: 'Find many' })(...args);
       ApiOkResponse({ type: this.findResponseType, isArray: true })(...args);
       Get(this.pluralPath)(...args);
@@ -96,10 +112,12 @@ export class ResourceDecoratorFactory {
    */
   FindOneById(): MethodDecorator {
     return (...args) => {
+      this.CommonResponse()(...args);
+
       ApiOperation({ summary: 'Find one' })(...args);
       ApiOkResponse({ type: this.findOneResponseType })(...args);
       ApiNotFoundResponse({
-        type: ValidationErorResponseDto,
+        type: ResponseMessageDto,
         description: 'Item not found',
       })(...args);
       Get(this.idPath)(...args);
@@ -112,10 +130,15 @@ export class ResourceDecoratorFactory {
    */
   UpdateOne(): MethodDecorator {
     return (...args) => {
+      this.CommonResponse()(...args);
+
       ApiOperation({ summary: 'Update one' })(...args);
       ApiOkResponse({ type: this.updateResponseType })(...args);
+      ApiUnprocessableEntityResponse({ type: ValidationErorResponseDto })(
+        ...args,
+      );
       ApiNotFoundResponse({
-        type: ValidationErorResponseDto,
+        type: ResponseMessageDto,
         description: 'Item not found',
       })(...args);
       Put(this.idPath)(...args);
@@ -129,10 +152,12 @@ export class ResourceDecoratorFactory {
    */
   DeleteOne(): MethodDecorator {
     return (...args) => {
+      this.CommonResponse()(...args);
+
       ApiOperation({ summary: 'Delete one' })(...args);
       ApiOkResponse({ type: this.deleteResponseType })(...args);
       ApiNotFoundResponse({
-        type: ValidationErorResponseDto,
+        type: ResponseMessageDto,
         description: 'Item not found',
       })(...args);
       Delete(this.idPath)(...args);
