@@ -20,6 +20,9 @@
     },
     {
       "path": "./libs/nest-prop"
+    },
+    {
+      "path": "./libs/prisma"
     }
   ]
 }
