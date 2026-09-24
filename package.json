@@ -6,7 +6,7 @@
   "homepage": "https://aenode.github.io?utm_source=github&utm_campaing=social",
   "scripts": {
     "prepare": "husky",
-    "x:prune": "rm -rf bun.lock node_modules  **/**/**/node_modules **/**/**/dist **/**/**/out-tsc .nx",
+    "x:prune": "rm -rf bun.lock node_modules  **/**/node_modules **/**/dist **/**/out-tsc .nx",
     "x:ssh": "sh -c 'NAME=\"$1\"; PASSPHRASE=\"$2\"; ssh-keygen -t ed25519 -C \"$NAME\" -f \"$HOME/.ssh/$NAME\" -N \"$PASSPHRASE\" && ssh-add \"$HOME/.ssh/$NAME\" && cat \"$HOME/.ssh/$NAME.pub\"' --"
   },
   "private": true,
@@ -36,7 +36,6 @@
     "jsonc-eslint-parser": "^2.1.0",
     "nx": "23.2.1",
     "prettier": "~3.6.2",
-    "prisma": "7.10.0",
     "tslib": "^2.3.0",
     "typedoc": "^0.28.20",
     "typescript": "~6.0.3",
