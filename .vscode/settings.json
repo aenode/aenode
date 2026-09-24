@@ -2,7 +2,11 @@
   "eslint.useFlatConfig": true,
   "editor.formatOnSave": true,
   "eslint.enable": true,
-  "eslint.validate": ["json", "javascript", "typescript"],
+  "eslint.validate": [
+    "json",
+    "javascript",
+    "typescript"
+  ],
   "files.associations": {
     "*.json.template": "json",
     "*.swcrc.template": "json",
@@ -53,5 +57,8 @@
   },
   "[prisma]": {
     "editor.defaultFormatter": "Prisma.prisma"
+  },
+  "[env]": {
+    "editor.defaultFormatter": "IronGeek.vscode-env"
   }
 }

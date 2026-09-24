@@ -1,0 +1,176 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Status {
+  NEW
+  IN_PROGRESS
+  DONE
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  isActive  Boolean  @default(true) @map("is_active")
+
+  username String @unique
+
+  /// @writeonly
+  password String
+
+  avatar String @default("person.svg")
+
+  /// @include
+  userRoles UserRole[]
+  comments  Comment[]
+  userTasks UserTask[]
+}
+
+model Scope {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  isActive  Boolean  @default(true) @map("is_active")
+
+  name        String       @unique
+  permissions Permission[]
+}
+
+model Role {
+  id Int @id @default(autoincrement())
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  isActive  Boolean  @default(true) @map("is_active")
+
+  name        String  @unique
+  description String?
+
+  rolePermissions RolePermission[]
+  userRoles       UserRole[]
+}
+
+model Permission {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  isActive  Boolean  @default(true) @map("is_active")
+
+  permission  String
+  description String?
+
+  scope   Scope @relation(fields: [scopeId], references: [id])
+  scopeId Int   @map("scope_id")
+
+  rolePermissions RolePermission[]
+
+  @@unique([scopeId, permission])
+  @@index([permission])
+}
+
+model RolePermission {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  isActive  Boolean  @default(true) @map("is_active")
+
+  role   Role @relation(fields: [roleId], references: [id])
+  roleId Int  @map("role_id")
+
+  permisssion  Permission @relation(fields: [permissionId], references: [id])
+  permissionId Int        @map("permission_id")
+
+  @@unique([roleId, permissionId])
+}
+
+model UserRole {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  isActive  Boolean  @default(true) @map("is_active")
+
+  role   Role @relation(fields: [roleId], references: [id])
+  roleId Int  @map("role_id")
+
+  user   User @relation(fields: [userId], references: [id])
+  userId Int  @map("user_id")
+
+  @@unique([userId, roleId])
+  @@index([roleId])
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  isActive  Boolean  @default(true) @map("is_active")
+
+  comment String
+
+  task   Task @relation(fields: [taskId], references: [id])
+  taskId Int  @map("task_id")
+
+  /// @include(username,avatar)
+  user   User @relation(fields: [userId], references: [id])
+  userId Int  @map("user_id")
+}
+
+model Task {
+  id Int @id @default(autoincrement())
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt
+  isActive  Boolean  @default(true)
+
+  /// @minlength(3) @maxlength(255)
+  title String @unique
+
+  /// @slug(title)
+  slug String
+
+  description String?
+
+  /// @lessThan(endDate)
+  /// @lessThan(dueDate)
+  startDate DateTime @map("start_date")
+
+  /// @morethan(startDate)
+  endDate DateTime? @map("end_date")
+
+  /// @morethan(startDate)
+  dueDate DateTime @map("due_date")
+
+  /// @maxitems(5)
+  tags String[]
+
+  /// @min(0) @max(100)
+  score Int
+
+  /// @include
+  comments Comment[]
+
+  userTasks UserTask[]
+}
+
+model UserTask {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  isActive  Boolean  @default(true) @map("is_active")
+
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int  @map("user_id")
+
+  /// @include
+  task   Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  taskId Int  @map("task_id")
+
+  @@unique([userId, taskId])
+  @@index([taskId])
+}
