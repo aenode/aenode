@@ -14,8 +14,15 @@ import {
   type ValidationOptions,
 } from 'class-validator';
 import { __PropCommon } from './prop-common.js';
-import type { PropStringOptions, StringFormat } from './prop-options.js';
+import type { StringFormat, StringValidationOptions } from './prop-options.js';
 
+/**
+ * String property format validation decorator
+ *
+ * @param format string format {@link StringFormat}
+ * @param validationOptions class-validator validation options
+ * @returns a property decorator
+ */
 export function __PropStringFormat(
   format: StringFormat,
   validationOptions: ValidationOptions,
@@ -65,14 +72,22 @@ export function __PropStringFormat(
   };
 }
 
-export function PropString(options: PropStringOptions): PropertyDecorator {
+/**
+ * String property validation decorator
+ *
+ * @param options string validation options {@link StringValidationOptions}
+ * @returns a property decorator
+ */
+export function PropString(
+  options: StringValidationOptions,
+): PropertyDecorator {
   return (...args) => {
     __PropString(options)(...args);
   };
 }
 
 export function __PropString(
-  options?: PropStringOptions,
+  options?: StringValidationOptions,
   validationOptions?: ValidationOptions,
 ): PropertyDecorator {
   return (...args) => {

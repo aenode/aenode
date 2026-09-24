@@ -1,8 +1,14 @@
 import { Transform } from 'class-transformer';
 import type { PropValidationOptions } from './prop-options.js';
 
+/**
+ * Property value transformer for default values.
+ *
+ * @param options
+ * @returns a property decorator
+ */
 export function DefaultValueTransformer(
-  options?: PropValidationOptions,
+  options?: Pick<PropValidationOptions, 'defaultValue'>,
 ): PropertyDecorator {
   return (...args) => {
     options ??= {};

@@ -1,15 +1,27 @@
 import { IsEnum, IsIn, type ValidationOptions } from 'class-validator';
 import { __PropCommon } from './prop-common.js';
-import type { PropEnumOptions } from './prop-options.js';
+import type { EnumValidationOptions } from './prop-options.js';
 
-export function PropEnum(options: PropEnumOptions): PropertyDecorator {
+/**
+ * Enum property validation decorator
+ *
+ * @param options enum validation options
+ * @returns a property decorator
+ */
+export function PropEnum(options: EnumValidationOptions): PropertyDecorator {
   return (...args) => {
     __PropEnum(options)(...args);
   };
 }
 
+/**
+ * Enum property validation decorator
+ *
+ * @param options enum validation options
+ * @returns a property decorator
+ */
 export function __PropEnum(
-  options: PropEnumOptions,
+  options: EnumValidationOptions,
   validationOptions?: ValidationOptions,
 ): PropertyDecorator {
   return (...args) => {

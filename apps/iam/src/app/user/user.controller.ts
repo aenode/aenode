@@ -9,13 +9,13 @@ import { Body, Param, ParseIntPipe } from '@nestjs/common';
 import { Prisma } from '../../generated/prisma/client.js';
 
 export class UserDto implements Prisma.UserModel {
-  @Prop({ example: new Date() }) createdAt: Date;
-  @Prop({ example: new Date() }) updatedAt: Date;
-  @Prop({ example: true }) isActive: boolean;
-  @Prop({ example: 'user@mail.com' }) username: string;
-  @Prop({ example: '!Password123.' }) password: string;
-  @Prop({ example: 'avatar.svg' }) avatar: string;
-  @Prop({ example: 1 }) id: number;
+  @Prop() createdAt: Date;
+  @Prop() updatedAt: Date;
+  @Prop() isActive: boolean;
+  @Prop() username: string;
+  @Prop() password: string;
+  @Prop() avatar: string;
+  @Prop() id: number;
 }
 
 export class UserCreateDto extends PickType(UserDto, [

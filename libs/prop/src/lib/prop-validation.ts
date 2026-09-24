@@ -6,18 +6,18 @@ import { __PropEnum } from './prop-enum.js';
 import { __PropNumber } from './prop-number.js';
 import { __PropObject } from './prop-object.js';
 import {
-  type PropBooleanOptions,
-  type PropDateOptions,
-  type PropEnumOptions,
-  type PropNumberOptions,
-  type PropObjectOptions,
-  type PropStringOptions,
+  type BooleanValidationOptions,
+  type DateValidationOptions,
+  type EnumValidationOptions,
+  type NumberValidationOptions,
+  type ObjectValidationOptions,
   type PropValidationOptions,
+  type StringValidationOptions,
 } from './prop-options.js';
 import { __PropString } from './prop-string.js';
 
 /**
- * DTO class property validation decorator.
+ * Property validation decorator.
  *
  * @important for circler objects use ProjectObjectValidation decorator.
  * @param options validation options {@link PropValidationOptions}
@@ -34,7 +34,6 @@ export function PropValidation(
     const isUnkownObject = inferedType === Object;
     const propertyDef = `${args[0].constructor.name}.${args[1].toString()} is ${inferedType}: `;
 
-    console.debug(`${propertyDef}`, PropValidation.name);
     ArrayORUnkownObjectShouldProvideTypeOrEnumOrIsIn: {
       if (isArrayType || isUnkownObject) {
         if (isArrayType) {
@@ -42,8 +41,8 @@ export function PropValidation(
         }
         if (
           !options.type &&
-          !(options as PropEnumOptions).enum &&
-          !(options as PropEnumOptions).isIn
+          !(options as EnumValidationOptions).enum &&
+          !(options as EnumValidationOptions).isIn
         ) {
           throw new Error(
             `${propertyDef} does not provide type, enum, or isIn option`,
@@ -63,7 +62,10 @@ export function PropValidation(
 
     IfPropertyHasEnumOrIsInOptionThenApplyEnumDecorator: {
       if (options.enum || options.isIn) {
-        __PropEnum(options as PropEnumOptions, validationOptions)(...args);
+        __PropEnum(
+          options as EnumValidationOptions,
+          validationOptions,
+        )(...args);
         return;
       }
       break IfPropertyHasEnumOrIsInOptionThenApplyEnumDecorator;
@@ -71,27 +73,39 @@ export function PropValidation(
 
     switch (options.type) {
       case String: {
-        __PropString(options as PropStringOptions, validationOptions)(...args);
+        __PropString(
+          options as StringValidationOptions,
+          validationOptions,
+        )(...args);
         break;
       }
       case Number: {
-        __PropNumber(options as PropNumberOptions, validationOptions)(...args);
+        __PropNumber(
+          options as NumberValidationOptions,
+          validationOptions,
+        )(...args);
         break;
       }
       case Boolean: {
         __PropBoolean(
-          options as PropBooleanOptions,
+          options as BooleanValidationOptions,
           validationOptions,
         )(...args);
         break;
       }
       case Date: {
-        __PropDate(options as PropDateOptions, validationOptions)(...args);
+        __PropDate(
+          options as DateValidationOptions,
+          validationOptions,
+        )(...args);
         break;
       }
 
       default: {
-        __PropObject(options as PropObjectOptions, validationOptions)(...args);
+        __PropObject(
+          options as ObjectValidationOptions,
+          validationOptions,
+        )(...args);
 
         break;
       }

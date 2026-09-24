@@ -1,18 +1,32 @@
 import { Type } from 'class-transformer';
 import { ValidateNested, type ValidationOptions } from 'class-validator';
 import { __PropCommon } from './prop-common.js';
-import type { PropObjectOptions } from './prop-options.js';
+import type { ObjectValidationOptions } from './prop-options.js';
 
+/**
+ * Object property validation decorator
+ *
+ * @param options object validation options
+ * @returns a property decorator
+ */
 export function PropObject(
-  options: PropObjectOptions & Required<Pick<PropObjectOptions, 'type'>>,
+  options: ObjectValidationOptions &
+    Required<Pick<ObjectValidationOptions, 'type'>>,
 ): PropertyDecorator {
   return (...args) => {
     __PropObject(options)(...args);
   };
 }
 
+/**
+ * Object property validation decorator
+ *
+ * @param options object validation options {@link ObjectValidationOptions}
+ * @param validationOptions class-validator validation options
+ * @returns a validatino decorator
+ */
 export function __PropObject(
-  options?: PropObjectOptions,
+  options?: ObjectValidationOptions,
   validationOptions?: ValidationOptions,
 ): PropertyDecorator {
   return (...args) => {

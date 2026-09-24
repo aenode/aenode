@@ -6,8 +6,15 @@ import {
   type ValidationOptions,
 } from 'class-validator';
 import { __PropCommon } from './prop-common.js';
-import type { NumberFormat, PropNumberOptions } from './prop-options.js';
+import type { NumberFormat, NumberValidationOptions } from './prop-options.js';
 
+/**
+ * Number property format validation decorator
+ *
+ * @param format number format {@link NumberFormat}
+ * @param validationOptions class-validation validation options.
+ * @returns a property decorator
+ */
 export function __PropNumberFormat(
   format: NumberFormat,
   validationOptions: ValidationOptions,
@@ -31,8 +38,15 @@ export function __PropNumberFormat(
   };
 }
 
+/**
+ * Number property validation decorator
+ *
+ * @param options number validation options
+ * @param validationOptions class-validator validation options
+ * @returns a property decorator
+ */
 export function __PropNumber(
-  options: PropNumberOptions,
+  options: NumberValidationOptions,
   validationOptions?: ValidationOptions,
 ): PropertyDecorator {
   return (...args) => {

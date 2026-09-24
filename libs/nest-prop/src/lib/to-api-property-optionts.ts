@@ -1,9 +1,9 @@
-import type { PropValidationOptions } from '@aenode/prop';
 import type { ApiPropertyOptions } from '@nestjs/swagger';
 import 'reflect-metadata';
+import type { PropOptions } from './prop-options.js';
 
 export function toApiProeprtyOptions(
-  options: PropValidationOptions,
+  options: PropOptions,
   ...args: Parameters<PropertyDecorator>
 ): ApiPropertyOptions {
   const inferedType = Reflect.getMetadata('design:type', ...args);
@@ -18,12 +18,12 @@ export function toApiProeprtyOptions(
     minLength: options.minLength,
     maxLength: options.maxLength,
     isArray: isArrayType,
-    description: options.description,
-    example: options.example,
-    examples: options.examples,
     enum: options.enum,
     minItems: options.minItems,
     maxItems: options.maxItems,
+    example: options.example,
+    examples: options.examples,
+    description: options.description,
   };
 
   if (isArrayType === true) {

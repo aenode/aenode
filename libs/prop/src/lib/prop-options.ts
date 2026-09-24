@@ -14,6 +14,7 @@ export type StringFormat =
   | 'data-uri';
 
 export type NumberFormat = 'integer' | 'positive' | 'percent';
+
 export type PropFormat = StringFormat | NumberFormat;
 
 export type PropType =
@@ -21,57 +22,55 @@ export type PropType =
   | NumberConstructor
   | BooleanConstructor
   | DateConstructor
-  | ClassConstructor<unknown>
   | (() => ClassConstructor<unknown>);
 
-export type PropCommonOptions = {
+export type CommonValidationOptions = {
   type?: PropType;
   required?: boolean;
   groups?: string[];
-  description?: string;
 
   maxItems?: number;
   minItems?: number;
   defaultValue?: unknown;
 };
 
-export type PropStringOptions = {
+export type StringValidationOptions = {
   format?: StringFormat;
   minLength?: number;
   maxLength?: number;
   isIn?: string[];
   isNotIn?: string[];
-} & PropCommonOptions;
+} & CommonValidationOptions;
 
-export type PropNumberOptions = {
+export type NumberValidationOptions = {
   format?: NumberFormat;
   min?: number;
   max?: number;
   isIn?: number[];
   isNotIn?: number[];
-} & PropCommonOptions;
+} & CommonValidationOptions;
 
-export type PropBooleanOptions = {} & PropCommonOptions;
+export type BooleanValidationOptions = {} & CommonValidationOptions;
 
 export type DateType = Date | (() => Date);
 
-export type PropDateOptions = {
+export type DateValidationOptions = {
   type?: Date;
   minDate?: DateType;
   maxDate?: DateType;
   isIn?: DateType[];
   isNotIn?: DateType[];
-} & PropCommonOptions;
+} & CommonValidationOptions;
 
-export type PropEnumOptions = {
+export type EnumValidationOptions = {
   enum?: object;
   isIn?: (string | number)[];
-} & PropCommonOptions;
+} & CommonValidationOptions;
 
-export type PropObjectOptions = {
+export type ObjectValidationOptions = {
   type?: () => ClassConstructor<unknown>;
   isArray?: boolean;
-} & PropCommonOptions;
+} & CommonValidationOptions;
 
 export type PropValidationOptions = {
   type?: PropType;
@@ -85,6 +84,4 @@ export type PropValidationOptions = {
   maxDate?: DateType;
   isIn?: unknown[];
   isNotIn?: unknown[];
-  example?: unknown;
-  examples?: Record<string, unknown>;
-} & PropCommonOptions;
+} & CommonValidationOptions;

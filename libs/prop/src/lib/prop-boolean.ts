@@ -1,15 +1,29 @@
 import { IsBoolean, type ValidationOptions } from 'class-validator';
 import { __PropCommon } from './prop-common.js';
-import type { PropBooleanOptions } from './prop-options.js';
+import type { BooleanValidationOptions } from './prop-options.js';
 
-export function PropBoolean(options: PropBooleanOptions): PropertyDecorator {
+/**
+ * Boolean property validation decorator
+ *
+ * @param options boolean validation options
+ * @returns a property decorator
+ */
+export function PropBoolean(
+  options: BooleanValidationOptions,
+): PropertyDecorator {
   return (...args) => {
     __PropBoolean(options)(...args);
   };
 }
 
+/**
+ * Boolean property validation decorator
+ *
+ * @param options boolean validation options
+ * @returns a property decorator
+ */
 export function __PropBoolean(
-  options: PropBooleanOptions,
+  options: BooleanValidationOptions,
   validationOptions?: ValidationOptions,
 ): PropertyDecorator {
   return (...args) => {

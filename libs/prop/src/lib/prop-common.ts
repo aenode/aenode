@@ -3,6 +3,17 @@ import { IsDefined, IsOptional, type ValidationOptions } from 'class-validator';
 import { DefaultValueTransformer } from './default-value-transformer.js';
 import type { PropValidationOptions } from './prop-options.js';
 
+/**
+ * Common validations and transform decorators including
+ * - Expose
+ * - IsDefined
+ * - IsOptional
+ * - DefaultValueTransformer
+ *
+ * @param options property validation options
+ * @param validationOptions class-validator validation options
+ * @returns
+ */
 export function __PropCommon(
   options: PropValidationOptions,
   validationOptions: ValidationOptions,

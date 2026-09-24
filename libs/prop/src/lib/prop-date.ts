@@ -5,16 +5,28 @@ import {
   type ValidationOptions,
 } from 'class-validator';
 import { __PropCommon } from './prop-common.js';
-import type { PropDateOptions } from './prop-options.js';
+import type { DateValidationOptions } from './prop-options.js';
 
-export function PropDate(options: PropDateOptions): PropertyDecorator {
+/**
+ * Date property validation decorator
+ *
+ * @param options date validation options
+ * @returns a property decorator
+ */
+export function PropDate(options: DateValidationOptions): PropertyDecorator {
   return (...args) => {
     __PropDate(options)(...args);
   };
 }
 
+/**
+ * Date property validation decorator
+ *
+ * @param options date validation options
+ * @returns a property decorator
+ */
 export function __PropDate(
-  options?: PropDateOptions,
+  options?: DateValidationOptions,
   validationOptions?: ValidationOptions,
 ): PropertyDecorator {
   return (...args) => {
