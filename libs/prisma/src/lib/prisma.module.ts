@@ -9,10 +9,20 @@ import { __DEFAULT__ } from './__constants.js';
 import { getClientToken, provideClient } from './provide-client.js';
 import { getDelegateToken, provideDelegate } from './provide-delegate.js';
 
+/**
+ * Prisma module
+ */
 @Module({
   imports: [ConfigModule],
 })
 export class PrismaModule {
+  /**
+   * Globally provides prisma client
+   *
+   * @param client
+   * @param name
+   * @returns
+   */
   static forRoot(client: Type, name = __DEFAULT__): DynamicModule {
     return {
       module: PrismaModule,
@@ -22,6 +32,13 @@ export class PrismaModule {
     };
   }
 
+  /**
+   * Provides prisma delegates to host module
+   *
+   * @param modelNames
+   * @param name
+   * @returns
+   */
   static forFeature(
     modelNames: string[],
     name: string = __DEFAULT__,

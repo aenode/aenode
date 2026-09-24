@@ -6,6 +6,6 @@ export function Prop(options?: PropValidationOptions): PropertyDecorator {
   return (...args) => {
     options ??= {};
     PropValidation(options)(...args);
-    ApiProperty(toApiProeprtyOptions(options, ...args));
+    ApiProperty(toApiProeprtyOptions(options, ...args))(...args);
   };
 }

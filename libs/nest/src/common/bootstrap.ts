@@ -1,8 +1,13 @@
 import type { Type } from '@nestjs/common';
-import { Logger } from '@nestjs/common';
+import {
+  Logger,
+  UnprocessableEntityException,
+  ValidationPipe,
+} from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import type { ValiationErrorDto } from '../dtos/validation-error.dto.js';
 
 export async function bootstrap(appModule: Type) {
   const app = await NestFactory.create(appModule);
@@ -15,6 +20,30 @@ export async function bootstrap(appModule: Type) {
   app.setGlobalPrefix('api');
   app.enableCors();
   app.enableShutdownHooks();
+
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+      transformOptions: {
+        excludeExtraneousValues: true,
+        exposeDefaultValues: false,
+        exposeUnsetFields: false,
+      },
+      exceptionFactory(validationErrors) {
+        const errors = validationErrors.flatMap((e) => {
+          return Object.entries(e.constraints ?? {}).map(
+            ([constraint, message]) => {
+              return {
+                constraint,
+                message,
+              } as ValiationErrorDto;
+            },
+          );
+        });
+        throw new UnprocessableEntityException({ errors });
+      },
+    }),
+  );
 
   SwaggerConfig: {
     const swaggerConfig = new DocumentBuilder()

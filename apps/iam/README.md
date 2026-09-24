@@ -1,3 +1,3 @@
 # @aenode/iam
 
--[ ] Add documentation
+Identity and access management system
