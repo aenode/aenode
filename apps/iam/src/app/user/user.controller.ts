@@ -40,7 +40,7 @@ export class UserController {
     protected readonly delegate: Prisma.UserDelegate,
   ) {}
 
-  @UserDecoratorFactory.Find()
+  @UserDecoratorFactory.FindMany()
   findMany() {
     return this.delegate.findMany({ where: { isActive: true } });
   }
@@ -49,12 +49,12 @@ export class UserController {
   findOneById(@Param('id', ParseIntPipe) id: number) {
     return this.delegate.findUnique({ where: { id } });
   }
-  @UserDecoratorFactory.Create()
+  @UserDecoratorFactory.CreateOne()
   createOne(@Body() data: UserCreateDto) {
     return this.delegate.create({ data });
   }
 
-  @UserDecoratorFactory.UpdateOne()
+  @UserDecoratorFactory.UpdateOneById()
   updateOne(
     @Param('id', ParseIntPipe) id: number,
     @Body() data: UserUpdateDto,
@@ -62,7 +62,7 @@ export class UserController {
     return this.delegate.update({ where: { id }, data });
   }
 
-  @UserDecoratorFactory.DeleteOne()
+  @UserDecoratorFactory.DeleteOneById()
   deleteOne(@Param('id', ParseIntPipe) id: number) {
     return this.delegate.update({ where: { id }, data: { isActive: false } });
   }

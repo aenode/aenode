@@ -1,4 +1,4 @@
-import { CommonModule } from '@aenode/nest/common';
+import { CommonModule } from '@aenode/nest';
 import { PrismaModule } from '@aenode/prisma';
 import { Module } from '@nestjs/common';
 import { PrismaClient } from '../generated/prisma/client.js';

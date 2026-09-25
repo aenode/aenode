@@ -62,10 +62,18 @@
         "@swc/helpers": "~0.5.18",
       },
     },
+    "libs/names": {
+      "name": "@aenode/names",
+      "version": "0.0.1",
+      "dependencies": {
+        "@swc/helpers": "~0.5.18",
+      },
+    },
     "libs/nest": {
       "name": "@aenode/nest",
       "version": "0.0.1",
       "dependencies": {
+        "@aenode/names": "workspace:*",
         "@aenode/nest-prop": "workspace:*",
         "@nestjs/cache-manager": "^12.0.0",
         "@nestjs/common": "^12.0.4",
@@ -131,6 +139,8 @@
     "@aenode/common": ["@aenode/common@workspace:libs/common"],
 
     "@aenode/iam": ["@aenode/iam@workspace:apps/iam"],
+
+    "@aenode/names": ["@aenode/names@workspace:libs/names"],
 
     "@aenode/nest": ["@aenode/nest@workspace:libs/nest"],
 

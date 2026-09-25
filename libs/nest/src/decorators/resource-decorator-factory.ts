@@ -11,10 +11,11 @@ import {
 import {
   ResponseMessageDto,
   ValidationErorResponseDto,
-} from '../dtos/common.js';
+} from '../dtos/response-types.js';
+import { Public } from './public.js';
 
 export type ResourceDecoratorFactoryOptions = {
-  singularPath: string;
+  singularPath?: string;
   pluralPath?: string;
   responseType: Type;
   createResponseType?: Type;
@@ -22,6 +23,7 @@ export type ResourceDecoratorFactoryOptions = {
   findOneResponseType?: Type;
   updateResponseType?: Type;
   deleteResponseType?: Type;
+  public?: boolean;
 };
 
 export class ResourceDecoratorFactory {
@@ -39,15 +41,22 @@ export class ResourceDecoratorFactory {
     return `${this.singularPath}/:id`;
   }
 
+  private get isPublic() {
+    return this.options.public;
+  }
+
   private get createResponseType() {
     return this.options.createResponseType ?? this.options.responseType;
   }
+
   private get updateResponseType() {
     return this.options.updateResponseType ?? this.options.responseType;
   }
+
   private get findResponseType() {
     return this.options.findResponseType ?? this.options.responseType;
   }
+
   private get findOneResponseType() {
     return (
       this.options.findOneResponseType ??
@@ -69,16 +78,21 @@ export class ResourceDecoratorFactory {
   Controller(): ClassDecorator {
     return (...args) => {
       Controller()(...args);
-      ApiBearerAuth()(...args);
+      if (this.isPublic === true) {
+        Public()(...args);
+      } else {
+        ApiBearerAuth()(...args);
+      }
     };
   }
+
   /**
    * POST /item
    *
    * @param type return type
    * @returns
    */
-  Create(): MethodDecorator {
+  CreateOne(): MethodDecorator {
     return (...args) => {
       this.CommonResponse()(...args);
       ApiOperation({ summary: 'Create item' })(...args);
@@ -95,7 +109,7 @@ export class ResourceDecoratorFactory {
    * GET /items
    * @returns
    */
-  Find(): MethodDecorator {
+  FindMany(): MethodDecorator {
     return (...args) => {
       this.CommonResponse()(...args);
 
@@ -128,7 +142,7 @@ export class ResourceDecoratorFactory {
    *
    * @returns
    */
-  UpdateOne(): MethodDecorator {
+  UpdateOneById(): MethodDecorator {
     return (...args) => {
       this.CommonResponse()(...args);
 
@@ -150,7 +164,7 @@ export class ResourceDecoratorFactory {
    *
    * @returns
    */
-  DeleteOne(): MethodDecorator {
+  DeleteOneById(): MethodDecorator {
     return (...args) => {
       this.CommonResponse()(...args);
 

@@ -7,7 +7,7 @@ import {
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import type { ValiationErrorDto } from '../dtos/common.js';
+import type { ValiationErrorDto } from '../dtos/response-types.js';
 
 export async function bootstrap(appModule: Type) {
   const app = await NestFactory.create(appModule);

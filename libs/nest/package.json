@@ -13,17 +13,23 @@
       "import": "./dist/index.js",
       "default": "./dist/index.js"
     },
-    "./common": {
-      "bun": "./src/common/index.ts",
-      "types": "./dist/common/index.d.ts",
-      "import": "./dist/common/index.js",
-      "default": "./dist/common/index.js"
+    "./bootstrap": {
+      "bun": "./src/bootstrap/index.ts",
+      "types": "./dist/bootstrap/index.d.ts",
+      "import": "./dist/bootstrap/index.js",
+      "default": "./dist/bootstrap/index.js"
     },
     "./prop": {
       "bun": "./src/prop/index.ts",
       "types": "./dist/prop/index.d.ts",
       "import": "./dist/prop/index.js",
       "default": "./dist/prop/index.js"
+    },
+    "./dtos": {
+      "bun": "./src/dtos/index.ts",
+      "types": "./dist/dtos/index.d.ts",
+      "import": "./dist/dtos/index.js",
+      "default": "./dist/dtos/index.js"
     }
   },
   "files": [
@@ -43,6 +49,7 @@
     }
   },
   "dependencies": {
+    "@aenode/names": "workspace:*",
     "@aenode/nest-prop": "workspace:*",
     "@nestjs/cache-manager": "^12.0.0",
     "@nestjs/common": "^12.0.4",

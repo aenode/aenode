@@ -5,10 +5,6 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { CommonController } from './common.controller.js';
 
-export * from '@nestjs/cache-manager';
-export * from '@nestjs/config';
-export * from '@nestjs/event-emitter';
-export * from '@nestjs/swagger';
 @Module({
   imports: [
     ConfigModule.forRoot({ cache: true }),
