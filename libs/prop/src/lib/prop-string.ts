@@ -15,6 +15,7 @@ import {
 } from 'class-validator';
 import { __PropCommon } from './prop-common.js';
 import type { StringFormat, StringValidationOptions } from './prop-options.js';
+import { IsRelativePath } from './validators/is-relative-path.js';
 
 /**
  * String property format validation decorator
@@ -66,6 +67,11 @@ export function __PropStringFormat(
       }
       case 'url': {
         IsUrl(undefined, validationOptions)(...args);
+        break;
+      }
+
+      case 'path': {
+        IsRelativePath(validationOptions)(...args);
         break;
       }
     }

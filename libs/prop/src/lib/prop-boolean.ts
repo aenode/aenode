@@ -1,3 +1,4 @@
+import { Transform } from 'class-transformer';
 import { IsBoolean, type ValidationOptions } from 'class-validator';
 import { __PropCommon } from './prop-common.js';
 import type { BooleanValidationOptions } from './prop-options.js';
@@ -32,6 +33,14 @@ export function __PropBoolean(
       each: inferedType === Array,
       groups: options?.groups,
     };
+    Transform(({ value }) => {
+      if (value === 'true') {
+        return true;
+      } else if (value === 'false') {
+        return false;
+      }
+      return value;
+    })(...args);
     __PropCommon(options, validationOptions)(...args);
     IsBoolean(validationOptions)(...args);
   };

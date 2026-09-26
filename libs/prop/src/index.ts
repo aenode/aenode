@@ -1,5 +1,6 @@
-// @index(['./**/*.ts', '!./**/*.spec.ts', "!**/test/**"], f => `export * from '${f.path}.js'`)
+// @index(['./**/*.ts', '!./**/*.spec.ts','!./**/index.ts', '!./**/_*.ts', '!./**/generated/**'], f => `export * from '${f.path}.js'`)
 export * from './lib/default-value-transformer.js';
+export * from './lib/json-transformer.js';
 export * from './lib/prop-boolean.js';
 export * from './lib/prop-common.js';
 export * from './lib/prop-date.js';
@@ -11,3 +12,8 @@ export * from './lib/prop-options.js';
 export * from './lib/prop-string.js';
 export * from './lib/prop-validation.js';
 export * from './lib/test-helpers.js';
+export * from './lib/validators/is-relative-path.js';
+export * from './lib/validators/less-than.js';
+export * from './lib/validators/more-than.js';
+export * from './lib/validators/not-with.js';
+export * from './lib/validators/not-without.js';

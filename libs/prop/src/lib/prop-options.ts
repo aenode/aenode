@@ -11,7 +11,8 @@ export type StringFormat =
   | 'ean'
   | 'json'
   | 'url'
-  | 'data-uri';
+  | 'data-uri'
+  | 'path';
 
 export type NumberFormat = 'integer' | 'positive' | 'percent';
 
@@ -84,4 +85,8 @@ export type PropValidationOptions = {
   maxDate?: DateType;
   isIn?: unknown[];
   isNotIn?: unknown[];
+  notWith?: string[];
+  notWithout?: string[];
+  moreThan?: string[];
+  lessThan?: string[];
 } & CommonValidationOptions;

@@ -1,3 +1,4 @@
+import { Transform } from 'class-transformer';
 import {
   IsInt,
   IsNumber,
@@ -59,6 +60,12 @@ export function __PropNumber(
     const { min, max, format } = options;
 
     __PropCommon(options, validationOptions)(...args);
+    Transform(({ value }) => {
+      if (typeof value === 'string') {
+        return parseFloat(value);
+      }
+      return value;
+    })(...args);
     IsNumber(undefined, validationOptions)(...args);
 
     if (min !== undefined) Min(min, validationOptions)(...args);

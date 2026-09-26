@@ -54,15 +54,15 @@ export class UUIDFilterDto {
 }
 
 export class JSONFilterDto {
-  @Prop() equals?: unknown;
+  @Prop() equals?: string;
   @Prop() not?: JSONFilterDto;
   @Prop({ type: String }) path?: string[];
   @Prop() string_contains?: string;
   @Prop() string_starts_with?: string;
   @Prop() string_ends_with?: string;
-  @Prop() array_contains?: unknown;
-  @Prop() array_starts_with?: unknown;
-  @Prop() array_ends_with?: unknown;
+  @Prop() array_contains?: string;
+  @Prop() array_starts_with?: string;
+  @Prop() array_ends_with?: string;
 }
 
 export class ArrayStringFilterDto {

@@ -24,6 +24,7 @@ export function toApiProeprtyOptions(
     example: options.example,
     examples: options.examples,
     description: options.description,
+    default: options.defaultValue,
   };
 
   if (isArrayType === true) {

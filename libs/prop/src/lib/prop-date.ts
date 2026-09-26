@@ -1,5 +1,7 @@
+import { Transform } from 'class-transformer';
 import {
   IsDate,
+  isISO8601,
   MaxDate,
   MinDate,
   type ValidationOptions,
@@ -40,6 +42,13 @@ export function __PropDate(
     const { minDate: min, maxDate: max } = options ?? {};
 
     __PropCommon(options, validationOptions)(...args);
+
+    Transform(({ value }) => {
+      if (isISO8601(value)) {
+        return new Date(value);
+      }
+      return value;
+    })(...args);
     IsDate(validationOptions)(...args);
 
     if (min) MinDate(min, validationOptions)(...args);

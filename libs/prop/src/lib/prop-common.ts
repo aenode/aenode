@@ -2,6 +2,10 @@ import { Expose } from 'class-transformer';
 import { IsDefined, IsOptional, type ValidationOptions } from 'class-validator';
 import { DefaultValueTransformer } from './default-value-transformer.js';
 import type { PropValidationOptions } from './prop-options.js';
+import { LessThan } from './validators/less-than.js';
+import { MoreThan } from './validators/more-than.js';
+import { NotWith } from './validators/not-with.js';
+import { NotWithout } from './validators/not-without.js';
 
 /**
  * Common validations and transform decorators including
@@ -22,6 +26,23 @@ export function __PropCommon(
     const { required } = options;
 
     Expose({ groups: options.groups })(...args);
+
+    if (options.notWith) {
+      NotWith(options.notWith)(...args);
+    }
+
+    if (options.notWithout) {
+      NotWithout(options.notWithout)(...args);
+    }
+
+    if (options.moreThan) {
+      MoreThan(options.moreThan, validationOptions)(...args);
+    }
+
+    if (options.lessThan) {
+      LessThan(options.lessThan, validationOptions)(...args);
+    }
+
     DefaultValueTransformer(options)(...args);
 
     if (required === true) {

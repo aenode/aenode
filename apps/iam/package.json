@@ -31,7 +31,7 @@
       "serve": {},
       "prisma:generate": {},
       "prisma:migrate": {},
-      "prisma:reste": {}
+      "prisma:reset": {}
     }
   },
   "dependencies": {
