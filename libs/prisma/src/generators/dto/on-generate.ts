@@ -1,5 +1,6 @@
 import type { GeneratorOptions } from '@prisma/generator-helper';
-import { FieldMetadata } from '../helpers/metadata.js';
+import { FieldMetadata } from '../helpers/field-metadata.js';
+import { toWritableOptions } from '../helpers/to-writable-options.js';
 
 export default async function onGenerate(options: GeneratorOptions) {
   const output = options.generator.output?.value;
@@ -15,6 +16,7 @@ export default async function onGenerate(options: GeneratorOptions) {
     'Models: ',
     models.map((e) => e.name),
   );
+
   console.log(
     'Enums: ',
     enumModels.map((e) => e.name),
@@ -25,16 +27,9 @@ export default async function onGenerate(options: GeneratorOptions) {
       `${m.name} input field:`,
       m.fields
         .map((f) => new FieldMetadata(f))
-        .filter((e) => e.isInputField)
-        .map((e) => e.name),
-    );
-
-    console.log(
-      `${m.name} update field:  `,
-      m.fields
-        .map((f) => new FieldMetadata(f))
-        .filter((e) => e.isUpdateField)
-        .map((e) => e.name),
+        .map((meta) => {
+          return toWritableOptions(meta);
+        }),
     );
   }
 }

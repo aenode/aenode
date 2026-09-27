@@ -6,6 +6,14 @@ export class FieldMetadata {
   private get doc() {
     return this.field.documentation ?? '';
   }
+
+  get enum() {
+    if (this.field.kind === 'enum') {
+      return `P.$Enums.${this.field.type}`;
+    }
+    return undefined;
+  }
+
   private has(name: keyof FieldMetadata): boolean {
     return !!this.doc.match(new RegExp(`@${name}`, 'i'));
   }
@@ -14,6 +22,7 @@ export class FieldMetadata {
     const matched = this.doc.match(new RegExp(`@${name}\\((\\w+)\\)`, 'i'));
     return matched?.[1];
   }
+
   private arrayStrValue(name: keyof FieldMetadata): string[] | undefined {
     const matchedValue = this.valueOf(name);
 
@@ -32,6 +41,10 @@ export class FieldMetadata {
     return undefined;
   }
 
+  get isArray() {
+    return this.field.isList;
+  }
+
   get name() {
     return this.field.name;
   }
@@ -46,11 +59,12 @@ export class FieldMetadata {
     }
 
     if (this.field.hasDefaultValue) {
-      return false;
+      return;
     }
 
-    return this.field.isRequired === true;
+    return this.field.isRequired === true ? true : undefined;
   }
+
   get internal() {
     return this.has('internal');
   }
@@ -70,30 +84,39 @@ export class FieldMetadata {
   get min() {
     return this.numValue('min');
   }
+
   get max() {
     return this.numValue('max');
   }
+
   get minLength() {
     return this.numValue('minLength');
   }
+
   get maxLength() {
     return this.numValue('maxLength');
   }
+
   get format() {
     return this.valueOf('format');
   }
+
   get moreThan() {
     return this.arrayStrValue('moreThan');
   }
+
   get lessThan() {
     return this.arrayStrValue('lessThan');
   }
+
   get isIn() {
     return this.arrayStrValue('isIn');
   }
+
   get isNotIn() {
     return this.arrayStrValue('isNotIn');
   }
+
   get description() {
     return this.valueOf('description');
   }
@@ -123,6 +146,13 @@ export class FieldMetadata {
     return /(created|updated|deleted)By/i.test(this.field.name);
   }
 
+  get include() {
+    return this.has('include');
+  }
+
+  get isReadField() {
+    return !this.internal && !this.hidden && !this.writeonly;
+  }
   get isInputField() {
     return !(
       this.isRelationField ||
@@ -138,5 +168,49 @@ export class FieldMetadata {
       return false;
     }
     return this.isInputField;
+  }
+
+  get type() {
+    return this.valueOf('type');
+  }
+
+  get tsPrimitiveType() {
+    if (this.type) {
+      return this.type;
+    }
+
+    switch (this.field.kind) {
+      case 'scalar': {
+        switch (this.field.type) {
+          case 'Json':
+          case 'String': {
+            return 'string';
+          }
+          case 'Boolean':
+            return 'boolean';
+          case 'Int':
+          case 'Decimal':
+            return 'number';
+          case 'DateTime':
+            return 'Date';
+        }
+        break;
+      }
+      case 'enum': {
+        return `P.$Enums.${this.field.type}`;
+      }
+      case 'unsupported': {
+        throw new Error('Unsupored types should be typed explictly');
+      }
+      case 'object': {
+        throw new Error('Object field is not valid in this context');
+      }
+    }
+
+    throw new Error(`Could not reesolve the type of ${this.name}`);
+  }
+
+  get tsType() {
+    return `${this.tsPrimitiveType}${this.field.isList ? '[]' : ''}`;
   }
 }
