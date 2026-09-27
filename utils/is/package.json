@@ -1,6 +1,6 @@
 {
   "name": "@aenode/is",
-  "version": "0.0.19",
+  "version": "0.0.21",
   "description": "Common validation and transformation functions to stream line the conditional statements and transforming values",
   "keywords": [
     "types"
