@@ -1,5 +1,5 @@
 import { extractResourceName, names } from '@aenode/names';
-import { getMethodNames, getReturnType } from '@aenode/reflect';
+import { getReturnType } from '@aenode/reflect';
 import { Controller, Delete, Get, Post, Put } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
@@ -102,7 +102,18 @@ export function AutoController(): ClassDecorator {
 
     [Controller(kebab), ResouceName(resouceName)].forEach((d) => d(target));
 
-    const methodNames = getMethodNames(target.prototype);
+    const methodNames = Object.getOwnPropertyNames(target.prototype).filter(
+      (name) => {
+        if (name === 'constructor') return false;
+
+        const descriptor = Object.getOwnPropertyDescriptor(
+          target.prototype,
+          name,
+        );
+
+        return typeof descriptor?.value === 'function';
+      },
+    );
 
     for (const methodName of methodNames) {
       const descriptor = Object.getOwnPropertyDescriptor(

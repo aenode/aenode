@@ -110,6 +110,7 @@
     "autoExit": 3,
     "enabled": true
   },
+  "useDaemonProcess": false,
   "generators": {
     "@aenode/aenode:project": {
       "orgName": "aenode",

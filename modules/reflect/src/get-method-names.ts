@@ -1,9 +1,11 @@
-import type { ClassType } from '@aenode/types';
+export function getMethodNames<T extends { prototype: any }>(
+  target: T,
+): string[] {
+  const prototype = target.prototype;
 
-export function getMethodNames<T>(target: ClassType<T>) {
-  return Object.getOwnPropertyNames(target.prototype).filter(
+  return Object.getOwnPropertyNames(prototype).filter(
     (name) =>
       name !== 'constructor' &&
-      typeof target.prototype[name as keyof typeof target] === 'function',
+      typeof prototype[name as keyof T] === 'function',
   );
 }

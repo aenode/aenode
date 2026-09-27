@@ -7,12 +7,12 @@ packages:
   - "plugins/*"
   - "databases/*"
 allowBuilds:
-  '@apollo/protobufjs': set this to true or false
-  '@parcel/watcher': set this to true or false
-  '@prisma/engines': set this to true or false
-  '@scarf/scarf': set this to true or false
-  '@swc/core': set this to true or false
-  better-sqlite3: set this to true or false
-  nx: set this to true or false
-  prisma: set this to true or false
-  unrs-resolver: set this to true or false
+  '@apollo/protobufjs': true
+  '@parcel/watcher': true
+  '@prisma/engines': true
+  '@scarf/scarf': true
+  '@swc/core': true
+  better-sqlite3: true
+  nx: true
+  prisma: true
+  unrs-resolver: true
