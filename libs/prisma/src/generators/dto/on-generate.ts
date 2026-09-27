@@ -1,5 +1,5 @@
 import type { GeneratorOptions } from '@prisma/generator-helper';
-import { isInputField, isUpdateField } from '../helpers/metadata.js';
+import { FieldMetadata } from '../helpers/metadata.js';
 
 export default async function onGenerate(options: GeneratorOptions) {
   const output = options.generator.output?.value;
@@ -23,12 +23,18 @@ export default async function onGenerate(options: GeneratorOptions) {
   for (const m of models) {
     console.log(
       `${m.name} input field:`,
-      m.fields.filter((e) => isInputField(e)).map((e) => e.name),
+      m.fields
+        .map((f) => new FieldMetadata(f))
+        .filter((e) => e.isInputField)
+        .map((e) => e.name),
     );
 
     console.log(
       `${m.name} update field:  `,
-      m.fields.filter((e) => isUpdateField(e)).map((e) => e.name),
+      m.fields
+        .map((f) => new FieldMetadata(f))
+        .filter((e) => e.isUpdateField)
+        .map((e) => e.name),
     );
   }
 }
