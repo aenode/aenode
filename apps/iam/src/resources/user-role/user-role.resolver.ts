@@ -43,8 +43,10 @@ export class UserRoleResolver {
   @Mutation(() => Dtos.UserRoleReadDto)
   protected createUserRole(
     @ArgsInput(() => Dtos.UserRoleCreateDto) data: Dtos.UserRoleCreateDto,
+    @ArgsQuery(() => Dtos.UserRoleFindOneArgsDto)
+    query: Dtos.UserRoleFindOneArgsDto,
   ) {
-    return this.delegate.create({ data });
+    return this.delegate.create({ ...query, data });
   }
 
   @Mutation(() => Dtos.UserRoleReadDto)
@@ -52,13 +54,19 @@ export class UserRoleResolver {
     @ArgsId() id: number,
     @ArgsInput(() => Dtos.UserRoleUpdateDto)
     data: Dtos.UserRoleUpdateDto,
+    @ArgsQuery(() => Dtos.UserRoleFindOneArgsDto)
+    query: Dtos.UserRoleFindOneArgsDto,
   ) {
-    return this.delegate.update({ where: { id }, data });
+    return this.delegate.update({ ...query, where: { id }, data });
   }
 
   @Mutation(() => Dtos.UserRoleReadDto)
-  protected deleteUserRoleById(@ArgsId() id: number) {
-    return this.delegate.delete({ where: { id } });
+  protected deleteUserRoleById(
+    @ArgsId() id: number,
+    @ArgsQuery(() => Dtos.UserRoleFindOneArgsDto)
+    query: Dtos.UserRoleFindOneArgsDto,
+  ) {
+    return this.delegate.delete({ ...query, where: { id } });
   }
 
   @Subscription(() => Dtos.UserRoleReadDto)

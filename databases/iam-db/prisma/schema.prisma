@@ -8,6 +8,11 @@ generator aenodeGraphql {
     output   = "../src/generated/dtos"
 }
 
+generator aenodeResolver {
+    provider = "aenode-graphql"
+    output   = "../../../apps/iam/src/resources"
+}
+
 datasource db {
     provider = "postgresql"
 }

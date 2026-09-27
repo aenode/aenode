@@ -2,57 +2,32 @@ import { writeTextFile } from '@aenode/fs';
 import { names } from '@aenode/names';
 import type { GeneratorOptions } from '@prisma/generator-helper';
 import { join } from 'node:path';
-import { printCreateDtoClass } from '../printers/print-create-dto-class.js';
-import { printEnumFilterDtos } from '../printers/print-enum-filter-dto-class.js';
-import { printReadDtoClass } from '../printers/print-read-dto-class.js';
-import { printWhereDtoClass } from '../printers/print-where-dto-class.js';
+import {
+  printResolverClass,
+  printResolverModule,
+} from '../printers/print-resolver.js';
 
 export default async function onGenerate(options: GeneratorOptions) {
   const output = options.generator.output?.value;
 
   if (!output) throw new Error('output is required!');
 
-  const enumModels = options.dmmf.datamodel.enums;
+  const models = options.dmmf.datamodel.models;
 
-  EnumFilters: if (enumModels) {
-    const fileName = 'enum-filters.ts';
-    const filepath = join(output, 'common', fileName);
-    const code = printEnumFilterDtos([...enumModels]);
-
-    await writeTextFile(filepath, code);
-
-    break EnumFilters;
-  }
-
-  for (const model of options.dmmf.datamodel.models) {
-    ReadDtoPrinter: {
+  for (const model of models) {
+    Resolver: {
+      const code = printResolverClass(model);
       const { kebab } = names(model.name);
-      const fileName = `${kebab}-read.dto.ts`;
-      const filepath = join(output, kebab, fileName);
-      const code = printReadDtoClass(model);
+      await writeTextFile(join(output, kebab, `${kebab}.resolver.ts`), code);
 
-      await writeTextFile(filepath, code);
-      break ReadDtoPrinter;
+      break Resolver;
     }
 
-    CreateDtoPrinter: {
+    Module: {
+      const code = printResolverModule(model);
       const { kebab } = names(model.name);
-      const fileName = `${kebab}-create.dto.ts`;
-      const filepath = join(output, kebab, fileName);
-      const code = printCreateDtoClass(model);
-
-      await writeTextFile(filepath, code);
-      break CreateDtoPrinter;
-    }
-
-    WhereDtoPritner: {
-      const { kebab } = names(model.name);
-      const fileName = `${kebab}-where.dto.ts`;
-      const filepath = join(output, kebab, fileName);
-      const code = printWhereDtoClass(model);
-
-      await writeTextFile(filepath, code);
-      break WhereDtoPritner;
+      await writeTextFile(join(output, kebab, `${kebab}.module.ts`), code);
+      break Module;
     }
   }
 }
