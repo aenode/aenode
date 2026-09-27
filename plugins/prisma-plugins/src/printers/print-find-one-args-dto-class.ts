@@ -11,19 +11,19 @@ export function printFindOneArgsDtoProperties(model: DMMF.Model) {
   const IncludeDto = `${model.name}${ClassNameSuffix.IncludeDto}`;
   const OmitDto = `${model.name}${ClassNameSuffix.OmitDto}`;
 
-  const hasSelect = model.fields.filter((e) => isSelectField(e)).length > 0;
-  const hasInclude = model.fields.filter((e) => isIncludeField(e)).length > 0;
-  const hasOmit = model.fields.filter((e) => isOmitField(e)).length > 0;
+  const hasSelect = model.fields.some((e) => isSelectField(e));
+  const hasInclude = model.fields.some((e) => isIncludeField(e));
+  const hasOmit = model.fields.some((e) => isOmitField(e));
 
   return [
-    hasSelect
-      ? `  @Prop({ object: ()=> ${SelectDto} }) select?: ${SelectDto};`
-      : '',
-    hasInclude
-      ? `  @Prop({ object: ()=> ${IncludeDto} }) include?: ${IncludeDto};`
-      : '',
-    hasOmit ? `  @Prop({ object: ()=> ${OmitDto} }) omit?: ${OmitDto};` : '',
-  ].join('\n');
+    hasSelect &&
+      `  @Prop({ object: () => ${SelectDto} }) select?: ${SelectDto};`,
+    hasInclude &&
+      `  @Prop({ object: () => ${IncludeDto} }) include?: ${IncludeDto};`,
+    hasOmit && `  @Prop({ object: () => ${OmitDto} }) omit?: ${OmitDto};`,
+  ]
+    .filter(Boolean)
+    .join('\n');
 }
 
 export function printFindOneArgsDtoClass(
@@ -35,7 +35,9 @@ export function printFindOneArgsDtoClass(
   const properties = printFindOneArgsDtoProperties(model);
 
   if (properties) {
-    return [classDecorator, `export class ${className}{`, `}`].join('\n');
+    return [classDecorator, `export class ${className}{`, properties, `}`].join(
+      '\n',
+    );
   }
 
   return '';

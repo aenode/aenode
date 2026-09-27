@@ -32,8 +32,12 @@ export class UserRoleResolver {
   }
 
   @Query(() => Dtos.UserRoleReadDto, { nullable: true })
-  protected findUserRoleById(@ArgsId() id: number) {
-    return this.delegate.findUnique({ where: { id } });
+  protected findUserRoleById(
+    @ArgsId() id: number,
+    @ArgsQuery(() => Dtos.UserRoleFindOneArgsDto)
+    query: Dtos.UserRoleFindOneArgsDto,
+  ) {
+    return this.delegate.findUnique({ ...query, where: { id } });
   }
 
   @Mutation(() => Dtos.UserRoleReadDto)

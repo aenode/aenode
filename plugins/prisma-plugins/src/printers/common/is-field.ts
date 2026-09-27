@@ -7,7 +7,7 @@ import type { DMMF } from '@prisma/generator-helper';
  * @returns
  */
 export function hasInternalAnnotation(field: DMMF.Field) {
-  return /@internal|@hidden/i.test(field.documentation ?? '');
+  return /@(internal|hidden)/i.test(field.documentation ?? '');
 }
 
 /**
@@ -17,7 +17,7 @@ export function hasInternalAnnotation(field: DMMF.Field) {
  * @returns
  */
 export function isTimestampField(field: DMMF.Field) {
-  return /^createdat|updatedat|deletedat$/i.test(field.name);
+  return /^(createdat|updatedat|deletedat)$/i.test(field.name);
 }
 
 /**
