@@ -1,6 +1,6 @@
 {
   "name": "@aenode/api",
-  "version": "0.0.21",
+  "version": "0.0.23",
   "description": "Core api",
   "keywords": [
     "api"

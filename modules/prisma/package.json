@@ -1,6 +1,6 @@
 {
   "name": "@aenode/prisma",
-  "version": "0.0.21",
+  "version": "0.0.23",
   "description": "Nestjs prisma module",
   "keywords": [
     "types"
