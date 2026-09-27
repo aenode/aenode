@@ -9,7 +9,12 @@ export function LessThan(
       name: 'lessThan',
       target: object.constructor,
       propertyName: propertyName as string,
-      options: validationOptions,
+      options: {
+        ...validationOptions,
+        message(args) {
+          return `${args.property} should be less than ${properties.join(', ')}`;
+        },
+      },
       validator: {
         validate(value: unknown, args) {
           if (value !== undefined && value !== null) {

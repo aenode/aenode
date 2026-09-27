@@ -34,18 +34,7 @@ export class UserListFilterDto {
   @Prop({ type: () => UserScalarWhereDto }) none: UserScalarWhereDto;
 }
 
-export class UserSelectDto {
-  @Prop() password: boolean;
-  @Prop() uuid: boolean;
-  @Prop() id: boolean;
-  @Prop() createdAt: boolean;
-  @Prop() updatedAt: boolean;
-  @Prop() isActive: boolean;
-  @Prop() username: boolean;
-  @Prop() avatar: boolean;
-}
-
-export class UserOmitDto {
+export class UserScalarProjectionDto {
   @Prop() password: boolean;
   @Prop() uuid: boolean;
   @Prop() id: boolean;
@@ -62,17 +51,15 @@ export class UserIncludeDto implements Required<Prisma.UserInclude> {
   @Prop() userTasks: boolean;
   @Prop() _count: boolean;
 }
+
 export class UserFindManyDto {
   @Prop({ defaultValue: 20 }) take?: number;
   @Prop({ defaultValue: 0 }) skip?: number;
-  @Prop({ defaultValue: null }) cursor?: UserScalarWhereDto;
-  @Prop({ defaultValue: null }) where?: UserScalarWhereDto;
-  @Prop({ defaultValue: null, notWith: ['omit', 'inlclude'] })
-  select?: UserSelectDto;
-  @Prop({ defaultValue: null, notWith: ['select', 'inlclude'] })
-  omit?: UserOmitDto;
-  @Prop({ defaultValue: null, notWith: ['select', 'omit'] })
-  include?: UserIncludeDto;
+  @Prop() cursor?: UserScalarWhereDto;
+  @Prop() where?: UserScalarWhereDto;
+  @Prop({ notWith: ['omit', 'inlclude'] }) select?: UserScalarProjectionDto;
+  @Prop({ notWith: ['select', 'inlclude'] }) omit?: UserScalarProjectionDto;
+  @Prop({ notWith: ['select', 'omit'] }) include?: UserIncludeDto;
 }
 
 export class UserDto implements Prisma.UserModel {

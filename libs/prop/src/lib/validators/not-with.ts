@@ -6,6 +6,11 @@ export function NotWith(properties: string[]): PropertyDecorator {
       name: 'notWith',
       target: object.constructor,
       propertyName: propertyName as string,
+      options: {
+        message(args) {
+          return `${args.property} cannot be used together with ${properties.join(', ')}`;
+        },
+      },
       validator: {
         validate(value: unknown, args) {
           if (value !== undefined && value !== null) {

@@ -9,7 +9,12 @@ export function IsRelativePath(
       name: 'isRelativePath',
       target: object.constructor,
       propertyName: propertyName as string,
-      options: validationOptions,
+      options: {
+        ...validationOptions,
+        message(args) {
+          return `${args.property} should be a realative path`;
+        },
+      },
       validator: {
         validate(value: unknown) {
           if (typeof value !== 'string') return false;
