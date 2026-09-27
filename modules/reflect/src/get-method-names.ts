@@ -1,8 +1,6 @@
 import type { ClassType } from '@aenode/types';
 
-export function getMethodNames<T extends { prototype: object }>(
-  target: ClassType<T>,
-) {
+export function getMethodNames<T>(target: ClassType<T>) {
   return Object.getOwnPropertyNames(target.prototype).filter(
     (name) =>
       name !== 'constructor' &&

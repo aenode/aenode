@@ -1,6 +1,6 @@
 import { extractResourceName, names } from '@aenode/names';
 import { getMethodNames, getReturnType } from '@aenode/reflect';
-import { Controller, Get, Post } from '@nestjs/common';
+import { Controller, Delete, Get, Post, Put } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
   ApiInternalServerErrorResponse,
@@ -42,6 +42,18 @@ export function CreateMethod(resouceName: string): MethodDecorator {
   };
 }
 
+export function UpdateByIdMethod(resouceName: string): MethodDecorator {
+  return (...args) => {
+    [Put(':id'), CommonMethod(resouceName)].forEach((d) => d(...args));
+  };
+}
+
+export function DeleteByIdMethod(resouceName: string): MethodDecorator {
+  return (...args) => {
+    [Delete(':id'), CommonMethod(resouceName)].forEach((d) => d(...args));
+  };
+}
+
 export function FindManyMethod(resourceName: string): MethodDecorator {
   return (...args) => {
     [
@@ -68,26 +80,16 @@ export function AutoMethod(resourceName?: string): MethodDecorator {
 
     resourceName ??= extractResourceName(args[0].constructor.name);
 
-    switch (methodName as MethodName) {
-      case 'findMany': {
+    if (/^create.*$/i.test(methodName)) {
+      CreateMethod(resourceName)(...args);
+      if (/^findMany.*$/i.test(methodName)) {
         FindManyMethod(resourceName)(...args);
-        break;
-      }
-      case 'findOneById': {
-        FindManyMethod(resourceName)(...args);
-        break;
-      }
-      case 'create': {
-        FindManyMethod(resourceName)(...args);
-        break;
-      }
-      case 'update': {
-        FindManyMethod(resourceName)(...args);
-        break;
-      }
-      case 'delete': {
-        FindManyMethod(resourceName)(...args);
-        break;
+      } else if (/^find.*ById/i.test(methodName)) {
+        FindByIdMethod(resourceName)(...args);
+      } else if (/^update.*ById/i.test(methodName)) {
+        UpdateByIdMethod(resourceName)(...args);
+      } else if (/^delete.*ById/i.test(methodName)) {
+        DeleteByIdMethod(resourceName)(...args);
       }
     }
   };

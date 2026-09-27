@@ -6,7 +6,7 @@
   "homepage": "https://aenode.github.io?utm_source=github&utm_campaing=social",
   "scripts": {
     "prepare": "husky",
-    "aenode:prune": "rm -rf node_modules  **/**/node_modules **/**/dist .nx"
+    "aenode:prune": "rm -rf pnpm-lock.yaml node_modules  **/**/node_modules **/**/dist .nx"
   },
   "private": true,
   "devDependencies": {

@@ -40,6 +40,7 @@
   ],
   "bin": {
     "aenode-graphql": "./bin/aenode-graphql.mjs",
+    "aenode-dto": "./bin/aenode-dto.mjs",
     "aenode-controller": "./bin/aenode-controller.mjs",
     "aenode-resolver": "./bin/aenode-resolver.mjs"
   },
