@@ -14,7 +14,11 @@
       "default": "./dist/index.js"
     }
   },
+  "bin": {
+    "prisma-dto": "./bin/prisma-dto.mjs"
+  },
   "files": [
+    "bin",
     "dist",
     "!**/*.tsbuildinfo"
   ],
@@ -34,6 +38,7 @@
     "@nestjs/common": "^12.1.0",
     "@nestjs/config": "^12.0.1",
     "@prisma/adapter-pg": "^7.10.0",
+    "@prisma/generator-helper": "^7.10.0",
     "@swc/helpers": "~0.5.18"
   }
 }
