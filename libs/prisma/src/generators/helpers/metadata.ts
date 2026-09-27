@@ -63,3 +63,86 @@ export function isUpdateField(field: DMMF.Field) {
   }
   return isInputField(field);
 }
+
+export class FieldAnnotations {
+  constructor(protected readonly field: DMMF.Field) {}
+
+  private get doc() {
+    return this.field.documentation ?? '';
+  }
+  private has(name: keyof FieldAnnotations): boolean {
+    return !!this.doc.match(new RegExp(`@${name}`, 'i'));
+  }
+
+  private valueOf(name: keyof FieldAnnotations): string | undefined {
+    const matched = this.doc.match(new RegExp(`@${name}\\((\\w+)\\)`, 'i'));
+    return matched?.[1];
+  }
+  private arrayStrValue(name: keyof FieldAnnotations): string[] | undefined {
+    const matchedValue = this.valueOf(name);
+
+    if (matchedValue) {
+      return matchedValue.split(',');
+    }
+    return undefined;
+  }
+
+  private numValue(name: keyof FieldAnnotations): number | undefined {
+    const matchedValue = this.valueOf(name);
+
+    if (matchedValue) {
+      return parseFloat(matchedValue as string);
+    }
+    return undefined;
+  }
+
+  get required() {
+    return this.has('required');
+  }
+  get internal() {
+    return this.has('internal');
+  }
+
+  get hidden() {
+    return this.has('hidden');
+  }
+
+  get readonly() {
+    return this.has('readonly');
+  }
+
+  get writeonly() {
+    return this.has('writeonly');
+  }
+
+  get min() {
+    return this.numValue('min');
+  }
+  get max() {
+    return this.numValue('max');
+  }
+  get minLength() {
+    return this.numValue('minLength');
+  }
+  get maxLength() {
+    return this.numValue('maxLength');
+  }
+  get format() {
+    return this.valueOf('format');
+  }
+  get moreThan() {
+    return this.arrayStrValue('moreThan');
+  }
+  get lessThan() {
+    return this.arrayStrValue('lessThan');
+  }
+  get isIn() {
+    return this.arrayStrValue('isIn');
+  }
+  get isNotIn() {
+    return this.arrayStrValue('isNotIn');
+  }
+  get description() {
+    return this.valueOf('description');
+  }
+}
