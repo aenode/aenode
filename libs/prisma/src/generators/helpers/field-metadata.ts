@@ -150,17 +150,29 @@ export class FieldMetadata {
     return this.has('include');
   }
 
-  get isReadField() {
-    return !this.internal && !this.hidden && !this.writeonly;
-  }
-  get isInputField() {
-    return !(
-      this.isRelationField ||
-      this.isAuditField ||
-      this.isTimestampField ||
-      this.isGeneratedId ||
-      this.readonly
+  get isDtoField() {
+    return [this.isReadField, this.isInputField, this.isUpdateField].some(
+      (e) => e === true,
     );
+  }
+
+  get isReadField() {
+    return [
+      this.isRelationField,
+      this.internal,
+      this.hidden,
+      this.writeonly,
+    ].every((e) => e === false);
+  }
+
+  get isInputField() {
+    return [
+      this.isRelationField,
+      this.isAuditField,
+      this.isTimestampField,
+      this.isGeneratedId,
+      this.readonly,
+    ].every((e) => e === false);
   }
 
   get isUpdateField() {
@@ -200,10 +212,14 @@ export class FieldMetadata {
         return `P.$Enums.${this.field.type}`;
       }
       case 'unsupported': {
-        throw new Error('Unsupored types should be typed explictly');
+        throw new Error(
+          `Unsupored, ${this.name}, types should be typed explictly`,
+        );
       }
       case 'object': {
-        throw new Error('Object field is not valid in this context');
+        throw new Error(
+          `Object field, ${this.name}, is not valid in this context`,
+        );
       }
     }
 

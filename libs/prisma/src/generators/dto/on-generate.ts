@@ -1,6 +1,8 @@
+import { names } from '@aenode/names';
 import type { GeneratorOptions } from '@prisma/generator-helper';
-import { FieldMetadata } from '../helpers/field-metadata.js';
-import { toWritableOptions } from '../helpers/to-writable-options.js';
+import { mkdir, writeFile } from 'node:fs/promises';
+import { dirname, join } from 'node:path';
+import { printDtoClasses } from './printers/print-dto-classes.js';
 
 export default async function onGenerate(options: GeneratorOptions) {
   const output = options.generator.output?.value;
@@ -8,28 +10,15 @@ export default async function onGenerate(options: GeneratorOptions) {
   if (!output) throw new Error('output is required!');
 
   const models = options.dmmf.datamodel.models;
-  const enumModels = options.dmmf.datamodel.enums;
-
-  console.log('Output:  ', output);
-
-  console.log(
-    'Models: ',
-    models.map((e) => e.name),
-  );
-
-  console.log(
-    'Enums: ',
-    enumModels.map((e) => e.name),
-  );
 
   for (const m of models) {
-    console.log(
-      `${m.name} input field:`,
-      m.fields
-        .map((f) => new FieldMetadata(f))
-        .map((meta) => {
-          return toWritableOptions(meta);
-        }),
-    );
+    const content = printDtoClasses(m);
+    const { kebab } = names(m.name);
+    const fileName = `${kebab}.dto.ts`;
+
+    const filePath = join(output, kebab, fileName);
+
+    await mkdir(dirname(filePath), { recursive: true });
+    await writeFile(filePath, content);
   }
 }
