@@ -8,8 +8,8 @@ describe('Boolean Validation', () => {
     options                                        | value                    | errors
     ${{} as PropValidationOptions}                 | ${{ value: undefined }}  | ${[]}
     ${{} as PropValidationOptions}                 | ${{ value: null }}       | ${[]}
-    ${{ required: true } as PropValidationOptions} | ${{ value: undefined }}  | ${['isDefined', 'isBoolean']}
-    ${{ required: true } as PropValidationOptions} | ${{ value: null }}       | ${['isDefined', 'isBoolean']}
+    ${{ required: true } as PropValidationOptions} | ${{ value: undefined }}  | ${['isBoolean']}
+    ${{ required: true } as PropValidationOptions} | ${{ value: null }}       | ${['isBoolean']}
     ${{} as PropValidationOptions}                 | ${{ value: true }}       | ${[]}
     ${{} as PropValidationOptions}                 | ${{ value: false }}      | ${[]}
     ${{} as PropValidationOptions}                 | ${{ value: 1 }}          | ${['isBoolean']}

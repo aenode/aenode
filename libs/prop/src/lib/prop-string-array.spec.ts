@@ -10,10 +10,10 @@ describe('String Array Validation ', () => {
     options                                                          | value                                                               | errors
     ${{ type: String } as PropValidationOptions}                     | ${{ value: undefined }}                                             | ${[]}
     ${{ type: String } as PropValidationOptions}                     | ${{ value: null }}                                                  | ${[]}
-    ${{ type: String, required: true } as PropValidationOptions}     | ${{ value: undefined }}                                             | ${['isString', 'isArray', 'isDefined']}
-    ${{ type: String, required: true } as PropValidationOptions}     | ${{ value: null }}                                                  | ${['isString', 'isArray', 'isDefined']}
-    ${{ type: String, required: true } as PropValidationOptions}     | ${{ value: [undefined] }}                                           | ${['isString', 'isDefined']}
-    ${{ type: String, required: true } as PropValidationOptions}     | ${{ value: [null] }}                                                | ${['isString', 'isDefined']}
+    ${{ type: String, required: true } as PropValidationOptions}     | ${{ value: undefined }}                                             | ${['isString', 'isArray']}
+    ${{ type: String, required: true } as PropValidationOptions}     | ${{ value: null }}                                                  | ${['isString', 'isArray']}
+    ${{ type: String, required: true } as PropValidationOptions}     | ${{ value: [undefined] }}                                           | ${['isString']}
+    ${{ type: String, required: true } as PropValidationOptions}     | ${{ value: [null] }}                                                | ${['isString']}
     ${{ type: String } as PropValidationOptions}                     | ${{ value: [''] }}                                                  | ${[]}
     ${{ type: String } as PropValidationOptions}                     | ${{ value: [' '] }}                                                 | ${[]}
     ${{ type: String, minLength: 5 } as PropValidationOptions}       | ${{ value: [faker.string.sample(5)] }}                              | ${[]}

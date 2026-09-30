@@ -1,8 +1,7 @@
 import {
   Body,
-  Param,
-  ParseIntPipe,
-  Query,
+  ParamId,
+  QueryParam,
   ResourceDecoratorFactory,
 } from '@aenode/nest';
 import { InjectPrismaDelegate } from '@aenode/prisma';
@@ -28,13 +27,13 @@ export class UserController {
   ) {}
 
   @UserDecoratorFactory.FindMany()
-  findMany(@Query() query: UserFindManyDto) {
-    console.table({ query });
-    return this.delegate.findMany(query);
+  findMany(@QueryParam() query: UserFindManyDto) {
+    console.log(query);
+    return this.delegate.findMany({ ...query });
   }
 
   @UserDecoratorFactory.FindOneById()
-  findOneById(@Param('id', ParseIntPipe) id: number) {
+  findOneById(@ParamId() id: number) {
     return this.delegate.findUnique({ where: { id } });
   }
   @UserDecoratorFactory.CreateOne()
@@ -43,15 +42,12 @@ export class UserController {
   }
 
   @UserDecoratorFactory.UpdateOneById()
-  updateOne(
-    @Param('id', ParseIntPipe) id: number,
-    @Body() data: UserUpdateDto,
-  ) {
+  updateOne(@ParamId() id: number, @Body() data: UserUpdateDto) {
     return this.delegate.update({ where: { id }, data });
   }
 
   @UserDecoratorFactory.DeleteOneById()
-  deleteOne(@Param('id', ParseIntPipe) id: number) {
+  deleteOne(@ParamId() id: number) {
     return this.delegate.update({ where: { id }, data: { isActive: false } });
   }
 }

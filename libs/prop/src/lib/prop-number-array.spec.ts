@@ -8,8 +8,8 @@ describe('Number Array Validation', () => {
     options                                                         | value                   | errors
     ${{ type: Number } as PropValidationOptions}                    | ${{ value: undefined }} | ${[]}
     ${{ type: Number } as PropValidationOptions}                    | ${{ value: null }}      | ${[]}
-    ${{ type: Number, required: true } as PropValidationOptions}    | ${{ value: undefined }} | ${['isNumber', 'isDefined', 'isArray']}
-    ${{ type: Number, required: true } as PropValidationOptions}    | ${{ value: null }}      | ${['isNumber', 'isDefined', 'isArray']}
+    ${{ type: Number, required: true } as PropValidationOptions}    | ${{ value: undefined }} | ${['isNumber', 'isArray']}
+    ${{ type: Number, required: true } as PropValidationOptions}    | ${{ value: null }}      | ${['isNumber', 'isArray']}
     ${{ type: Number } as PropValidationOptions}                    | ${{ value: [1] }}       | ${[]}
     ${{ type: Number } as PropValidationOptions}                    | ${{ value: [-1] }}      | ${[]}
     ${{ type: Number, format: 'percent' } as PropValidationOptions} | ${{ value: [0] }}       | ${[]}

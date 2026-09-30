@@ -11,10 +11,10 @@ describe('Object Array Validation', () => {
     options                                                         | value                        | errors
     ${{ type: () => Obj } as PropValidationOptions}                 | ${{ value: undefined }}      | ${[]}
     ${{ type: () => Obj } as PropValidationOptions}                 | ${{ value: null }}           | ${[]}
-    ${{ type: () => Obj, required: true } as PropValidationOptions} | ${{ value: null }}           | ${['isArray', 'isDefined', 'nestedValidation']}
-    ${{ type: () => Obj, required: true } as PropValidationOptions} | ${{ value: undefined }}      | ${['isArray', 'isDefined']}
-    ${{ type: () => Obj, required: true } as PropValidationOptions} | ${{ value: [null] }}         | ${['isDefined', 'nestedValidation']}
-    ${{ type: () => Obj, required: true } as PropValidationOptions} | ${{ value: [undefined] }}    | ${['isDefined']}
+    ${{ type: () => Obj, required: true } as PropValidationOptions} | ${{ value: null }}           | ${['isArray', 'isObject', 'nestedValidation']}
+    ${{ type: () => Obj, required: true } as PropValidationOptions} | ${{ value: undefined }}      | ${['isArray', 'isObject']}
+    ${{ type: () => Obj, required: true } as PropValidationOptions} | ${{ value: [null] }}         | ${['isObject', 'nestedValidation']}
+    ${{ type: () => Obj, required: true } as PropValidationOptions} | ${{ value: [undefined] }}    | ${['isObject']}
     ${{ type: () => Obj } as PropValidationOptions}                 | ${{ value: [{ name: '' }] }} | ${[]}
     ${{ type: () => Obj } as PropValidationOptions}                 | ${{ value: [{ name: '' }] }} | ${[]}
   `(

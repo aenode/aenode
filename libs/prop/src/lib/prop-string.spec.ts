@@ -10,8 +10,8 @@ describe('String Value Validation', () => {
     options                                            | value                                                             | errors
     ${{} as PropValidationOptions}                     | ${{ value: undefined }}                                           | ${[]}
     ${{} as PropValidationOptions}                     | ${{ value: null }}                                                | ${[]}
-    ${{ required: true } as PropValidationOptions}     | ${{ value: undefined }}                                           | ${['isString', 'isDefined']}
-    ${{ required: true } as PropValidationOptions}     | ${{ value: null }}                                                | ${['isString', 'isDefined']}
+    ${{ required: true } as PropValidationOptions}     | ${{ value: undefined }}                                           | ${['isString']}
+    ${{ required: true } as PropValidationOptions}     | ${{ value: null }}                                                | ${['isString']}
     ${{} as PropValidationOptions}                     | ${{ value: '' }}                                                  | ${[]}
     ${{} as PropValidationOptions}                     | ${{ value: ' ' }}                                                 | ${[]}
     ${{ minLength: 5 } as PropValidationOptions}       | ${{ value: faker.string.sample(5) }}                              | ${[]}

@@ -13,8 +13,8 @@ describe('Enum Validation', () => {
     options                                                         | value                    | errors
     ${{ enum: ValueEnum } as PropValidationOptions}                 | ${{ value: undefined }}  | ${[]}
     ${{ enum: ValueEnum } as PropValidationOptions}                 | ${{ value: null }}       | ${[]}
-    ${{ enum: ValueEnum, required: true } as PropValidationOptions} | ${{ value: undefined }}  | ${['isDefined', 'isEnum']}
-    ${{ enum: ValueEnum, required: true } as PropValidationOptions} | ${{ value: null }}       | ${['isDefined', 'isEnum']}
+    ${{ enum: ValueEnum, required: true } as PropValidationOptions} | ${{ value: undefined }}  | ${['isEnum']}
+    ${{ enum: ValueEnum, required: true } as PropValidationOptions} | ${{ value: null }}       | ${['isEnum']}
     ${{ enum: ValueEnum } as PropValidationOptions}                 | ${{ value: true }}       | ${['isEnum']}
     ${{ enum: ValueEnum } as PropValidationOptions}                 | ${{ value: false }}      | ${['isEnum']}
     ${{ enum: ValueEnum } as PropValidationOptions}                 | ${{ value: 1 }}          | ${['isEnum']}

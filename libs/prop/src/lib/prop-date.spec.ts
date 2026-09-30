@@ -8,8 +8,8 @@ describe('Date Validation', () => {
     options                                                               | value                                | errors
     ${{} as PropValidationOptions}                                        | ${{ value: undefined }}              | ${[]}
     ${{} as PropValidationOptions}                                        | ${{ value: null }}                   | ${[]}
-    ${{ required: true } as PropValidationOptions}                        | ${{ value: undefined }}              | ${['isDefined', 'isDate']}
-    ${{ required: true } as PropValidationOptions}                        | ${{ value: null }}                   | ${['isDefined', 'isDate']}
+    ${{ required: true } as PropValidationOptions}                        | ${{ value: undefined }}              | ${['isDate']}
+    ${{ required: true } as PropValidationOptions}                        | ${{ value: null }}                   | ${['isDate']}
     ${{} as PropValidationOptions}                                        | ${{ value: new Date() }}             | ${[]}
     ${{ minDate: () => new Date('10/10/1990') } as PropValidationOptions} | ${{ value: new Date('10/9/1990') }}  | ${['minDate']}
     ${{ maxDate: () => new Date('10/10/1990') } as PropValidationOptions} | ${{ value: new Date('10/11/1990') }} | ${['maxDate']}

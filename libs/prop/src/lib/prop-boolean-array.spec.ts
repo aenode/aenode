@@ -8,8 +8,8 @@ describe('Boolean Array Validation', () => {
     options                                                       | value                      | errors
     ${{ type: Boolean } as PropValidationOptions}                 | ${{ value: undefined }}    | ${[]}
     ${{ type: Boolean } as PropValidationOptions}                 | ${{ value: null }}         | ${[]}
-    ${{ type: Boolean, required: true } as PropValidationOptions} | ${{ value: [undefined] }}  | ${['isDefined', 'isBoolean']}
-    ${{ type: Boolean, required: true } as PropValidationOptions} | ${{ value: [null] }}       | ${['isDefined', 'isBoolean']}
+    ${{ type: Boolean, required: true } as PropValidationOptions} | ${{ value: [undefined] }}  | ${['isBoolean']}
+    ${{ type: Boolean, required: true } as PropValidationOptions} | ${{ value: [null] }}       | ${['isBoolean']}
     ${{ type: Boolean } as PropValidationOptions}                 | ${{ value: [true] }}       | ${[]}
     ${{ type: Boolean } as PropValidationOptions}                 | ${{ value: [false] }}      | ${[]}
     ${{ type: Boolean } as PropValidationOptions}                 | ${{ value: [1] }}          | ${['isBoolean']}

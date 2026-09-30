@@ -1,5 +1,5 @@
 import { Expose } from 'class-transformer';
-import { IsDefined, IsOptional, type ValidationOptions } from 'class-validator';
+import { IsOptional, type ValidationOptions } from 'class-validator';
 import { DefaultValueTransformer } from './default-value-transformer.js';
 import type { PropValidationOptions } from './prop-options.js';
 import { LessThan } from './validators/less-than.js';
@@ -45,9 +45,7 @@ export function __PropCommon(
 
     DefaultValueTransformer(options)(...args);
 
-    if (required === true) {
-      IsDefined(validationOptions)(...args);
-    } else {
+    if (required !== true) {
       IsOptional(validationOptions)(...args);
     }
   };
