@@ -3,6 +3,8 @@ import { ValidateNested, type ValidationOptions } from 'class-validator';
 import { JsonTransformer } from './json-transformer.js';
 import { __PropCommon } from './prop-common.js';
 import type { ObjectValidationOptions } from './prop-options.js';
+import { MaxProperties } from './validators/max-properties.js';
+import { MinProperties } from './validators/min-properties.js';
 
 /**
  * Object property validation decorator
@@ -47,6 +49,14 @@ export function __PropObject(
       each: isArrayType,
       groups: options?.groups,
     };
+
+    if (options.minProperties !== undefined) {
+      MinProperties(options.minProperties, validationOptions)(...args);
+    }
+
+    if (options.maxProperties !== undefined) {
+      MaxProperties(options.maxProperties, validationOptions)(...args);
+    }
 
     __PropCommon(options, validationOptions)(...args);
 

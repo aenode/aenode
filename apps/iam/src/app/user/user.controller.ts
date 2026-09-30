@@ -1,90 +1,23 @@
 import {
   Body,
-  DateFilterDto,
   Param,
   ParseIntPipe,
-  PartialType,
-  PickType,
-  Prop,
   Query,
   ResourceDecoratorFactory,
 } from '@aenode/nest';
 import { InjectPrismaDelegate } from '@aenode/prisma';
+import {
+  UserCreateDto,
+  UserFindManyDto,
+  UserReadDto,
+  UserUpdateDto,
+} from '../../generated/dto/user/user.dto.js';
 import { Prisma } from '../../generated/prisma/client.js';
-
-export class UserScalarWhereDto
-  implements Required<Prisma.UserScalarWhereWithAggregatesInput>
-{
-  @Prop({ type: () => UserScalarWhereDto }) AND: UserScalarWhereDto[];
-  @Prop({ type: () => UserScalarWhereDto }) OR: UserScalarWhereDto[];
-  @Prop({ type: () => UserScalarWhereDto }) NOT: UserScalarWhereDto[];
-  @Prop() id: number;
-  @Prop() isActive: boolean;
-  @Prop({ format: 'email' }) username: string;
-  @Prop({ format: 'uuid7' }) uuid: string;
-  @Prop() createdAt: DateFilterDto;
-  @Prop() updatedAt: DateFilterDto;
-  @Prop() password: string;
-  @Prop() avatar: string;
-}
-
-export class UserListFilterDto {
-  @Prop({ type: () => UserScalarWhereDto }) every: UserScalarWhereDto;
-  @Prop({ type: () => UserScalarWhereDto }) some: UserScalarWhereDto;
-  @Prop({ type: () => UserScalarWhereDto }) none: UserScalarWhereDto;
-}
-
-export class UserScalarProjectionDto {
-  @Prop() password: boolean;
-  @Prop() uuid: boolean;
-  @Prop() id: boolean;
-  @Prop() createdAt: boolean;
-  @Prop() updatedAt: boolean;
-  @Prop() isActive: boolean;
-  @Prop() username: boolean;
-  @Prop() avatar: boolean;
-}
-
-export class UserIncludeDto implements Required<Prisma.UserInclude> {
-  @Prop() userRoles: boolean;
-  @Prop() comments: boolean;
-  @Prop() userTasks: boolean;
-  @Prop() _count: boolean;
-}
-
-export class UserFindManyDto {
-  @Prop({ defaultValue: 20 }) take?: number;
-  @Prop({ defaultValue: 0 }) skip?: number;
-  @Prop() cursor?: UserScalarWhereDto;
-  @Prop() where?: UserScalarWhereDto;
-  @Prop({ notWith: ['omit', 'inlclude'] }) select?: UserScalarProjectionDto;
-  @Prop({ notWith: ['select', 'inlclude'] }) omit?: UserScalarProjectionDto;
-  @Prop({ notWith: ['select', 'omit'] }) include?: UserIncludeDto;
-}
-
-export class UserDto implements Prisma.UserModel {
-  @Prop() id: number;
-  @Prop() uuid: string;
-  @Prop() createdAt: Date;
-  @Prop() updatedAt: Date;
-  @Prop() isActive: boolean;
-  @Prop({ required: true, format: 'email' }) username: string;
-  @Prop({ required: true, format: 'password' }) password: string;
-  @Prop({ format: 'url' }) avatar: string;
-}
-
-export class UserCreateDto extends PickType(UserDto, [
-  'username',
-  'password',
-  'avatar',
-]) {}
-
-export class UserUpdateDto extends PartialType(UserCreateDto) {}
 
 const UserDecoratorFactory = new ResourceDecoratorFactory({
   singularPath: 'user',
   pluralPath: 'users',
-  responseType: UserDto,
+  responseType: UserReadDto,
 });
 
 @UserDecoratorFactory.Controller()

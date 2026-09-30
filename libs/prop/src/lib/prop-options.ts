@@ -71,6 +71,8 @@ export type EnumValidationOptions = {
 export type ObjectValidationOptions = {
   type?: () => ClassConstructor<unknown>;
   isArray?: boolean;
+  minProperties?: number;
+  maxProperties?: number;
 } & CommonValidationOptions;
 
 export type PropValidationOptions = {

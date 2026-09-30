@@ -14,6 +14,8 @@ export * from './lib/prop-validation.js';
 export * from './lib/test-helpers.js';
 export * from './lib/validators/is-relative-path.js';
 export * from './lib/validators/less-than.js';
+export * from './lib/validators/max-properties.js';
+export * from './lib/validators/min-properties.js';
 export * from './lib/validators/more-than.js';
 export * from './lib/validators/not-with.js';
 export * from './lib/validators/not-without.js';
