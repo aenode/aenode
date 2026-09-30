@@ -1,6 +1,10 @@
 import type { DMMF } from '@prisma/generator-helper';
 import { FieldMetadata } from '../../helpers/field-metadata.js';
-import { printProjectionProperty, printProperty } from './print-property.js';
+import {
+  printProjectionProperty,
+  printProperty,
+  printWhereProperty,
+} from './print-property.js';
 
 export function printDtoClasses(model: DMMF.Model) {
   const filteredFields = model.fields
@@ -32,14 +36,18 @@ export function printDtoClasses(model: DMMF.Model) {
     .map((e) => `  ${e}`)
     .join('\n');
 
-  const imports: string[] = [];
+  const whereDtoField = filteredFields
+    .map((field) => {
+      return printWhereProperty(field);
+    })
+    .map((e) => `  ${e}`)
+    .join('\n');
 
-  if (model.fields.some((e) => e.kind === 'enum')) {
-    imports.push(`import * as P from '../../prisma/client.js';`);
-  }
+  const imports: string[] = [];
 
   return [
     `import { Prop } from '@aenode/nest';`,
+    `import * as P from '../common/index.js';`,
     imports,
     '',
     '',
@@ -59,6 +67,9 @@ export function printDtoClasses(model: DMMF.Model) {
     projectionDtoField,
     `}`,
     ``,
+    `export class ${model.name}WhereDto {`,
+    whereDtoField,
+    `}`,
     ``,
     `export class ${model.name}FindManyDto {`,
     `  @Prop({ min: 1, default: 20 }) take?: number;`,
@@ -67,6 +78,8 @@ export function printDtoClasses(model: DMMF.Model) {
     `  select?: ${model.name}ProjectionDto;`,
     `  @Prop({ type: () => ${model.name}ProjectionDto, minProperties: 1, notWith: ['select'] })`,
     `  omit?: ${model.name}ProjectionDto;`,
+    `  @Prop({ type: ()=> ${model.name}WhereDto })`,
+    `  where?: ${model.name}WhereDto`,
     `}`,
 
     '',

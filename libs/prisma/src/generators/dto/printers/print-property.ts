@@ -27,3 +27,14 @@ export function printProperty(field: DMMF.Field, isRequired?: boolean) {
     meta.tsType,
   );
 }
+
+export function printWhereProperty(field: DMMF.Field) {
+  const meta = new FieldMetadata(field);
+
+  return __printProperty(
+    field.name,
+    false,
+    `{ type: ()=>${meta.filterType} }`,
+    meta.filterType,
+  );
+}

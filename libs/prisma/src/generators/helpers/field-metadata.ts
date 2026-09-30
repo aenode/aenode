@@ -182,6 +182,40 @@ export class FieldMetadata {
     return this.isInputField;
   }
 
+  get filterType() {
+    switch (this.field.kind) {
+      case 'scalar': {
+        switch (this.field.type) {
+          case 'String': {
+            return 'P.StringFilterDto';
+          }
+          case 'Int':
+          case 'Decimal':
+          case 'Number': {
+            return 'P.NumberFilterDto';
+          }
+          case 'Boolean': {
+            return 'P.BooleanFilterDto';
+          }
+          case 'DateTime': {
+            return 'P.DateFilterDto';
+          }
+          case 'Json': {
+            return 'P.JSONFilterDto';
+          }
+        }
+        throw new Error(`Unkown type ${this.field.type}`);
+      }
+      case 'enum': {
+        return `P.Enum${this.field.type}FilterDto`;
+      }
+      case 'object':
+      case 'unsupported': {
+        throw new Error('Not supoorted');
+      }
+    }
+  }
+
   get type() {
     return this.valueOf('type');
   }

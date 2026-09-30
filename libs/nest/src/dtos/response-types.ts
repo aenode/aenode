@@ -1,7 +1,7 @@
 import { Prop } from '@aenode/nest-prop';
 
 export class ResponseMessageDto {
-  @Prop() message: string;
+  @Prop({ default: 'Response messsage' }) message: string;
 }
 
 export class ValiationErrorDto {

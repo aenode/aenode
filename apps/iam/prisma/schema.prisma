@@ -162,6 +162,8 @@ model Task {
   comments Comment[]
 
   userTasks UserTask[]
+
+  status Status?
 }
 
 model UserTask {

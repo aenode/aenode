@@ -3,6 +3,10 @@ import type { FieldMetadata } from './field-metadata.js';
 
 export function toCode(value: unknown): string {
   if (typeof value === 'string') {
+    if (value.startsWith('P.')) {
+      return value;
+    }
+
     return `'${value}'`;
   } else if (Array.isArray(value)) {
     return `[ ${value.map((v) => toCode(v)).join(',')} ]`;

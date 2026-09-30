@@ -15,6 +15,10 @@ export function Prop(options?: PropOptions): PropertyDecorator {
   return (...args) => {
     options ??= {};
     const apiPropertyOptions = toApiProeprtyOptions(options, ...args);
+
+    options.default ??= options.defaultValue;
+    options.defaultValue ??= options.default;
+
     PropValidation(options)(...args);
     ApiProperty(apiPropertyOptions)(...args);
   };
