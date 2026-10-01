@@ -24,6 +24,20 @@ const UserDecoratorFactory = new ResourceDecoratorFactory({
 export class UserController {
   constructor(protected service: UserService) {}
 
+  protected async prepare<T extends UserCreateDto | UserUpdateDto>(
+    data: T,
+  ): Promise<T> {
+    const errors = await this.service.isExist(data);
+    if (errors) {
+      throw new UnprocessableEntityException({ errors });
+    }
+
+    if (data.password) {
+      return { ...data, password: await hash(data.password) };
+    }
+    return data;
+  }
+
   @UserDecoratorFactory.FindMany()
   findMany(@QueryParam() query: UserFindManyDto) {
     return this.service.findMany(query);
@@ -36,17 +50,12 @@ export class UserController {
 
   @UserDecoratorFactory.CreateOne()
   async createOne(@Body() data: UserCreateDto) {
-    const errors = await this.service.isExist(data);
-    if (errors) {
-      throw new UnprocessableEntityException({ errors });
-    }
-    const hashedPassword = await hash(data.password);
-    return await this.service.createOne({ ...data, password: hashedPassword });
+    return await this.service.createOne(await this.prepare(data));
   }
 
   @UserDecoratorFactory.UpdateOneById()
-  updateOneById(@ParamId() id: number, @Body() data: UserUpdateDto) {
-    return this.service.updateOneById(id, data);
+  async updateOneById(@ParamId() id: number, @Body() data: UserUpdateDto) {
+    return await this.service.updateOneById(id, await this.prepare(data));
   }
 
   @UserDecoratorFactory.DeleteOneById()
