@@ -1,4 +1,4 @@
 import { bootstrap } from '@aenode/nest';
-import { AppModule } from './app/app.module.js';
+import { AppModule } from './api/app.module.js';
 
 bootstrap(AppModule);

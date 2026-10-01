@@ -12,6 +12,18 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js"
+    },
+    "./data": {
+      "bun": "./src/data/index.ts",
+      "types": "./dist/data/index.d.ts",
+      "import": "./dist/data/index.js",
+      "default": "./dist/data/index.js"
+    },
+    "./app": {
+      "bun": "./src/app/index.ts",
+      "types": "./dist/app/index.d.ts",
+      "import": "./dist/app/index.js",
+      "default": "./dist/app/index.js"
     }
   },
   "files": [
@@ -36,6 +48,7 @@
     }
   },
   "dependencies": {
+    "@aenode/crypto": "workspace:*",
     "@aenode/nest": "workspace:*",
     "@aenode/prisma": "workspace:*",
     "@nestjs/common": "^12.0.4",

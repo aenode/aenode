@@ -25,9 +25,10 @@ model User {
   updatedAt DateTime @updatedAt @map("updated_at")
   isActive  Boolean  @default(true) @map("is_active")
 
+  /// @format(email)
   username String @unique
 
-  /// @writeonly
+  /// @format(password) @writeonly
   password String
 
   avatar String @default("person.svg")
@@ -76,7 +77,7 @@ model Permission {
 
   rolePermissions RolePermission[]
 
-  @@unique([scopeId, permission])
+  @@unique(fields: [scopeId, permission], map: "scopeId_permission")
   @@index([permission])
 }
 
@@ -179,6 +180,6 @@ model UserTask {
   task   Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
   taskId Int  @map("task_id")
 
-  @@unique([userId, taskId])
+  @@unique(fields: [userId, taskId], map: "userId_taskId")
   @@index([taskId])
 }

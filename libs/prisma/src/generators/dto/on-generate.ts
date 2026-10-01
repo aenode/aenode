@@ -4,6 +4,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { printDtoClasses } from './printers/print-dto-classes.js';
 import { printEnumDtos } from './printers/print-enum-dtos.js';
+import { printService } from './printers/print-service.js';
 
 export default async function onGenerate(options: GeneratorOptions) {
   const output = options.generator.output?.value;
@@ -45,10 +46,13 @@ export default async function onGenerate(options: GeneratorOptions) {
     break baral;
   }
 
-  for (const m of models) {
-    const content = printDtoClasses(m);
-    const { kebab } = names(m.name);
-    const fileName = `${kebab}.dto.ts`;
+  for (const model of models) {
+    const dtoClasses = printDtoClasses(model);
+    const serviceClass = printService(model);
+    const content = [dtoClasses, serviceClass].join('\n\n');
+
+    const { kebab } = names(model.name);
+    const fileName = `${kebab}.ts`;
 
     const filePath = join(output, kebab, fileName);
 

@@ -26,6 +26,9 @@
     },
     {
       "path": "./libs/names"
+    },
+    {
+      "path": "./libs/crypto"
     }
   ]
 }

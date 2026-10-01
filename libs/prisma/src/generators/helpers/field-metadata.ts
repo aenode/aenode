@@ -187,17 +187,26 @@ export class FieldMetadata {
       case 'scalar': {
         switch (this.field.type) {
           case 'String': {
+            if (this.field.isList) {
+              return 'P.ArrayStringFilterDto';
+            }
             return 'P.StringFilterDto';
           }
           case 'Int':
           case 'Decimal':
           case 'Number': {
+            if (this.field.isList) {
+              return 'P.ArrayNumberFilterDto';
+            }
             return 'P.NumberFilterDto';
           }
           case 'Boolean': {
             return 'P.BooleanFilterDto';
           }
           case 'DateTime': {
+            if (this.field.isList) {
+              return 'P.ArrayDateFilterDto';
+            }
             return 'P.DateFilterDto';
           }
           case 'Json': {
