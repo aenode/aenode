@@ -165,6 +165,13 @@ export class FieldMetadata {
     ].every((e) => e === false);
   }
 
+  get hash() {
+    return this.has('hash');
+  }
+  get encript() {
+    return this.has('encript');
+  }
+
   get isInputField() {
     return [
       this.isRelationField,

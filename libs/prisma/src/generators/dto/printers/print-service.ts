@@ -69,8 +69,9 @@ export function printUpdateByMethod(modelName: string, field: DMMF.Field) {
   const type = meta.tsType;
 
   return [
-    `  updateOneBy${pascal}(${camel}: ${type}, data: ${modelName}UpdateDto) {`,
-    `    return this.delegate.update({ where: { ${camel}, isActive: true }, data });`,
+    `  async updateOneBy${pascal}(${camel}: ${type}, data: ${modelName}UpdateDto) {`,
+    `    data = await this.beforeUpdate(await this.beforeCreateAndUpdate(data));`,
+    `    return await this.delegate.update({ where: { ${camel}, isActive: true }, data });`,
     `  }`,
   ].join('\n');
 }
@@ -145,20 +146,25 @@ export function printIsExistMethod(model: DMMF.Model): string {
     })
     .join(',');
 
-  return [
-    `async isExist(data: ${model.name}UpdateDto | ${model.name}CreateDto) {`,
-    `  const result  = [`,
-    uniqueFieldsCheck,
-    ``,
-    compositeUniqueFieldsCheck,
-    `  ].filter(e=>e)`,
-
-    `  if(result.length > 0){`,
-    `     return result`,
-    `  }`,
-    `return undefined`,
-    `}`,
-  ].join('\n');
+  if (uniqueFieldsCheck || compositeUniqueFieldsCheck) {
+    return [
+      `  async isUniqueExist(data: ${model.name}UpdateDto | ${model.name}CreateDto) {`,
+      `    const result  = [ ${[uniqueFieldsCheck, compositeUniqueFieldsCheck].filter((d) => d).join(', ')}].filter(e=>e)`,
+      `       .map((fieldName) => {
+        return {
+          constraint: 'isUnique',
+          propery: fieldName,
+          message: \`\${fieldName} should be unqiue\`,
+        };
+      });`,
+      `    if(result.length > 0){`,
+      `       return result`,
+      `    }`,
+      `    return undefined`,
+      `  }`,
+    ].join('\n');
+  }
+  return '';
 }
 
 export function printService(model: DMMF.Model) {
@@ -204,7 +210,8 @@ export function printService(model: DMMF.Model) {
     ``,
     ``,
     `  async createOne(data: ${modelName}CreateDto) {`,
-    `    return  await this.delegate.create({ data });`,
+    `    data = await this.beforeCreate(await this.beforeCreateAndUpdate(data));`,
+    `    return await this.delegate.create({ data });`,
     `  }`,
     findUnqiueOneMethods,
     findFirstOneMethods,
@@ -216,6 +223,21 @@ export function printService(model: DMMF.Model) {
     updateByMethods,
     deleteByMethods,
     isExistMethod,
+
+    `  async beforeUpdate(data: ${modelName}UpdateDto): Promise<${modelName}UpdateDto> {`,
+    `    return data;`,
+    `  }`,
+    `  `,
+    `  async beforeCreate(data: ${modelName}CreateDto): Promise<${modelName}CreateDto> {`,
+    `    return data;`,
+    `  }`,
+    ``,
+    `  async beforeCreateAndUpdate<T extends ${modelName}UpdateDto | ${modelName}CreateDto>(`,
+    `    data: T,`,
+    `  ): Promise<T> {`,
+    `    return data;`,
+    `  }`,
+
     `}`,
   ].join('\n');
 }

@@ -10,13 +10,7 @@
   "include": ["src/**/*.ts"],
   "references": [
     {
-      "path": "../../libs/prisma/tsconfig.lib.json"
-    },
-    {
-      "path": "../../libs/nest-crypto/tsconfig.lib.json"
-    },
-    {
-      "path": "../../libs/nest/tsconfig.lib.json"
+      "path": "../crypto/tsconfig.lib.json"
     }
   ],
   "exclude": [

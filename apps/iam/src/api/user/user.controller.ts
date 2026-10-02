@@ -1,10 +1,8 @@
-import { hash } from '@aenode/crypto';
 import {
   Body,
   ParamId,
   QueryParam,
   ResourceDecoratorFactory,
-  UnprocessableEntityException,
 } from '@aenode/nest';
 import { UserService } from '../../data/index.js';
 import {
@@ -24,20 +22,6 @@ const UserDecoratorFactory = new ResourceDecoratorFactory({
 export class UserController {
   constructor(protected service: UserService) {}
 
-  protected async prepare<T extends UserCreateDto | UserUpdateDto>(
-    data: T,
-  ): Promise<T> {
-    const errors = await this.service.isExist(data);
-    if (errors) {
-      throw new UnprocessableEntityException({ errors });
-    }
-
-    if (data.password) {
-      return { ...data, password: await hash(data.password) };
-    }
-    return data;
-  }
-
   @UserDecoratorFactory.FindMany()
   findMany(@QueryParam() query: UserFindManyDto) {
     return this.service.findMany(query);
@@ -50,12 +34,12 @@ export class UserController {
 
   @UserDecoratorFactory.CreateOne()
   async createOne(@Body() data: UserCreateDto) {
-    return await this.service.createOne(await this.prepare(data));
+    return await this.service.createOne(data);
   }
 
   @UserDecoratorFactory.UpdateOneById()
   async updateOneById(@ParamId() id: number, @Body() data: UserUpdateDto) {
-    return await this.service.updateOneById(id, await this.prepare(data));
+    return await this.service.updateOneById(id, data);
   }
 
   @UserDecoratorFactory.DeleteOneById()
