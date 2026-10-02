@@ -1,5 +1,5 @@
 import { Prop } from '@aenode/nest-prop';
 
-export class RestPasswordDto {
+export class ResetPasswordDto {
   @Prop({ required: true, format: 'password' }) password: string;
 }
