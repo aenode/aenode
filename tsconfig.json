@@ -32,6 +32,9 @@
     },
     {
       "path": "./libs/nest-crypto"
+    },
+    {
+      "path": "./libs/nest-auth"
     }
   ]
 }

@@ -37,6 +37,37 @@ model User {
   userRoles UserRole[]
   comments  Comment[]
   userTasks UserTask[]
+  sessions  Session[]
+  otps      Otp[]
+}
+
+model Otp {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  isActive  Boolean  @default(true) @map("is_active")
+
+  /// @encript
+  secret    String
+  isEnabled Boolean @default(false) @map("is_enabled")
+
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int  @unique
+}
+
+model Session {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  isActive  Boolean  @default(true) @map("is_active")
+
+  expiresAt  DateTime  @map("expires_at")
+  lastUsedAt DateTime? @map("last_used_at")
+  userAgent  String?   @map("user_agent")
+  ipAddress  String?   @map("ip_address")
+
+  user   User @relation(fields: [userId], references: [id])
+  userId Int  @map("user_id")
 }
 
 model Scope {
