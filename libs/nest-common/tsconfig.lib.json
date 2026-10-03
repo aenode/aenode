@@ -11,6 +11,9 @@
   "references": [
     {
       "path": "../nest-prop/tsconfig.lib.json"
+    },
+    {
+      "path": "../names/tsconfig.lib.json"
     }
   ],
   "exclude": [

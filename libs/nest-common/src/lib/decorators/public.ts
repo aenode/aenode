@@ -2,6 +2,7 @@ import { SetMetadata, type ExecutionContext } from '@nestjs/common';
 import { type Reflector } from '@nestjs/core';
 
 export const PUBLIC_METADATA_TOKEN = 'PUBLIC_METADATA_TOKEN';
+
 /**
  * Define a public resource controller/method
  * @returns

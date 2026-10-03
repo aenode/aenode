@@ -31,7 +31,7 @@ model User {
   /// @format(password) @writeonly
   password String
 
-  avatar String @default("person.svg")
+  avatar String? @default("person.svg")
 
   /// @include
   userRoles UserRole[]
@@ -48,7 +48,7 @@ model Otp {
   isActive  Boolean  @default(true) @map("is_active")
 
   /// @encript
-  secret String?
+  secret String
 
   user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId Int  @unique
@@ -60,13 +60,10 @@ model Session {
   updatedAt DateTime @updatedAt @map("updated_at")
   isActive  Boolean  @default(true) @map("is_active")
 
-  expiresAt  DateTime  @map("expires_at")
-  lastUsedAt DateTime? @map("last_used_at")
-  userAgent  String?   @map("user_agent")
-  ipAddress  String?   @map("ip_address")
-
-  /// @hash
-  token String
+  userAgent String? @map("user_agent")
+  ipAddress String? @map("ip_address")
+  deviceId  String  @default(uuid(7)) @map("device_id")
+  usage     Int?    @default(0)
 
   user   User @relation(fields: [userId], references: [id])
   userId Int  @map("user_id")

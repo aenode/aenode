@@ -1,12 +1,21 @@
+import { ConfigModule, ConfigService } from '@aenode/nest';
 import { CryptoModule } from '@aenode/nest-crypto';
+import { PrismaModule } from '@aenode/prisma';
 import { Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { randomBytes } from 'node:crypto';
+import { Prisma } from '../generated/prisma/client.js';
+import { LoginController } from './login/login.controller.js';
+import { LoginService } from './login/login.service.js';
 
 @Module({
   imports: [
     CryptoModule.register(),
+    PrismaModule.forFeature([
+      Prisma.ModelName.User,
+      Prisma.ModelName.Session,
+      Prisma.ModelName.Otp,
+    ]),
     JwtModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -16,11 +25,13 @@ import { randomBytes } from 'node:crypto';
           global: true,
           secret: JWT_SECRET,
           signOptions: {
-            expiresIn: '1m',
+            expiresIn: '1y',
           },
         };
       },
     }),
   ],
+  controllers: [LoginController],
+  providers: [LoginService],
 })
 export class AuthModule {}

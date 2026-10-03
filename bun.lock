@@ -48,12 +48,20 @@
       "version": "0.0.1",
       "dependencies": {
         "@aenode/nest": "workspace:*",
+        "@aenode/nest-auth": "workspace:*",
         "@aenode/nest-crypto": "workspace:*",
         "@aenode/prisma": "workspace:*",
         "@nestjs/common": "^12.0.4",
+        "@nestjs/jwt": "^12.0.2",
         "@nestjs/platform-express": "^12.1.0",
         "@prisma/client": "7.8.0",
         "@swc/helpers": "~0.5.18",
+        "express": "^5.2.1",
+        "uuid": "^14.0.2",
+      },
+      "devDependencies": {
+        "@types/express": "^5.0.6",
+        "@types/uuid": "^11.0.0",
       },
     },
     "libs/common": {
@@ -99,17 +107,8 @@
       "name": "@aenode/nest-auth",
       "version": "0.0.1",
       "dependencies": {
-        "@aenode/nest-common": "workspace:*",
-        "@aenode/nest-crypto": "workspace:*",
         "@aenode/nest-prop": "workspace:*",
-        "@nestjs/common": "^12.1.2",
-        "@nestjs/config": "^12.0.1",
-        "@nestjs/core": "12.1.2",
-        "@nestjs/jwt": "^12.0.2",
-        "@nestjs/swagger": "^12.0.2",
         "@swc/helpers": "~0.5.18",
-        "express": "^5.2.1",
-        "uuid": "^14.0.2",
       },
       "devDependencies": {
         "@types/express": "^5.0.6",
@@ -120,6 +119,7 @@
       "name": "@aenode/nest-common",
       "version": "0.0.1",
       "dependencies": {
+        "@aenode/names": "workspace:*",
         "@aenode/nest-prop": "workspace:*",
         "@nestjs/common": "^12.1.2",
         "@nestjs/core": "^12.1.2",
