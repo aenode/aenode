@@ -1,8 +1,4 @@
 // @index(['./**/*.ts', '!./**/*.spec.ts','!./**/index.ts', '!./**/_*.ts','!./**/{main,bootstrap}.ts', '!./**/generated/**'], f => `export * from '${f.path}.js'`)
-export * from './lib/decorators/public.js';
-export * from './lib/decorators/user-id.js';
-export * from './lib/decorators/user-username.js';
-export * from './lib/decorators/user-uuid.js';
 export * from './lib/server/auth-user.service.js';
 export * from './lib/server/auth.controller.js';
 export * from './lib/server/auth.module.js';

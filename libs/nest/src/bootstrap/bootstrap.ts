@@ -1,9 +1,9 @@
+import { globalValidationPipe } from '@aenode/nest-common';
 import type { Type } from '@nestjs/common';
 import { ClassSerializerInterceptor, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory, Reflector } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { globalValidationPipe } from '../dtos/global-validation-pipe.js';
 
 export async function bootstrap(appModule: Type) {
   const app = await NestFactory.create(appModule);

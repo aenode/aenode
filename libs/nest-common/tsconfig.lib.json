@@ -11,12 +11,6 @@
   "references": [
     {
       "path": "../nest-prop/tsconfig.lib.json"
-    },
-    {
-      "path": "../nest-crypto/tsconfig.lib.json"
-    },
-    {
-      "path": "../nest-common/tsconfig.lib.json"
     }
   ],
   "exclude": [

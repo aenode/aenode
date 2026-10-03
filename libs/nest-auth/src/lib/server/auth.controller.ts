@@ -1,9 +1,8 @@
+import { HeaderDeviceId, Public, SessionId, UserId } from '@aenode/nest-common';
 import type { CryptoService } from '@aenode/nest-crypto';
 import { Body, Controller, Optional, Post, Req } from '@nestjs/common';
 import { ApiBearerAuth } from '@nestjs/swagger';
 import type { Request } from 'express';
-import { HeaderDeviceId, Public, UserId } from '../decorators/index.js';
-import { SessionId } from '../decorators/session-id.js';
 import { AuthUserService } from './auth-user.service.js';
 import { AuthService } from './auth.service.js';
 import type {

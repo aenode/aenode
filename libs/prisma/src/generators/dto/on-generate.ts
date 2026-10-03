@@ -34,9 +34,9 @@ export default async function onGenerate(options: GeneratorOptions) {
 
   baral: {
     const content = [
+      `export *  from '@aenode/nest/common'`,
       `export  * from './prisma.js';`,
       `export  * from './enums.js';`,
-      `export *  from '@aenode/nest/dtos'`,
     ].join('\n');
 
     const filePath = join(output, 'common', 'index.ts');

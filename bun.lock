@@ -84,6 +84,7 @@
       "version": "0.0.1",
       "dependencies": {
         "@aenode/names": "workspace:*",
+        "@aenode/nest-common": "workspace:*",
         "@aenode/nest-prop": "workspace:*",
         "@nestjs/cache-manager": "^12.0.0",
         "@nestjs/common": "^12.0.4",
@@ -98,6 +99,7 @@
       "name": "@aenode/nest-auth",
       "version": "0.0.1",
       "dependencies": {
+        "@aenode/nest-common": "workspace:*",
         "@aenode/nest-crypto": "workspace:*",
         "@aenode/nest-prop": "workspace:*",
         "@nestjs/common": "^12.1.2",
@@ -112,6 +114,17 @@
       "devDependencies": {
         "@types/express": "^5.0.6",
         "@types/uuid": "^11.0.0",
+      },
+    },
+    "libs/nest-common": {
+      "name": "@aenode/nest-common",
+      "version": "0.0.1",
+      "dependencies": {
+        "@aenode/nest-prop": "workspace:*",
+        "@nestjs/common": "^12.1.2",
+        "@nestjs/core": "^12.1.2",
+        "@nestjs/swagger": "^12.0.2",
+        "@swc/helpers": "~0.5.18",
       },
     },
     "libs/nest-crypto": {
@@ -195,6 +208,8 @@
     "@aenode/nest": ["@aenode/nest@workspace:libs/nest"],
 
     "@aenode/nest-auth": ["@aenode/nest-auth@workspace:libs/nest-auth"],
+
+    "@aenode/nest-common": ["@aenode/nest-common@workspace:libs/nest-common"],
 
     "@aenode/nest-crypto": ["@aenode/nest-crypto@workspace:libs/nest-crypto"],
 

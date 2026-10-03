@@ -25,11 +25,11 @@
       "import": "./dist/prop/index.js",
       "default": "./dist/prop/index.js"
     },
-    "./dtos": {
-      "bun": "./src/dtos/index.ts",
-      "types": "./dist/dtos/index.d.ts",
-      "import": "./dist/dtos/index.js",
-      "default": "./dist/dtos/index.js"
+    "./common": {
+      "bun": "./src/common/index.ts",
+      "types": "./dist/common/index.d.ts",
+      "import": "./dist/common/index.js",
+      "default": "./dist/common/index.js"
     }
   },
   "files": [
@@ -50,6 +50,7 @@
   },
   "dependencies": {
     "@aenode/names": "workspace:*",
+    "@aenode/nest-common": "workspace:*",
     "@aenode/nest-prop": "workspace:*",
     "@nestjs/cache-manager": "^12.0.0",
     "@nestjs/common": "^12.0.4",

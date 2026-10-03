@@ -6,18 +6,8 @@ export * from '@nestjs/core';
 export * from '@nestjs/event-emitter';
 export * from '@nestjs/swagger';
 
-// @index(['./**/*.ts', '!./**/*.spec.ts', '!./**/_*.ts'], f => `export * from '${f.path}.js'`)
+// @index(['./**/*.ts', '!./**/*.spec.ts','!./**/index.ts', '!./**/_*.ts', '!./**/generated/**'], f => `export * from '${f.path}.js'`)
 export * from './bootstrap/bootstrap.js';
 export * from './bootstrap/common.controller.js';
 export * from './bootstrap/common.module.js';
-export * from './bootstrap/index.js';
-export * from './decorators/index.js';
-export * from './decorators/param-id.js';
-export * from './decorators/query-param.js';
-export * from './decorators/resource-decorator-factory.js';
-export * from './dtos/global-validation-pipe.js';
-export * from './dtos/index.js';
-export * from './dtos/prisma-filters.js';
-export * from './dtos/response-types.js';
-export * from './prop/index.js';
-export * from './prop/nest-prop.js';
+export * from './common/common.js';
