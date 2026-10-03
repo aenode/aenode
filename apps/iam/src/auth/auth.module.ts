@@ -7,6 +7,7 @@ import { randomBytes } from 'node:crypto';
 import { Prisma } from '../generated/prisma/client.js';
 import { LoginController } from './login/login.controller.js';
 import { LoginService } from './login/login.service.js';
+import { LogoutController } from './login/logout.controller.js';
 
 @Module({
   imports: [
@@ -31,7 +32,7 @@ import { LoginService } from './login/login.service.js';
       },
     }),
   ],
-  controllers: [LoginController],
+  controllers: [LoginController, LogoutController],
   providers: [LoginService],
 })
 export class AuthModule {}

@@ -1,3 +1,4 @@
+import type { ResponseMessageDto } from '@aenode/nest';
 import type {
   LoginDto,
   LoginResponseDto,
@@ -88,5 +89,22 @@ export class LoginService {
     }
 
     throw new UnauthorizedException('Invalid otp');
+  }
+
+  async logout(sessionId: number): Promise<ResponseMessageDto> {
+    await this.sessionService.update({
+      where: { id: sessionId, isActive: true },
+      data: { isActive: false },
+    });
+
+    return { message: 'Bye' };
+  }
+
+  async logoutAll(userId: number): Promise<ResponseMessageDto> {
+    await this.sessionService.updateMany({
+      where: { userId, isActive: true },
+      data: { isActive: false },
+    });
+    return { message: 'bye' };
   }
 }
