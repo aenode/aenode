@@ -13,7 +13,6 @@ export * from './bootstrap/common.module.js';
 export * from './bootstrap/index.js';
 export * from './decorators/index.js';
 export * from './decorators/param-id.js';
-export * from './decorators/public.js';
 export * from './decorators/query-param.js';
 export * from './decorators/resource-decorator-factory.js';
 export * from './dtos/global-validation-pipe.js';

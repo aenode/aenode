@@ -12,7 +12,6 @@ import {
   ResponseMessageDto,
   ValidationErorResponseDto,
 } from '../dtos/response-types.js';
-import { Public } from './public.js';
 
 export type ResourceDecoratorFactoryOptions = {
   singularPath?: string;
@@ -78,9 +77,7 @@ export class ResourceDecoratorFactory {
   Controller(): ClassDecorator {
     return (...args) => {
       Controller()(...args);
-      if (this.isPublic === true) {
-        Public()(...args);
-      } else {
+      if (this.isPublic !== true) {
         ApiBearerAuth()(...args);
       }
     };

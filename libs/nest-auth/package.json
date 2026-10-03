@@ -35,9 +35,15 @@
     "@aenode/nest-prop": "workspace:*",
     "@nestjs/common": "^12.1.2",
     "@nestjs/config": "^12.0.1",
+    "@nestjs/core": "12.1.2",
     "@nestjs/jwt": "^12.0.2",
     "@nestjs/swagger": "^12.0.2",
     "@swc/helpers": "~0.5.18",
-    "@nestjs/core": "12.1.2"
+    "express": "^5.2.1",
+    "uuid": "^14.0.2"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/uuid": "^11.0.0"
   }
 }

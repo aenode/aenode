@@ -1,14 +1,16 @@
 import type { CryptoService } from '@aenode/nest-crypto';
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Optional, Post, Req } from '@nestjs/common';
 import { ApiBearerAuth } from '@nestjs/swagger';
-import { UserId } from '../decorators/user-id.js';
-import { UserUsername } from '../decorators/user-username.js';
-import { UserUuid } from '../decorators/user-uuid.js';
+import type { Request } from 'express';
+import { HeaderDeviceId, Public, UserId } from '../decorators/index.js';
+import { SessionId } from '../decorators/session-id.js';
 import { AuthUserService } from './auth-user.service.js';
 import { AuthService } from './auth.service.js';
-import type { LoginWithOTPDto } from './dtos/login-with-otp.dto.js';
-import type { LoginDto } from './dtos/login.dto.js';
-import type { ResetPasswordDto } from './dtos/reset-password.dto.js';
+import type {
+  LoginDto,
+  LoginWithOTPDto,
+  ResetPasswordDto,
+} from './dtos/index.js';
 
 @ApiBearerAuth()
 @Controller('auth')
@@ -19,31 +21,51 @@ export class AuthController {
     protected readonly crytoService: CryptoService,
   ) {}
 
+  @Public()
   @Post('login')
-  async login(@Body() data: LoginDto) {
-    return await this.authService.login(data);
+  async login(
+    @Body() data: LoginDto,
+    @Req() req: Request,
+    @Optional() @HeaderDeviceId() deviceId: string | undefined,
+  ) {
+    return await this.authService.login(data, req, deviceId);
   }
 
+  @Public()
   @Post('login-with-otp')
-  async loginWithOTP(@Body() data: LoginWithOTPDto) {
-    return await this.authService.loginWithOTP(data);
+  async loginWithOTP(
+    @Body() data: LoginWithOTPDto,
+    @Req() req: Request,
+    @Optional() @HeaderDeviceId() deviceId: string | undefined,
+  ) {
+    return await this.authService.loginWithOTP(data, req, deviceId);
   }
 
   @Post('logout')
-  async logout(@UserId() userId: number) {
-    return await this.authService.logout(userId);
+  async logout(@SessionId() sessionId: number) {
+    return await this.authService.logout(sessionId);
   }
 
-  @Post('2fa')
-  async enable2FA(@UserUsername() username: string) {
-    return await this.authService.enable2FA(username);
+  @Post('logout-all')
+  async logoutAll(@UserId() userId: number) {
+    return await this.authService.logoutAll(userId);
+  }
+
+  @Post('enable-2fa')
+  async enable2FA(@UserId() userId: number) {
+    return await this.authService.enable2FA(userId);
+  }
+
+  @Post('disable-2fa')
+  async disable2FA(@UserId() userId: number) {
+    return await this.authService.disable2FA(userId);
   }
 
   @Post('reset-password')
   async resetPassword(
+    @UserId() userId: number,
     @Body() data: ResetPasswordDto,
-    @UserUuid() uuid: string,
   ) {
-    return await this.authService.resetPassword(data, uuid);
+    return await this.authService.resetPassword(userId, data);
   }
 }

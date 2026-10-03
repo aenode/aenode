@@ -1,15 +1,35 @@
-import type { AuthUserDto } from './dtos/auth-user.dto.js';
-import type { ResetPasswordDto } from './dtos/reset-password.dto.js';
+import type {
+  AuthUserDto,
+  AuthUserSessionCreateDto,
+  AuthUserSessionDto,
+  ResetPasswordDto,
+} from './dtos/index.js';
 
 export abstract class AuthUserService {
-  abstract findByUsername(username: string): Promise<AuthUserDto | undefined>;
-  abstract findUniqueOneByUuid(uuid: string): Promise<AuthUserDto | undefined>;
-  abstract updateOtpSecretByUsername(
+  abstract findByIdOrThrow(id: number): Promise<AuthUserDto | never>;
+  abstract deleteSessionById(id: number): Promise<AuthUserDto | never>;
+  abstract deactivateAllSessionsByUserId(
+    id: number,
+  ): Promise<AuthUserDto | never>;
+  abstract findByUsernameOrThrow(
     username: string,
-    secret: string,
-  ): Promise<AuthUserDto | undefined>;
-  abstract updatePasswordByUuid(
-    uuid: string,
+  ): Promise<AuthUserDto | never>;
+  abstract findUniqueOneByUuidOrThrow(id: number): Promise<AuthUserDto | never>;
+  abstract updateOptSecretByIdOrThrow(
+    id: number,
+    secret: string | null,
+  ): Promise<AuthUserDto | never>;
+  abstract updatePasswordByIdOrThrow(
+    id: number,
     data: ResetPasswordDto,
-  ): Promise<AuthUserDto | undefined>;
+  ): Promise<AuthUserDto | never>;
+
+  abstract createSession(
+    data: AuthUserSessionCreateDto,
+  ): Promise<AuthUserDto | never>;
+
+  abstract updateSessionTokenById(
+    sessionId: number,
+    tokenHash: string,
+  ): Promise<AuthUserSessionDto>;
 }

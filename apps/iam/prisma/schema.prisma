@@ -48,8 +48,7 @@ model Otp {
   isActive  Boolean  @default(true) @map("is_active")
 
   /// @encript
-  secret    String
-  isEnabled Boolean @default(false) @map("is_enabled")
+  secret String?
 
   user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId Int  @unique
@@ -65,6 +64,9 @@ model Session {
   lastUsedAt DateTime? @map("last_used_at")
   userAgent  String?   @map("user_agent")
   ipAddress  String?   @map("ip_address")
+
+  /// @hash
+  token String
 
   user   User @relation(fields: [userId], references: [id])
   userId Int  @map("user_id")
