@@ -11,4 +11,11 @@ export class SessionService extends SessionDelegateService {
   ) {
     super(delegate);
   }
+
+  async softDeleteManyByUserId(userId: number) {
+    return await this.delegate.updateMany({
+      where: { userId },
+      data: { isActive: false },
+    });
+  }
 }

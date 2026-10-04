@@ -1,5 +1,6 @@
 // @index(['./**/*.ts', '!./**/*.spec.ts', '!./**/_*.ts', '!./**/generated/**'], f => `export * from '${f.path}.js'`)
 export * from './header-device-id.js';
+export * from './operation-name.js';
 export * from './param-id.js';
 export * from './public.js';
 export * from './query-param.js';

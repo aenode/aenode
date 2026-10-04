@@ -5,7 +5,6 @@ import type {
   OtpLoginDto,
 } from '@aenode/nest-auth';
 import { CryptoService } from '@aenode/nest-crypto';
-import { InjectPrismaDelegate } from '@aenode/prisma';
 import {
   Injectable,
   NotFoundException,
@@ -13,34 +12,31 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import type { Request } from 'express';
-import { Prisma } from '../../generated/prisma/client.js';
+import { OtpService, SessionService, UserService } from '../../data/index.js';
+import { SessionCacheService } from '../session-cache.service.js';
 
 @Injectable()
 export class LoginService {
   constructor(
-    protected readonly cryptoService: CryptoService,
-    @InjectPrismaDelegate(Prisma.ModelName.User)
-    protected readonly userService: Prisma.UserDelegate,
-    @InjectPrismaDelegate(Prisma.ModelName.Otp)
-    protected readonly otpService: Prisma.OtpDelegate,
-    @InjectPrismaDelegate(Prisma.ModelName.Session)
-    protected readonly sessionService: Prisma.SessionDelegate,
+    protected readonly userService: UserService,
+    protected readonly otpService: OtpService,
+    protected readonly sessionService: SessionService,
     protected readonly jwtService: JwtService,
+    protected readonly cryptoService: CryptoService,
+    protected readonly sessionCacheService: SessionCacheService,
   ) {}
 
   protected async findOtpByUserIdOrThrow(userId: number) {
-    const found = await this.otpService.findUnique({
-      where: { userId },
-    });
-
+    const found = await this.otpService.findUniqueOneByUserId(userId);
     if (found) {
       return found;
     }
 
     throw new NotFoundException('Otp not found');
   }
+
   protected async findUserByUsernameOrThrow(username: string) {
-    const found = await this.userService.findUnique({ where: { username } });
+    const found = await this.userService.findUniqueOneByUsername(username);
 
     if (found) {
       return found;
@@ -48,16 +44,22 @@ export class LoginService {
 
     throw new UnauthorizedException('User not found');
   }
+
   protected async createSession(userId: number, req: Request) {
     const userAgent = req.get('user-agent');
     const deviceId = req.headers['x-device-id'] as string | undefined;
     const ipAddress = req.ip;
 
-    const session = await this.sessionService.create({
-      data: { userId, userAgent, ipAddress, deviceId },
+    const session = await this.sessionService.createOne({
+      userId,
+      userAgent,
+      ipAddress,
+      deviceId,
     });
 
     const token = await this.jwtService.signAsync({ sub: session.id });
+
+    this.sessionCacheService.add(session.id, userId);
 
     return { token, deviceId: session.deviceId };
   }
@@ -68,6 +70,7 @@ export class LoginService {
       found.password,
       data.password,
     );
+
     if (isHashVerified) {
       return await this.createSession(found.id, req);
     }
@@ -92,19 +95,16 @@ export class LoginService {
   }
 
   async logout(sessionId: number): Promise<ResponseMessageDto> {
-    await this.sessionService.update({
-      where: { id: sessionId, isActive: true },
-      data: { isActive: false },
-    });
+    await this.sessionService.softDeleteOneById(sessionId);
 
-    return { message: 'Bye' };
+    this.sessionCacheService.remove(sessionId);
+
+    return { message: 'bye' };
   }
 
   async logoutAll(userId: number): Promise<ResponseMessageDto> {
-    await this.sessionService.updateMany({
-      where: { userId, isActive: true },
-      data: { isActive: false },
-    });
+    await this.sessionService.softDeleteManyByUserId(userId);
+    this.sessionCacheService.removeAll(userId);
     return { message: 'bye' };
   }
 }

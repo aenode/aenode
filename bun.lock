@@ -57,7 +57,7 @@
         "@prisma/client": "7.8.0",
         "@swc/helpers": "~0.5.18",
         "express": "^5.2.1",
-        "uuid": "^14.0.2",
+        "rxjs": "^7.8.2",
       },
       "devDependencies": {
         "@types/express": "^5.0.6",

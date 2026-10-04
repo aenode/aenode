@@ -1,5 +1,6 @@
 // @index(['./**/*.ts', '!./**/*.spec.ts','!./**/index.ts', '!./**/_*.ts','!./**/{main,bootstrap}.ts', '!./**/generated/**'], f => `export * from '${f.path}.js'`)
 export * from './lib/decorators/header-device-id.js';
+export * from './lib/decorators/operation-name.js';
 export * from './lib/decorators/param-id.js';
 export * from './lib/decorators/public.js';
 export * from './lib/decorators/query-param.js';

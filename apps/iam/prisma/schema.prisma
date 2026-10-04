@@ -62,7 +62,7 @@ model Session {
 
   userAgent String? @map("user_agent")
   ipAddress String? @map("ip_address")
-  deviceId  String  @default(uuid(7)) @map("device_id")
+  deviceId  String  @default("deviceId") @map("device_id")
   usage     Int?    @default(0)
 
   user   User @relation(fields: [userId], references: [id])

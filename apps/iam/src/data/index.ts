@@ -1,4 +1,8 @@
 // @index(['./**/*.ts', '!./**/*.spec.ts','!./**/index.ts', '!./**/_*.ts', '!./**/generated/**'], f => `export * from '${f.path}.js'`)
+export * from './otp/otp.module.js';
+export * from './otp/otp.service.js';
+export * from './permission/permission.module.js';
+export * from './permission/permission.service.js';
 export * from './role/role-data.module.js';
 export * from './role/role.service.js';
 export * from './session/session.module.js';
