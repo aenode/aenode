@@ -7,13 +7,13 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import type { Request } from 'express';
-import { SessionCacheService } from './session-cache.service.js';
+import { AuthCacheService } from './auth-cache.service.js';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(
     protected readonly jwtService: JwtService,
-    protected readonly sessionCache: SessionCacheService,
+    protected readonly sessionCache: AuthCacheService,
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -21,7 +21,7 @@ export class AuthGuard implements CanActivate {
     const token = this.extractTokenFromHeader(req);
     const jwtPayload = await this.jwtService.verifyAsync<JwtPayloadDto>(token);
 
-    return this.sessionCache.has(jwtPayload.sub);
+    return this.sessionCache.hasSession(jwtPayload.sub);
   }
 
   private extractTokenFromHeader(req: Request): string {

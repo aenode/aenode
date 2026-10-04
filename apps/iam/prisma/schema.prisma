@@ -26,7 +26,7 @@ model User {
   isActive  Boolean  @default(true) @map("is_active")
 
   /// @format(email)
-  username String @unique
+  username String @unique @db.Citext
 
   /// @format(password) @writeonly
   password String
@@ -34,11 +34,13 @@ model User {
   avatar String? @default("person.svg")
 
   /// @include
-  userRoles UserRole[]
-  comments  Comment[]
-  userTasks UserTask[]
-  sessions  Session[]
-  otps      Otp[]
+  comments        Comment[]
+  userTasks       UserTask[]
+  sessions        Session[]
+  otps            Otp[]
+  userPermissions UserPermission[]
+
+  @@map("users")
 }
 
 model Otp {
@@ -51,7 +53,9 @@ model Otp {
   secret String
 
   user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId Int  @unique
+  userId Int  @unique @map("user_id")
+
+  @@map("otps")
 }
 
 model Session {
@@ -69,6 +73,7 @@ model Session {
   userId Int  @map("user_id")
 
   @@unique([deviceId, isActive])
+  @@map("sessions")
 }
 
 model Scope {
@@ -77,22 +82,42 @@ model Scope {
   updatedAt DateTime @updatedAt @map("updated_at")
   isActive  Boolean  @default(true) @map("is_active")
 
-  name        String       @unique
-  permissions Permission[]
+  name String @unique @db.Citext
+
+  resources Resource[]
+
+  @@map("scopes")
 }
 
-model Role {
-  id Int @id @default(autoincrement())
-
+model Resource {
+  id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
   isActive  Boolean  @default(true) @map("is_active")
 
-  name        String  @unique
-  description String?
+  name String @db.Citext
 
-  rolePermissions RolePermission[]
-  userRoles       UserRole[]
+  scope   Scope @relation(fields: [scopeId], references: [id], onDelete: Cascade)
+  scopeId Int   @map("scope_id")
+
+  permissions Permission[]
+
+  @@unique([name, scopeId])
+  @@index([scopeId])
+  @@map("resources")
+}
+
+model Operation {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  isActive  Boolean  @default(true) @map("is_active")
+
+  name String @unique @db.Citext
+
+  permissions Permission[]
+
+  @@map("operations")
 }
 
 model Permission {
@@ -101,16 +126,29 @@ model Permission {
   updatedAt DateTime @updatedAt @map("updated_at")
   isActive  Boolean  @default(true) @map("is_active")
 
-  permission  String
-  description String?
+  resource   Resource @relation(fields: [resourceId], references: [id], onDelete: Cascade)
+  resourceId Int      @map("resource_id")
 
-  scope   Scope @relation(fields: [scopeId], references: [id])
-  scopeId Int   @map("scope_id")
+  operation   Operation @relation(fields: [operationId], references: [id], onDelete: Cascade)
+  operationId Int       @map("operation_id")
 
+  userPermissions UserPermission[]
   rolePermissions RolePermission[]
 
-  @@unique(fields: [scopeId, permission], map: "scopeId_permission")
-  @@index([permission])
+  @@unique([resourceId, operationId])
+  @@map("permissions")
+}
+
+model Role {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  isActive  Boolean  @default(true) @map("is_active")
+
+  name String @unique
+
+  /// @include
+  rolePermissions RolePermission[]
 }
 
 model RolePermission {
@@ -119,29 +157,30 @@ model RolePermission {
   updatedAt DateTime @updatedAt @map("updated_at")
   isActive  Boolean  @default(true) @map("is_active")
 
+  permission   Permission @relation(fields: [permissionId], references: [id])
+  permissionId Int        @map("permission_id")
+
   role   Role @relation(fields: [roleId], references: [id])
   roleId Int  @map("role_id")
 
-  permisssion  Permission @relation(fields: [permissionId], references: [id])
-  permissionId Int        @map("permission_id")
-
   @@unique([roleId, permissionId])
+  @@map("role_permissions")
 }
 
-model UserRole {
+model UserPermission {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
   isActive  Boolean  @default(true) @map("is_active")
 
-  role   Role @relation(fields: [roleId], references: [id])
-  roleId Int  @map("role_id")
-
-  user   User @relation(fields: [userId], references: [id])
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId Int  @map("user_id")
 
-  @@unique([userId, roleId])
-  @@index([roleId])
+  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+  permissionId Int        @map("permission_id")
+
+  @@unique([userId, permissionId])
+  @@map("user_permissions")
 }
 
 model Comment {
@@ -152,11 +191,11 @@ model Comment {
 
   comment String
 
-  task   Task @relation(fields: [taskId], references: [id])
+  task   Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
   taskId Int  @map("task_id")
 
   /// @include(username,avatar)
-  user   User @relation(fields: [userId], references: [id])
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId Int  @map("user_id")
 }
 
@@ -168,10 +207,10 @@ model Task {
   isActive  Boolean  @default(true)
 
   /// @minlength(3) @maxlength(255)
-  title String @unique
+  title String @unique @db.Citext
 
   /// @slug(title)
-  slug String
+  slug String @unique @db.Citext
 
   description String?
 
@@ -196,7 +235,7 @@ model Task {
 
   userTasks UserTask[]
 
-  status Status?
+  status Status? @default(NEW)
 }
 
 model UserTask {

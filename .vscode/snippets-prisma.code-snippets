@@ -1,0 +1,17 @@
+{
+    "model": {
+        "prefix": "model",
+        "body": [
+            "model $1 {",
+            "  id        Int      @id @default(autoincrement())",
+            "  createdAt DateTime @default(now()) @map(\"created_at\")",
+            "  updatedAt DateTime @updatedAt @map(\"updated_at\")",
+            "  isActive  Boolean  @default(true) @map(\"is_active\")",
+            "",
+            "  name String @unique",
+            "$0",
+            "}",
+        ],
+        "scope": "prisma"
+    }
+}

@@ -14,7 +14,7 @@ import { JwtService } from '@nestjs/jwt';
 import type { Request } from 'express';
 import { v7 } from 'uuid';
 import { OtpService, SessionService, UserService } from '../../data/index.js';
-import { SessionCacheService } from '../session-cache.service.js';
+import { AuthCacheService } from '../auth-cache.service.js';
 
 @Injectable()
 export class LoginService {
@@ -24,7 +24,7 @@ export class LoginService {
     protected readonly sessionService: SessionService,
     protected readonly jwtService: JwtService,
     protected readonly cryptoService: CryptoService,
-    protected readonly sessionCacheService: SessionCacheService,
+    protected readonly sessionCacheService: AuthCacheService,
   ) {}
 
   protected async findOtpByUserIdOrThrow(userId: number) {
@@ -65,7 +65,7 @@ export class LoginService {
 
     const token = await this.jwtService.signAsync({ sub: session.id });
 
-    this.sessionCacheService.add(session.id, userId);
+    this.sessionCacheService.addSession(session.id, userId);
 
     return { token, deviceId: session.deviceId };
   }
@@ -103,14 +103,14 @@ export class LoginService {
   async logout(sessionId: number): Promise<ResponseMessageDto> {
     await this.sessionService.softDeleteOneById(sessionId);
 
-    this.sessionCacheService.remove(sessionId);
+    this.sessionCacheService.removeSession(sessionId);
 
     return { message: 'bye' };
   }
 
   async logoutAll(userId: number): Promise<ResponseMessageDto> {
     await this.sessionService.softDeleteManyByUserId(userId);
-    this.sessionCacheService.removeAll(userId);
+    this.sessionCacheService.removeAllSessions(userId);
     return { message: 'bye' };
   }
 }
