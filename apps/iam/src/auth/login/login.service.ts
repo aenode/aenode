@@ -12,6 +12,7 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import type { Request } from 'express';
+import { v7 } from 'uuid';
 import { OtpService, SessionService, UserService } from '../../data/index.js';
 import { SessionCacheService } from '../session-cache.service.js';
 
@@ -47,15 +48,20 @@ export class LoginService {
 
   protected async createSession(userId: number, req: Request) {
     const userAgent = req.get('user-agent');
-    const deviceId = req.headers['x-device-id'] as string | undefined;
+    const deviceId = (req.headers['x-device-id'] as string) ?? v7();
     const ipAddress = req.ip;
 
-    const session = await this.sessionService.createOne({
-      userId,
-      userAgent,
-      ipAddress,
-      deviceId,
-    });
+    const foundSesion =
+      await this.sessionService.findFirstOneByDeviceId(deviceId);
+
+    const session =
+      foundSesion ??
+      (await this.sessionService.createOne({
+        userId,
+        userAgent,
+        ipAddress,
+        deviceId,
+      }));
 
     const token = await this.jwtService.signAsync({ sub: session.id });
 

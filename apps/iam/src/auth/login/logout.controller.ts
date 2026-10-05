@@ -1,6 +1,6 @@
 import { ApiBearerAuth, SessionId, UserId } from '@aenode/nest';
 import { Controller, Post } from '@nestjs/common';
-import type { LoginService } from './login.service.js';
+import { LoginService } from './login.service.js';
 
 @ApiBearerAuth()
 @Controller('auth')

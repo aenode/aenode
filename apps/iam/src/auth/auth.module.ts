@@ -6,12 +6,14 @@ import { randomBytes } from 'node:crypto';
 import {
   OtpDataModule,
   RoleDataModule,
+  SessionDataModule,
   UserDataModule,
   UserService,
 } from '../data/index.js';
 import { LoginController } from './login/login.controller.js';
 import { LoginService } from './login/login.service.js';
 import { LogoutController } from './login/logout.controller.js';
+import { SessionCacheService } from './session-cache.service.js';
 
 @Module({
   imports: [
@@ -19,6 +21,7 @@ import { LogoutController } from './login/logout.controller.js';
     UserDataModule,
     RoleDataModule,
     OtpDataModule,
+    SessionDataModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
@@ -35,7 +38,7 @@ import { LogoutController } from './login/logout.controller.js';
     }),
   ],
   controllers: [LoginController, LogoutController],
-  providers: [LoginService],
+  providers: [LoginService, SessionCacheService],
 })
 export class AuthModule implements OnModuleInit {
   constructor(

@@ -7,7 +7,7 @@ import { CommonController } from './common.controller.js';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ cache: true }),
+    ConfigModule.forRoot({ cache: true, isGlobal: true }),
     EventEmitterModule.forRoot({ global: true }),
     CacheModule.register({ ttl: 5_000 }),
   ],

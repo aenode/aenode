@@ -67,6 +67,8 @@ model Session {
 
   user   User @relation(fields: [userId], references: [id])
   userId Int  @map("user_id")
+
+  @@unique([deviceId, isActive])
 }
 
 model Scope {

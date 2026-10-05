@@ -25,6 +25,7 @@ export async function bootstrap(appModule: Type) {
     const swaggerConfig = new DocumentBuilder()
       .setTitle(APP_NAME)
       .addBearerAuth()
+      .addGlobalParameters({ name: 'x-device-id', in: 'header' })
       .build();
     const swaggerDog = SwaggerModule.createDocument(app, swaggerConfig, {
       autoTagControllers: true,
