@@ -25,8 +25,8 @@ model User {
   updatedAt DateTime @updatedAt @map("updated_at")
   isActive  Boolean  @default(true) @map("is_active")
 
-  /// @format(email)
-  username String @unique @db.Citext
+  /// @format(email) @citext
+  username String @unique
 
   /// @format(password) @writeonly
   password String
@@ -52,7 +52,7 @@ model Otp {
   /// @encript
   secret String
 
-  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId Int  @unique @map("user_id")
 
   @@map("otps")
@@ -82,7 +82,8 @@ model Scope {
   updatedAt DateTime @updatedAt @map("updated_at")
   isActive  Boolean  @default(true) @map("is_active")
 
-  name String @unique @db.Citext
+  /// @format(name) @citext
+  name String @unique
 
   resources Resource[]
 
@@ -95,9 +96,10 @@ model Resource {
   updatedAt DateTime @updatedAt @map("updated_at")
   isActive  Boolean  @default(true) @map("is_active")
 
-  name String @db.Citext
+  /// @format(name) @citext
+  name String @unique
 
-  scope   Scope @relation(fields: [scopeId], references: [id], onDelete: Cascade)
+  scope   Scope @relation(fields: [scopeId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   scopeId Int   @map("scope_id")
 
   permissions Permission[]
@@ -113,7 +115,8 @@ model Operation {
   updatedAt DateTime @updatedAt @map("updated_at")
   isActive  Boolean  @default(true) @map("is_active")
 
-  name String @unique @db.Citext
+  /// @format(name) @citext
+  name String @unique
 
   permissions Permission[]
 
@@ -126,10 +129,10 @@ model Permission {
   updatedAt DateTime @updatedAt @map("updated_at")
   isActive  Boolean  @default(true) @map("is_active")
 
-  resource   Resource @relation(fields: [resourceId], references: [id], onDelete: Cascade)
+  resource   Resource @relation(fields: [resourceId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   resourceId Int      @map("resource_id")
 
-  operation   Operation @relation(fields: [operationId], references: [id], onDelete: Cascade)
+  operation   Operation @relation(fields: [operationId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   operationId Int       @map("operation_id")
 
   userPermissions UserPermission[]
@@ -145,10 +148,13 @@ model Role {
   updatedAt DateTime @updatedAt @map("updated_at")
   isActive  Boolean  @default(true) @map("is_active")
 
+  /// @format(name) @citext
   name String @unique
 
   /// @include
   rolePermissions RolePermission[]
+
+  @@map("roles")
 }
 
 model RolePermission {
@@ -157,10 +163,10 @@ model RolePermission {
   updatedAt DateTime @updatedAt @map("updated_at")
   isActive  Boolean  @default(true) @map("is_active")
 
-  permission   Permission @relation(fields: [permissionId], references: [id])
+  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   permissionId Int        @map("permission_id")
 
-  role   Role @relation(fields: [roleId], references: [id])
+  role   Role @relation(fields: [roleId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   roleId Int  @map("role_id")
 
   @@unique([roleId, permissionId])
@@ -173,10 +179,10 @@ model UserPermission {
   updatedAt DateTime @updatedAt @map("updated_at")
   isActive  Boolean  @default(true) @map("is_active")
 
-  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId Int  @map("user_id")
 
-  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   permissionId Int        @map("permission_id")
 
   @@unique([userId, permissionId])
@@ -191,26 +197,27 @@ model Comment {
 
   comment String
 
-  task   Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  task   Task @relation(fields: [taskId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   taskId Int  @map("task_id")
 
   /// @include(username,avatar)
-  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId Int  @map("user_id")
+
+  @@map("comments")
 }
 
 model Task {
-  id Int @id @default(autoincrement())
-
+  id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt
-  isActive  Boolean  @default(true)
+  updatedAt DateTime @updatedAt @map("updated_at")
+  isActive  Boolean  @default(true) @map("is_active")
 
-  /// @minlength(3) @maxlength(255)
-  title String @unique @db.Citext
+  /// @minlength(3) @maxlength(255)  @citext
+  title String @unique
 
-  /// @slug(title)
-  slug String @unique @db.Citext
+  /// @slug(title)   @citext
+  slug String @unique
 
   description String?
 
@@ -236,6 +243,8 @@ model Task {
   userTasks UserTask[]
 
   status Status? @default(NEW)
+
+  @@map("tasks")
 }
 
 model UserTask {
@@ -244,13 +253,14 @@ model UserTask {
   updatedAt DateTime @updatedAt @map("updated_at")
   isActive  Boolean  @default(true) @map("is_active")
 
-  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId Int  @map("user_id")
 
   /// @include
-  task   Task @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  task   Task @relation(fields: [taskId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   taskId Int  @map("task_id")
 
-  @@unique(fields: [userId, taskId], map: "userId_taskId")
+  @@unique([userId, taskId])
   @@index([taskId])
+  @@map("user_tasks")
 }

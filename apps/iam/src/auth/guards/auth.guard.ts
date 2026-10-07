@@ -1,3 +1,4 @@
+import { isPublic, Reflector } from '@aenode/nest';
 import { JwtPayloadDto } from '@aenode/nest-auth';
 import {
   Injectable,
@@ -7,21 +8,32 @@ import {
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import type { Request } from 'express';
-import { AuthCacheService } from './auth-cache.service.js';
+import { RequestService } from '../services/request.service.js';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(
+    protected readonly reflector: Reflector,
     protected readonly jwtService: JwtService,
-    protected readonly sessionCache: AuthCacheService,
+    protected readonly requestService: RequestService,
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const req = context.switchToHttp().getRequest<Request>();
-    const token = this.extractTokenFromHeader(req);
-    const jwtPayload = await this.jwtService.verifyAsync<JwtPayloadDto>(token);
 
-    return this.sessionCache.hasSession(jwtPayload.sub);
+    if (isPublic(context, this.reflector)) {
+      return true;
+    }
+
+    const token = this.extractTokenFromHeader(req);
+
+    try {
+      this.requestService.session =
+        await this.jwtService.verifyAsync<JwtPayloadDto>(token);
+    } catch {
+      return false;
+    }
+    return true;
   }
 
   private extractTokenFromHeader(req: Request): string {

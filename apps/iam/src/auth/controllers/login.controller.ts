@@ -8,7 +8,7 @@ import {
 import { LoginDto, LoginResponseDto, OtpLoginDto } from '@aenode/nest-auth';
 import { Body, Controller, Post, Req } from '@nestjs/common';
 import type { Request } from 'express';
-import { LoginService } from './login.service.js';
+import { LoginService } from '../services/login.service.js';
 
 @Public()
 @Controller('auth')

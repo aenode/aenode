@@ -10,10 +10,11 @@ import {
   UserDataModule,
   UserService,
 } from '../data/index.js';
-import { AuthCacheService } from './auth-cache.service.js';
-import { LoginController } from './login/login.controller.js';
-import { LoginService } from './login/login.service.js';
-import { LogoutController } from './login/logout.controller.js';
+import { LoginController } from './controllers/login.controller.js';
+import { LogoutController } from './controllers/logout.controller.js';
+import { LoginService } from './services/login.service.js';
+import { PermissionCacheService } from './services/permission-cache.service.js';
+import { RequestService } from './services/request.service.js';
 
 @Module({
   imports: [
@@ -38,7 +39,7 @@ import { LogoutController } from './login/logout.controller.js';
     }),
   ],
   controllers: [LoginController, LogoutController],
-  providers: [LoginService, AuthCacheService],
+  providers: [LoginService, RequestService, PermissionCacheService],
 })
 export class AuthModule implements OnModuleInit {
   constructor(

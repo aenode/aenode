@@ -1,7 +1,7 @@
 // @index(['./**/*.ts', '!./**/*.spec.ts','!./**/index.ts', '!./**/_*.ts','!./**/{main,bootstrap}.ts', '!./**/generated/**'], f => `export * from '${f.path}.js'`)
-export * from './auth-cache.service.js';
-export * from './auth.guard.js';
 export * from './auth.module.js';
-export * from './login/login.controller.js';
-export * from './login/login.service.js';
-export * from './login/logout.controller.js';
+export * from './controllers/login.controller.js';
+export * from './controllers/logout.controller.js';
+export * from './guards/auth.guard.js';
+export * from './services/login.service.js';
+export * from './services/permission-cache.service.js';
