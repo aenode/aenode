@@ -6,6 +6,7 @@ export * from './lib/decorators/public.js';
 export * from './lib/decorators/query-param.js';
 export * from './lib/decorators/resource-decorator-factory.js';
 export * from './lib/decorators/resource-name.js';
+export * from './lib/decorators/scope-name.js';
 export * from './lib/decorators/session-id.js';
 export * from './lib/decorators/user-id.js';
 export * from './lib/decorators/user-username.js';

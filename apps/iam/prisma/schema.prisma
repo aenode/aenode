@@ -39,6 +39,7 @@ model User {
   sessions        Session[]
   otps            Otp[]
   userPermissions UserPermission[]
+  userRoles       UserRole[]
 
   @@map("users")
 }
@@ -153,6 +154,7 @@ model Role {
 
   /// @include
   rolePermissions RolePermission[]
+  userRoles       UserRole[]
 
   @@map("roles")
 }
@@ -171,6 +173,22 @@ model RolePermission {
 
   @@unique([roleId, permissionId])
   @@map("role_permissions")
+}
+
+model UserRole {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  isActive  Boolean  @default(true) @map("is_active")
+
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId Int  @map("user_id")
+
+  role   Role @relation(fields: [roleId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  roleId Int  @map("role_id")
+
+  @@unique([userId, roleId])
+  @@map("user_roles")
 }
 
 model UserPermission {

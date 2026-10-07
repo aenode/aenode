@@ -1,25 +1,28 @@
 import type { PermissionRecord } from '@aenode/nest-auth';
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class PermissionCacheService {
-  protected readonly permissions = new Map<number, PermissionRecord>();
+  protected readonly userIdToPermissions = new Map<number, PermissionRecord>();
 
   set(userId: number, permissions: PermissionRecord) {
-    return this.permissions.set(userId, permissions);
-  }
-
-  isDefined(userId: number) {
-    return !!this.permissions.get(userId);
+    return this.userIdToPermissions.set(userId, permissions);
   }
 
   get(userId: number) {
-    const permissions = this.permissions.get(userId);
+    return this.userIdToPermissions.get(userId);
+  }
 
-    if (!permissions) {
-      throw new UnauthorizedException(`No cached permissions for ${userId}`);
-    }
-
-    return permissions;
+  has(
+    userId: number,
+    scopeName: string,
+    resourceName: string,
+    operationName: string,
+  ) {
+    return (
+      this.userIdToPermissions.get(userId)?.[scopeName]?.[resourceName]?.[
+        operationName
+      ] === true
+    );
   }
 }

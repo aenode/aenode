@@ -6,6 +6,7 @@ export * from './public.js';
 export * from './query-param.js';
 export * from './resource-decorator-factory.js';
 export * from './resource-name.js';
+export * from './scope-name.js';
 export * from './session-id.js';
 export * from './user-id.js';
 export * from './user-username.js';

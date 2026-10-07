@@ -2,6 +2,20 @@ import { names } from '@aenode/names';
 import type { DMMF } from '@prisma/generator-helper';
 import { FieldMetadata } from '../../helpers/field-metadata.js';
 
+export function printUpsertByMethod(
+  modelName: string,
+  field: DMMF.Field,
+): string {
+  const { pascal, camel } = names(field.name);
+
+  return [
+    `  async upsertOneBy${pascal}(data:${modelName}CreateDto ) {`,
+    `    data = await this.beforeCreateAndUpdate(data);`,
+    `    return await this.delegate.upsert({ where: { ${camel}: data.${camel}, isActive: true }, create: data, update: {} });`,
+    `  }`,
+  ].join('\n');
+}
+
 export function printFindUnqiueByMethod(field: DMMF.Field) {
   const { pascal, camel } = names(field.name);
   const meta = new FieldMetadata(field);
@@ -183,6 +197,10 @@ export function printService(model: DMMF.Model) {
 
   const uniqueFields = ownFields.filter((e) => e.isUnique || e.isId);
 
+  const uniqueInputFields = uniqueFields.filter(
+    (e) => new FieldMetadata(e).isInputField,
+  );
+
   const findUnqiueOneMethods = uniqueFields
     .map((field) => printFindUnqiueByMethod(field))
     .join('\n');
@@ -201,11 +219,15 @@ export function printService(model: DMMF.Model) {
 
   const compositeUnqiueMethods = printFindCompositeUnqiueMethod(model);
 
+  const upsertOneMethods = uniqueInputFields
+    .map((field) => printUpsertByMethod(model.name, field))
+    .join('\n');
+
   const isExistMethod = printIsExistMethod(model);
 
   return [
     `export class ${modelName}DelegateService {`,
-    `  constructor(protected readonly delegate: P.Prisma.${modelName}Delegate) {}`,
+    `  constructor(public readonly delegate: P.Prisma.${modelName}Delegate) {}`,
     ``,
     ``,
     ``,
@@ -213,6 +235,8 @@ export function printService(model: DMMF.Model) {
     `    data = await this.beforeCreate(await this.beforeCreateAndUpdate(data));`,
     `    return await this.delegate.create({ data });`,
     `  }`,
+
+    upsertOneMethods,
     findUnqiueOneMethods,
     findFirstOneMethods,
     `  findMany(query: ${modelName}FindManyDto) {`,
@@ -239,5 +263,7 @@ export function printService(model: DMMF.Model) {
     `  }`,
 
     `}`,
-  ].join('\n');
+  ]
+    .filter((e) => e)
+    .join('\n');
 }
