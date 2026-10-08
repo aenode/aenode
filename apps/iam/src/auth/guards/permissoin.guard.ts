@@ -6,6 +6,7 @@ import {
 } from '@aenode/nest';
 import {
   Injectable,
+  Scope,
   UnauthorizedException,
   type CanActivate,
   type ExecutionContext,
@@ -13,7 +14,7 @@ import {
 import { PermissionCacheService } from '../services/permission-cache.service.js';
 import { RequestService } from '../services/request.service.js';
 
-@Injectable()
+@Injectable({ scope: Scope.REQUEST })
 export class PermissionGuard implements CanActivate {
   constructor(
     protected readonly permissionCache: PermissionCacheService,
