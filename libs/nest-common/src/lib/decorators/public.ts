@@ -14,7 +14,7 @@ export function isPublic(
   reflector: Reflector,
 ): boolean {
   return reflector.getAllAndOverride<boolean>(PUBLIC_METADATA_TOKEN, [
-    context.getHandler(),
     context.getClass(),
+    context.getHandler(),
   ]);
 }

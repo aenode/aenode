@@ -51,6 +51,16 @@ export class UserService extends UserDelegateService {
     }, {} as PermissionRecord);
   }
 
+  override async beforeUpsert<T extends UserCreateDto | UserUpdateDto>(
+    data: T,
+  ): Promise<T> {
+    if (data.password !== undefined) {
+      data.password = await this.cryptoService.hash(data.password);
+    }
+
+    return data;
+  }
+
   override async beforeCreateAndUpdate<T extends UserCreateDto | UserUpdateDto>(
     data: T,
   ): Promise<T> {
@@ -59,10 +69,6 @@ export class UserService extends UserDelegateService {
       throw new UnprocessableEntityException({ errors });
     }
 
-    if (data.password !== undefined) {
-      data.password = await this.cryptoService.hash(data.password);
-    }
-
-    return data;
+    return await this.beforeUpsert(data);
   }
 }

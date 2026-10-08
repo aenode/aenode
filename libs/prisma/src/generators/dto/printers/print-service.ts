@@ -10,7 +10,7 @@ export function printUpsertByMethod(
 
   return [
     `  async upsertOneBy${pascal}(data:${modelName}CreateDto ) {`,
-    `    data = await this.beforeCreateAndUpdate(data);`,
+    `    data = await this.beforeUpsert(data);`,
     `    return await this.delegate.upsert({ where: { ${camel}: data.${camel}, isActive: true }, create: data, update: {} });`,
     `  }`,
   ].join('\n');
@@ -249,6 +249,15 @@ export function printService(model: DMMF.Model) {
     isExistMethod,
 
     `  protected async beforeUpdate(data: ${modelName}UpdateDto): Promise<${modelName}UpdateDto> {`,
+    `    return data;`,
+    `  }`,
+    ` `,
+
+    `  protected async beforeUpsert<T extends ${modelName}CreateDto | ${modelName}UpdateDto>(`,
+    `    data: T,`,
+    `  ): Promise<T> {`,
+
+    `  `,
     `    return data;`,
     `  }`,
     `  `,

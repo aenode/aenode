@@ -56,6 +56,7 @@ import { RequestService } from './services/request.service.js';
   ],
   controllers: [LoginController, LogoutController],
   providers: [LoginService, RequestService, PermissionCacheService],
+  exports: [JwtModule, LoginService, RequestService, PermissionCacheService],
 })
 export class AuthModule implements OnModuleInit {
   constructor(

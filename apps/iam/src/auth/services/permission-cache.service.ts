@@ -1,6 +1,9 @@
 import type { PermissionRecord } from '@aenode/nest-auth';
 import { Injectable } from '@nestjs/common';
 
+/**
+ * The service cache the users' permissions by userId
+ */
 @Injectable()
 export class PermissionCacheService {
   protected readonly userIdToPermissions = new Map<number, PermissionRecord>();
@@ -13,6 +16,15 @@ export class PermissionCacheService {
     return this.userIdToPermissions.get(userId);
   }
 
+  /**
+   * Check the user has the required permission.
+   *
+   * @param userId
+   * @param scopeName
+   * @param resourceName
+   * @param operationName
+   * @returns
+   */
   has(
     userId: number,
     scopeName: string,

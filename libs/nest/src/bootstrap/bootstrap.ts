@@ -1,11 +1,11 @@
 import { globalValidationPipe } from '@aenode/nest-common';
-import type { Type } from '@nestjs/common';
+import type { CanActivate, Type } from '@nestjs/common';
 import { ClassSerializerInterceptor, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { NestFactory, Reflector } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
-export async function bootstrap(appModule: Type) {
+export async function bootstrap(appModule: Type, guards: CanActivate[] = []) {
   const app = await NestFactory.create(appModule);
   const conf = app.get(ConfigService);
 
@@ -20,6 +20,10 @@ export async function bootstrap(appModule: Type) {
   app.useGlobalPipes(globalValidationPipe);
 
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
+
+  if (guards.length > 0) {
+    app.useGlobalGuards(...guards);
+  }
 
   SwaggerConfig: {
     const swaggerConfig = new DocumentBuilder()

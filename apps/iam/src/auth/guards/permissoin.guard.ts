@@ -6,6 +6,7 @@ import {
 } from '@aenode/nest';
 import {
   Injectable,
+  UnauthorizedException,
   type CanActivate,
   type ExecutionContext,
 } from '@nestjs/common';
@@ -20,28 +21,30 @@ export class PermissionGuard implements CanActivate {
     protected readonly reflector: Reflector,
   ) {}
 
-  async canActivate(context: ExecutionContext): Promise<boolean> {
+  canActivate(context: ExecutionContext) {
     const session = this.requestService.session;
 
     if (!session) {
-      return false;
-    }
-
-    const permissions = this.permissionCache.get(session.userId);
-
-    if (!permissions) {
-      return false;
+      throw new UnauthorizedException('Session not found');
     }
 
     const scopeName = getScopeName(context, this.reflector);
     const resourceName = getResourceName(context, this.reflector);
     const operationName = getOperationName(context, this.reflector);
 
-    return this.permissionCache.has(
+    const userHasPermissions = this.permissionCache.has(
       session.userId,
       scopeName,
       resourceName,
       operationName,
     );
+
+    if (!userHasPermissions) {
+      throw new UnauthorizedException(
+        `The user does not have required permission ${scopeName}.${resourceName}.${operationName}`,
+      );
+    }
+
+    return true;
   }
 }

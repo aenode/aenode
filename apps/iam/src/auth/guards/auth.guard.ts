@@ -1,11 +1,12 @@
-import { isPublic, Reflector } from '@aenode/nest';
+import { isPublic } from '@aenode/nest';
 import { JwtPayloadDto } from '@aenode/nest-auth';
 import {
-  Injectable,
-  UnauthorizedException,
   type CanActivate,
   type ExecutionContext,
+  Injectable,
+  UnauthorizedException,
 } from '@nestjs/common';
+import { Reflector } from '@nestjs/core';
 import { JwtService } from '@nestjs/jwt';
 import type { Request } from 'express';
 import { RequestService } from '../services/request.service.js';
@@ -16,42 +17,46 @@ export class AuthGuard implements CanActivate {
     protected readonly reflector: Reflector,
     protected readonly jwtService: JwtService,
     protected readonly requestService: RequestService,
-  ) {}
+  ) {
+    console.log('Reflector: ', this.reflector);
+  }
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    const req = context.switchToHttp().getRequest<Request>();
-
     if (isPublic(context, this.reflector)) {
       return (this.requestService.isPublic = true);
     }
 
+    const req = context.switchToHttp().getRequest<Request>();
     const token = this.extractTokenFromHeader(req);
 
     try {
       this.requestService.session =
         await this.jwtService.verifyAsync<JwtPayloadDto>(token);
+
+      return true;
     } catch {
-      return false;
+      throw new UnauthorizedException('Invalid token');
     }
-    return true;
   }
 
   private extractTokenFromHeader(req: Request): string {
     const authorization = req.headers.authorization;
 
     if (!authorization) {
-      throw new UnauthorizedException('Autorization header is missing');
+      throw new UnauthorizedException('Authorization header is missing');
     }
 
-    const [name, token] = authorization.split(' ').slice(0, 1);
+    const [schema, token] = authorization.split(' ').slice(0, 2);
 
-    if (name === 'Bearer') {
-      if (!token) {
-        throw new UnauthorizedException('Token is not provided');
-      }
-      return token;
+    if (schema !== 'Bearer') {
+      throw new UnauthorizedException(
+        `Bearer token is required but found ${schema}`,
+      );
+    }
+    if (!token) {
+      throw new UnauthorizedException('Token is not provided');
     }
 
-    throw new UnauthorizedException('Bearer token is required');
+    return token;
   }
 }
