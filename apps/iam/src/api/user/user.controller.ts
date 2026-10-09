@@ -13,8 +13,7 @@ import {
 } from '../../generated/dto/user/user.js';
 
 const UserDecoratorFactory = new ResourceDecoratorFactory({
-  singularPath: 'user',
-  pluralPath: 'users',
+  resourceName: 'user',
   responseType: UserReadDto,
 });
 

@@ -67,6 +67,7 @@ export class AuthModule implements OnModuleInit {
     protected readonly permissionService: PermissionService,
     protected readonly operationService: OperationService,
     protected readonly userRoleService: UserRoleService,
+    protected readonly authCacheService: AuthCacheService,
   ) {}
 
   protected async createUser(
@@ -96,18 +97,32 @@ export class AuthModule implements OnModuleInit {
   }
 
   async createReaderUser() {
-    const adminRole = await this.roleService.upsertOneByName({
+    const readerRole = await this.roleService.upsertOneByName({
       name: 'reader',
     });
 
     const username = 'reader@aenode.io';
     const password = '!Password123.';
 
-    await this.createUser(username, password, adminRole.id);
+    await this.createUser(username, password, readerRole.id);
+  }
+
+  async loadCache() {
+    const users = await this.userService.findMany({ select: { id: true } });
+
+    for (const u of users) {
+      const permissions = await this.userService.permissions(u.id);
+      const roles = await this.userService.roles(u.id);
+
+      this.authCacheService.setPermissions(u.id, permissions);
+      this.authCacheService.setRoles(u.id, roles);
+    }
   }
 
   async onModuleInit() {
     await this.createAdminUser();
     await this.createReaderUser();
+
+    await this.loadCache();
   }
 }

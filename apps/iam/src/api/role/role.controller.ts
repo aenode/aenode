@@ -13,8 +13,7 @@ import {
 } from '../../generated/dto/role/role.js';
 
 const RoleDecoratorFactory = new ResourceDecoratorFactory({
-  singularPath: 'role',
-  pluralPath: 'roles',
+  resourceName: 'role',
   responseType: RoleReadDto,
 });
 

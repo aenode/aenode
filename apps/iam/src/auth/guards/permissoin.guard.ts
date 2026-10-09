@@ -41,6 +41,18 @@ export class PermissionGuard implements CanActivate {
     const resourceName = getResourceName(context, this.reflector);
     const operationName = getOperationName(context, this.reflector);
 
+    console.log(
+      'Permission: ',
+      [scopeName, resourceName, operationName].join('.'),
+    );
+
+    console.log('user Roles:  ', this.authCache.getRoles(session.userId));
+    if (/read_one|read_many/gi.test(operationName)) {
+      if (this.authCache.hasRole(session.userId, 'reader')) {
+        return true;
+      }
+    }
+
     const permission = `${scopeName}.${resourceName}.${operationName}`;
 
     const userHasPermissions = this.authCache.hasPermission(

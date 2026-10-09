@@ -1,3 +1,4 @@
+import { names, pluralize } from '@aenode/names';
 import { Controller, Delete, Get, Post, Put, type Type } from '@nestjs/common';
 import {
   ApiBadRequestResponse,
@@ -12,10 +13,12 @@ import {
   ResponseMessageDto,
   ValidationErorResponseDto,
 } from '../dtos/response-types.js';
+import { OperationName } from './operation-name.js';
+import { ResourceName } from './resource-name.js';
 
 export type ResourceDecoratorFactoryOptions = {
-  singularPath?: string;
-  pluralPath?: string;
+  resourceName: string;
+  scope?: string;
   responseType: Type;
   createResponseType?: Type;
   findResponseType?: Type;
@@ -28,12 +31,24 @@ export type ResourceDecoratorFactoryOptions = {
 export class ResourceDecoratorFactory {
   constructor(private readonly options: ResourceDecoratorFactoryOptions) {}
 
+  private get resourceName() {
+    return this.resourceNames.snake;
+  }
+
+  private get resourceNames() {
+    return names(this.options.resourceName);
+  }
+
   private get singularPath() {
-    return this.options.singularPath;
+    return this.resourceNames.kebab;
   }
 
   private get pluralPath() {
-    return this.options.pluralPath ?? this.singularPath;
+    const __plural = pluralize(this.singularPath);
+    if (__plural === this.singularPath) {
+      return this.singularPath + 's';
+    }
+    return __plural;
   }
 
   private get idPath() {
@@ -69,14 +84,18 @@ export class ResourceDecoratorFactory {
 
   private CommonResponse(): MethodDecorator {
     return (...args) => {
-      ApiInternalServerErrorResponse({ type: ResponseMessageDto })(...args);
-      ApiBadRequestResponse({ type: ResponseMessageDto })(...args);
+      [
+        ApiInternalServerErrorResponse({ type: ResponseMessageDto }),
+        ApiBadRequestResponse({ type: ResponseMessageDto }),
+      ].forEach((d) => d(...args));
     };
   }
 
   Controller(): ClassDecorator {
     return (...args) => {
       Controller()(...args);
+
+      ResourceName(this.resourceName)(...args);
       if (this.isPublic !== true) {
         ApiBearerAuth()(...args);
       }
@@ -91,14 +110,14 @@ export class ResourceDecoratorFactory {
    */
   CreateOne(): MethodDecorator {
     return (...args) => {
-      this.CommonResponse()(...args);
-      ApiOperation({ summary: 'Create item' })(...args);
-      ApiOkResponse({ type: this.createResponseType })(...args);
-      ApiUnprocessableEntityResponse({ type: ValidationErorResponseDto })(
-        ...args,
-      );
-
-      Post(this.singularPath)(...args);
+      [
+        this.CommonResponse(),
+        OperationName('create_one'),
+        ApiOperation({ summary: `Create one ${this.singularPath}` }),
+        ApiOkResponse({ type: this.createResponseType }),
+        ApiUnprocessableEntityResponse({ type: ValidationErorResponseDto }),
+        Post(this.singularPath),
+      ].forEach((d) => d(...args));
     };
   }
 
@@ -108,11 +127,13 @@ export class ResourceDecoratorFactory {
    */
   FindMany(): MethodDecorator {
     return (...args) => {
-      this.CommonResponse()(...args);
-
-      ApiOperation({ summary: 'Find many' })(...args);
-      ApiOkResponse({ type: this.findResponseType, isArray: true })(...args);
-      Get(this.pluralPath)(...args);
+      [
+        this.CommonResponse(),
+        OperationName('read_many'),
+        ApiOperation({ summary: `Find many ${this.singularPath}` }),
+        ApiOkResponse({ type: this.findResponseType, isArray: true }),
+        Get(this.pluralPath),
+      ].forEach((d) => d(...args));
     };
   }
 
@@ -123,17 +144,20 @@ export class ResourceDecoratorFactory {
    */
   FindOneById(): MethodDecorator {
     return (...args) => {
-      this.CommonResponse()(...args);
-
-      ApiOperation({ summary: 'Find one' })(...args);
-      ApiOkResponse({ type: this.findOneResponseType })(...args);
-      ApiNotFoundResponse({
-        type: ResponseMessageDto,
-        description: 'Item not found',
-      })(...args);
-      Get(this.idPath)(...args);
+      [
+        this.CommonResponse(),
+        OperationName('read_one'),
+        ApiOperation({ summary: `Find one ${this.singularPath}` }),
+        ApiOkResponse({ type: this.findOneResponseType }),
+        ApiNotFoundResponse({
+          type: ResponseMessageDto,
+          description: `${this.singularPath} is not found by id`,
+        }),
+        Get(this.idPath),
+      ].forEach((d) => d(...args));
     };
   }
+
   /**
    * PUT /item/:id
    *
@@ -141,18 +165,18 @@ export class ResourceDecoratorFactory {
    */
   UpdateOneById(): MethodDecorator {
     return (...args) => {
-      this.CommonResponse()(...args);
-
-      ApiOperation({ summary: 'Update one' })(...args);
-      ApiOkResponse({ type: this.updateResponseType })(...args);
-      ApiUnprocessableEntityResponse({ type: ValidationErorResponseDto })(
-        ...args,
-      );
-      ApiNotFoundResponse({
-        type: ResponseMessageDto,
-        description: 'Item not found',
-      })(...args);
-      Put(this.idPath)(...args);
+      [
+        this.CommonResponse(),
+        OperationName('update_one'),
+        ApiOperation({ summary: `Update one ${this.singularPath}` }),
+        ApiOkResponse({ type: this.updateResponseType }),
+        ApiUnprocessableEntityResponse({ type: ValidationErorResponseDto }),
+        ApiNotFoundResponse({
+          type: ResponseMessageDto,
+          description: `${this.singularPath} is not found by id`,
+        }),
+        Put(this.idPath),
+      ].forEach((d) => d(...args));
     };
   }
 
@@ -163,15 +187,17 @@ export class ResourceDecoratorFactory {
    */
   DeleteOneById(): MethodDecorator {
     return (...args) => {
-      this.CommonResponse()(...args);
-
-      ApiOperation({ summary: 'Delete one' })(...args);
-      ApiOkResponse({ type: this.deleteResponseType })(...args);
-      ApiNotFoundResponse({
-        type: ResponseMessageDto,
-        description: 'Item not found',
-      })(...args);
-      Delete(this.idPath)(...args);
+      [
+        this.CommonResponse(),
+        OperationName('delete_one'),
+        ApiOperation({ summary: `Delete one ${this.singularPath}` }),
+        ApiOkResponse({ type: this.deleteResponseType }),
+        ApiNotFoundResponse({
+          type: ResponseMessageDto,
+          description: `${this.singularPath} is not found by id`,
+        }),
+        Delete(this.idPath),
+      ].forEach((d) => d(...args));
     };
   }
 }

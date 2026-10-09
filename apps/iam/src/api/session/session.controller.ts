@@ -13,8 +13,7 @@ import {
 } from '../../generated/dto/session/session.js';
 
 const SessionDecoratorFactory = new ResourceDecoratorFactory({
-  singularPath: 'session',
-  pluralPath: 'sessions',
+  resourceName: 'session',
   responseType: SessionReadDto,
 });
 

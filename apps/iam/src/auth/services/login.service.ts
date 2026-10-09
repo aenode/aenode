@@ -118,16 +118,6 @@ export class LoginService {
       userAgent,
     });
 
-    const permissions = await this.userService.permissions(userId);
-    if (permissions) {
-      this.permissionCacheService.setPermissions(userId, permissions);
-    }
-    const roles = await this.userService.roles(userId);
-
-    if (roles) {
-      this.permissionCacheService.setRoles(userId, roles);
-    }
-
     return { ...session, token };
   }
 }

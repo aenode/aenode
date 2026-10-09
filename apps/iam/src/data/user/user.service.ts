@@ -33,7 +33,7 @@ export class UserService extends UserDelegateService {
     return new Set(rolesList);
   }
 
-  async permissions(userId: number): Promise<Set<string> | undefined> {
+  async permissions(userId: number): Promise<Set<string>> {
     const foundPermissions = await this.delegate.findUnique({
       where: { id: userId },
       select: {
