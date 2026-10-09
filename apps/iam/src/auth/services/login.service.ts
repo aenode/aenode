@@ -102,20 +102,15 @@ export class LoginService {
     const deviceId = (req.headers['x-device-id'] as string) ?? v7();
     const ipAddress = req.ip;
 
-    const session =
-      (await this.sessionService.findFirstOneByDeviceId(deviceId)) ??
-      (await this.sessionService.createOne({
-        userId,
-        userAgent,
-        ipAddress,
-        deviceId,
-      }));
+    const session = await this.sessionService.createOne({
+      userId,
+      userAgent,
+      ipAddress,
+      deviceId,
+    });
 
     const token = await this.jwtService.signAsync<JwtPayloadDto>({
-      sessionId: session.id,
-      userId,
-      deviceId,
-      userAgent,
+      sub: session.id,
     });
 
     return { ...session, token };

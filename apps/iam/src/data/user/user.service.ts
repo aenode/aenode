@@ -17,6 +17,64 @@ export class UserService extends UserDelegateService {
     super(delegate);
   }
 
+  async users() {
+    const __users = await this.delegate.findMany({
+      select: {
+        id: true,
+        username: true,
+        userRoles: {
+          select: { id: true, role: { select: { id: true, name: true } } },
+        },
+        userPermissions: {
+          select: {
+            id: true,
+            permission: {
+              select: {
+                id: true,
+                operation: { select: { id: true, name: true } },
+                resource: {
+                  select: {
+                    id: true,
+                    name: true,
+                    scope: { select: { id: true, name: true } },
+                  },
+                },
+              },
+            },
+          },
+        },
+        sessions: {
+          select: { id: true, deviceId: true },
+        },
+      },
+    });
+
+    return __users.map((u) => {
+      const roles = u.userRoles.map((r) => r.role.name);
+      const permissions = u.userPermissions.map(
+        (p) =>
+          `${p.permission.resource.scope.name}.${p.permission.resource.name}.${p.permission.operation.name}`,
+      );
+      const sessions = u.sessions.map((s) => s.id);
+      return {
+        id: u.id,
+        username: u.username,
+        roles: new Set(roles),
+        permissions: new Set(permissions),
+        sessions: new Set(sessions),
+      };
+    });
+  }
+
+  async sessions(userId: number) {
+    const found = await this.delegate.findUnique({
+      where: { id: userId },
+      select: { sessions: { select: { id: true } } },
+    });
+
+    return new Set(found?.sessions.map((s) => s.id));
+  }
+
   async roles(userId: number) {
     const userRoles = await this.delegate.findUnique({
       where: { id: userId },

@@ -107,22 +107,9 @@ export class AuthModule implements OnModuleInit {
     await this.createUser(username, password, readerRole.id);
   }
 
-  async loadCache() {
-    const users = await this.userService.findMany({ select: { id: true } });
-
-    for (const u of users) {
-      const permissions = await this.userService.permissions(u.id);
-      const roles = await this.userService.roles(u.id);
-
-      this.authCacheService.setPermissions(u.id, permissions);
-      this.authCacheService.setRoles(u.id, roles);
-    }
-  }
-
   async onModuleInit() {
     await this.createAdminUser();
     await this.createReaderUser();
-
-    await this.loadCache();
+    this.authCacheService.loadCache();
   }
 }

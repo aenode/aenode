@@ -1,10 +1,4 @@
-import {
-  getOperationName,
-  getResourceName,
-  getScopeName,
-  isPublic,
-  Reflector,
-} from '@aenode/nest';
+import { getPermissions, getRoles, isPublic, Reflector } from '@aenode/nest';
 import {
   Injectable,
   Scope,
@@ -32,38 +26,29 @@ export class PermissionGuard implements CanActivate {
     if (!session) {
       throw new UnauthorizedException('Session not found');
     }
+    const userId = this.authCache.userId(session.sub);
 
-    if (this.authCache.hasRole(session.userId, 'admin')) {
+    if (!userId) {
+      throw new UnauthorizedException('User id is not resovled from cache');
+    }
+
+    if (this.authCache.isAdmin(userId)) {
       return true;
     }
 
-    const scopeName = getScopeName(context, this.reflector);
-    const resourceName = getResourceName(context, this.reflector);
-    const operationName = getOperationName(context, this.reflector);
+    const requiredPermissions = getPermissions(context, this.reflector);
+    const requiredRoles = getRoles(context, this.reflector);
 
-    console.log(
-      'Permission: ',
-      [scopeName, resourceName, operationName].join('.'),
-    );
-
-    console.log('user Roles:  ', this.authCache.getRoles(session.userId));
-    if (/read_one|read_many/gi.test(operationName)) {
-      if (this.authCache.hasRole(session.userId, 'reader')) {
-        return true;
+    for (const rp of requiredPermissions) {
+      if (!this.authCache.hasPermission(userId, rp)) {
+        return false;
       }
     }
 
-    const permission = `${scopeName}.${resourceName}.${operationName}`;
-
-    const userHasPermissions = this.authCache.hasPermission(
-      session.userId,
-      permission,
-    );
-
-    if (!userHasPermissions) {
-      throw new UnauthorizedException(
-        `The user does not have required permission ${scopeName}.${resourceName}.${operationName}`,
-      );
+    for (const rr of requiredRoles) {
+      if (!this.authCache.hasRole(userId, rr)) {
+        return false;
+      }
     }
 
     return true;

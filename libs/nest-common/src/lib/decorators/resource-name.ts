@@ -13,7 +13,5 @@ export function getResourceName(
   context: ExecutionContext,
   reflector: Reflector,
 ) {
-  return reflector.getAllAndOverride(RESOURCE_NAME_METADATA_TOKEN, [
-    context.getClass(),
-  ]);
+  return reflector.get(RESOURCE_NAME_METADATA_TOKEN, context.getClass());
 }

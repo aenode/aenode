@@ -13,7 +13,9 @@ import {
   ResponseMessageDto,
   ValidationErorResponseDto,
 } from '../dtos/response-types.js';
+import { EventName } from './event-name.js';
 import { OperationName } from './operation-name.js';
+import { Permissions } from './permissions.js';
 import { ResourceName } from './resource-name.js';
 
 export type ResourceDecoratorFactoryOptions = {
@@ -33,6 +35,10 @@ export class ResourceDecoratorFactory {
 
   private get resourceName() {
     return this.resourceNames.snake;
+  }
+
+  private get scope() {
+    return this.options.scope ?? 'default';
   }
 
   private get resourceNames() {
@@ -82,7 +88,7 @@ export class ResourceDecoratorFactory {
     return this.options.findResponseType ?? this.options.responseType;
   }
 
-  private CommonResponse(): MethodDecorator {
+  private Common(): MethodDecorator {
     return (...args) => {
       [
         ApiInternalServerErrorResponse({ type: ResponseMessageDto }),
@@ -94,7 +100,6 @@ export class ResourceDecoratorFactory {
   Controller(): ClassDecorator {
     return (...args) => {
       Controller()(...args);
-
       ResourceName(this.resourceName)(...args);
       if (this.isPublic !== true) {
         ApiBearerAuth()(...args);
@@ -110,9 +115,13 @@ export class ResourceDecoratorFactory {
    */
   CreateOne(): MethodDecorator {
     return (...args) => {
+      const operationName = 'create_one';
+      const eventName = `${this.scope}.${this.resourceName}.${operationName}`;
       [
-        this.CommonResponse(),
-        OperationName('create_one'),
+        this.Common(),
+        EventName(eventName),
+        Permissions(eventName),
+        OperationName(operationName),
         ApiOperation({ summary: `Create one ${this.singularPath}` }),
         ApiOkResponse({ type: this.createResponseType }),
         ApiUnprocessableEntityResponse({ type: ValidationErorResponseDto }),
@@ -127,9 +136,13 @@ export class ResourceDecoratorFactory {
    */
   FindMany(): MethodDecorator {
     return (...args) => {
+      const operationName = 'create_one';
+      const eventName = `${this.scope}.${this.resourceName}.${operationName}`;
       [
-        this.CommonResponse(),
-        OperationName('read_many'),
+        this.Common(),
+        EventName(eventName),
+        Permissions(eventName),
+        OperationName(operationName),
         ApiOperation({ summary: `Find many ${this.singularPath}` }),
         ApiOkResponse({ type: this.findResponseType, isArray: true }),
         Get(this.pluralPath),
@@ -144,9 +157,13 @@ export class ResourceDecoratorFactory {
    */
   FindOneById(): MethodDecorator {
     return (...args) => {
+      const operationName = 'create_one';
+      const eventName = `${this.scope}.${this.resourceName}.${operationName}`;
       [
-        this.CommonResponse(),
-        OperationName('read_one'),
+        this.Common(),
+        EventName(eventName),
+        Permissions(eventName),
+        OperationName(operationName),
         ApiOperation({ summary: `Find one ${this.singularPath}` }),
         ApiOkResponse({ type: this.findOneResponseType }),
         ApiNotFoundResponse({
@@ -165,9 +182,13 @@ export class ResourceDecoratorFactory {
    */
   UpdateOneById(): MethodDecorator {
     return (...args) => {
+      const operationName = 'create_one';
+      const eventName = `${this.scope}.${this.resourceName}.${operationName}`;
       [
-        this.CommonResponse(),
-        OperationName('update_one'),
+        this.Common(),
+        EventName(eventName),
+        Permissions(eventName),
+        OperationName(operationName),
         ApiOperation({ summary: `Update one ${this.singularPath}` }),
         ApiOkResponse({ type: this.updateResponseType }),
         ApiUnprocessableEntityResponse({ type: ValidationErorResponseDto }),
@@ -187,9 +208,13 @@ export class ResourceDecoratorFactory {
    */
   DeleteOneById(): MethodDecorator {
     return (...args) => {
+      const operationName = 'create_one';
+      const eventName = `${this.scope}.${this.resourceName}.${operationName}`;
       [
-        this.CommonResponse(),
-        OperationName('delete_one'),
+        this.Common(),
+        EventName(eventName),
+        Permissions(eventName),
+        OperationName(operationName),
         ApiOperation({ summary: `Delete one ${this.singularPath}` }),
         ApiOkResponse({ type: this.deleteResponseType }),
         ApiNotFoundResponse({
