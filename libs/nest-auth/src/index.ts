@@ -3,5 +3,4 @@ export * from './lib/dtos/jwt-payload.dto.js';
 export * from './lib/dtos/login-response.dto.js';
 export * from './lib/dtos/login.dto.js';
 export * from './lib/dtos/otp-login.dto.js';
-export * from './lib/dtos/permissions-record.js';
 export * from './lib/dtos/reset-password.dto.js';

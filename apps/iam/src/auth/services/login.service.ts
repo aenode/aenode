@@ -15,7 +15,7 @@ import { JwtService } from '@nestjs/jwt';
 import type { Request } from 'express';
 import { v7 } from 'uuid';
 import { OtpService, SessionService, UserService } from '../../data/index.js';
-import { PermissionCacheService } from './permission-cache.service.js';
+import { AuthCacheService } from './auth-cache.service.js';
 
 @Injectable()
 export class LoginService {
@@ -25,7 +25,7 @@ export class LoginService {
     protected readonly sessionService: SessionService,
     protected readonly jwtService: JwtService,
     protected readonly cryptoService: CryptoService,
-    protected readonly permissionCacheService: PermissionCacheService,
+    protected readonly permissionCacheService: AuthCacheService,
   ) {}
 
   async login(data: LoginDto, req: Request): Promise<LoginResponseDto> {
@@ -120,7 +120,12 @@ export class LoginService {
 
     const permissions = await this.userService.permissions(userId);
     if (permissions) {
-      this.permissionCacheService.set(userId, permissions);
+      this.permissionCacheService.setPermissions(userId, permissions);
+    }
+    const roles = await this.userService.roles(userId);
+
+    if (roles) {
+      this.permissionCacheService.setRoles(userId, roles);
     }
 
     return { ...session, token };

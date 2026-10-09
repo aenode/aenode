@@ -2,7 +2,6 @@ import { ConfigModule, ConfigService } from '@aenode/nest';
 import { CryptoModule } from '@aenode/nest-crypto';
 import { Module, type OnModuleInit } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
-import { randomBytes } from 'node:crypto';
 import {
   OperationService,
   OtpDataModule,
@@ -23,8 +22,8 @@ import {
 import { OperationDataModule } from '../data/operation/operation-data.module.js';
 import { LoginController } from './controllers/login.controller.js';
 import { LogoutController } from './controllers/logout.controller.js';
+import { AuthCacheService } from './services/auth-cache.service.js';
 import { LoginService } from './services/login.service.js';
-import { PermissionCacheService } from './services/permission-cache.service.js';
 import { RequestService } from './services/request.service.js';
 
 @Module({
@@ -43,7 +42,7 @@ import { RequestService } from './services/request.service.js';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory(config: ConfigService) {
-        const JWT_SECRET = config.get('JWT_KEY', randomBytes(12).toString());
+        const JWT_SECRET = config.getOrThrow('JWT_KEY');
         return {
           global: true,
           secret: JWT_SECRET,
@@ -55,8 +54,8 @@ import { RequestService } from './services/request.service.js';
     }),
   ],
   controllers: [LoginController, LogoutController],
-  providers: [LoginService, RequestService, PermissionCacheService],
-  exports: [JwtModule, LoginService, RequestService, PermissionCacheService],
+  providers: [LoginService, RequestService, AuthCacheService],
+  exports: [JwtModule, LoginService, RequestService, AuthCacheService],
 })
 export class AuthModule implements OnModuleInit {
   constructor(
@@ -70,21 +69,45 @@ export class AuthModule implements OnModuleInit {
     protected readonly userRoleService: UserRoleService,
   ) {}
 
-  async onModuleInit() {
-    const username = this.config.getOrThrow('ROOT_USERNAME');
-    const password = this.config.getOrThrow('ROOT_PASSWORD');
-
-    const role = await this.roleService.upsertOneByName({ name: 'admin' });
-
+  protected async createUser(
+    username: string,
+    password: string,
+    roleId: number,
+  ) {
     const user = await this.userService.upsertOneByUsername({
       username,
       password,
     });
 
     await this.userRoleService.delegate.upsert({
-      where: { userId_roleId: { roleId: role.id, userId: user.id } },
-      create: { userId: user.id, roleId: role.id },
+      where: { userId_roleId: { roleId: roleId, userId: user.id } },
+      create: { userId: user.id, roleId: roleId },
       update: {},
     });
+  }
+
+  async createAdminUser() {
+    const adminRole = await this.roleService.upsertOneByName({ name: 'admin' });
+
+    const username = this.config.getOrThrow('ROOT_USERNAME');
+    const password = this.config.getOrThrow('ROOT_PASSWORD');
+
+    await this.createUser(username, password, adminRole.id);
+  }
+
+  async createReaderUser() {
+    const adminRole = await this.roleService.upsertOneByName({
+      name: 'reader',
+    });
+
+    const username = 'reader@aenode.io';
+    const password = '!Password123.';
+
+    await this.createUser(username, password, adminRole.id);
+  }
+
+  async onModuleInit() {
+    await this.createAdminUser();
+    await this.createReaderUser();
   }
 }

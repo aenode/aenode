@@ -1,4 +1,3 @@
-import type { PermissionRecord } from '@aenode/nest-auth';
 import { CryptoService } from '@aenode/nest-crypto';
 import { InjectPrismaDelegate } from '@aenode/prisma';
 import { Injectable, UnprocessableEntityException } from '@nestjs/common';
@@ -18,7 +17,23 @@ export class UserService extends UserDelegateService {
     super(delegate);
   }
 
-  async permissions(userId: number): Promise<PermissionRecord | undefined> {
+  async roles(userId: number) {
+    const userRoles = await this.delegate.findUnique({
+      where: { id: userId },
+      select: {
+        id: true,
+        userRoles: { select: { id: true, role: { select: { name: true } } } },
+      },
+    });
+
+    const rolesList = userRoles?.userRoles.map((r) => {
+      return r.role.name;
+    });
+
+    return new Set(rolesList);
+  }
+
+  async permissions(userId: number): Promise<Set<string> | undefined> {
     const foundPermissions = await this.delegate.findUnique({
       where: { id: userId },
       select: {
@@ -38,17 +53,15 @@ export class UserService extends UserDelegateService {
       },
     });
 
-    return foundPermissions?.userPermissions.reduce((acc, p) => {
+    const permissionList = foundPermissions?.userPermissions.map((p) => {
       const scopeName = p.permission.resource.scope.name;
       const resourceName = p.permission.resource.name;
       const operationName = p.permission.operation.name;
 
-      acc[scopeName] ??= {};
-      acc[scopeName][resourceName] ??= {};
-      acc[scopeName][resourceName][operationName] ??= true;
+      return `${scopeName}.${resourceName}.${operationName}`;
+    });
 
-      return acc;
-    }, {} as PermissionRecord);
+    return new Set(permissionList);
   }
 
   override async beforeUpsert<T extends UserCreateDto | UserUpdateDto>(
