@@ -4,7 +4,7 @@ import {
   ApiOperation,
   ApiUnauthorizedResponse,
   ResponseMessageDto,
-  UserId,
+  SessionId,
 } from '@aenode/nest';
 import { Controller, Post } from '@nestjs/common';
 import { LoginService } from '../services/login.service.js';
@@ -21,8 +21,8 @@ export class LogoutController {
   @ApiOperation({ summary: 'Logout from the current session' })
   @ApiUnauthorizedResponse()
   @Post('logout')
-  logout(@UserId() userId: number) {
-    return this.service.logout(userId);
+  logout(@SessionId() sessionId: number) {
+    return this.service.logout(sessionId);
   }
 
   @ApiOkResponse({
@@ -32,7 +32,7 @@ export class LogoutController {
   @ApiOperation({ summary: 'Logout from all sessions' })
   @ApiUnauthorizedResponse()
   @Post('logout-all')
-  logoutAll(@UserId() userId: number) {
-    return this.service.logoutAll(userId);
+  logoutAll(@SessionId() sessionId: number) {
+    return this.service.logoutAll(sessionId);
   }
 }

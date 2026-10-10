@@ -25,56 +25,15 @@ export class LoginService {
     protected readonly sessionService: SessionService,
     protected readonly jwtService: JwtService,
     protected readonly cryptoService: CryptoService,
-    protected readonly permissionCacheService: AuthCacheService,
+    protected readonly authCacheService: AuthCacheService,
   ) {}
 
-  async login(data: LoginDto, req: Request): Promise<LoginResponseDto> {
-    const user = await this.findUserByUsernameOrThrow(data.username);
-    const isVerified = await this.cryptoService.verifyHash(
-      user.password,
-      data.password,
-    );
-
-    if (!isVerified) {
-      throw new UnauthorizedException('Wrong password');
-    }
-
-    return await this.createSession(user.id, req);
+  protected async verifyHash(hashed: string, password: string) {
+    return await this.cryptoService.verifyHash(hashed, password);
   }
 
-  async loginWithOpt(data: OtpLoginDto, req: Request) {
-    const user = await this.findUserByUsernameOrThrow(data.username);
-    const otp = await this.findOtpByUserIdOrThrow(user.id);
-
-    const isVerified = await this.cryptoService.verifyOtp(data.otp, otp.secret);
-
-    if (!isVerified) {
-      throw new UnauthorizedException('Invalid OTP');
-    }
-
-    return await this.createSession(user.id, req);
-  }
-
-  /**
-   * Logout from the current session.
-   *
-   * @param userId
-   * @returns
-   */
-  async logout(userId: number): Promise<ResponseMessageDto> {
-    await this.sessionService.softDeleteOneById(userId);
-    return { message: 'Logout from the current session' };
-  }
-
-  /**
-   * Logout from all sessions
-   *
-   * @param userId
-   * @returns
-   */
-  async logoutAll(userId: number): Promise<ResponseMessageDto> {
-    await this.sessionService.softDeleteManyByUserId(userId);
-    return { message: 'Logout from all sessions' };
+  protected async verifyOtp(otp: string, secret: string) {
+    return await this.cryptoService.verifyOtp(otp, secret);
   }
 
   protected async findOtpByUserIdOrThrow(userId: number) {
@@ -113,6 +72,56 @@ export class LoginService {
       sub: session.id,
     });
 
+    this.authCacheService.setUserId(session.id, userId);
+
     return { ...session, token };
+  }
+
+  async login(data: LoginDto, req: Request): Promise<LoginResponseDto> {
+    const user = await this.findUserByUsernameOrThrow(data.username);
+
+    if (!this.verifyHash(user.password, data.password)) {
+      throw new UnauthorizedException('Wrong password');
+    }
+
+    return await this.createSession(user.id, req);
+  }
+
+  async loginWithOpt(data: OtpLoginDto, req: Request) {
+    const user = await this.findUserByUsernameOrThrow(data.username);
+    const otp = await this.findOtpByUserIdOrThrow(user.id);
+
+    if (!(await this.verifyOtp(data.otp, otp.secret))) {
+      throw new UnauthorizedException('Invalid OTP');
+    }
+
+    return await this.createSession(user.id, req);
+  }
+
+  /**
+   * Logout from the current session.
+   *
+   * @param userId
+   * @returns
+   */
+  async logout(userId: number): Promise<ResponseMessageDto> {
+    await this.sessionService.softDeleteOneById(userId);
+    return { message: 'Logout from the current session' };
+  }
+
+  /**
+   * Logout from all sessions
+   *
+   * @param sessionId
+   * @returns
+   */
+  async logoutAll(sessionId: number): Promise<ResponseMessageDto> {
+    const userId = this.authCacheService.userId(sessionId);
+
+    if (!userId)
+      throw new UnauthorizedException('Could not find the session owner');
+
+    await this.sessionService.softDeleteManyByUserId(userId);
+    return { message: 'Logout from all sessions' };
   }
 }

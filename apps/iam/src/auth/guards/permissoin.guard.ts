@@ -21,11 +21,13 @@ export class PermissionGuard implements CanActivate {
     if (isPublic(context, this.reflector)) {
       return true;
     }
+
     const session = this.requestService.session;
 
     if (!session) {
       throw new UnauthorizedException('Session not found');
     }
+
     const userId = this.authCache.userId(session.sub);
 
     if (!userId) {

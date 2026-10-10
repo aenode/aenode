@@ -9,11 +9,53 @@ export function printUpsertByMethod(
   const { pascal, camel } = names(field.name);
 
   return [
-    `  async upsertOneBy${pascal}(data:${modelName}CreateDto ) {`,
+    `  async upsertOneBy${pascal}(data: ${modelName}CreateDto) {`,
     `    data = await this.beforeUpsert(data);`,
     `    return await this.delegate.upsert({ where: { ${camel}: data.${camel}, isActive: true }, create: data, update: {} });`,
     `  }`,
   ].join('\n');
+}
+
+export function __printUpsertCompositeMethod(
+  modelName: string,
+  fields: DMMF.Field[],
+) {
+  const fieldNames = fields.map((e) => names(e.name));
+  const compositeMethodSuffix = fieldNames.map((e) => e.pascal).join('And');
+  const compositeWhereName = fieldNames.map((e) => e.camel).join('_');
+
+  const compositeWhereOptins = fieldNames
+    .map((e) => `${e.camel}: data.${e.camel}`)
+    .join(',');
+
+  return [
+    `  async upsertOneBy${compositeMethodSuffix}(data: ${modelName}CreateDto){`,
+    `    data = await this.beforeUpsert(data)`,
+    `    return await this.delegate.upsert({ where: { ${compositeWhereName}: { ${compositeWhereOptins} }, isActive: true }, create: data, update: {} })`,
+    `  }`,
+  ].join('\n');
+}
+
+export function printUpsertCompositeMethods(model: DMMF.Model) {
+  const content: string[] = [];
+
+  if (model.uniqueFields && model.uniqueFields.length > 0) {
+    for (const fieldNames of model.uniqueFields) {
+      if (fieldNames.length >= 2) {
+        const fields = fieldNames.map((fieldName) => {
+          const field = model.fields.find((e) => e.name === fieldName);
+
+          if (!field) {
+            throw new Error('field not found');
+          }
+          return field;
+        });
+
+        content.push(__printUpsertCompositeMethod(model.name, fields));
+      }
+    }
+  }
+  return content.join('\n');
 }
 
 export function printFindUnqiueByMethod(field: DMMF.Field) {
@@ -63,12 +105,14 @@ export function printFindCompositeUnqiueMethod(model: DMMF.Model) {
   if (model.uniqueFields && model.uniqueFields.length > 0) {
     const content = [];
     for (const fieldNames of model.uniqueFields) {
-      const fields = fieldNames.map((e) => {
-        const found = model.fields.find((f) => f.name === e);
-        if (!found) throw new Error('Field not found');
-        return found;
-      });
-      content.push(__printFindCompositeUnqiueMethod(fields));
+      if (fieldNames.length >= 2) {
+        const fields = fieldNames.map((e) => {
+          const found = model.fields.find((f) => f.name === e);
+          if (!found) throw new Error('Field not found');
+          return found;
+        });
+        content.push(__printFindCompositeUnqiueMethod(fields));
+      }
     }
 
     return content.join('\n');
@@ -223,6 +267,8 @@ export function printService(model: DMMF.Model) {
     .map((field) => printUpsertByMethod(model.name, field))
     .join('\n');
 
+  const upsertCompositeMethods = printUpsertCompositeMethods(model);
+
   const isExistMethod = printIsExistMethod(model);
 
   return [
@@ -237,6 +283,7 @@ export function printService(model: DMMF.Model) {
     `  }`,
 
     upsertOneMethods,
+    upsertCompositeMethods,
     findUnqiueOneMethods,
     findFirstOneMethods,
     `  findMany(query: ${modelName}FindManyDto) {`,

@@ -80,10 +80,9 @@ export class AuthModule implements OnModuleInit {
       password,
     });
 
-    await this.userRoleService.delegate.upsert({
-      where: { userId_roleId: { roleId: roleId, userId: user.id } },
-      create: { userId: user.id, roleId: roleId },
-      update: {},
+    await this.userRoleService.upsertOneByUserIdAndRoleId({
+      roleId,
+      userId: user.id,
     });
   }
 
