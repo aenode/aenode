@@ -91,7 +91,8 @@ export class LoginService {
     const user = await this.findUserByUsernameOrThrow(data.username);
     const otp = await this.findOtpByUserIdOrThrow(user.id);
 
-    if (!(await this.verifyOtp(data.otp, otp.secret))) {
+    const secret = this.cryptoService.decrypt(otp.secret);
+    if (!(await this.verifyOtp(data.otp, secret))) {
       throw new UnauthorizedException('Invalid OTP');
     }
 

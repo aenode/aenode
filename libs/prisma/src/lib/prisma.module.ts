@@ -52,6 +52,7 @@ export class PrismaModule {
 
     return {
       module: PrismaModule,
+
       providers: [...providers.map(([delegate]) => delegate)],
       exports: [...providers.map(([, token]) => token)],
     };

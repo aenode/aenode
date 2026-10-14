@@ -10,6 +10,7 @@ import {
 import { Reflector } from '@nestjs/core';
 import { JwtService } from '@nestjs/jwt';
 import type { Request } from 'express';
+import { AuthCacheService } from '../services/auth-cache.service.js';
 import { RequestService } from '../services/request.service.js';
 
 @Injectable({ scope: Scope.REQUEST })
@@ -18,6 +19,7 @@ export class AuthGuard implements CanActivate {
     protected readonly reflector: Reflector,
     protected readonly jwtService: JwtService,
     protected readonly requestService: RequestService,
+    protected readonly authCacheService: AuthCacheService,
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -30,6 +32,9 @@ export class AuthGuard implements CanActivate {
 
     try {
       const session = await this.jwtService.verifyAsync<JwtPayloadDto>(token);
+
+      (req as any).user ??= {};
+      (req as any).user.id = this.authCacheService.userId(session.sub);
 
       if (session) {
         this.requestService.session = session;
