@@ -1,4 +1,4 @@
-import { isPublic } from '@aenode/nest';
+import { type ExtendedRequest, isPublic } from '@aenode/nest';
 import { JwtPayloadDto } from '@aenode/nest-auth';
 import {
   type CanActivate,
@@ -27,14 +27,19 @@ export class AuthGuard implements CanActivate {
       return (this.requestService.isPublic = true);
     }
 
-    const req = context.switchToHttp().getRequest<Request>();
+    const req = context.switchToHttp().getRequest<ExtendedRequest>();
     const token = this.extractTokenFromHeader(req);
 
     try {
       const session = await this.jwtService.verifyAsync<JwtPayloadDto>(token);
 
-      (req as any).user ??= {};
-      (req as any).user.id = this.authCacheService.userId(session.sub);
+      const userId = this.authCacheService.userId(session.sub);
+
+      if (!userId) {
+        throw new UnauthorizedException(`User id cannot find in cache`);
+      }
+
+      req.user = { id: userId };
 
       if (session) {
         this.requestService.session = session;

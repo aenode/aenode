@@ -90,8 +90,8 @@ export class LoginService {
   async loginWithOpt(data: OtpLoginDto, req: Request) {
     const user = await this.findUserByUsernameOrThrow(data.username);
     const otp = await this.findOtpByUserIdOrThrow(user.id);
-
     const secret = this.cryptoService.decrypt(otp.secret);
+
     if (!(await this.verifyOtp(data.otp, secret))) {
       throw new UnauthorizedException('Invalid OTP');
     }

@@ -21,20 +21,9 @@ export class AuthSeedModule implements OnModuleInit {
     this.client.$transaction(async (client) => {
       // Create the root user
       const hashedPassword = await this.crypto.hash(password);
-      const user = await client.user.upsert({
+      await client.user.upsert({
         where: { username },
         create: { username, password: hashedPassword },
-        update: { isActive: true },
-      });
-
-      const otpSecret = await this.crypto.generateOtpSecret();
-
-      await client.otp.upsert({
-        where: { userId: user.id },
-        create: {
-          userId: user.id,
-          secret: this.crypto.encrypt(otpSecret),
-        },
         update: { isActive: true },
       });
 

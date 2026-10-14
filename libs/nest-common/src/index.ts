@@ -17,3 +17,4 @@ export * from './lib/decorators/user-uuid.js';
 export * from './lib/dtos/global-validation-pipe.js';
 export * from './lib/dtos/prisma-filters.js';
 export * from './lib/dtos/response-types.js';
+export * from './lib/types/extended-request.js';

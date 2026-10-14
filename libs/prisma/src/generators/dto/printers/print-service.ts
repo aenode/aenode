@@ -11,7 +11,7 @@ export function printUpsertByMethod(
   return [
     `  async upsertOneBy${pascal}(data: ${modelName}CreateDto) {`,
     `    data = await this.beforeUpsert(data);`,
-    `    return await this.delegate.upsert({ where: { ${camel}: data.${camel}, isActive: true }, create: data, update: {} });`,
+    `    return await this.delegate.upsert({ where: { ${camel}: data.${camel}, isActive: true }, create: data, update: {...data, isActive: true } });`,
     `  }`,
   ].join('\n');
 }
@@ -31,7 +31,7 @@ export function __printUpsertCompositeMethod(
   return [
     `  async upsertOneBy${compositeMethodSuffix}(data: ${modelName}CreateDto){`,
     `    data = await this.beforeUpsert(data)`,
-    `    return await this.delegate.upsert({ where: { ${compositeWhereName}: { ${compositeWhereOptins} }, isActive: true }, create: data, update: {} })`,
+    `    return await this.delegate.upsert({ where: { ${compositeWhereName}: { ${compositeWhereOptins} }, isActive: true }, create: data, update: {...data, isActive: true } })`,
     `  }`,
   ].join('\n');
 }

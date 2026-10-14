@@ -13,3 +13,7 @@ export class ValiationErrorDto {
 export class ValidationErorResponseDto {
   @Prop({ type: () => ValiationErrorDto }) errors: ValiationErrorDto[];
 }
+
+export class ResponseDataDto {
+  @Prop() data: string;
+}

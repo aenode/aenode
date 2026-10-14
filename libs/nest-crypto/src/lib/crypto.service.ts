@@ -9,7 +9,7 @@ import {
   verifyHash,
 } from '@aenode/crypto';
 import { Injectable } from '@nestjs/common';
-import { toDataURL } from 'qrcode';
+import { toBuffer, toDataURL } from 'qrcode';
 import { InjectCryptoKey } from './key.provider.js';
 
 @Injectable()
@@ -32,8 +32,8 @@ export class CryptoService {
     return decrypt(value, this.key);
   }
 
-  async generateOtpSecret() {
-    return await generateSecret({
+  generateOtpSecret() {
+    return generateSecret({
       length: 30,
       crypto: new NobleCryptoPlugin(),
     });
@@ -55,13 +55,12 @@ export class CryptoService {
     return await toDataURL(uri);
   }
 
-  async verifyOtp(token: string, secret: string) {
-    const result = await verify({
-      secret,
-      token,
-      epochTolerance: [5, 0],
-    });
+  async generateOtpQrCodeBuffer(uri: string) {
+    return await toBuffer(uri);
+  }
 
+  async verifyOtp(token: string, secret: string) {
+    const result = await verify({ secret, token, epochTolerance: [5, 0] });
     return result.valid;
   }
 }

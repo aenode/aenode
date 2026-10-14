@@ -1,10 +1,22 @@
-import { ApiBearerAuth, UserId } from '@aenode/nest';
+import {
+  ApiBearerAuth,
+  ApiCreatedResponse,
+  ApiOperation,
+  ApiProduces,
+  UserId,
+} from '@aenode/nest';
 import { CryptoService } from '@aenode/nest-crypto';
-import { Controller, NotFoundException, Post } from '@nestjs/common';
+import {
+  Controller,
+  Header,
+  NotFoundException,
+  Post,
+  StreamableFile,
+} from '@nestjs/common';
 import { OtpService, UserService } from '../../data/index.js';
 
 @ApiBearerAuth()
-@Controller('auth')
+@Controller('auth/2fa')
 export class Otp2FAController {
   constructor(
     protected readonly otpService: OtpService,
@@ -12,20 +24,31 @@ export class Otp2FAController {
     protected readonly cryptoService: CryptoService,
   ) {}
 
-  @Post('enable-2fa')
+  @ApiOperation({ summary: 'Enable 2FA' })
+  @ApiProduces('image/png')
+  @ApiCreatedResponse({
+    description: 'QR code for authenticator app enrollment',
+    content: {
+      'image/png': { schema: { type: 'string', format: 'binary' } },
+    },
+  })
+  @Header('Content-Type', 'image/png')
+  @Header('Cache-Control', 'no-store')
+  @Post()
   async enable(@UserId() userId: number) {
     const user = await this.userService.findUniqueOneById(userId);
     if (!user) throw new NotFoundException('User not found');
-    const otp = await this.otpService.findUniqueOneByUserId(userId);
 
-    if (!otp) throw new NotFoundException('Otp not found');
-    const secret = this.cryptoService.decrypt(otp?.secret);
+    const secret = await this.cryptoService.generateOtpSecret();
+    const encriptedSecret = this.cryptoService.encrypt(secret);
+    await this.otpService.upsertOneByUserId({
+      secret: encriptedSecret,
+      userId,
+    });
 
-    const qrcode = await this.cryptoService.generateOtpQrCode(
+    const data = await this.cryptoService.generateOtpQrCodeBuffer(
       await this.cryptoService.generateOtpUri(secret, user.username),
     );
-    return {
-      data: qrcode,
-    };
+    return new StreamableFile(data);
   }
 }
