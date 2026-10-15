@@ -12,7 +12,7 @@ import { LoginService } from '../services/login.service.js';
 @ApiBearerAuth()
 @Controller('auth')
 export class LogoutController {
-  constructor(protected readonly service: LoginService) {}
+  constructor(protected readonly loginService: LoginService) {}
 
   @ApiOkResponse({
     type: ResponseMessageDto,
@@ -22,7 +22,7 @@ export class LogoutController {
   @ApiUnauthorizedResponse()
   @Post('logout')
   logout(@SessionId() sessionId: number) {
-    return this.service.logout(sessionId);
+    return this.loginService.logout(sessionId);
   }
 
   @ApiOkResponse({
@@ -33,6 +33,6 @@ export class LogoutController {
   @ApiUnauthorizedResponse()
   @Post('logout-all')
   logoutAll(@SessionId() sessionId: number) {
-    return this.service.logoutAll(sessionId);
+    return this.loginService.logoutAll(sessionId);
   }
 }

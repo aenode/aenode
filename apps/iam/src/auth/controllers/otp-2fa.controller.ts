@@ -1,30 +1,22 @@
 import {
   ApiBearerAuth,
   ApiCreatedResponse,
+  ApiOkResponse,
   ApiOperation,
   ApiProduces,
+  ApiUnauthorizedResponse,
   UserId,
 } from '@aenode/nest';
-import { CryptoService } from '@aenode/nest-crypto';
-import {
-  Controller,
-  Header,
-  NotFoundException,
-  Post,
-  StreamableFile,
-} from '@nestjs/common';
-import { OtpService, UserService } from '../../data/index.js';
+import { EnableOtpDto } from '@aenode/nest-auth';
+import { Body, Controller, Header, Post } from '@nestjs/common';
+import { LoginService } from '../services/login.service.js';
 
 @ApiBearerAuth()
 @Controller('auth/2fa')
 export class Otp2FAController {
-  constructor(
-    protected readonly otpService: OtpService,
-    protected readonly userService: UserService,
-    protected readonly cryptoService: CryptoService,
-  ) {}
+  constructor(protected readonly loginService: LoginService) {}
 
-  @ApiOperation({ summary: 'Enable 2FA' })
+  @ApiOperation({ summary: 'Create 2FA' })
   @ApiProduces('image/png')
   @ApiCreatedResponse({
     description: 'QR code for authenticator app enrollment',
@@ -35,20 +27,15 @@ export class Otp2FAController {
   @Header('Content-Type', 'image/png')
   @Header('Cache-Control', 'no-store')
   @Post()
-  async enable(@UserId() userId: number) {
-    const user = await this.userService.findUniqueOneById(userId);
-    if (!user) throw new NotFoundException('User not found');
+  create2FA(@UserId() userId: number) {
+    return this.loginService.create2FA(userId);
+  }
 
-    const secret = await this.cryptoService.generateOtpSecret();
-    const encriptedSecret = this.cryptoService.encrypt(secret);
-    await this.otpService.upsertOneByUserId({
-      secret: encriptedSecret,
-      userId,
-    });
-
-    const data = await this.cryptoService.generateOtpQrCodeBuffer(
-      await this.cryptoService.generateOtpUri(secret, user.username),
-    );
-    return new StreamableFile(data);
+  @ApiOperation({ summary: 'Enable 2FA' })
+  @ApiOkResponse({ description: 'Enabled 2FA' })
+  @ApiUnauthorizedResponse({ description: 'Not autorized for the operation' })
+  @Post('enable')
+  enable2FA(@Body() data: EnableOtpDto, @UserId() userId: number) {
+    return this.loginService.enable2FA(data, userId);
   }
 }

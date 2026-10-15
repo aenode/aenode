@@ -10,12 +10,13 @@ import {
 } from '@aenode/crypto';
 import { Injectable } from '@nestjs/common';
 import { toBuffer, toDataURL } from 'qrcode';
-import { InjectCryptoKey } from './key.provider.js';
+import { InjectEncryptionSecret } from './encryption-secret-provider.js';
 
 @Injectable()
 export class CryptoService {
-  constructor(@InjectCryptoKey() protected readonly key: Buffer) {}
-
+  constructor(
+    @InjectEncryptionSecret() protected readonly encryptionSecret: Buffer,
+  ) {}
   async hash(password: string) {
     return await hash(password);
   }
@@ -25,11 +26,11 @@ export class CryptoService {
   }
 
   encrypt(value: string) {
-    return encrypt(value, this.key);
+    return encrypt(value, this.encryptionSecret);
   }
 
   decrypt(value: string) {
-    return decrypt(value, this.key);
+    return decrypt(value, this.encryptionSecret);
   }
 
   generateOtpSecret() {

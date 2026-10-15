@@ -5,10 +5,7 @@ import { Prisma } from '../../generated/prisma/client.js';
 import { UserService } from './user.service.js';
 
 @Module({
-  imports: [
-    PrismaModule.forFeature([Prisma.ModelName.User]),
-    CryptoModule.register(),
-  ],
+  imports: [PrismaModule.forFeature([Prisma.ModelName.User]), CryptoModule],
   providers: [UserService],
   exports: [UserService],
 })

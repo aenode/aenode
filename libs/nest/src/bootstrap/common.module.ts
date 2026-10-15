@@ -1,17 +1,19 @@
 import { CacheInterceptor, CacheModule } from '@nestjs/cache-manager';
-import { Module } from '@nestjs/common';
+import { Global, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { CommonController } from './common.controller.js';
 
+@Global()
 @Module({
   imports: [
-    ConfigModule.forRoot({ cache: true, isGlobal: true }),
+    ConfigModule.forRoot({ isGlobal: true, cache: true }),
     EventEmitterModule.forRoot({ global: true }),
-    CacheModule.register({ ttl: 5_000 }),
+    CacheModule.register({ isGlobal: true, ttl: 5_000 }),
   ],
-  providers: [{ provide: APP_INTERCEPTOR, useClass: CacheInterceptor }],
   controllers: [CommonController],
+  providers: [{ provide: APP_INTERCEPTOR, useClass: CacheInterceptor }],
+  exports: [ConfigModule, EventEmitterModule, CacheModule],
 })
 export class CommonModule {}

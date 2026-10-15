@@ -1,5 +1,6 @@
-import type { ResponseMessageDto } from '@aenode/nest';
+import type { ExtendedRequest, ResponseMessageDto } from '@aenode/nest';
 import {
+  EnableOtpDto,
   JwtPayloadDto,
   type LoginDto,
   type LoginResponseDto,
@@ -9,10 +10,10 @@ import { CryptoService } from '@aenode/nest-crypto';
 import {
   Injectable,
   NotFoundException,
+  StreamableFile,
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import type { Request } from 'express';
 import { v7 } from 'uuid';
 import { OtpService, SessionService, UserService } from '../../data/index.js';
 import { AuthCacheService } from './auth-cache.service.js';
@@ -56,7 +57,7 @@ export class LoginService {
     return found;
   }
 
-  protected async createSession(userId: number, req: Request) {
+  protected async createSession(userId: number, req: ExtendedRequest) {
     const userAgent = req.get('user-agent');
     const deviceId = (req.headers['x-device-id'] as string) ?? v7();
     const ipAddress = req.ip;
@@ -77,7 +78,7 @@ export class LoginService {
     return { ...session, token };
   }
 
-  async login(data: LoginDto, req: Request): Promise<LoginResponseDto> {
+  async login(data: LoginDto, req: ExtendedRequest): Promise<LoginResponseDto> {
     const user = await this.findUserByUsernameOrThrow(data.username);
 
     if (!this.verifyHash(user.password, data.password)) {
@@ -87,16 +88,48 @@ export class LoginService {
     return await this.createSession(user.id, req);
   }
 
-  async loginWithOpt(data: OtpLoginDto, req: Request) {
+  async loginWithOpt(data: OtpLoginDto, req: ExtendedRequest) {
     const user = await this.findUserByUsernameOrThrow(data.username);
     const otp = await this.findOtpByUserIdOrThrow(user.id);
     const secret = this.cryptoService.decrypt(otp.secret);
+
+    if (!otp.enabled) {
+      throw new UnauthorizedException('OTP is not enabled');
+    }
 
     if (!(await this.verifyOtp(data.otp, secret))) {
       throw new UnauthorizedException('Invalid OTP');
     }
 
     return await this.createSession(user.id, req);
+  }
+
+  async create2FA(userId: number) {
+    const user = await this.userService.findUniqueOneById(userId);
+    if (!user) throw new NotFoundException('User not found');
+
+    const secret = this.cryptoService.generateOtpSecret();
+    await this.otpService.upsertOneByUserId({ secret, userId });
+
+    const data = await this.cryptoService.generateOtpQrCodeBuffer(
+      await this.cryptoService.generateOtpUri(secret, user.username),
+    );
+    return new StreamableFile(data);
+  }
+
+  async enable2FA(data: EnableOtpDto, userId: number) {
+    const otp = await this.otpService.findUniqueOneByUserId(userId);
+
+    if (!otp) {
+      throw new NotFoundException('OTP not found');
+    }
+
+    const secret = this.cryptoService.decrypt(otp.secret);
+
+    if (!(await this.verifyOtp(data.otp, secret))) {
+      throw new UnauthorizedException('Invalid OTP');
+    }
+    return await this.otpService.updateOneByUserId(userId, { enabled: true });
   }
 
   /**

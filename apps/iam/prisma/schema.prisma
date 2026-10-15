@@ -51,7 +51,8 @@ model Otp {
   isActive  Boolean  @default(true) @map("is_active")
 
   /// @encript
-  secret String
+  secret  String
+  enabled Boolean @default(false)
 
   user   User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   userId Int  @unique @map("user_id")

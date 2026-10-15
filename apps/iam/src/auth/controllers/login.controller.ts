@@ -4,16 +4,17 @@ import {
   ApiUnauthorizedResponse,
   Public,
   ResponseMessageDto,
+  type ExtendedRequest,
 } from '@aenode/nest';
 import { LoginDto, LoginResponseDto, OtpLoginDto } from '@aenode/nest-auth';
 import { Body, Controller, Post, Req } from '@nestjs/common';
-import type { Request } from 'express';
+
 import { LoginService } from '../services/login.service.js';
 
 @Public()
 @Controller('auth')
 export class LoginController {
-  constructor(protected readonly service: LoginService) {}
+  constructor(protected readonly loginService: LoginService) {}
 
   @ApiOkResponse({ type: LoginResponseDto, description: 'Successful login' })
   @ApiUnauthorizedResponse({
@@ -24,9 +25,9 @@ export class LoginController {
   @Post('login')
   login(
     @Body() data: LoginDto,
-    @Req() req: Request,
+    @Req() req: ExtendedRequest,
   ): Promise<LoginResponseDto> {
-    return this.service.login(data, req);
+    return this.loginService.login(data, req);
   }
 
   @ApiOkResponse({ type: LoginResponseDto, description: 'Successful login' })
@@ -36,7 +37,7 @@ export class LoginController {
   })
   @ApiOperation({ summary: 'Login with username and otp' })
   @Post('login-with-otp')
-  loginWithOpt(@Body() data: OtpLoginDto, @Req() req: Request) {
-    return this.service.loginWithOpt(data, req);
+  loginWithOpt(@Body() data: OtpLoginDto, @Req() req: ExtendedRequest) {
+    return this.loginService.loginWithOpt(data, req);
   }
 }
