@@ -18,14 +18,19 @@ export class AuthSeedModule implements OnModuleInit {
     const username = this.config.getOrThrow('ROOT_USERNAME');
     const password = this.config.getOrThrow('ROOT_PASSWORD');
 
-    this.client.$transaction(async (client) => {
+    await this.client.$transaction(async (client) => {
       // Create the root user
-      const hashedPassword = await this.crypto.hash(password);
-      await client.user.upsert({
-        where: { username },
-        create: { username, password: hashedPassword },
-        update: { isActive: true },
-      });
+
+      const foundUser = await client.user.findUnique({ where: { username } });
+
+      if (!foundUser) {
+        const hashedPassword = await this.crypto.hash(password);
+        await client.user.upsert({
+          where: { username },
+          create: { username, password: hashedPassword },
+          update: { isActive: true },
+        });
+      }
 
       // Create scope
       const scope = await client.scope.upsert({
@@ -38,7 +43,7 @@ export class AuthSeedModule implements OnModuleInit {
       const modelNames = Object.values(Prisma.ModelName).map(
         (e) => names(e).snake,
       );
-      const cratedResources: Prisma.ResourceModel[] = [];
+      const createdResources: Prisma.ResourceModel[] = [];
       for (const name of modelNames) {
         const created = await client.resource.upsert({
           where: { name, scopeId: scope.id },
@@ -46,7 +51,7 @@ export class AuthSeedModule implements OnModuleInit {
           update: { isActive: true },
         });
 
-        cratedResources.push(created);
+        createdResources.push(created);
       }
 
       const operations = [
@@ -56,9 +61,9 @@ export class AuthSeedModule implements OnModuleInit {
         'read_one',
         'read_many',
         'read_own',
-        'upate_one',
-        'upate_many',
-        'upate_own',
+        'update_one',
+        'update_many',
+        'update_own',
         'delete_one',
         'delete_many',
         'delete_own',
@@ -73,7 +78,7 @@ export class AuthSeedModule implements OnModuleInit {
         });
 
         // Create permissions
-        for (const resource of cratedResources) {
+        for (const resource of createdResources) {
           //
           await client.permission.upsert({
             where: {
