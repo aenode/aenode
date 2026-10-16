@@ -17,6 +17,23 @@ export class OtpService extends OtpDelegateService {
     super(delegate);
   }
 
+  enableOtpByUserId(userId: number) {
+    return this.delegate.update({
+      where: { userId },
+      data: { enabled: true, isActive: true },
+    });
+  }
+
+  findUniqueOneByUsername(username: string) {
+    return this.delegate.findFirst({
+      where: {
+        user: { username, isActive: true },
+        isActive: true,
+        enabled: true,
+      },
+    });
+  }
+
   protected override beforeUpsert<T extends OtpCreateDto | OtpUpdateDto>(
     data: T,
   ): Promise<T> {

@@ -28,7 +28,7 @@ export class PermissionGuard implements CanActivate {
       throw new UnauthorizedException('Session not found');
     }
 
-    const userId = this.authCache.userId(session.sub);
+    const userId = this.authCache.getUserIdBySessionId(session.sub);
 
     if (!userId) {
       throw new UnauthorizedException('User id is not resovled from cache');

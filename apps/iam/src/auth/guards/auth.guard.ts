@@ -33,7 +33,7 @@ export class AuthGuard implements CanActivate {
     try {
       const session = await this.jwtService.verifyAsync<JwtPayloadDto>(token);
 
-      const userId = this.authCacheService.userId(session.sub);
+      const userId = this.authCacheService.getUserIdBySessionId(session.sub);
 
       if (!userId) {
         throw new UnauthorizedException(`User id cannot find in cache`);

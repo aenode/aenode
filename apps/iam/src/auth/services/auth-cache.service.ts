@@ -1,9 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { UserService } from '../../data/index.js';
 
-/**
- * The service cache the users' permissions by userId
- */
 @Injectable()
 export class AuthCacheService {
   protected readonly rolesMap = new Map<
@@ -26,25 +23,40 @@ export class AuthCacheService {
   async loadCache() {
     const users = await this.userService.users();
 
-    for (const u of users) {
-      this.setPermissions(u.id, u.permissions);
-      this.setRoles(u.id, u.roles);
+    for (const user of users) {
+      this.setPermissionsByUserId(user.id, user.permissions);
+      this.setRolesByUserId(user.id, user.roles);
 
-      for (const s of u.sessions) {
-        this.setUserId(s, u.id);
+      for (const sessionId of user.sessions) {
+        this.setUserIdBySessionId(sessionId, user.id);
       }
     }
   }
 
-  userId(sessionId: number) {
+  getUserIdBySessionId(sessionId: number) {
     return this.sessionIdUserIdMap.get(sessionId);
   }
 
-  setUserId(sessionId: number, userId: number) {
+  setUserIdBySessionId(sessionId: number, userId: number) {
     this.sessionIdUserIdMap.set(sessionId, userId);
   }
 
-  setRoles(userId: number, roles: Set<string>) {
+  deleteSessionBySessionId(sessionId: number) {
+    this.sessionIdUserIdMap.delete(sessionId);
+  }
+
+  deleteAllSessionsBySessionId(sessionId: number) {
+    const userId = this.getUserIdBySessionId(sessionId);
+
+    const sessionEntries = this.sessionIdUserIdMap.entries();
+    for (const [__sessionId, __userId] of sessionEntries) {
+      if (__userId === userId) {
+        this.sessionIdUserIdMap.delete(__sessionId);
+      }
+    }
+  }
+
+  setRolesByUserId(userId: number, roles: Set<string>) {
     this.rolesMap.set(userId, roles);
   }
 
@@ -52,11 +64,11 @@ export class AuthCacheService {
     return this.rolesMap.get(userId);
   }
 
-  setPermissions(userId: number, permissions: Set<string>) {
+  setPermissionsByUserId(userId: number, permissions: Set<string>) {
     this.permissionsMap.set(userId, permissions);
   }
 
-  permissions(userId: number) {
+  getUserPermissionsByUserId(userId: number) {
     return this.permissionsMap.get(userId);
   }
 

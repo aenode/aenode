@@ -29,12 +29,30 @@ export class LoginService {
     protected readonly authCacheService: AuthCacheService,
   ) {}
 
-  protected async verifyHash(hashed: string, password: string) {
-    return await this.cryptoService.verifyHash(hashed, password);
+  protected async verifyHashOrThrow(hashed: string, password: string) {
+    if (await this.cryptoService.verifyHash(hashed, password)) {
+      return true;
+    }
+
+    throw new UnauthorizedException('Invalid password');
   }
 
-  protected async verifyOtp(otp: string, secret: string) {
-    return await this.cryptoService.verifyOtp(otp, secret);
+  protected async verifyOtpOrThrow(otp: string, secret: string) {
+    if (await this.cryptoService.verifyOtp(otp, secret)) {
+      return true;
+    }
+
+    throw new UnauthorizedException('Invalid otp');
+  }
+
+  protected async findOtpByUsernameOrThrow(username: string) {
+    const found = await this.otpService.findUniqueOneByUsername(username);
+
+    if (!found) {
+      throw new NotFoundException('OTP not found');
+    }
+
+    return found;
   }
 
   protected async findOtpByUserIdOrThrow(userId: number) {
@@ -49,6 +67,16 @@ export class LoginService {
 
   protected async findUserByUsernameOrThrow(username: string) {
     const found = await this.userService.findUniqueOneByUsername(username);
+
+    if (!found) {
+      throw new UnauthorizedException('User not found');
+    }
+
+    return found;
+  }
+
+  protected async findUserByUserIdOrThrow(userId: number) {
+    const found = await this.userService.findUniqueOneById(userId);
 
     if (!found) {
       throw new UnauthorizedException('User not found');
@@ -73,63 +101,40 @@ export class LoginService {
       sub: session.id,
     });
 
-    this.authCacheService.setUserId(session.id, userId);
+    this.authCacheService.setUserIdBySessionId(session.id, userId);
 
     return { ...session, token };
   }
 
   async login(data: LoginDto, req: ExtendedRequest): Promise<LoginResponseDto> {
     const user = await this.findUserByUsernameOrThrow(data.username);
-
-    if (!this.verifyHash(user.password, data.password)) {
-      throw new UnauthorizedException('Wrong password');
-    }
-
+    await this.verifyHashOrThrow(user.password, data.password);
     return await this.createSession(user.id, req);
   }
 
   async loginWithOpt(data: OtpLoginDto, req: ExtendedRequest) {
-    const user = await this.findUserByUsernameOrThrow(data.username);
-    const otp = await this.findOtpByUserIdOrThrow(user.id);
+    const otp = await this.findOtpByUsernameOrThrow(data.username);
     const secret = this.cryptoService.decrypt(otp.secret);
-
-    if (!otp.enabled) {
-      throw new UnauthorizedException('OTP is not enabled');
-    }
-
-    if (!(await this.verifyOtp(data.otp, secret))) {
-      throw new UnauthorizedException('Invalid OTP');
-    }
-
-    return await this.createSession(user.id, req);
+    await this.verifyOtpOrThrow(data.otp, secret);
+    return await this.createSession(otp.userId, req);
   }
 
   async create2FA(userId: number) {
-    const user = await this.userService.findUniqueOneById(userId);
-    if (!user) throw new NotFoundException('User not found');
-
+    const user = await this.findUserByUserIdOrThrow(userId);
     const secret = this.cryptoService.generateOtpSecret();
     await this.otpService.upsertOneByUserId({ secret, userId });
 
-    const data = await this.cryptoService.generateOtpQrCodeBuffer(
-      await this.cryptoService.generateOtpUri(secret, user.username),
-    );
+    const uri = await this.cryptoService.generateOtpUri(secret, user.username);
+    const data = await this.cryptoService.generateOtpQrCodeBuffer(uri);
+
     return new StreamableFile(data);
   }
 
   async enable2FA(data: EnableOtpDto, userId: number) {
-    const otp = await this.otpService.findUniqueOneByUserId(userId);
-
-    if (!otp) {
-      throw new NotFoundException('OTP not found');
-    }
-
+    const otp = await this.findOtpByUserIdOrThrow(userId);
     const secret = this.cryptoService.decrypt(otp.secret);
-
-    if (!(await this.verifyOtp(data.otp, secret))) {
-      throw new UnauthorizedException('Invalid OTP');
-    }
-    return await this.otpService.updateOneByUserId(userId, { enabled: true });
+    await this.verifyOtpOrThrow(data.otp, secret);
+    return await this.otpService.enableOtpByUserId(userId);
   }
 
   /**
@@ -138,8 +143,9 @@ export class LoginService {
    * @param userId
    * @returns
    */
-  async logout(userId: number): Promise<ResponseMessageDto> {
-    await this.sessionService.softDeleteOneById(userId);
+  async logout(sessionId: number): Promise<ResponseMessageDto> {
+    await this.sessionService.softDeleteOneById(sessionId);
+    this.authCacheService.deleteSessionBySessionId(sessionId);
     return { message: 'Logout from the current session' };
   }
 
@@ -150,12 +156,13 @@ export class LoginService {
    * @returns
    */
   async logoutAll(sessionId: number): Promise<ResponseMessageDto> {
-    const userId = this.authCacheService.userId(sessionId);
-
+    const userId = this.authCacheService.getUserIdBySessionId(sessionId);
     if (!userId)
       throw new UnauthorizedException('Could not find the session owner');
 
+    this.authCacheService.deleteAllSessionsBySessionId(sessionId);
     await this.sessionService.softDeleteManyByUserId(userId);
+
     return { message: 'Logout from all sessions' };
   }
 }
