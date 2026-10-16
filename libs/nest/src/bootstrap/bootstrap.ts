@@ -24,13 +24,41 @@ export async function bootstrap(appModule: Type) {
   SwaggerConfig: {
     const swaggerConfig = new DocumentBuilder()
       .setTitle(APP_NAME)
-      .addBearerAuth()
+
       .addGlobalParameters({ name: 'x-device-id', in: 'header' })
+
       .build();
-    const swaggerDog = SwaggerModule.createDocument(app, swaggerConfig, {
+    const swaggerDoc = SwaggerModule.createDocument(app, swaggerConfig, {
       autoTagControllers: true,
     });
-    SwaggerModule.setup('docs', app, swaggerDog, {});
+    SwaggerModule.setup('docs', app, swaggerDoc, {
+      swaggerOptions: {
+        persistAuthorization: true,
+        responseInterceptor: (response: any) => {
+          if (response.url.includes('/auth/login') && response.ok) {
+            const token = response.body?.token;
+
+            if (token) {
+              localStorage.setItem('token', token);
+            }
+          }
+
+          return response;
+        },
+        requestInterceptor: (request: any) => {
+          const token = localStorage.getItem('token');
+
+          if (token && !request.url.includes('/auth/login')) {
+            request.headers = {
+              ...request.headers,
+              Authorization: `Bearer ${token}`,
+            };
+          }
+
+          return request;
+        },
+      },
+    });
 
     break SwaggerConfig;
   }

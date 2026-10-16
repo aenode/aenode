@@ -41,14 +41,14 @@ export class PermissionGuard implements CanActivate {
     const requiredPermissions = getPermissions(context, this.reflector);
     const requiredRoles = getRoles(context, this.reflector);
 
-    for (const rp of requiredPermissions) {
-      if (!this.authCache.hasPermission(userId, rp)) {
+    for (const requiredPermission of requiredPermissions) {
+      if (!this.authCache.hasPermission(userId, requiredPermission)) {
         return false;
       }
     }
 
-    for (const rr of requiredRoles) {
-      if (!this.authCache.hasRole(userId, rr)) {
+    for (const requiredRole of requiredRoles) {
+      if (!this.authCache.hasRole(userId, requiredRole)) {
         return false;
       }
     }
