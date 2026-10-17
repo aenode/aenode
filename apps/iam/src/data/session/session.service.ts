@@ -1,5 +1,5 @@
+import { Injectable } from '@aenode/nest';
 import { InjectPrismaDelegate } from '@aenode/prisma';
-import { Injectable } from '@nestjs/common';
 import { SessionDelegateService } from '../../generated/dto/session/session.js';
 import { Prisma } from '../../generated/prisma/client.js';
 

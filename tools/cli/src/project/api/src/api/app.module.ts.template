@@ -1,0 +1,8 @@
+import { CommonModule, Module } from '@aenode/nest';
+import { PrismaModule } from '@aenode/prisma';
+import { PrismaClient } from '../generated/prisma/client.js';
+@Module({
+  imports: [CommonModule, PrismaModule.forRoot(PrismaClient)],
+  providers: [],
+})
+export class AppModule {}

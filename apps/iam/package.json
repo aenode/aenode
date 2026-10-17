@@ -19,16 +19,29 @@
       "import": "./dist/data/index.js",
       "default": "./dist/data/index.js"
     },
-    "./app": {
-      "bun": "./src/app/index.ts",
-      "types": "./dist/app/index.d.ts",
-      "import": "./dist/app/index.js",
-      "default": "./dist/app/index.js"
+    "./api": {
+      "bun": "./src/api/index.ts",
+      "types": "./dist/api/index.d.ts",
+      "import": "./dist/api/index.js",
+      "default": "./dist/api/index.js"
+    },
+    "./prisma": {
+      "bun": "./src/generated/prisma/client.ts",
+      "types": "./dist/generated/prisma/client.d.ts",
+      "import": "./dist/generated/prisma/client.js",
+      "default": "./dist/generated/prisma/client.js"
+    },
+    "./dto": {
+      "bun": "./src/generated/dto/index.ts",
+      "types": "./dist/generated/dto/index.d.ts",
+      "import": "./dist/generated/dto/index.js",
+      "default": "./dist/generated/dto/index.js"
     }
   },
   "files": [
     "bin",
     "dist",
+    "prisma",
     "!**/*.tsbuildinfo"
   ],
   "nx": {
@@ -52,14 +65,14 @@
     "@aenode/nest-auth": "workspace:*",
     "@aenode/nest-crypto": "workspace:*",
     "@aenode/prisma": "workspace:*",
-    "@nestjs/common": "^12.0.4",
-    "@nestjs/core": "^12.1.2",
     "@nestjs/jwt": "^12.0.2",
     "@nestjs/platform-express": "^12.1.0",
     "@prisma/client": "7.8.0",
     "@swc/helpers": "~0.5.18",
     "express": "^5.2.1",
-    "uuid": "^14.0.2"
+    "uuid": "^14.0.2",
+    "@nestjs/common": "12.1.2",
+    "@nestjs/core": "12.1.2"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",

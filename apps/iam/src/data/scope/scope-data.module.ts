@@ -1,5 +1,5 @@
+import { Module } from '@aenode/nest';
 import { PrismaModule } from '@aenode/prisma';
-import { Module } from '@nestjs/common';
 import { Prisma } from '../../generated/prisma/client.js';
 import { ScopeService } from './scope.service.js';
 

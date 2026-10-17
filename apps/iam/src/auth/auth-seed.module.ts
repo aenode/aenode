@@ -1,7 +1,12 @@
-import { ConfigModule, ConfigService, names } from '@aenode/nest';
+import {
+  ConfigModule,
+  ConfigService,
+  Module,
+  names,
+  type OnModuleInit,
+} from '@aenode/nest';
 import { CryptoModule, CryptoService } from '@aenode/nest-crypto';
 import { InjectPrismaClient } from '@aenode/prisma';
-import { Module, type OnModuleInit } from '@nestjs/common';
 import { Prisma, PrismaClient } from '../generated/prisma/client.js';
 
 @Module({

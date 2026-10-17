@@ -1,5 +1,5 @@
+import { Injectable, Scope } from '@aenode/nest';
 import type { JwtPayloadDto } from '@aenode/nest-auth';
-import { Injectable, Scope } from '@nestjs/common';
 
 /**
  * The service is for  holding the session information and resource accessability such us public or secured

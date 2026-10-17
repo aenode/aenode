@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module } from '@aenode/nest';
 import { RoleDataModule } from '../../data/index.js';
 import { RoleController } from './role.controller.js';
 

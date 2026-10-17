@@ -18,6 +18,20 @@ enum Status {
   DONE
 }
 
+model Scope {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  isActive  Boolean  @default(true) @map("is_active")
+
+  /// @format(name) @citext
+  name String @unique
+
+  resources Resource[]
+
+  @@map("scopes")
+}
+
 model User {
   id        Int      @id @default(autoincrement())
   uuid      String   @unique @default(uuid(7)) @db.Uuid
@@ -33,9 +47,6 @@ model User {
 
   avatar String? @default("person.svg")
 
-  /// @include
-  comments        Comment[]
-  userTasks       UserTask[]
   sessions        Session[]
   otps            Otp[]
   userPermissions UserPermission[]
@@ -75,20 +86,6 @@ model Session {
   userId Int  @map("user_id")
 
   @@map("sessions")
-}
-
-model Scope {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-  isActive  Boolean  @default(true) @map("is_active")
-
-  /// @format(name) @citext
-  name String @unique
-
-  resources Resource[]
-
-  @@map("scopes")
 }
 
 model Resource {
@@ -205,80 +202,4 @@ model UserPermission {
 
   @@unique([userId, permissionId])
   @@map("user_permissions")
-}
-
-model Comment {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-  isActive  Boolean  @default(true) @map("is_active")
-
-  comment String
-
-  task   Task @relation(fields: [taskId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  taskId Int  @map("task_id")
-
-  /// @include(username,avatar)
-  user   User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  userId Int  @map("user_id")
-
-  @@map("comments")
-}
-
-model Task {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-  isActive  Boolean  @default(true) @map("is_active")
-
-  /// @minlength(3) @maxlength(255)  @citext
-  title String @unique
-
-  /// @slug(title)   @citext
-  slug String @unique
-
-  description String?
-
-  /// @lessThan(endDate)
-  /// @lessThan(dueDate)
-  startDate DateTime @map("start_date")
-
-  /// @morethan(startDate)
-  endDate DateTime? @map("end_date")
-
-  /// @morethan(startDate)
-  dueDate DateTime @map("due_date")
-
-  /// @maxitems(5)
-  tags String[]
-
-  /// @min(0) @max(100)
-  score Int
-
-  /// @include
-  comments Comment[]
-
-  userTasks UserTask[]
-
-  status Status? @default(NEW)
-
-  @@map("tasks")
-}
-
-model UserTask {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-  isActive  Boolean  @default(true) @map("is_active")
-
-  user   User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  userId Int  @map("user_id")
-
-  /// @include
-  task   Task @relation(fields: [taskId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  taskId Int  @map("task_id")
-
-  @@unique([userId, taskId])
-  @@index([taskId])
-  @@map("user_tasks")
 }

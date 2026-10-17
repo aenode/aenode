@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable } from '@aenode/nest';
 import { UserService } from '../../data/index.js';
 
 @Injectable()

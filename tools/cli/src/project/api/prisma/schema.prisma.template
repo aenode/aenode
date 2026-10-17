@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+generator prismaDto {
+  provider = "prisma-dto"
+  output   = "../src/generated/dto"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Status {
+  NEW
+  IN_PROGRESS
+  DONE
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  uuid      String   @unique 
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  isActive  Boolean  @default(true) @map("is_active")
+
+  @@map("users")
+}
+

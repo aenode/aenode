@@ -12,14 +12,40 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js"
+    },
+    "./data": {
+      "bun": "./src/data/index.ts",
+      "types": "./dist/data/index.d.ts",
+      "import": "./dist/data/index.js",
+      "default": "./dist/data/index.js"
+    },
+    "./api": {
+      "bun": "./src/api/index.ts",
+      "types": "./dist/api/index.d.ts",
+      "import": "./dist/api/index.js",
+      "default": "./dist/api/index.js"
+    },
+    "./prisma": {
+      "bun": "./src/generated/prisma/client.ts",
+      "types": "./dist/generated/prisma/client.d.ts",
+      "import": "./dist/generated/prisma/client.js",
+      "default": "./dist/generated/prisma/client.js"
+    },
+    "./dto": {
+      "bun": "./src/generated/dto/index.ts",
+      "types": "./dist/generated/dto/index.d.ts",
+      "import": "./dist/generated/dto/index.js",
+      "default": "./dist/generated/dto/index.js"
     }
   },
   "files": [
+    "bin",
     "dist",
+    "prisma",
     "!**/*.tsbuildinfo"
   ],
   "nx": {
-    "sourceRoot": "<%- directory %>/src",
+    "sourceRoot": "apps/iam/src",
     "tags": [
       "app:api"
     ],
@@ -27,11 +53,27 @@
       "build": {},
       "lint": {},
       "test": {},
+      "doc": {},
       "serve": {},
-      "doc": {}
+      "prisma:generate": {},
+      "prisma:migrate": {},
+      "prisma:reset": {}
     }
   },
   "dependencies": {
-    "@swc/helpers": "~0.5.18"
+    "@aenode/nest": "workspace:*",
+    "@aenode/iam": "workspace:*",
+    "@aenode/prisma": "workspace:*",
+    "@nestjs/common": "^12.0.4",
+    "@nestjs/core": "^12.1.2",
+    "@nestjs/jwt": "^12.0.2",
+    "@nestjs/platform-express": "^12.1.0",
+    "@prisma/client": "7.8.0",
+    "@swc/helpers": "~0.5.18",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/uuid": "^11.0.0"
   }
 }

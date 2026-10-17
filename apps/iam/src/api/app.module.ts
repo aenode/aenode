@@ -1,6 +1,5 @@
-import { APP_GUARD, CommonModule } from '@aenode/nest';
+import { APP_GUARD, CommonModule, Module } from '@aenode/nest';
 import { PrismaModule } from '@aenode/prisma';
-import { Module } from '@nestjs/common';
 import { AuthModule } from '../auth/auth.module.js';
 import { AuthGuard, AuthSeedModule, PermissionGuard } from '../auth/index.js';
 import { PrismaClient } from '../generated/prisma/client.js';

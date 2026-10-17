@@ -1,6 +1,6 @@
+import { Injectable } from '@aenode/nest';
 import { CryptoService } from '@aenode/nest-crypto';
 import { InjectPrismaDelegate } from '@aenode/prisma';
-import { Injectable } from '@nestjs/common';
 import {
   OtpCreateDto,
   OtpDelegateService,

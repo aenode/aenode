@@ -1,6 +1,6 @@
+import { Module } from '@aenode/nest';
 import { CryptoModule } from '@aenode/nest-crypto';
 import { PrismaModule } from '@aenode/prisma';
-import { Module } from '@nestjs/common';
 import { Prisma } from '../../generated/prisma/client.js';
 import { UserService } from './user.service.js';
 

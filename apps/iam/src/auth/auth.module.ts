@@ -1,6 +1,5 @@
-import { ConfigModule, ConfigService } from '@aenode/nest';
+import { ConfigModule, ConfigService, Module } from '@aenode/nest';
 import { CryptoModule } from '@aenode/nest-crypto';
-import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import {
   OtpDataModule,

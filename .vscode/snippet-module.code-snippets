@@ -39,10 +39,9 @@
     "rest module": {
         "prefix": "rest module",
         "body": [
-            "import { Module } from '@nestjs/common';",
+            "import { Module } from '@aenode/nest';",
             "import { $1DataModule } from '../../data/index.js';",
             "import { $1Controller } from './$2.controller.js';",
-            "",
             "@Module({",
             "  imports: [$1DataModule],",
             "  controllers: [$1Controller],",

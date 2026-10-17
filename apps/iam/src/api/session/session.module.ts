@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module } from '@aenode/nest';
 import { SessionDataModule } from '../../data/index.js';
 import { SessionController } from './session.controller.js';
 

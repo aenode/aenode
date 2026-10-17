@@ -59,4 +59,11 @@ export default async function onGenerate(options: GeneratorOptions) {
     await mkdir(dirname(filePath), { recursive: true });
     await writeFile(filePath, content);
   }
+
+  const baralContent = [
+    './common/index.js',
+    ...models.map((e) => names(e.name).kebab).map((e) => `./${e}/${e}.js`),
+  ].join('\n');
+
+  await writeFile(join(output, 'index.ts'), baralContent);
 }
