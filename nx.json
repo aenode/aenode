@@ -25,7 +25,8 @@
           "buildDepsName": "build-deps",
           "watchDepsName": "watch-deps"
         }
-      }
+      },
+      "exclude": ["tools/plugin/*"]
     },
     {
       "plugin": "@nx/eslint/plugin",
@@ -88,7 +89,6 @@
         "cwd": "{projectRoot}"
       }
     },
-
     "prisma:migrate": {
       "executor": "nx:run-commands",
       "options": {
@@ -117,8 +117,19 @@
           "typedoc --entryPointStrategy expand {projectRoot}/src --out public/{projectRoot} --tsconfig {projectRoot}/tsconfig.lib.json --favicon {projectRoot}/assets/favicon.svg"
         ]
       }
+    },
+    "@nx/js:tsc": {
+      "cache": true,
+      "dependsOn": ["^build"],
+      "inputs": ["production", "^production"]
     }
   },
+  "generators": {
+    "@aenode/plugin:project": {
+      "orgName": "aenode"
+    }
+  },
+
   "release": {
     "version": {
       "preVersionCommand": "bunx nx run-many -t build"

@@ -1,0 +1,4 @@
+
+export function <%- names.propertyName %>(){ 
+  return '<%- names.fileName %>'
+}

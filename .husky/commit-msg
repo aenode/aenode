@@ -18,7 +18,8 @@ if ! echo "$COMMIT_MSG" | grep -qE "$PATTERN"; then
   exit 1
 fi
 
-bunx nx run-many -t build --projects="*,!tag:stable"
+bunx  nx run-many -t prisma:generate
+bunx  nx run-many -t build --projects="*,!tag:stable"
 bunx  nx run-many -t lint --projects="*,!tag:stable"
 bunx  nx run-many -t typecheck --projects="*,!tag:stable"
 bunx  nx run-many -t test --projects="*,!tag:stable"

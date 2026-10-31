@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/schema",
+  "$id": "Project",
+  "title": "Project generator",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "description": "Project root directory",
+      "enum": ["nest", "lib", "cli", "prisma"],
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      }
+    },
+    "directory": {
+      "type": "string",
+      "description": "Project root directory",
+      "$default": {
+        "$source": "argv",
+        "index": 1
+      },
+      "x-prompt": "What directory would you like to use?"
+    },
+    "orgName": {
+      "type": "string",
+      "description": "Orgnanization name",
+      "$default": { "$source": "argv", "index": 2 },
+      "x-promp": "What orgName would you like to use?"
+    },
+    "description": {
+      "type": "string",
+      "description": "",
+      "$default": { "$source": "argv", "index": 3 },
+      "x-promp": "What description would you like to use?"
+    },
+    "authorName": {
+      "type": "string",
+      "description": "",
+      "$default": { "$source": "argv", "index": 4 },
+      "x-promp": "What authorName would you like to use?"
+    },
+    "email": {
+      "type": "string",
+      "description": "",
+      "$default": { "$source": "argv", "index": 5 },
+      "x-promp": "What email would you like to use?"
+    },
+    "profileUrl": {
+      "type": "string",
+      "description": "",
+      "$default": { "$source": "argv", "index": 6 },
+      "x-promp": "What profileUrl would you like to use?"
+    },
+    "fundingUrl": {
+      "type": "string",
+      "description": "",
+      "$default": { "$source": "argv", "index": 7 },
+      "x-promp": "What fundingUrl would you like to use?"
+    },
+    "homepageUrl": {
+      "type": "string",
+      "description": "",
+      "$default": { "$source": "argv", "index": 8 },
+      "x-promp": "What homepageUrl would you like to use?"
+    },
+    "repositoryUrl": {
+      "type": "string",
+      "description": "",
+      "$default": { "$source": "argv", "index": 9 },
+      "x-promp": "What repositoryUrl would you like to use?"
+    },
+    "iconUrl": {
+      "type": "string",
+      "description": "",
+      "$default": { "$source": "argv", "index": 10 },
+      "x-promp": "What iconUrl would you like to use?"
+    },
+
+    "version": {
+      "type": "string",
+      "description": "Version",
+      "$default": { "$source": "argv", "index": 11 },
+      "x-promp": "What version would you like to use?"
+    }
+  },
+  "required": ["type", "directory", "orgName"]
+}

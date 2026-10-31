@@ -10,15 +10,21 @@ export default [
           depConstraints: [
             {
               sourceTag: 'app:*',
-              onlyDependOnLibsWithTags: ['app:*', 'lib:*'],
+              onlyDependOnLibsWithTags: ['app:*', 'lib:*', 'data:*'],
             },
+
             {
-              sourceTag: 'data:*',
-              onlyDependOnLibsWithTags: ['data:*', 'lib:*'],
+              sourceTag: 'cli:*',
+              onlyDependOnLibsWithTags: ['lib:*'],
             },
             {
               sourceTag: 'lib:*',
               onlyDependOnLibsWithTags: ['lib:*'],
+            },
+
+            {
+              sourceTag: 'data:*',
+              onlyDependOnLibsWithTags: ['data:*', 'lib:*'],
             },
           ],
         },

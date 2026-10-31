@@ -1,0 +1,69 @@
+{
+  "name": "@aenode/plugin",
+  "version": "0.0.1",
+  "description": "Nestjs module wrapper exports nestjs modules as they are",
+  "author": {
+    "name": "Ahmet Emrebas",
+    "email": "aenode+aenode@proton.me",
+    "url": "https://aenode.github.io/#profile"
+  },
+  "bin": {},
+  "funding": "https://cash.app/$puqlib",
+  "homepage": "https://aenode.github.io/aenode/libs/nest",
+  "repository": {
+    "directory": "libs/nest",
+    "type": "github",
+    "url": "https://github.com/aenode/aenode/tree/main/libs/nest"
+  },
+  "icon": "https://aenode.github.io/aenode/libs/nest/favicon.svg",
+  "keywords": [
+    "nestjs",
+    "rest",
+    "utils"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "@aenode/source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "assets",
+    "bin",
+    "dist",
+    "!**/*.tsbuildinfo",
+    "generators.json"
+  ],
+  "nx": {
+    "tags": [
+      "cli:cli"
+    ],
+    "targets": {
+      "build": {
+        "outputPath": "tools/plugin/dist",
+        "options": {
+          "assets": [
+            {
+              "input": "./tools/plugin/src",
+              "glob": "**/!(*.ts)",
+              "output": "."
+            }
+          ]
+        }
+      },
+      "doc": {}
+    }
+  },
+  "dependencies": {
+    "@nx/devkit": "24.0.3",
+    "@swc/helpers": "~0.5.18"
+  },
+  "generators": "./generators.json"
+}

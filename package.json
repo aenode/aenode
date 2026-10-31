@@ -9,16 +9,20 @@
   },
   "private": true,
   "dependencies": {
+    "@nx/devkit": "24.0.3",
     "axios": "^1.6.0"
   },
   "devDependencies": {
+    "@aenode/plugin": "workspace:*",
     "@eslint/js": "^9.8.0",
     "@nx/eslint": "23.2.1",
     "@nx/eslint-plugin": "23.2.1",
     "@nx/js": "24.0.3",
     "@nx/node": "24.0.3",
+    "@nx/plugin": "^24.0.3",
     "@nx/vitest": "24.0.3",
     "@nx/workspace": "24.0.3",
+    "@swc-node/register": "~1.11.1",
     "@swc/cli": "~0.8.1",
     "@swc/core": "~1.15.5",
     "@swc/helpers": "~0.5.18",
@@ -26,14 +30,17 @@
     "@typescript-eslint/eslint-plugin": "^8.70.0",
     "@typescript-eslint/parser": "^8.70.0",
     "@vitest/coverage-v8": "~5.0.1",
+    "dotenv": "^18.0.9",
     "eslint": "^9.8.0",
     "eslint-config-prettier": "^10.0.0",
     "eslint-plugin-unicorn": "^72.0.0",
     "eslint-plugin-unused-imports": "^4.4.1",
     "husky": "^9.1.7",
+    "jsdom": "^27.1.0",
     "jsonc-eslint-parser": "^2.1.0",
     "nx": "24.0.3",
     "prettier": "~3.6.2",
+    "prisma": "7.8.0",
     "tslib": "^2.3.0",
     "typedoc": "^0.28.20",
     "typescript": "~6.0.3",
@@ -46,7 +53,8 @@
   "workspaces": [
     "apps/*",
     "libs/*",
-    "databases/*"
+    "databases/*",
+    "tools/*"
   ],
   "nx": {
     "includedScripts": [],

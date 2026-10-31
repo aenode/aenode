@@ -1,0 +1,9 @@
+{
+  "generators": {
+    "project": {
+      "factory": "./dist/project/project.js",
+      "schema": "./dist/project/schema.json",
+      "description": "project generator"
+    }
+  }
+}
