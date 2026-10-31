@@ -49,7 +49,8 @@
   "nx": {
     "sourceRoot": "libs/nest/src",
     "tags": [
-      "lib:common"
+      "lib:common",
+      "stable"
     ],
     "targets": {
       "build": {},
