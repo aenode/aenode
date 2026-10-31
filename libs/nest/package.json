@@ -38,6 +38,78 @@
       "types": "./dist/cache.d.ts",
       "import": "./dist/cache.js",
       "default": "./dist/cache.js"
+    },
+    "./common": {
+      "bun": "./src/common.ts",
+      "types": "./dist/common.d.ts",
+      "import": "./dist/common.js",
+      "default": "./dist/common.js"
+    },
+    "./config": {
+      "bun": "./src/config.ts",
+      "types": "./dist/config.d.ts",
+      "import": "./dist/config.js",
+      "default": "./dist/config.js"
+    },
+    "./core": {
+      "bun": "./src/core.ts",
+      "types": "./dist/core.d.ts",
+      "import": "./dist/core.js",
+      "default": "./dist/core.js"
+    },
+    "./emitter": {
+      "bun": "./src/emitter.ts",
+      "types": "./dist/emitter.d.ts",
+      "import": "./dist/emitter.js",
+      "default": "./dist/emitter.js"
+    },
+    "./express": {
+      "bun": "./src/express.ts",
+      "types": "./dist/express.d.ts",
+      "import": "./dist/express.js",
+      "default": "./dist/express.js"
+    },
+    "./jwt": {
+      "bun": "./src/jwt.ts",
+      "types": "./dist/jwt.d.ts",
+      "import": "./dist/jwt.js",
+      "default": "./dist/jwt.js"
+    },
+    "./meta": {
+      "bun": "./src/meta.ts",
+      "types": "./dist/meta.d.ts",
+      "import": "./dist/meta.js",
+      "default": "./dist/meta.js"
+    },
+    "./platform-express": {
+      "bun": "./src/platform-express.ts",
+      "types": "./dist/platform-express.d.ts",
+      "import": "./dist/platform-express.js",
+      "default": "./dist/platform-express.js"
+    },
+    "./rxjs": {
+      "bun": "./src/rxjs.ts",
+      "types": "./dist/rxjs.d.ts",
+      "import": "./dist/rxjs.js",
+      "default": "./dist/rxjs.js"
+    },
+    "./schedule": {
+      "bun": "./src/schedule.ts",
+      "types": "./dist/schedule.d.ts",
+      "import": "./dist/schedule.js",
+      "default": "./dist/schedule.js"
+    },
+    "./types": {
+      "bun": "./src/types.ts",
+      "types": "./dist/types.d.ts",
+      "import": "./dist/types.js",
+      "default": "./dist/types.js"
+    },
+    "./uuid": {
+      "bun": "./src/uuid.ts",
+      "types": "./dist/uuid.d.ts",
+      "import": "./dist/uuid.js",
+      "default": "./dist/uuid.js"
     }
   },
   "files": [
@@ -49,8 +121,7 @@
   "nx": {
     "sourceRoot": "libs/nest/src",
     "tags": [
-      "lib:common",
-      "stable"
+      "lib:common"
     ],
     "targets": {
       "build": {},
@@ -58,7 +129,6 @@
     }
   },
   "dependencies": {
-    "@swc/helpers": "~0.5.18",
     "@nestjs/cache-manager": "^12.0.2",
     "@nestjs/common": "^12.3.2",
     "@nestjs/config": "^12.0.1",
@@ -67,6 +137,11 @@
     "@nestjs/jwt": "^12.0.3",
     "@nestjs/platform-express": "^12.3.2",
     "@nestjs/schedule": "^12.0.2",
-    "express": "^5.3.0"
+    "@swc/helpers": "~0.5.18",
+    "express": "^5.3.0",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2",
+    "type-fest": "^5.10.0",
+    "uuid": "^14.0.3"
   }
 }
