@@ -13,20 +13,21 @@ jobs:
           filter: tree:0
           fetch-depth: 0
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v6
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          version: 11.22.0
-          run_install: false
+          bun-version: latest
 
-      - name: Set node version
-        uses: actions/setup-node@v6
+      - name: Cache Bun dependencies
+        uses: actions/cache@v4
         with:
-          node-version: 24
-          cache: "pnpm"
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lock', '**/bun.lockb') }}
+          restore-keys: |
+            ${{ runner.os }}-bun-
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: bun install --frozen-lockfile
 
       - name: Typecheck and lint
         uses: nick-fields/retry@v3
@@ -35,11 +36,11 @@ jobs:
           max_attempts: 3
           retry_wait_seconds: 5
           command: |
-            bunx  nx run-many -t build
-            bunx  nx run-many -t lint
-            bunx  nx run-many -t typecheck
-            bunx  nx run-many -t test
+            bunx nx run-many -t build
+            bunx nx run-many -t lint
+            bunx nx run-many -t typecheck
+            bunx nx run-many -t test
 
       - name: Finish
-        run: pnpm exec nx fix-ci
+        run: bunx nx fix-ci
         if: always()

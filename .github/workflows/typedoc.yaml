@@ -28,21 +28,21 @@ jobs:
           filter: tree:0
           fetch-depth: 0
 
-      - name: Install pnpm
-        uses: pnpm/action-setup@v6
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          version: 11.22.0
-          run_install: false
+          bun-version: latest
 
-      - name: Set node version
-        uses: actions/setup-node@v6
+      - name: Cache Bun dependencies
+        uses: actions/cache@v4
         with:
-          node-version: 24
-          cache: "pnpm"
-          registry-url: "https://registry.npmjs.org"
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lock', '**/bun.lockb') }}
+          restore-keys: |
+            ${{ runner.os }}-bun-
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: bun install --frozen-lockfile
 
       - name: Build
         uses: nick-fields/retry@v3
@@ -51,8 +51,8 @@ jobs:
           max_attempts: 3
           retry_wait_seconds: 5
           command: |
-            bunx  nx run-many -t build
-            bunx  nx run-many -t doc
+            bunx nx run-many -t build
+            bunx nx run-many -t doc
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -67,5 +67,5 @@ jobs:
         uses: actions/deploy-pages@v4
 
       - name: Finish
-        run: pnpm exec nx fix-ci
+        run: bunx nx fix-ci
         if: always()
