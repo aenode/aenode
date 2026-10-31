@@ -1,50 +1,53 @@
 {
   "name": "@aenode/aenode",
   "version": "0.0.1",
-  "private": true,
+  "description": "Nestjs module exports. The project is for managing the module versions",
+  "author": {
+    "name": "Ahmet Emrebas",
+    "email": "aenode+aenode@proton.me",
+    "url": "https://aenode.github.io/#profile"
+  },
+  "bin": {},
+  "funding": "https://cash.app/$puqlib",
+  "homepage": "https://aenode.github.io/aenode/libs/nest",
+  "repository": {
+    "directory": "libs/nest",
+    "type": "github",
+    "url": "https://github.com/aenode/aenode/tree/main/libs/nest"
+  },
+  "icon": "https://aenode.github.io/aenode/libs/nest/favicon.svg",
+  "keywords": [
+    "nestjs",
+    "rest",
+    "utils"
+  ],
   "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "bun": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "assets",
+    "bin",
+    "dist",
+    "!**/*.tsbuildinfo"
+  ],
   "nx": {
+    "tags": [
+      "app:node"
+    ],
     "targets": {
-      "prune-lockfile": {
-        "dependsOn": [
-          "build"
-        ],
-        "cache": true,
-        "executor": "@nx/js:prune-lockfile",
-        "outputs": [
-          "{workspaceRoot}/apps/aenode/dist/package.json",
-          "{workspaceRoot}/apps/aenode/dist/bun.lock"
-        ],
-        "options": {
-          "buildTarget": "build"
-        }
-      },
-      "copy-workspace-modules": {
-        "dependsOn": [
-          "build"
-        ],
-        "cache": true,
-        "outputs": [
-          "{workspaceRoot}/apps/aenode/dist/workspace_modules"
-        ],
-        "executor": "@nx/js:copy-workspace-modules",
-        "options": {
-          "buildTarget": "build"
-        }
-      },
-      "prune": {
-        "dependsOn": [
-          "prune-lockfile",
-          "copy-workspace-modules"
-        ],
-        "executor": "nx:noop"
-      },
-      "serve": {
-        "continuous": true,
-        "dependsOn": [
-          "^build"
-        ]
-      }
+      "build": {},
+      "serve": {},
+      "doc": {}
     }
   },
   "dependencies": {}

@@ -1,0 +1,71 @@
+{
+  "name": "@aenode/nest",
+  "version": "0.0.1",
+  "description": "Nestjs module wrapper exports nestjs modules as they are",
+  "author": {
+    "name": "Ahmet Emrebas",
+    "email": "aenode+aenode@proton.me",
+    "url": "https://aenode.github.io/#profile"
+  },
+  "bin": {},
+  "funding": "https://cash.app/$puqlib",
+  "homepage": "https://aenode.github.io/aenode/libs/nest",
+  "repository": {
+    "directory": "libs/nest",
+    "type": "github",
+    "url": "https://github.com/aenode/aenode/tree/main/libs/nest"
+  },
+  "icon": "https://aenode.github.io/aenode/libs/nest/favicon.svg",
+  "keywords": [
+    "nestjs",
+    "rest",
+    "utils"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "bun": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./cache": {
+      "bun": "./src/cache.ts",
+      "types": "./dist/cache.d.ts",
+      "import": "./dist/cache.js",
+      "default": "./dist/cache.js"
+    }
+  },
+  "files": [
+    "assets",
+    "bin",
+    "dist",
+    "!**/*.tsbuildinfo"
+  ],
+  "nx": {
+    "sourceRoot": "libs/nest/src",
+    "tags": [
+      "lib:common"
+    ],
+    "targets": {
+      "build": {},
+      "doc": {}
+    }
+  },
+  "dependencies": {
+    "@swc/helpers": "~0.5.18",
+    "@nestjs/cache-manager": "^12.0.2",
+    "@nestjs/common": "^12.3.2",
+    "@nestjs/config": "^12.0.1",
+    "@nestjs/core": "^12.3.2",
+    "@nestjs/event-emitter": "^12.0.1",
+    "@nestjs/jwt": "^12.0.3",
+    "@nestjs/platform-express": "^12.3.2",
+    "@nestjs/schedule": "^12.0.2",
+    "express": "^5.3.0"
+  }
+}
