@@ -1,4 +1,5 @@
 import { Env } from '@aenode/constants';
+import { Prisma } from '@aenode/contact-db';
 import { Controller, Get } from '@aenode/nest/common';
 import { ConfigService } from '@aenode/nest/config';
 
@@ -21,6 +22,7 @@ export class AppController {
       port: get(env.APP.PORT),
       allowedOrigins: get(env.AUTH.ALLOWED_ORIGINS),
       authProfile: get(env.AUTH.AUTH_PROFILE),
+      modelNames: Object.values(Prisma.ModelName),
     };
   }
 }

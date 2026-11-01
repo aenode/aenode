@@ -52,6 +52,7 @@
       "version": "0.0.1",
       "dependencies": {
         "@aenode/constants": "workspace:*",
+        "@aenode/contact-db": "workspace:*",
         "@aenode/nest": "workspace:*",
         "@aenode/nest-boot": "workspace:*",
       },

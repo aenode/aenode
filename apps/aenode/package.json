@@ -7,7 +7,9 @@
     "email": "aenode+aenode@proton.me",
     "url": "https://aenode.github.io/#profile"
   },
-  "bin": {},
+  "bin": {
+    "aenode-api": "./bin/aenode.mjs"
+  },
   "funding": "https://cash.app/$puqlib",
   "homepage": "https://aenode.github.io/aenode/libs/nest",
   "repository": {
@@ -53,6 +55,7 @@
   "dependencies": {
     "@aenode/constants": "workspace:*",
     "@aenode/nest": "workspace:*",
-    "@aenode/nest-boot": "workspace:*"
+    "@aenode/nest-boot": "workspace:*",
+    "@aenode/contact-db": "0.0.1"
   }
 }
