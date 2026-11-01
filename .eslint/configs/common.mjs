@@ -13,7 +13,6 @@ export default [
       parser: await import('jsonc-eslint-parser'),
     },
   },
-
   // Ignore configuraiton and generated files
   {
     ignores: [
@@ -23,20 +22,10 @@ export default [
       '**/generated/prisma/**',
       '**/generated/nest/**',
       '**/vitest.config.*.timestamp*',
-      '**/vitest.config.*.timestamp*',
       '**/prisma.config.ts',
-      '**/prisma.config.mts',
-      '**/prisma.config.mjs',
-      '**/prisma.config.js',
-      '**/vitest.config.ts',
-      '**/vitest.config.js',
-      '**/vitest.config.mjs',
       '**/vitest.config.mts',
-      '**/vitest.workspace.ts',
-      '**/vitest.workspace.mts',
-      '**/vitest.workspace.mjs',
       '**/eslint.config.mjs',
-      '**/eslint.config.mts',
+      '**/*.js',
     ],
   },
 ];

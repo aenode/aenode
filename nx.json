@@ -118,6 +118,14 @@
         ]
       }
     },
+    "doc-data": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "// append all {projectRoot}/package.json to public/projects.json"
+        ]
+      }
+    },
     "@nx/js:tsc": {
       "cache": true,
       "dependsOn": ["^build"],
