@@ -8,6 +8,7 @@
     "strictPropertyInitialization": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "verbatimModuleSyntax": true,
     "lib": [
       "ESNext"
     ],

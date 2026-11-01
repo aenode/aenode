@@ -7,7 +7,7 @@
 
 ## @aenode/aenode
 
-Aenode cli 
+Aenode api
 
 ## Install 
 

@@ -28,10 +28,10 @@
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "bun": "./src/index.ts",
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "default": "./dist/index.js"
+      "bun": "./src/app/index.ts",
+      "types": "./dist/app/index.d.ts",
+      "import": "./dist/app/index.js",
+      "default": "./dist/app/index.js"
     }
   },
   "files": [
@@ -50,5 +50,9 @@
       "doc": {}
     }
   },
-  "dependencies": {}
+  "dependencies": {
+    "@aenode/constants": "workspace:*",
+    "@aenode/nest": "workspace:*",
+    "@aenode/nest-boot": "workspace:*"
+  }
 }

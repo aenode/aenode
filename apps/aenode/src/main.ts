@@ -1,4 +1,6 @@
 #!/usr/bin/env node
 
-// @nx-target-name: serve
-console.log('Hello World, some');
+import { boot } from '@aenode/nest-boot';
+import { AppModule } from './app/app.module.ts';
+
+boot({ module: AppModule });

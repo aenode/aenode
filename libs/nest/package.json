@@ -99,6 +99,12 @@
       "import": "./dist/schedule.js",
       "default": "./dist/schedule.js"
     },
+    "./swagger": {
+      "bun": "./src/swagger.ts",
+      "types": "./dist/swagger.d.ts",
+      "import": "./dist/swagger.js",
+      "default": "./dist/swagger.js"
+    },
     "./types": {
       "bun": "./src/types.ts",
       "types": "./dist/types.d.ts",
@@ -137,6 +143,7 @@
     "@nestjs/jwt": "^12.0.3",
     "@nestjs/platform-express": "^12.3.2",
     "@nestjs/schedule": "^12.0.2",
+    "@nestjs/swagger": "^12.0.5",
     "@swc/helpers": "~0.5.18",
     "express": "^5.3.0",
     "reflect-metadata": "^0.2.2",

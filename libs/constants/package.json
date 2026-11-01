@@ -1,0 +1,57 @@
+{
+  "name": "@aenode/constants",
+  "version": "0.0.1",
+  "description": "Common environment keys and constants",
+  "author": {
+    "name": "Ahmet Emrebas",
+    "email": "aenode+aenode@-constantsproton.me",
+    "url": "https://aenode.github.io/#profile"
+  },
+  "bin": {
+    "aenode-constants": "./bin/constants.mjs"
+  },
+  "funding": "https://cash.app/$puqlib",
+  "homepage": "https://aenode.github.io/aenode/libs/constants",
+  "repository": {
+    "directory": "libs/constants",
+    "type": "github",
+    "url": "https://github.com/aenode/aenode/tree/main/libs/constants"
+  },
+  "icon": "https://aenode.github.io/aenode/libs/constants/assets/favicon.svg",
+  "keywords": [
+    "lib"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "bun": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "assets",
+    "bin",
+    "dist",
+    "generators.json",
+    "!**/*.tsbuildinfo"
+  ],
+  "nx": {
+    "sourceRoot": "libs/constants/src",
+    "tags": [
+      "lib:common"
+    ],
+    "targets": {
+      "build": {},
+      "doc": {}
+    }
+  },
+  "dependencies": {
+    "@swc/helpers": "~0.5.18"
+  }
+}

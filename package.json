@@ -9,6 +9,7 @@
   },
   "private": true,
   "dependencies": {
+    "@aenode/nest-boot": "workspace:*",
     "@nx/devkit": "24.0.3",
     "axios": "^1.6.0"
   },

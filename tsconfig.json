@@ -23,6 +23,12 @@
     },
     {
       "path": "./databases/contact-db"
+    },
+    {
+      "path": "./libs/constants"
+    },
+    {
+      "path": "./libs/nest-boot"
     }
   ]
 }
