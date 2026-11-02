@@ -41,23 +41,32 @@ export async function projectGenerator(
 ) {
   options = new ProjectGeneratorSchema(options);
 
+  // Generate the project type specific files
   generateByProjectType(tree, options);
 
+  // Generate the common configuration files exluding the e2e projects
   switch (options.type) {
+    case 'nest':
+    case 'lib':
+    case 'cli':
+    case 'prisma': {
+      generateCommonConfig(tree, options);
+      break;
+    }
     case 'nest-e2e': {
       break;
     }
+  }
+
+  switch (options.type) {
     case 'lib': {
-      generateCommonConfig(tree, options);
       generateLibConfig(tree, options);
       break;
     }
+    case 'prisma':
     case 'cli':
-    case 'prisma': {
-      throw new Error('not implemented');
-    }
-    case 'nest': {
-      generateCommonConfig(tree, options);
+    case 'nest':
+    case 'nest-e2e': {
       break;
     }
   }

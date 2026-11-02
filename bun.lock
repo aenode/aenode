@@ -65,11 +65,8 @@
       "name": "@aenode/aenode-e2e",
       "version": "0.0.1",
       "devDependencies": {
-        "@aenode/aenode": "^0.0.24",
+        "@aenode/aenode": "workspace:*",
         "@aenode/nest": "workspace:*",
-        "@nestjs/testing": "^12.3.2",
-        "@types/supertest": "^7.2.1",
-        "supertest": "^7.3.1",
       },
     },
     "databases/contact-db": {
