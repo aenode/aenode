@@ -1,6 +1,6 @@
 {
   "name": "@aenode/nest",
-  "version": "0.0.25",
+  "version": "0.0.30",
   "description": "Nestjs module wrapper exports nestjs modules as they are",
   "author": {
     "name": "Ahmet Emrebas",

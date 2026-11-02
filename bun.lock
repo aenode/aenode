@@ -66,7 +66,7 @@
     },
     "databases/contact-db": {
       "name": "@aenode/contact-db",
-      "version": "0.0.25",
+      "version": "0.0.30",
       "bin": {
         "aenode-contact-db": "./bin/contact-db.mjs",
       },
@@ -76,7 +76,7 @@
     },
     "libs/constants": {
       "name": "@aenode/constants",
-      "version": "0.0.25",
+      "version": "0.0.30",
       "bin": {
         "aenode-constants": "./bin/constants.mjs",
       },
@@ -86,7 +86,7 @@
     },
     "libs/names": {
       "name": "@aenode/names",
-      "version": "0.0.25",
+      "version": "0.0.30",
       "bin": {
         "aenode-names": "./bin/names.mjs",
       },
@@ -96,7 +96,7 @@
     },
     "libs/nest": {
       "name": "@aenode/nest",
-      "version": "0.0.25",
+      "version": "0.0.30",
       "dependencies": {
         "@nestjs/cache-manager": "^12.0.2",
         "@nestjs/common": "^12.3.2",
@@ -120,7 +120,7 @@
     },
     "libs/nest-boot": {
       "name": "@aenode/nest-boot",
-      "version": "0.0.25",
+      "version": "0.0.30",
       "bin": {
         "aenode-nest-boot": "./bin/nest-boot.mjs",
       },
