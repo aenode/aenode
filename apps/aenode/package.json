@@ -47,7 +47,7 @@
     "!**/*.tsbuildinfo"
   ],
   "nx": {
-    "projectType": "application",
+    "projectType": "library",
     "tags": [
       "app:node"
     ],
@@ -59,6 +59,7 @@
   },
   "dependencies": {
     "@aenode/constants": "workspace:*",
+    "@aenode/contact-db": "workspace:*",
     "@aenode/nest": "workspace:*",
     "@aenode/nest-boot": "workspace:*"
   }

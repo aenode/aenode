@@ -46,7 +46,7 @@
     "generators.json"
   ],
   "nx": {
-    "projectType": "application",
+    "projectType": "library",
     "tags": [
       "cli:cli"
     ],

@@ -75,6 +75,7 @@
     "tags": [
       "lib:common"
     ],
+    "projectType": "library",
     "targets": {
       "build": {
         "dependsOn": [
