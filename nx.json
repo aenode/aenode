@@ -122,9 +122,7 @@
     }
   },
   "generators": {
-    "@aenode/plugin:project": {
-      "version": "0.0.32"
-    }
+    "@aenode/plugin:project": {}
   },
 
   "release": {

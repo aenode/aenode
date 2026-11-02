@@ -23,10 +23,13 @@ export function generateLibConfig(tree: Tree, options: ProjectGeneratorSchema) {
   );
 }
 
-export function generateLib(tree: Tree, options: ProjectGeneratorSchema) {
+export function generateByProjectType(
+  tree: Tree,
+  options: ProjectGeneratorSchema,
+) {
   generateFiles(
     tree,
-    path.join(import.meta.dirname, 'lib'),
+    path.join(import.meta.dirname, options.type),
     options.directory,
     { ...options, ...options.names },
   );
@@ -38,19 +41,24 @@ export async function projectGenerator(
 ) {
   options = new ProjectGeneratorSchema(options);
 
-  generateCommonConfig(tree, options);
+  generateByProjectType(tree, options);
 
   switch (options.type) {
-    case 'lib': {
-      generateLibConfig(tree, options);
-      generateLib(tree, options);
+    case 'nest-e2e': {
       break;
     }
-
-    case 'nest':
+    case 'lib': {
+      generateCommonConfig(tree, options);
+      generateLibConfig(tree, options);
+      break;
+    }
     case 'cli':
     case 'prisma': {
       throw new Error('not implemented');
+    }
+    case 'nest': {
+      generateCommonConfig(tree, options);
+      break;
     }
   }
 

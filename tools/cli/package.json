@@ -49,7 +49,7 @@
     "sourceRoot": "tools/cli/src",
     "projectType": "library",
     "tags": [
-      "lib:common"
+      "cli:cli"
     ],
     "targets": {
       "build": {},

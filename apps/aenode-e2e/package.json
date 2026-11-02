@@ -1,10 +1,11 @@
 {
   "name": "@aenode/aenode-e2e",
   "version": "0.0.1",
+  "description": "aenode e2e test project",
   "nx": {
     "projectType": "e2e",
     "tags": [
-      "app:e2e"
+      "e2e:nest"
     ],
     "implicitDependencies": [
       "@aenode/aenode"
@@ -21,10 +22,7 @@
   "private": true,
   "type": "module",
   "devDependencies": {
-    "@aenode/aenode": "^0.0.24",
-    "@aenode/nest": "workspace:*",
-    "@nestjs/testing": "^12.3.2",
-    "@types/supertest": "^7.2.1",
-    "supertest": "^7.3.1"
+    "@aenode/aenode": "workspace:*",
+    "@aenode/nest": "workspace:*"
   }
 }

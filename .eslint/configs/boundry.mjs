@@ -12,10 +12,14 @@ export default [
               sourceTag: 'app:*',
               onlyDependOnLibsWithTags: ['app:*', 'lib:*', 'data:*'],
             },
+            {
+              sourceTag: 'e2e:*',
+              onlyDependOnLibsWithTags: ['*'],
+            },
 
             {
               sourceTag: 'cli:*',
-              onlyDependOnLibsWithTags: ['lib:*'],
+              onlyDependOnLibsWithTags: ['lib:*', 'cli:*'],
             },
             {
               sourceTag: 'lib:*',
@@ -24,7 +28,7 @@ export default [
 
             {
               sourceTag: 'data:*',
-              onlyDependOnLibsWithTags: ['data:*', 'lib:*'],
+              onlyDependOnLibsWithTags: ['lib:*'],
             },
           ],
         },

@@ -103,11 +103,23 @@
       "import": "./dist/schedule.js",
       "default": "./dist/schedule.js"
     },
+    "./supertest": {
+      "bun": "./src/supertest.ts",
+      "types": "./dist/supertest.d.ts",
+      "import": "./dist/supertest.js",
+      "default": "./dist/supertest.js"
+    },
     "./swagger": {
       "bun": "./src/swagger.ts",
       "types": "./dist/swagger.d.ts",
       "import": "./dist/swagger.js",
       "default": "./dist/swagger.js"
+    },
+    "./testing": {
+      "bun": "./src/testing.ts",
+      "types": "./dist/testing.d.ts",
+      "import": "./dist/testing.js",
+      "default": "./dist/testing.js"
     },
     "./types": {
       "bun": "./src/types.ts",
@@ -154,9 +166,12 @@
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.2",
     "type-fest": "^5.10.0",
-    "uuid": "^14.0.3"
+    "uuid": "^14.0.3",
+    "@nestjs/testing": "^12.3.2",
+    "supertest": "^7.3.1"
   },
   "devDependencies": {
-    "@types/express": "^5.0.6"
+    "@types/express": "^5.0.6",
+    "@types/supertest": "^7.2.1"
   }
 }

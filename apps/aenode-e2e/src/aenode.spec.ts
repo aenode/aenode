@@ -1,11 +1,8 @@
-// apps/<your-app>/src/app/app.controller.e2e.spec.ts
-import { type INestApplication } from '@aenode/nest/common';
-import { Test } from '@nestjs/testing';
-import request from 'supertest';
-import { afterEach, describe, expect, it } from 'vitest';
-
 import { AppController } from '@aenode/aenode';
+import { type INestApplication } from '@aenode/nest/common';
 import { ConfigService } from '@aenode/nest/config';
+import { request } from '@aenode/nest/supertest';
+import { Test } from '@nestjs/testing';
 
 async function createApp(values: Record<string, unknown>) {
   const moduleRef = await Test.createTestingModule({

@@ -16,6 +16,13 @@ Nx plugin to generate project and resources
   bun add @aenode/plugin 
 ```
 
+## Example 
+
+
+Generate a nestjs project 
+```sh 
+bunx nx g @aenode/plugin:project nest apps/hello-api --orgName="aenode" --version="0.0.1" --email="aenode@proton.me"
+```
 
 
 ## Examples 

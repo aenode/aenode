@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-import { boot } from '@aenode/nest-boot';
-import { AppModule } from './app/app.module.js';
+import { bootstrap } from './app/bootstrap.js';
 
-boot({ module: AppModule });
+bootstrap();

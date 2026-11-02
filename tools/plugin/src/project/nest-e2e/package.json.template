@@ -1,0 +1,28 @@
+{
+  "name": "<%- projectName %>-e2e",
+  "version": "<%- version %>",
+  "description": "<%- fileName %> e2e test",
+  "nx": {
+    "projectType": "e2e",
+    "tags": [
+      "e2e:nest"
+    ],
+    "implicitDependencies": [
+      "<%- projectName %>"
+    ],
+    "targets": {
+      "e2e": {
+        "dependsOn": [
+          "<%- projectName %>:build",
+          "<%- projectName %>:serve"
+        ]
+      }
+    }
+  },
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "<%- projectName %>": "workspace:*",
+    "@aenode/nest": "workspace:*"
+  }
+}
