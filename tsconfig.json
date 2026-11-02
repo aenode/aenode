@@ -32,6 +32,9 @@
     },
     {
       "path": "./libs/types"
+    },
+    {
+      "path": "./apps/hello"
     }
   ]
 }

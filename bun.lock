@@ -69,6 +69,18 @@
         "@aenode/nest": "workspace:*",
       },
     },
+    "apps/hello": {
+      "name": "@aenode/hello",
+      "version": "0.0.1",
+      "bin": {
+        "aenode-hello": "./bin/hello.mjs",
+      },
+      "dependencies": {
+        "@aenode/constants": "workspace:*",
+        "@aenode/nest": "workspace:*",
+        "@aenode/nest-boot": "workspace:*",
+      },
+    },
     "databases/contact-db": {
       "name": "@aenode/contact-db",
       "version": "0.0.30",
@@ -185,6 +197,8 @@
     "@aenode/constants": ["@aenode/constants@workspace:libs/constants"],
 
     "@aenode/contact-db": ["@aenode/contact-db@workspace:databases/contact-db"],
+
+    "@aenode/hello": ["@aenode/hello@workspace:apps/hello"],
 
     "@aenode/names": ["@aenode/names@workspace:libs/names"],
 

@@ -53,7 +53,8 @@
     ],
     "targets": {
       "build": {},
-      "doc": {}
+      "doc": {},
+      "serve": {}
     }
   },
   "dependencies": {

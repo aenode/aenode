@@ -48,7 +48,7 @@
     "sourceRoot": "<%- directory %>/src",
     "projectType": "library",
     "tags": [
-      "nest:node"
+      "app:nest"
     ],
     "targets": {
       "build": {},
