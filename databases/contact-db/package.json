@@ -1,7 +1,7 @@
 {
   "name": "@aenode/contact-db",
   "version": "0.0.1",
-  "description": "- [ ] Add project description",
+  "description": "Contact database",
   "author": {
     "name": "Ahmet Emrebas",
     "email": "aenode+aenode@-contact-dbproton.me",
@@ -21,6 +21,10 @@
   "keywords": [
     "lib"
   ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",

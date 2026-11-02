@@ -1,0 +1,3 @@
+   # bunfig.toml
+   [install.scopes]
+   "@aenode" = "https://registry.npmjs.org/"

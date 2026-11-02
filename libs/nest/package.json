@@ -21,6 +21,10 @@
     "rest",
     "utils"
   ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -145,7 +149,6 @@
     "@nestjs/schedule": "^12.0.2",
     "@nestjs/swagger": "^12.0.5",
     "@swc/helpers": "~0.5.18",
-    "@types/express": "^5.0.6",
     "express": "^5.3.0",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.2",

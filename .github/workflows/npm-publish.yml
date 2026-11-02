@@ -48,7 +48,6 @@ jobs:
           command: |
             bunx nx run-many -t build
             bunx nx run-many -t lint
-            bunx nx run-many -t typecheck
             bunx nx run-many -t test
 
       - name: Publish

@@ -1,7 +1,7 @@
 {
   "name": "@aenode/names",
   "version": "0.0.1",
-  "description": "- [ ] Add project description",
+  "description": "Create all variants of a given text",
   "author": {
     "name": "Ahmet Emrebas",
     "email": "aenode+aenode@-namesproton.me",
@@ -21,6 +21,10 @@
   "keywords": [
     "lib"
   ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
