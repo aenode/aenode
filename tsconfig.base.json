@@ -2,11 +2,11 @@
   "compilerOptions": {
     "composite": true,
     "declarationMap": true,
-    "emitDeclarationOnly": true,
     "importHelpers": true,
     "isolatedModules": true,
     "strictPropertyInitialization": false,
-    "emitDecoratorMetadata": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
     "experimentalDecorators": true,
     "verbatimModuleSyntax": true,
     "lib": [

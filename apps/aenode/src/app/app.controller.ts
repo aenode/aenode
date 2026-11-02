@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/consistent-type-imports */
+
 import { Env } from '@aenode/constants';
 import { Prisma } from '@aenode/contact-db';
 import { Controller, Get } from '@aenode/nest/common';

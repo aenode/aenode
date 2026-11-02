@@ -11,6 +11,7 @@ export default [
             'tslib',
             'vitest',
             '@nx/devkit',
+            '@types/express',
           ],
           ignoredFiles: [
             '{projectRoot}/eslint.config.mjs',

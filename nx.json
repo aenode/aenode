@@ -14,21 +14,6 @@
   },
   "plugins": [
     {
-      "plugin": "@nx/js/typescript",
-      "options": {
-        "typecheck": {
-          "targetName": "typecheck"
-        },
-        "buildtypes": {
-          "targetName": "buildtypes",
-          "configName": "tsconfig.lib.json",
-          "buildDepsName": "build-deps",
-          "watchDepsName": "watch-deps"
-        }
-      },
-      "exclude": ["tools/plugin/*"]
-    },
-    {
       "plugin": "@nx/eslint/plugin",
       "options": {
         "targetName": "lint"
@@ -72,12 +57,13 @@
     },
     "build": {
       "executor": "@nx/js:swc",
+      "dependsOn": ["^build"],
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "{projectRoot}/dist",
         "main": "{projectRoot}/src/index.ts",
         "tsConfig": "{projectRoot}/tsconfig.lib.json",
-        "skipTypeCheck": true,
+        "skipTypeCheck": false,
         "stripLeadingPaths": true
       }
     },
@@ -114,15 +100,17 @@
       "executor": "nx:run-commands",
       "options": {
         "commands": [
+          "bunx aenode merge -t json -s {projectRoot}/package.json  -d public/projects.json",
           "typedoc --entryPointStrategy expand {projectRoot}/src --out public/{projectRoot} --tsconfig {projectRoot}/tsconfig.lib.json --favicon {projectRoot}/assets/favicon.svg"
         ]
-      }
+      },
+      "dependsOn": ["doc-data"]
     },
     "doc-data": {
       "executor": "nx:run-commands",
       "options": {
         "commands": [
-          "// append all {projectRoot}/package.json to public/projects.json"
+          "bunx aenode merge -t json -s {projectRoot}/package.json  -d public/projects.json"
         ]
       }
     },
