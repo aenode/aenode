@@ -21,6 +21,10 @@
     "rest",
     "utils"
   ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",

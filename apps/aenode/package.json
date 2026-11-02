@@ -1,6 +1,6 @@
 {
   "name": "@aenode/aenode",
-  "version": "0.0.1",
+  "version": "0.0.24",
   "description": "Nestjs module exports. The project is for managing the module versions",
   "author": {
     "name": "Ahmet Emrebas",

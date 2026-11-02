@@ -1,18 +1,18 @@
 
-![Version](https://img.shields.io/npm/v/@aenode/types)  ![Downloads](https://img.shields.io/npm/dm/@aenode/types)  ![Status](https://img.shields.io/github/actions/workflow/status/aenode/aenode/ci.yml)  ![Size](https://img.shields.io/bundlephobia/min/@aenode/types)   
+![Version](https://img.shields.io/npm/v/@aenode/source)  ![Downloads](https://img.shields.io/npm/dm/@aenode/source)  ![Status](https://img.shields.io/github/actions/workflow/status/aenode/aenode/ci.yml)  ![Size](https://img.shields.io/bundlephobia/min/@aenode/source)   
 
 <p align="center">
   <img   src="https://aenode.github.io/aenode/libs/types/assets/favicon.svg" alt="Types Logo" height="128" width="128" style="border-radius: 32px;"/>
 </p>
 
-## @aenode/types
+## @aenode/source
 
 Common types
 
 ## Install 
 
 ```sh 
-  bun add @aenode/types 
+  bun add @aenode/source 
 ```
 
 
