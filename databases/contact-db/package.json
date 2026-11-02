@@ -73,7 +73,7 @@
   "nx": {
     "sourceRoot": "databases/contact-db/src",
     "tags": [
-      "lib:common"
+      "data:prisma"
     ],
     "projectType": "library",
     "targets": {

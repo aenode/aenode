@@ -1,7 +1,7 @@
 {
   "name": "@aenode/aenode",
   "version": "0.0.24",
-  "description": "Nestjs module exports. The project is for managing the module versions",
+  "description": "Aenode core application",
   "author": {
     "name": "Ahmet Emrebas",
     "email": "aenode+aenode@proton.me",
@@ -47,9 +47,10 @@
     "!**/*.tsbuildinfo"
   ],
   "nx": {
+    "sourceRoot": "apps/aenode/src",
     "projectType": "library",
     "tags": [
-      "app:node"
+      "app:nest"
     ],
     "targets": {
       "build": {},

@@ -4,11 +4,12 @@
     "declarationMap": true,
     "importHelpers": true,
     "isolatedModules": true,
+    "verbatimModuleSyntax": true,
     "strictPropertyInitialization": false,
+    "forceConsistentCasingInFileNames": true,
     "declaration": true,
     "emitDeclarationOnly": true,
     "experimentalDecorators": true,
-    "verbatimModuleSyntax": true,
     "lib": [
       "ESNext"
     ],

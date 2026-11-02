@@ -13,6 +13,7 @@ export function generateCommonConfig(
     { ...options, ...options.names },
   );
 }
+
 export function generateLibConfig(tree: Tree, options: ProjectGeneratorSchema) {
   generateFiles(
     tree,

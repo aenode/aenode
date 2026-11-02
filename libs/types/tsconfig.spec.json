@@ -11,11 +11,7 @@
     ],
     "forceConsistentCasingInFileNames": true
   },
-  "include": [
-    "vitest.config.mts",
-    "src/**/*.spec.ts",
-    "src/**/*.d.ts"
-  ],
+  "include": ["vitest.config.mts", "src/**/*.spec.ts", "src/**/*.d.ts"],
   "references": [
     {
       "path": "./tsconfig.lib.json"

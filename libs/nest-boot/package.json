@@ -4,7 +4,7 @@
   "description": "Nestjs boot function",
   "author": {
     "name": "Ahmet Emrebas",
-    "email": "aenode+aenode@-nest-bootproton.me",
+    "email": "aenode+aenode-nest-boot@proton.me",
     "url": "https://aenode.github.io/#profile"
   },
   "bin": {
@@ -47,8 +47,9 @@
   ],
   "nx": {
     "sourceRoot": "libs/nest-boot/src",
+    "projectType": "library",
     "tags": [
-      "lib:common"
+      "lib:core"
     ],
     "targets": {
       "build": {},

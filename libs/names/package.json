@@ -4,7 +4,7 @@
   "description": "Create all variants of a given text",
   "author": {
     "name": "Ahmet Emrebas",
-    "email": "aenode+aenode@-namesproton.me",
+    "email": "aenode+aenode-names@proton.me",
     "url": "https://aenode.github.io/#profile"
   },
   "bin": {
@@ -48,7 +48,7 @@
   "nx": {
     "sourceRoot": "libs/names/src",
     "tags": [
-      "lib:common"
+      "lib:util"
     ],
     "targets": {
       "build": {},

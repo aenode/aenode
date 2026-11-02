@@ -1,12 +1,49 @@
-import { execSync } from 'node:child_process';
-import { join } from 'node:path';
+// apps/<your-app>/src/app/app.controller.e2e.spec.ts
+import { type INestApplication } from '@aenode/nest/common';
+import { Test } from '@nestjs/testing';
+import request from 'supertest';
+import { afterEach, describe, expect, it } from 'vitest';
 
-describe('CLI tests', () => {
-  it('should print a message', () => {
-    const cliPath = join(process.cwd(), 'apps/aenode/dist/main.js');
+import { AppController } from '@aenode/aenode';
+import { ConfigService } from '@aenode/nest/config';
 
-    const output = execSync(`node ${cliPath}`).toString();
+async function createApp(values: Record<string, unknown>) {
+  const moduleRef = await Test.createTestingModule({
+    controllers: [AppController],
+    providers: [
+      {
+        provide: ConfigService,
+        useValue: { get: (key: string) => values[key] },
+      },
+    ],
+  }).compile();
 
-    expect(output).toMatch(/Hello World/);
+  const app = moduleRef.createNestApplication();
+  await app.init();
+  return app;
+}
+
+describe('AppController (e2e)', () => {
+  let app: INestApplication;
+
+  afterEach(async () => {
+    await app?.close();
+  });
+
+  describe('GET /info', () => {
+    it('returns values read from the unprefixed keys', async () => {
+      app = await createApp({
+        NAME: 'app-name',
+        DESCRIPTION: 'app-description',
+        API_PREFIX: 'api',
+        PORT: 3000,
+        ALLOWED_ORIGINS: 'http://localhost:4200',
+        AUTH_PROFILE: 'ADMIN_ONLY',
+      });
+
+      const res = await request(app.getHttpServer()).get('/info').expect(200);
+
+      expect(res.body.name).toEqual('app-name');
+    });
   });
 });

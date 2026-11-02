@@ -21,6 +21,10 @@
   "keywords": [
     "lib"
   ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -43,8 +47,9 @@
   ],
   "nx": {
     "sourceRoot": "<%- directory %>/src",
+    "projectType": "library",
     "tags": [
-      "lib:common"
+      "lib>:<%- fileName %>"
     ],
     "targets": {
       "build": {},

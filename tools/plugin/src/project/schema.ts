@@ -24,6 +24,7 @@ export class ProjectGeneratorSchema {
     const shortName = basename(this.directory);
 
     this.names = names(shortName);
+    this.orgName ??= 'aenode';
 
     if (!this.homepageUrl) {
       this.homepageUrl = `https://aenode.github.io/aenode/${this.directory}`;
@@ -42,7 +43,7 @@ export class ProjectGeneratorSchema {
     if (!this.email) {
       this.email = `aenode+${this.names.fileName}@proton.me`;
     } else {
-      this.email = this.email.replace('@', `@-${this.names.fileName}`);
+      this.email = this.email.replace('@', `${this.names.fileName}@`);
     }
 
     if (!this.projectName) {

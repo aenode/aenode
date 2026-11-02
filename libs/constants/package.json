@@ -4,7 +4,7 @@
   "description": "Common environment keys and constants",
   "author": {
     "name": "Ahmet Emrebas",
-    "email": "aenode+aenode@-constantsproton.me",
+    "email": "aenode+aenode-constants@proton.me",
     "url": "https://aenode.github.io/#profile"
   },
   "bin": {
@@ -47,6 +47,7 @@
   ],
   "nx": {
     "sourceRoot": "libs/constants/src",
+    "projectType": "library",
     "tags": [
       "lib:common"
     ],

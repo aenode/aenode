@@ -1,0 +1,59 @@
+{
+  "name": "@aenode/types",
+  "version": "0.0.1",
+  "description": "Types",
+  "author": {
+    "name": "Ahmet Emrebas",
+    "email": "aenode+aenode-types@proton.me",
+    "url": "https://aenode.github.io/#profile"
+  },
+  "bin": {
+    "aenode-types": "./bin/types.mjs"
+  },
+  "funding": "https://cash.app/$puqlib",
+  "homepage": "https://aenode.github.io/aenode/libs/types",
+  "repository": {
+    "directory": "libs/types",
+    "type": "github",
+    "url": "https://github.com/aenode/aenode/tree/main/libs/types"
+  },
+  "icon": "https://aenode.github.io/aenode/libs/types/assets/favicon.svg",
+  "keywords": [
+    "lib"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "bun": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "assets",
+    "bin",
+    "dist",
+    "generators.json",
+    "!**/*.tsbuildinfo"
+  ],
+  "nx": {
+    "sourceRoot": "libs/types/src",
+    "projectType": "library",
+    "tags": [
+      "lib:common"
+    ],
+    "targets": {
+      "build": {},
+      "doc": {}
+    }
+  },
+  "dependencies": {
+    "@swc/helpers": "~0.5.18",
+    "type-fest": "^5.10.0"
+  }
+}

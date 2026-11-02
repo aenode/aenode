@@ -4,8 +4,6 @@
     "rootDir": "src",
     "outDir": "dist",
     "tsBuildInfoFile": "dist/tsconfig.lib.tsbuildinfo",
-    "emitDeclarationOnly": true,
-    "forceConsistentCasingInFileNames": true,
     "types": [
       "node"
     ]
@@ -14,9 +12,7 @@
     "src/**/*.ts"
   ],
   "exclude": [
-    "vitest.config.mts",
-    "eslint.config.mjs",
-    "src/**/*.spec.ts",
+    "src/**/*.spec.ts"
   ],
-  "references": [],
+  "references": []
 }

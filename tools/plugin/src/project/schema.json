@@ -84,5 +84,5 @@
       "x-promp": "What version would you like to use?"
     }
   },
-  "required": ["type", "directory", "orgName"]
+  "required": ["type", "directory"]
 }

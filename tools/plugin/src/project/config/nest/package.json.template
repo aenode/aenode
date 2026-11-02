@@ -1,0 +1,64 @@
+{
+  "name": "<%- projectName %>",
+  "version": "<%- version %>",
+  "description": "<%- description %>",
+  "author": {
+    "name": "<%- authorName %>",
+    "email": "<%- email %>",
+    "url": "<%- profileUrl %>"
+  },
+  "bin": {
+    "<%- orgName %>-<%- fileName %>": "./bin/<%- fileName %>.mjs"
+  },
+  "funding": "<%- fundingUrl %>",
+  "homepage": "<%- homepageUrl %>",
+  "repository": {
+    "directory": "<%- directory %>",
+    "type": "github",
+    "url": "<%- repositoryUrl %>"
+  },
+  "icon": "<%- iconUrl %>",
+  "keywords": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "bun": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "assets",
+    "bin",
+    "dist",
+    "!**/*.tsbuildinfo"
+  ],
+  "nx": {
+    "sourceRoot": "<%- directory %>/src",
+    "projectType": "library",
+    "tags": [
+      "nest:node"
+    ],
+    "targets": {
+      "build": {},
+      "serve": {},
+      "doc": {}
+    }
+  },
+  "dependencies": {
+    "@aenode/constants": "workspace:*",
+    "@aenode/nest": "workspace:*",
+    "@aenode/nest-boot": "workspace:*"
+  }
+}

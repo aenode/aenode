@@ -1,3 +1,1 @@
-#!/usr/bin/env node
-
-console.log('Hello from @aenode/constants');
+import '../dist/main.js';

@@ -24,10 +24,29 @@ export abstract class BaseEnv {
 }
 
 export class EnvApp extends BaseEnv {
+  /**
+   * Unique application name
+   */
   static readonly NAME = 'NAME';
+
+  /**
+   * Rest api port
+   */
   static readonly PORT = 'PORT';
+
+  /**
+   * Rest api global path prefix such as 'api'
+   */
   static readonly API_PREFIX = 'API_PREFIX';
+
+  /**
+   * App description
+   */
   static readonly DESCRIPTION = 'DESCRIPTION';
+
+  /**
+   * Runtime profile such as DEVELOPMENT, PRODUCTION, READONLY
+   */
   static readonly PROFILE = 'PROFILE';
 
   get NAME() {
@@ -45,11 +64,31 @@ export class EnvApp extends BaseEnv {
 }
 
 export class EnvAuth extends BaseEnv {
+  /**
+   * JWT SECRET to genreate user authentication tokens
+   */
   static readonly JWT_SECRET = 'JWT_SECRET';
+
+  /**
+   * Encription secret to encript data
+   */
   static readonly ENCRIPTION_SECRET = 'ENCRIPTION_SECRET';
+
+  /**
+   * Root user username
+   */
   static readonly ROOT_USERANME = 'ROOT_USERANME';
+
+  /**
+   * Root user password
+   */
   static readonly ROOT_PASSWORD = 'ROOT_PASSWORD';
+
+  /**
+   * Authentication profile such as public
+   */
   static readonly AUTH_PROFILE = 'AUTH_PROFILE';
+
   static readonly ALLOWED_ORIGINS = 'ALLOWED_ORIGINS';
 
   get JWT_SECRET() {

@@ -7,7 +7,9 @@
     "email": "aenode+aenode@proton.me",
     "url": "https://aenode.github.io/#profile"
   },
-  "bin": {},
+  "bin": {
+    "aenode-plugin": "./bin/plugin.mjs"
+  },
   "funding": "https://cash.app/$puqlib",
   "homepage": "https://aenode.github.io/aenode/libs/nest",
   "repository": {

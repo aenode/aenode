@@ -19,9 +19,6 @@
   },
   "sourceMaps": true,
   "exclude": [
-    "vitest.config.mjs",
-    "eslint.config.mjs",
-    ".*\\.spec.ts$",
-    ".*.js$"
+    ".*\\.spec.ts$"
   ]
 }
