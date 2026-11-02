@@ -76,7 +76,11 @@
       "lib:common"
     ],
     "targets": {
-      "build": {},
+      "build": {
+        "dependsOn": [
+          "prisma:generate"
+        ]
+      },
       "doc": {},
       "prisma:generate": {},
       "prisma:migrate": {},

@@ -56,7 +56,6 @@
       },
       "dependencies": {
         "@aenode/constants": "workspace:*",
-        "@aenode/contact-db": "0.0.1",
         "@aenode/nest": "workspace:*",
         "@aenode/nest-boot": "workspace:*",
       },
@@ -2447,8 +2446,6 @@
     "yocto-queue": ["yocto-queue@0.1.0", "", {}, "sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q=="],
 
     "zeptomatch": ["zeptomatch@2.1.0", "", { "dependencies": { "grammex": "^3.1.11", "graphmatch": "^1.1.0" } }, "sha512-KiGErG2J0G82LSpniV0CtIzjlJ10E04j02VOudJsPyPwNZgGnRKQy7I1R7GMyg/QswnE4l7ohSGrQbQbjXPPDA=="],
-
-    "@aenode/aenode/@aenode/contact-db": ["@aenode/contact-db@0.0.1", "", { "dependencies": { "@swc/helpers": "~0.5.18" }, "bin": { "aenode-contact-db": "bin/contact-db.mjs" } }, "sha512-zQyLYrsCfK1y1uhs0pRpT8Bmu1B1ieqoSoOpO+6qxB/VrKzbtk/YISuUJDEfhZ/bLOg3G/IHfaC/zdrTMNW1HA=="],
 
     "@asamuzakjp/css-color/lru-cache": ["lru-cache@11.5.3", "", {}, "sha512-U4N8FgzmWxc8k1VH8Kr6lQg18U7Fjvby6wXHVRX/ZZ7IwWbRMgrRbP0Wrb5q5NVinryp4SQampHKdvtecItxUg=="],
 
