@@ -51,7 +51,7 @@ jobs:
             bunx nx run-many -t test
 
       - name: Publish
-        run: bunx nx release publish
+        run: bunx nx release publish --tag latest
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
