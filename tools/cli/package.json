@@ -42,6 +42,7 @@
     "!**/*.tsbuildinfo"
   ],
   "nx": {
+    "projectType": "application",
     "sourceRoot": "tools/cli/src",
     "tags": [
       "lib:common"

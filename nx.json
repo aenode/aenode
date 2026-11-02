@@ -100,7 +100,8 @@
       "executor": "nx:run-commands",
       "options": {
         "commands": [
-          "bunx aenode merge -t json -s {projectRoot}/package.json  -d public/projects.json",
+          "bunx nx graph --file=public/projects.html",
+          "bunx nx graph --file=public/projects.json",
           "typedoc --entryPointStrategy expand {projectRoot}/src --out public/{projectRoot} --tsconfig {projectRoot}/tsconfig.lib.json --favicon {projectRoot}/assets/favicon.svg"
         ]
       },
