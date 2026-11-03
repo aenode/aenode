@@ -1,6 +1,6 @@
 {
   "name": "@aenode/dbs",
-  "version": "0.0.1",
+  "version": "0.0.36",
   "description": "Centeralize the databaser projects in a single project.",
   "author": {
     "name": "Ahmet Emrebas",

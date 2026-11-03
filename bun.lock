@@ -50,7 +50,7 @@
     },
     "apps/aenode": {
       "name": "@aenode/aenode",
-      "version": "0.0.24",
+      "version": "0.0.36",
       "bin": {
         "aenode-api": "./bin/aenode.mjs",
       },
@@ -71,7 +71,7 @@
     },
     "databases/contact-db": {
       "name": "@aenode/contact-db",
-      "version": "0.0.30",
+      "version": "0.0.36",
       "bin": {
         "aenode-contact-db": "./bin/contact-db.mjs",
       },
@@ -81,7 +81,7 @@
     },
     "databases/dbs": {
       "name": "@aenode/dbs",
-      "version": "0.0.1",
+      "version": "0.0.36",
       "bin": {
         "aenode-dbs": "./bin/dbs.mjs",
       },
@@ -91,7 +91,7 @@
     },
     "libs/constants": {
       "name": "@aenode/constants",
-      "version": "0.0.30",
+      "version": "0.0.36",
       "bin": {
         "aenode-constants": "./bin/constants.mjs",
       },
@@ -101,7 +101,7 @@
     },
     "libs/names": {
       "name": "@aenode/names",
-      "version": "0.0.30",
+      "version": "0.0.36",
       "bin": {
         "aenode-names": "./bin/names.mjs",
       },
@@ -111,7 +111,7 @@
     },
     "libs/nest": {
       "name": "@aenode/nest",
-      "version": "0.0.30",
+      "version": "0.0.36",
       "dependencies": {
         "@nestjs/cache-manager": "^12.0.2",
         "@nestjs/common": "^12.3.2",
@@ -138,7 +138,7 @@
     },
     "libs/nest-auth": {
       "name": "@aenode/nest-auth",
-      "version": "0.0.1",
+      "version": "0.0.36",
       "bin": {
         "aenode-nest-auth": "./bin/nest-auth.mjs",
       },
@@ -151,7 +151,7 @@
     },
     "libs/nest-boot": {
       "name": "@aenode/nest-boot",
-      "version": "0.0.30",
+      "version": "0.0.36",
       "bin": {
         "aenode-nest-boot": "./bin/nest-boot.mjs",
       },
@@ -163,7 +163,7 @@
     },
     "libs/types": {
       "name": "@aenode/types",
-      "version": "0.0.1",
+      "version": "0.0.36",
       "bin": {
         "aenode-types": "./bin/types.mjs",
       },
@@ -174,7 +174,7 @@
     },
     "tools/cli": {
       "name": "@aenode/cli",
-      "version": "0.0.1",
+      "version": "0.0.36",
       "bin": {
         "aenode": "./bin/aenode.mjs",
       },
@@ -189,7 +189,7 @@
     },
     "tools/plugin": {
       "name": "@aenode/plugin",
-      "version": "0.0.1",
+      "version": "0.0.36",
       "dependencies": {
         "@nx/devkit": "24.0.3",
         "@swc/helpers": "~0.5.18",
