@@ -47,6 +47,9 @@
     },
     {
       "path": "./libs/prop"
+    },
+    {
+      "path": "./tools/prisma-plugin"
     }
   ]
 }

@@ -1,0 +1,65 @@
+{
+  "name": "@aenode/prisma-plugin",
+  "version": "0.0.1",
+  "description": "Prisma plugins",
+  "author": {
+    "name": "Ahmet Emrebas",
+    "email": "aenode+aenode+aenode-prisma-plugin@proton.me",
+    "url": "https://aenode.github.io/#profile"
+  },
+  "funding": "https://cash.app/$puqlib",
+  "homepage": "https://aenode.github.io/aenode/tools/prisma-plugin",
+  "repository": {
+    "directory": "tools/prisma-plugin",
+    "type": "github",
+    "url": "https://github.com/aenode/aenode/tree/main/tools/prisma-plugin"
+  },
+  "icon": "https://aenode.github.io/aenode/tools/prisma-plugin/assets/favicon.svg",
+  "keywords": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
+  "bin": {
+    "aenode-prisma-plugin": "./bin/prisma-plugin.mjs",
+    "aenode-prisma-nest": "./bin/nest.mjs"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "bun": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "assets",
+    "bin",
+    "dist",
+    "generators.json",
+    "!**/*.tsbuildinfo"
+  ],
+  "nx": {
+    "sourceRoot": "tools/prisma-plugin/src",
+    "projectType": "library",
+    "tags": [
+      "lib:prisma-plugin"
+    ],
+    "targets": {
+      "build": {},
+      "doc": {}
+    }
+  },
+  "dependencies": {
+    "@aenode/names": "workspace:*",
+    "@prisma/generator-helper": "^7.10.1",
+    "@swc/helpers": "~0.5.18"
+  }
+}

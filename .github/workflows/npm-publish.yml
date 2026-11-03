@@ -46,9 +46,12 @@ jobs:
           max_attempts: 3
           retry_wait_seconds: 5
           command: |
-            bunx nx run-many -t build
-            bunx nx run-many -t lint
-            bunx nx run-many -t test
+            bunx  nx run-many -t prisma:generate --projects="tag:data:*"
+            bunx  nx run-many -t build --projects="tag:lib:*"
+            bunx  nx run-many -t build --projects="tag:data:*"
+            bunx  nx run-many -t build --projects="tag:app:*"
+            bunx  nx run-many -t lint
+            bunx  nx run-many -t test
 
       - name: Publish
         run: bunx nx release publish --tag latest

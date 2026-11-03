@@ -73,7 +73,6 @@
     "@aenode/contact-db": "workspace:*",
     "@aenode/nest": "workspace:*",
     "@aenode/nest-boot": "workspace:*",
-    "@aenode/nest-prisma": "workspace:*",
-    "@aenode/prop": "workspace:*"
+    "@aenode/nest-prisma": "workspace:*"
   }
 }

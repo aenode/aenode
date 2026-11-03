@@ -3,9 +3,16 @@ generator client {
   output   = "../src/generated/prisma"
 }
 
+generator nest {
+  provider = "aenode-prisma-nest"
+}
+
 datasource db {
   provider = "postgresql"
 }
+
+
+
 
 model User {
   id   Int    @id @default(autoincrement())

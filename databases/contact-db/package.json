@@ -60,6 +60,12 @@
       "types": "./dist/generated/prisma/enums.d.ts",
       "import": "./dist/generated/prisma/enums.js",
       "default": "./dist/generated/prisma/enums.js"
+    },
+    "./nest": {
+      "bun": "./src/generated/nest/index.ts",
+      "types": "./dist/generated/nest/index.d.ts",
+      "import": "./dist/generated/nest/index.js",
+      "default": "./dist/generated/nest/index.js"
     }
   },
   "files": [
@@ -89,6 +95,10 @@
     }
   },
   "dependencies": {
+    "@aenode/prop": "workspace:*",
     "@swc/helpers": "~0.5.18"
+  },
+  "devDependencies": {
+    "@aenode/prisma-plugin": "workspace:*"
   }
 }

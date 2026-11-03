@@ -4,6 +4,11 @@
       "factory": "./dist/project/project.js",
       "schema": "./dist/project/schema.json",
       "description": "project generator"
+    },
+    "prisma-module": {
+      "factory": "./dist/prisma-module/prisma-module.js",
+      "schema": "./dist/prisma-module/schema.json",
+      "description": "prisma-module generator"
     }
   }
 }

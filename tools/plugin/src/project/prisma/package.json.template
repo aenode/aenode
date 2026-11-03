@@ -33,10 +33,40 @@
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "bun": "./src/index.ts",
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "default": "./dist/index.js"
+      "bun": "./src/generated/prisma/client.ts",
+      "types": "./dist/generated/prisma/client.d.ts",
+      "import": "./dist/generated/prisma/client.js",
+      "default": "./dist/generated/prisma/client.js"
+    },
+    "./client": {
+      "bun": "./src/generated/prisma/client.ts",
+      "types": "./dist/generated/prisma/client.d.ts",
+      "import": "./dist/generated/prisma/client.js",
+      "default": "./dist/generated/prisma/client.js"
+    },
+    "./browser": {
+      "bun": "./src/generated/prisma/browser.ts",
+      "types": "./dist/generated/prisma/browser.d.ts",
+      "import": "./dist/generated/prisma/browser.js",
+      "default": "./dist/generated/prisma/browser.js"
+    },
+    "./models": {
+      "bun": "./src/generated/prisma/models.ts",
+      "types": "./dist/generated/prisma/models.d.ts",
+      "import": "./dist/generated/prisma/models.js",
+      "default": "./dist/generated/prisma/models.js"
+    },
+    "./enums": {
+      "bun": "./src/generated/prisma/enums.ts",
+      "types": "./dist/generated/prisma/enums.d.ts",
+      "import": "./dist/generated/prisma/enums.js",
+      "default": "./dist/generated/prisma/enums.js"
+    },
+    "./nest": {
+      "bun": "./src/generated/nest/index.ts",
+      "types": "./dist/generated/nest/index.d.ts",
+      "import": "./dist/generated/nest/index.js",
+      "default": "./dist/generated/nest/index.js"
     }
   },
   "files": [
@@ -63,5 +93,8 @@
   },
   "dependencies": {
     "@swc/helpers": "~0.5.18"
+  },
+  "devDependencies": {
+    "@aenode/prisma-plugin": "workspace:*"
   }
 }

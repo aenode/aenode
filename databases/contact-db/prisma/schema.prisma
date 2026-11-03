@@ -7,6 +7,15 @@ datasource db {
   provider = "postgresql"
 }
 
+generator nest {
+  provider = "aenode-prisma-nest"
+}
+
+enum Gender {
+  Male
+  Female
+}
+
 model Phone {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now()) @map("created_at")
@@ -16,7 +25,7 @@ model Phone {
   phone String
 
   user   User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  userId Int
+  userId Int  @map("user_id")
 
   @@unique([userId, phone])
 }
@@ -30,9 +39,10 @@ model Email {
   email String
 
   user   User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  userId Int
+  userId Int  @map("user_id")
 
   @@unique([userId, email])
+  @@map("emails")
 }
 
 model Country {
@@ -79,7 +89,7 @@ model Address {
   line1      String
   line2      String?
   city       String
-  postalCode String
+  postalCode String  @map("postal_code")
   note       String?
 
   country     Country @relation(fields: [countryCode], references: [code], onDelete: Restrict, onUpdate: Cascade)
@@ -89,7 +99,7 @@ model Address {
   subdivisionCode String?      @map("subdivision_code")
 
   user   User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  userId Int
+  userId Int  @map("user_id")
 
   @@unique([userId, line1])
   @@index([countryCode])
@@ -98,8 +108,9 @@ model Address {
 }
 
 model User {
-  id        Int       @id @default(autoincrement())
-  uuid      String    @unique @db.Uuid
+  id   Int    @id @default(autoincrement())
+  uuid String @unique @db.Uuid
+
   addresses Address[]
   emails    Email[]
   phones    Phone[]

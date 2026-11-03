@@ -1,0 +1,11 @@
+import { Prisma } from '<%- project %>-db';
+import { PrismaClientModule } from '@aenode/nest-prisma';
+import { Module } from '@aenode/nest/common';
+import { <%- className %>Service } from './<%- fileName %>.service.js';
+
+@Module({
+  imports: [PrismaClientModule.feature([Prisma.ModelName.<%- className %>])],
+  providers: [<%- className %>Service],
+  exports: [<%- className %>Service],
+})
+export class <%- className %>DataModule {}

@@ -36,6 +36,12 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js"
+    },
+    "./contact-db": {
+      "bun": "./src/contact-db/index.ts",
+      "types": "./dist/contact-db/index.d.ts",
+      "import": "./dist/contact-db/index.js",
+      "default": "./dist/contact-db/index.js"
     }
   },
   "files": [
@@ -57,6 +63,7 @@
     }
   },
   "dependencies": {
+    "@aenode/contact-db": "workspace:*",
     "@swc/helpers": "~0.5.18"
   }
 }

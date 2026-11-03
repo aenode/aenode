@@ -6,7 +6,7 @@
 
 ## @aenode/contact-db
 
-- [ ] Add project description
+Contact database
 
 ## Install
 
