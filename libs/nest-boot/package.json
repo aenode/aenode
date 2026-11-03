@@ -49,7 +49,7 @@
     "sourceRoot": "libs/nest-boot/src",
     "projectType": "library",
     "tags": [
-      "lib:core"
+      "lib:module"
     ],
     "targets": {
       "build": {},

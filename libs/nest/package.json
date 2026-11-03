@@ -144,7 +144,7 @@
     "sourceRoot": "libs/nest/src",
     "projectType": "library",
     "tags": [
-      "lib:exports"
+      "lib:shared"
     ],
     "targets": {
       "build": {},

@@ -45,7 +45,7 @@
     "sourceRoot": "libs/types/src",
     "projectType": "library",
     "tags": [
-      "lib:common"
+      "lib:shared"
     ],
     "targets": {
       "build": {},

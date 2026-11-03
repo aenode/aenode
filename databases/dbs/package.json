@@ -1,0 +1,62 @@
+{
+  "name": "@aenode/dbs",
+  "version": "0.0.1",
+  "description": "Centeralize the databaser projects in a single project.",
+  "author": {
+    "name": "Ahmet Emrebas",
+    "email": "aenode+aenode+aenode-dbs@proton.me",
+    "url": "https://aenode.github.io/#profile"
+  },
+  "bin": {
+    "aenode-dbs": "./bin/dbs.mjs"
+  },
+  "funding": "https://cash.app/$puqlib",
+  "homepage": "https://aenode.github.io/aenode/databases/dbs",
+  "repository": {
+    "directory": "databases/dbs",
+    "type": "github",
+    "url": "https://github.com/aenode/aenode/tree/main/databases/dbs"
+  },
+  "icon": "https://aenode.github.io/aenode/databases/dbs/assets/favicon.svg",
+  "keywords": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "bun": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "assets",
+    "bin",
+    "dist",
+    "generators.json",
+    "!**/*.tsbuildinfo"
+  ],
+  "nx": {
+    "sourceRoot": "databases/dbs/src",
+    "projectType": "library",
+    "tags": [
+      "data:prisma"
+    ],
+    "targets": {
+      "build": {},
+      "doc": {}
+    }
+  },
+  "dependencies": {
+    "@swc/helpers": "~0.5.18"
+  }
+}

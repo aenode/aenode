@@ -23,12 +23,11 @@ export default [
             },
             {
               sourceTag: 'lib:*',
-              onlyDependOnLibsWithTags: ['lib:*'],
+              onlyDependOnLibsWithTags: ['lib:shared'],
             },
-
             {
               sourceTag: 'data:*',
-              onlyDependOnLibsWithTags: ['lib:*'],
+              onlyDependOnLibsWithTags: ['data:*', 'lib:*'],
             },
           ],
         },

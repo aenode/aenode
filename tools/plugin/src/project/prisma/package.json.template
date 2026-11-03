@@ -1,0 +1,67 @@
+{
+  "name": "<%- projectName %>",
+  "version": "<%- version %>",
+  "description": "<%- description %>",
+  "author": {
+    "name": "<%- authorName %>",
+    "email": "<%- email %>",
+    "url": "<%- profileUrl %>"
+  },
+  "bin": {
+    "<%- orgName %>-<%- fileName %>": "./bin/<%- fileName %>.mjs"
+  },
+  "funding": "<%- fundingUrl %>",
+  "homepage": "<%- homepageUrl %>",
+  "repository": {
+    "directory": "<%- directory %>",
+    "type": "github",
+    "url": "<%- repositoryUrl %>"
+  },
+  "icon": "<%- iconUrl %>",
+  "keywords": [
+    "database",
+    "prisma"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "bun": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "assets",
+    "bin",
+    "dist",
+    "prisma",
+    "!**/*.tsbuildinfo"
+  ],
+  "nx": {
+    "sourceRoot": "<%- directory %>/src",
+    "projectType": "library",
+    "targets": {
+      "build": {
+        "dependsOn": [
+          "prisma:generate"
+        ]
+      },
+      "doc": {},
+      "prisma:generate": {},
+      "prisma:migrate": {},
+      "prisma:reset": {}
+    }
+  },
+  "dependencies": {
+    "@swc/helpers": "~0.5.18"
+  }
+}

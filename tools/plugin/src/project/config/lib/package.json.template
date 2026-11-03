@@ -49,7 +49,7 @@
     "sourceRoot": "<%- directory %>/src",
     "projectType": "library",
     "tags": [
-      "lib>:<%- fileName %>"
+      "lib:<%- fileName %>"
     ],
     "targets": {
       "build": {},

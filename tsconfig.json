@@ -10,28 +10,34 @@
       "path": "./apps/aenode"
     },
     {
-      "path": "./libs/nest"
-    },
-    {
-      "path": "./tools/plugin"
-    },
-    {
-      "path": "./libs/names"
-    },
-    {
       "path": "./databases/contact-db"
+    },
+    {
+      "path": "./databases/dbs"
     },
     {
       "path": "./libs/constants"
     },
     {
+      "path": "./libs/names"
+    },
+    {
+      "path": "./libs/nest-auth"
+    },
+    {
       "path": "./libs/nest-boot"
+    },
+    {
+      "path": "./libs/nest"
+    },
+    {
+      "path": "./libs/types"
     },
     {
       "path": "./tools/cli"
     },
     {
-      "path": "./libs/types"
-    }
+      "path": "./tools/plugin"
+    },
   ]
 }

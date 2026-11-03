@@ -69,23 +69,21 @@
         "@aenode/nest": "workspace:*",
       },
     },
-    "apps/hello": {
-      "name": "@aenode/hello",
-      "version": "0.0.1",
-      "bin": {
-        "aenode-hello": "./bin/hello.mjs",
-      },
-      "dependencies": {
-        "@aenode/constants": "workspace:*",
-        "@aenode/nest": "workspace:*",
-        "@aenode/nest-boot": "workspace:*",
-      },
-    },
     "databases/contact-db": {
       "name": "@aenode/contact-db",
       "version": "0.0.30",
       "bin": {
         "aenode-contact-db": "./bin/contact-db.mjs",
+      },
+      "dependencies": {
+        "@swc/helpers": "~0.5.18",
+      },
+    },
+    "databases/dbs": {
+      "name": "@aenode/dbs",
+      "version": "0.0.1",
+      "bin": {
+        "aenode-dbs": "./bin/dbs.mjs",
       },
       "dependencies": {
         "@swc/helpers": "~0.5.18",
@@ -136,6 +134,19 @@
       "devDependencies": {
         "@types/express": "^5.0.6",
         "@types/supertest": "^7.2.1",
+      },
+    },
+    "libs/nest-auth": {
+      "name": "@aenode/nest-auth",
+      "version": "0.0.1",
+      "bin": {
+        "aenode-nest-auth": "./bin/nest-auth.mjs",
+      },
+      "dependencies": {
+        "@aenode/constants": "workspace:*",
+        "@aenode/nest": "workspace:*",
+        "@aenode/types": "workspace:*",
+        "@swc/helpers": "~0.5.18",
       },
     },
     "libs/nest-boot": {
@@ -198,11 +209,13 @@
 
     "@aenode/contact-db": ["@aenode/contact-db@workspace:databases/contact-db"],
 
-    "@aenode/hello": ["@aenode/hello@workspace:apps/hello"],
+    "@aenode/dbs": ["@aenode/dbs@workspace:databases/dbs"],
 
     "@aenode/names": ["@aenode/names@workspace:libs/names"],
 
     "@aenode/nest": ["@aenode/nest@workspace:libs/nest"],
+
+    "@aenode/nest-auth": ["@aenode/nest-auth@workspace:libs/nest-auth"],
 
     "@aenode/nest-boot": ["@aenode/nest-boot@workspace:libs/nest-boot"],
 

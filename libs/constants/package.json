@@ -49,7 +49,7 @@
     "sourceRoot": "libs/constants/src",
     "projectType": "library",
     "tags": [
-      "lib:common"
+      "lib:shared"
     ],
     "targets": {
       "build": {},
