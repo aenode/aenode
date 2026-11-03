@@ -1,0 +1,79 @@
+{
+  "name": "@aenode/contact",
+  "version": "0.0.1",
+  "description": "- [ ] Add project description",
+  "author": {
+    "name": "Ahmet Emrebas",
+    "email": "aenode+aenode+aenode-contact@proton.me",
+    "url": "https://aenode.github.io/#profile"
+  },
+  "bin": {
+    "aenode-contact": "./bin/contact.mjs"
+  },
+  "funding": "https://cash.app/$puqlib",
+  "homepage": "https://aenode.github.io/aenode/apps/contact",
+  "repository": {
+    "directory": "apps/contact",
+    "type": "github",
+    "url": "https://github.com/aenode/aenode/tree/main/apps/contact"
+  },
+  "icon": "https://aenode.github.io/aenode/apps/contact/assets/favicon.svg",
+  "keywords": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "bun": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./api": {
+      "bun": "./src/api/index.ts",
+      "types": "./dist/api/index.d.ts",
+      "import": "./dist/api/index.js",
+      "default": "./dist/api/index.js"
+    },
+    "./data": {
+      "bun": "./src/data/index.ts",
+      "types": "./dist/data/index.d.ts",
+      "import": "./dist/data/index.js",
+      "default": "./dist/data/index.js"
+    }
+  },
+  "files": [
+    "assets",
+    "bin",
+    "dist",
+    "!**/*.tsbuildinfo"
+  ],
+  "nx": {
+    "sourceRoot": "apps/contact/src",
+    "projectType": "library",
+    "tags": [
+      "app:nest"
+    ],
+    "targets": {
+      "build": {},
+      "serve": {},
+      "doc": {}
+    }
+  },
+  "dependencies": {
+    "@aenode/constants": "workspace:*",
+    "@aenode/contact-db": "workspace:*",
+    "@aenode/nest": "workspace:*",
+    "@aenode/nest-boot": "workspace:*",
+    "@aenode/nest-prisma": "workspace:*",
+    "@aenode/prop": "workspace:*"
+  }
+}

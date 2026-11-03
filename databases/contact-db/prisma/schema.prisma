@@ -15,7 +15,10 @@ model Phone {
 
   phone String
 
-  userPhones UserPhone[]
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId Int
+
+  @@unique([userId, phone])
 }
 
 model Email {
@@ -26,7 +29,10 @@ model Email {
 
   email String
 
-  userEmails UserEmail[]
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId Int
+
+  @@unique([userId, email])
 }
 
 model Country {
@@ -37,7 +43,7 @@ model Country {
 
   name      String @unique
   code      String @unique
-  phoneCode String @unique @map("phone_code")
+  phoneCode String @map("phone_code")
 
   subdivisions Subdivision[]
   addresses    Address[]
@@ -45,6 +51,7 @@ model Country {
   @@map("countries")
 }
 
+// subdivisionCode
 model Subdivision {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now()) @map("created_at")
@@ -70,77 +77,30 @@ model Address {
   isActive  Boolean  @default(true) @map("is_active")
 
   line1      String
-  line2      String
+  line2      String?
   city       String
   postalCode String
   note       String?
 
-  country     Country @relation(fields: [countryCode], references: [code], onDelete: Cascade, onUpdate: Cascade)
+  country     Country @relation(fields: [countryCode], references: [code], onDelete: Restrict, onUpdate: Cascade)
   countryCode String  @map("country_code")
 
-  subdivision     Subdivision @relation(fields: [subdivitionCode], references: [code], onDelete: Cascade, onUpdate: Cascade)
-  subdivitionCode String      @map("subdivition_code")
+  subdivision     Subdivision? @relation(fields: [subdivisionCode], references: [code], onDelete: SetNull, onUpdate: Cascade)
+  subdivisionCode String?      @map("subdivision_code")
 
-  userAddresses UserAddress[]
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId Int
 
+  @@unique([userId, line1])
   @@index([countryCode])
-  @@index([subdivitionCode])
+  @@index([subdivisionCode])
   @@map("addresses")
 }
 
-model UserEmail {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-  isActive  Boolean  @default(true) @map("is_active")
-
-  user   User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  userId Int
-
-  email   Email @relation(fields: [emailId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  emailId Int
-
-  @@unique([userId, emailId])
-  @@map("user_emails")
-}
-
-model UserAddress {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-  isActive  Boolean  @default(true) @map("is_active")
-
-  user   User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  userId Int  @map("user_id")
-
-  address   Address @relation(fields: [addressId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  addressId Int     @map("address_id")
-
-  @@unique([userId, addressId])
-  @@map("user_addresses")
-}
-
-model UserPhone {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-  isActive  Boolean  @default(true) @map("is_active")
-
-  user   User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  userId Int
-
-  phone   Phone @relation(fields: [phoneId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  phoneId Int
-
-  @@unique([userId, phoneId])
-  @@map("user_phones")
-}
-
 model User {
-  id   Int    @id @default(autoincrement())
-  uuid String @unique @db.Uuid
-
-  userEmails    UserEmail[]
-  userAddresses UserAddress[]
-  userPhones    UserPhone[]
+  id        Int       @id @default(autoincrement())
+  uuid      String    @unique @db.Uuid
+  addresses Address[]
+  emails    Email[]
+  phones    Phone[]
 }

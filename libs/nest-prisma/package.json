@@ -1,0 +1,67 @@
+{
+  "name": "@aenode/nest-prisma",
+  "version": "0.0.1",
+  "description": "Nestjs prisma client module",
+  "author": {
+    "name": "Ahmet Emrebas",
+    "email": "aenode+aenode+aenode-nest-prisma@proton.me",
+    "url": "https://aenode.github.io/#profile"
+  },
+  "bin": {
+    "aenode-nest-prisma": "./bin/nest-prisma.mjs"
+  },
+  "funding": "https://cash.app/$puqlib",
+  "homepage": "https://aenode.github.io/aenode/libs/nest-prisma",
+  "repository": {
+    "directory": "libs/nest-prisma",
+    "type": "github",
+    "url": "https://github.com/aenode/aenode/tree/main/libs/nest-prisma"
+  },
+  "icon": "https://aenode.github.io/aenode/libs/nest-prisma/assets/favicon.svg",
+  "keywords": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "bun": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "assets",
+    "bin",
+    "dist",
+    "generators.json",
+    "!**/*.tsbuildinfo"
+  ],
+  "nx": {
+    "sourceRoot": "libs/nest-prisma/src",
+    "projectType": "library",
+    "tags": [
+      "lib:nest-prisma"
+    ],
+    "targets": {
+      "build": {},
+      "doc": {}
+    }
+  },
+  "dependencies": {
+    "@aenode/constants": "workspace:*",
+    "@aenode/names": "workspace:*",
+    "@aenode/nest": "workspace:*",
+    "@prisma/adapter-pg": "^7.10.1",
+    "@prisma/client": "7.8.0",
+    "@swc/helpers": "~0.5.18"
+  }
+}

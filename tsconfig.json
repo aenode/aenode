@@ -39,5 +39,14 @@
     {
       "path": "./tools/plugin"
     },
+    {
+      "path": "./apps/contact"
+    },
+    {
+      "path": "./libs/nest-prisma"
+    },
+    {
+      "path": "./libs/prop"
+    }
   ]
 }

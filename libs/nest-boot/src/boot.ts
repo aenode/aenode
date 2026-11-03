@@ -1,5 +1,10 @@
 import { Env } from '@aenode/constants';
-import { Logger, type Type } from '@aenode/nest/common';
+import {
+  Logger,
+  UnprocessableEntityException,
+  ValidationPipe,
+  type Type,
+} from '@aenode/nest/common';
 import { ConfigService } from '@aenode/nest/config';
 import { NestFactory } from '@aenode/nest/core';
 import { DocumentBuilder, SwaggerModule } from '@aenode/nest/swagger';
@@ -40,6 +45,26 @@ export async function boot(options: BootOptions) {
   app.enableCors({ origins: [allowedOrigins.split(',')] });
   app.setGlobalPrefix(apiPrefix);
   app.enableShutdownHooks();
+
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+
+      transformOptions: {
+        excludeExtraneousValues: true,
+        exposeUnsetFields: false,
+        exposeDefaultValues: true,
+      },
+      validationError: { target: false, value: false },
+
+      exceptionFactory(cerrors) {
+        const errors = cerrors.flatMap((e) => {
+          return [e, ...(e.children ?? [])];
+        });
+        throw new UnprocessableEntityException({ errors });
+      },
+    }),
+  );
 
   swaggerIntegration: {
     const swaggerConfig = new DocumentBuilder();

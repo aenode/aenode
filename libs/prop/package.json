@@ -1,0 +1,63 @@
+{
+  "name": "@aenode/prop",
+  "version": "0.0.1",
+  "description": "- [ ] Add project description",
+  "author": {
+    "name": "Ahmet Emrebas",
+    "email": "aenode+aenode+aenode-prop@proton.me",
+    "url": "https://aenode.github.io/#profile"
+  },
+  "bin": {
+    "aenode-prop": "./bin/prop.mjs"
+  },
+  "funding": "https://cash.app/$puqlib",
+  "homepage": "https://aenode.github.io/aenode/libs/prop",
+  "repository": {
+    "directory": "libs/prop",
+    "type": "github",
+    "url": "https://github.com/aenode/aenode/tree/main/libs/prop"
+  },
+  "icon": "https://aenode.github.io/aenode/libs/prop/assets/favicon.svg",
+  "keywords": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "bun": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "assets",
+    "bin",
+    "dist",
+    "generators.json",
+    "!**/*.tsbuildinfo"
+  ],
+  "nx": {
+    "sourceRoot": "libs/prop/src",
+    "projectType": "library",
+    "tags": [
+      "lib:prop"
+    ],
+    "targets": {
+      "build": {},
+      "doc": {}
+    }
+  },
+  "dependencies": {
+    "@aenode/nest": "workspace:*",
+    "@swc/helpers": "~0.5.18"
+  }
+}

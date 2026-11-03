@@ -1,5 +1,5 @@
 #!/usr/bin/env node
 
-import { bootstrap } from './app/bootstrap.js';
+import { bootstrap } from './api/bootstrap.js';
 
 bootstrap();
