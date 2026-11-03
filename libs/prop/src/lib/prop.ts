@@ -1,7 +1,14 @@
-import { ApiProperty, type ApiPropertyOptions } from '@aenode/nest/swagger';
+import { ApiProperty } from '@aenode/nest/swagger';
+import type { PropOptions } from './prop-options.js';
+import { PropValidation } from './prop-validation.js';
+import { toApiProeprtyOptions } from './to-api-property-optionts.js';
 
-export function Prop(options?: ApiPropertyOptions): PropertyDecorator {
+export function Prop(options?: PropOptions): PropertyDecorator {
   return (...args) => {
-    ApiProperty(options)(...args);
+    options ??= {};
+    const apiPropertyOptions = toApiProeprtyOptions(options, ...args);
+
+    PropValidation(options)(...args);
+    ApiProperty(apiPropertyOptions)(...args);
   };
 }

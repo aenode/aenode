@@ -7,9 +7,6 @@
     "email": "<%- email %>",
     "url": "<%- profileUrl %>"
   },
-  "bin": {
-    "<%- orgName %>-<%- fileName %>": "./bin/<%- fileName %>.mjs"
-  },
   "funding": "<%- fundingUrl %>",
   "homepage": "<%- homepageUrl %>",
   "repository": {
@@ -24,6 +21,9 @@
   "publishConfig": {
     "access": "public",
     "tag": "latest"
+  },
+  "bin": {
+    "<%- orgName %>-<%- fileName %>": "./bin/<%- fileName %>.mjs"
   },
   "type": "module",
   "main": "./dist/index.js",

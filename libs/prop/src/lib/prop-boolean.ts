@@ -1,8 +1,46 @@
-import { ApiProperty } from '@aenode/nest/swagger';
-import type { PropOptions } from './prop-options.js';
-
-export function PropBoolean(options?: PropOptions): PropertyDecorator {
+import { Transform } from '@aenode/nest/transformer';
+import { IsBoolean, type ValidationOptions } from '@aenode/nest/validator';
+import { __PropCommon } from './prop-common.js';
+import type { BooleanValidationOptions } from './prop-options.js';
+/**
+ * Boolean property validation decorator
+ *
+ * @param options boolean validation options
+ * @returns a property decorator
+ */
+export function PropBoolean(
+  options: BooleanValidationOptions,
+): PropertyDecorator {
   return (...args) => {
-    ApiProperty(options)(...args);
+    __PropBoolean(options)(...args);
+  };
+}
+
+/**
+ * Boolean property validation decorator
+ *
+ * @param options boolean validation options
+ * @returns a property decorator
+ */
+export function __PropBoolean(
+  options: BooleanValidationOptions,
+  validationOptions?: ValidationOptions,
+): PropertyDecorator {
+  return (...args) => {
+    const inferedType = Reflect.getMetadata('design:type', ...args);
+    validationOptions ??= {
+      each: inferedType === Array,
+      groups: options?.groups,
+    };
+    Transform(({ value }) => {
+      if (value === 'true') {
+        return true;
+      } else if (value === 'false') {
+        return false;
+      }
+      return value;
+    })(...args);
+    __PropCommon(options, validationOptions)(...args);
+    IsBoolean(validationOptions)(...args);
   };
 }

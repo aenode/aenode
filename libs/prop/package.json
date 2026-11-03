@@ -7,9 +7,6 @@
     "email": "aenode+aenode+aenode-prop@proton.me",
     "url": "https://aenode.github.io/#profile"
   },
-  "bin": {
-    "aenode-prop": "./bin/prop.mjs"
-  },
   "funding": "https://cash.app/$puqlib",
   "homepage": "https://aenode.github.io/aenode/libs/prop",
   "repository": {
@@ -24,6 +21,9 @@
   "publishConfig": {
     "access": "public",
     "tag": "latest"
+  },
+  "bin": {
+    "aenode-prop": "./bin/prop.mjs"
   },
   "type": "module",
   "main": "./dist/index.js",
@@ -49,7 +49,7 @@
     "sourceRoot": "libs/prop/src",
     "projectType": "library",
     "tags": [
-      "lib:prop"
+      "lib:shared"
     ],
     "targets": {
       "build": {},

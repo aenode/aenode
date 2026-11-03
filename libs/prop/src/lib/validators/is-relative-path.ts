@@ -1,0 +1,31 @@
+// import { registerDecorator, type ValidationOptions } from 'class-validator';
+import {
+  type ValidationOptions,
+  registerDecorator,
+} from '@aenode/nest/validator';
+import path from 'node:path';
+
+export function IsRelativePath(
+  validationOptions?: ValidationOptions,
+): PropertyDecorator {
+  return (object, propertyName) => {
+    registerDecorator({
+      name: 'isRelativePath',
+      target: object.constructor,
+      propertyName: propertyName as string,
+      options: {
+        ...validationOptions,
+        message(args) {
+          return `${args.property} should be a realative path`;
+        },
+      },
+      validator: {
+        validate(value: unknown) {
+          if (typeof value !== 'string') return false;
+
+          return !path.isAbsolute(value);
+        },
+      },
+    });
+  };
+}

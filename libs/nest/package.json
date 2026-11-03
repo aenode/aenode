@@ -144,6 +144,12 @@
       "types": "./dist/transformer.d.ts",
       "import": "./dist/transformer.js",
       "default": "./dist/transformer.js"
+    },
+    "./faker": {
+      "bun": "./src/faker.ts",
+      "types": "./dist/faker.d.ts",
+      "import": "./dist/faker.js",
+      "default": "./dist/faker.js"
     }
   },
   "files": [
@@ -164,6 +170,7 @@
     }
   },
   "dependencies": {
+    "@faker-js/faker": "^10.6.0",
     "@nestjs/cache-manager": "^12.0.2",
     "@nestjs/common": "^12.3.2",
     "@nestjs/config": "^12.0.1",

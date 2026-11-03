@@ -1,0 +1,34 @@
+import {
+  type ValidationOptions,
+  registerDecorator,
+} from '@aenode/nest/validator';
+
+export function LessThan(
+  properties: string[],
+  validationOptions?: ValidationOptions,
+): PropertyDecorator {
+  return (object, propertyName) => {
+    registerDecorator({
+      name: 'lessThan',
+      target: object.constructor,
+      propertyName: propertyName as string,
+      options: {
+        ...validationOptions,
+        message(args) {
+          return `${args.property} should be less than ${properties.join(', ')}`;
+        },
+      },
+      validator: {
+        validate(value: unknown, args) {
+          if (value !== undefined && value !== null) {
+            return properties
+              .map((e: string) => (args?.object as { [e]: unknown })?.[e])
+              .filter((e) => e !== undefined && e !== null)
+              .every((e) => value < e);
+          }
+          return true;
+        },
+      },
+    });
+  };
+}

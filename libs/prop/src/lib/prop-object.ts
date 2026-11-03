@@ -1,8 +1,72 @@
-import { ApiProperty } from '@aenode/nest/swagger';
-import type { PropOptions } from './prop-options.js';
+import { Type } from '@aenode/nest/transformer';
+import {
+  type ValidationOptions,
+  IsObject,
+  ValidateNested,
+} from '@aenode/nest/validator';
+import { JsonTransformer } from './json-transformer.js';
+import { __PropCommon } from './prop-common.js';
+import type { ObjectValidationOptions } from './prop-options.js';
+import { MaxProperties } from './validators/max-properties.js';
+import { MinProperties } from './validators/min-properties.js';
 
-export function PropObject(options?: PropOptions): PropertyDecorator {
+/**
+ * Object property validation decorator
+ *
+ * @param options object validation options
+ * @returns a property decorator
+ */
+export function PropObject(
+  options: ObjectValidationOptions &
+    Required<Pick<ObjectValidationOptions, 'type'>>,
+): PropertyDecorator {
   return (...args) => {
-    ApiProperty(options)(...args);
+    __PropObject(options)(...args);
+  };
+}
+
+/**
+ * Object property validation decorator
+ *
+ * @param options object validation options {@link ObjectValidationOptions}
+ * @param validationOptions class-validator validation options
+ * @returns a validatino decorator
+ */
+export function __PropObject(
+  options?: ObjectValidationOptions,
+  validationOptions?: ValidationOptions,
+): PropertyDecorator {
+  return (...args) => {
+    options ??= {};
+    const inferedType = Reflect.getMetadata('design:type', ...args);
+    const isArrayType = inferedType === Array;
+
+    if (isArrayType) {
+      if (!options.type) {
+        throw new Error('Could not resolve the object type');
+      }
+    } else {
+      options.type = () => inferedType;
+    }
+
+    validationOptions ??= {
+      each: isArrayType,
+      groups: options?.groups,
+    };
+
+    if (options.minProperties !== undefined) {
+      MinProperties(options.minProperties, validationOptions)(...args);
+    }
+
+    if (options.maxProperties !== undefined) {
+      MaxProperties(options.maxProperties, validationOptions)(...args);
+    }
+
+    __PropCommon(options, validationOptions)(...args);
+
+    JsonTransformer()(...args);
+    IsObject(validationOptions)(...args);
+    Type(options.type)(...args);
+    ValidateNested(validationOptions)(...args);
   };
 }

@@ -1,0 +1,50 @@
+import { faker } from '@aenode/nest/faker';
+import { v4, v7 } from '@aenode/nest/uuid';
+import type { PropValidationOptions } from './prop-options.js';
+import { PropValidation } from './prop-validation.js';
+import { transformAndValidate } from './test-helpers.js';
+
+describe('String Array Validation ', () => {
+  it.each`
+    options                                                          | value                                                               | errors
+    ${{ type: String } as PropValidationOptions}                     | ${{ value: undefined }}                                             | ${[]}
+    ${{ type: String } as PropValidationOptions}                     | ${{ value: null }}                                                  | ${[]}
+    ${{ type: String, required: true } as PropValidationOptions}     | ${{ value: undefined }}                                             | ${['isString', 'isArray']}
+    ${{ type: String, required: true } as PropValidationOptions}     | ${{ value: null }}                                                  | ${['isString', 'isArray']}
+    ${{ type: String, required: true } as PropValidationOptions}     | ${{ value: [undefined] }}                                           | ${['isString']}
+    ${{ type: String, required: true } as PropValidationOptions}     | ${{ value: [null] }}                                                | ${['isString']}
+    ${{ type: String } as PropValidationOptions}                     | ${{ value: [''] }}                                                  | ${[]}
+    ${{ type: String } as PropValidationOptions}                     | ${{ value: [' '] }}                                                 | ${[]}
+    ${{ type: String, minLength: 5 } as PropValidationOptions}       | ${{ value: [faker.string.sample(5)] }}                              | ${[]}
+    ${{ type: String, maxLength: 5 } as PropValidationOptions}       | ${{ value: [faker.string.sample(5)] }}                              | ${[]}
+    ${{ type: String, format: 'password' } as PropValidationOptions} | ${{ value: ['!Password123.'] }}                                     | ${[]}
+    ${{ type: String, format: 'email' } as PropValidationOptions}    | ${{ value: [faker.internet.email()] }}                              | ${[]}
+    ${{ type: String, format: 'uuid' } as PropValidationOptions}     | ${{ value: [v4()] }}                                                | ${[]}
+    ${{ type: String, format: 'uuid4' } as PropValidationOptions}    | ${{ value: [v4()] }}                                                | ${[]}
+    ${{ type: String, format: 'uuid7' } as PropValidationOptions}    | ${{ value: [v7()] }}                                                | ${[]}
+    ${{ type: String, format: 'url' } as PropValidationOptions}      | ${{ value: [faker.internet.url()] }}                                | ${[]}
+    ${{ type: String, format: 'data-uri' } as PropValidationOptions} | ${{ value: [faker.image.dataUri()] }}                               | ${[]}
+    ${{ type: String, format: 'ean' } as PropValidationOptions}      | ${{ value: [faker.commerce.isbn({ variant: 13, separator: '' })] }} | ${[]}
+    ${{ type: String, format: 'password' } as PropValidationOptions} | ${{ value: ['some'] }}                                              | ${['isStrongPassword']}
+    ${{ type: String, format: 'email' } as PropValidationOptions}    | ${{ value: ['some'] }}                                              | ${['isEmail']}
+    ${{ type: String, format: 'uuid' } as PropValidationOptions}     | ${{ value: ['some'] }}                                              | ${['isUuid']}
+    ${{ type: String, format: 'uuid4' } as PropValidationOptions}    | ${{ value: ['some'] }}                                              | ${['isUuid']}
+    ${{ type: String, format: 'uuid7' } as PropValidationOptions}    | ${{ value: ['some'] }}                                              | ${['isUuid']}
+    ${{ type: String, format: 'url' } as PropValidationOptions}      | ${{ value: ['some'] }}                                              | ${['isUrl']}
+    ${{ type: String, format: 'data-uri' } as PropValidationOptions} | ${{ value: ['some'] }}                                              | ${['isDataURI']}
+    ${{ type: String, format: 'ean' } as PropValidationOptions}      | ${{ value: ['some'] }}                                              | ${['isEAN']}
+    ${{ type: String, minLength: 5 } as PropValidationOptions}       | ${{ value: [faker.string.sample(4)] }}                              | ${['minLength']}
+    ${{ type: String, maxLength: 5 } as PropValidationOptions}       | ${{ value: [faker.string.sample(6)] }}                              | ${['maxLength']}
+  `(
+    'PropValidation($options) should validate $value',
+    ({ options, value, errors }) => {
+      class Sample {
+        @PropValidation(options) value: string[];
+      }
+
+      const foundConstraints = transformAndValidate(Sample, value);
+      expect(foundConstraints.sort()).toEqual(errors.sort());
+      expect(foundConstraints.sort()).toEqual(errors.sort());
+    },
+  );
+});

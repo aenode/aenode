@@ -10,7 +10,10 @@
       "vitest"
     ]
   },
-  "include": ["vitest.config.mts", "src/**/*.spec.ts"],
+  "include": [
+    "vitest.config.mts",
+    "src/**/*.spec.ts"
+  ],
   "references": [
     {
       "path": "./tsconfig.lib.json"
