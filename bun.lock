@@ -81,6 +81,8 @@
         "@aenode/nest": "workspace:*",
         "@aenode/nest-boot": "workspace:*",
         "@aenode/nest-prisma": "workspace:*",
+        "@aenode/prop": "0.0.1",
+        "@prisma/client": "7.8.0",
       },
     },
     "databases/contact-db": {
@@ -91,6 +93,7 @@
       },
       "dependencies": {
         "@aenode/prop": "workspace:*",
+        "@prisma/client": "7.8.0",
         "@swc/helpers": "~0.5.18",
       },
       "devDependencies": {
@@ -180,6 +183,7 @@
       "dependencies": {
         "@aenode/constants": "workspace:*",
         "@aenode/nest": "workspace:*",
+        "@aenode/prop": "workspace:*",
         "@swc/helpers": "~0.5.18",
       },
     },

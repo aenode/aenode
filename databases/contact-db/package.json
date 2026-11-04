@@ -96,6 +96,7 @@
   },
   "dependencies": {
     "@aenode/prop": "workspace:*",
+    "@prisma/client": "7.8.0",
     "@swc/helpers": "~0.5.18"
   },
   "devDependencies": {

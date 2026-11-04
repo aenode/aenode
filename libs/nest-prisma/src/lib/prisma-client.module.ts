@@ -9,6 +9,7 @@ import {
   getPrismaDelegateToken,
   providePrismaDelegate,
 } from './prisma-delegate.provider.js';
+
 @Module({})
 export class PrismaClientModule {
   static register(

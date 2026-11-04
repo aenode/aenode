@@ -59,6 +59,7 @@
   "dependencies": {
     "@aenode/constants": "workspace:*",
     "@aenode/nest": "workspace:*",
+    "@aenode/prop": "workspace:*",
     "@swc/helpers": "~0.5.18"
   }
 }

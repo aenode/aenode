@@ -28,11 +28,28 @@ bunx nx g @aenode/plugin:project nest apps/hello-api --orgName="aenode" --versio
 ## Examples 
 
 
-````ts 
+Generate project
 
-const message= 'Hello there'
+````ts 
+bunx nx g @aenode/plugin:project <projectType:lib|cli|plugin|nest> <directory>
 
 ````
+
+
+Generate nest prisma module 
+
+````
+bunx nx g @aenode/plugin:prisma-module <projectName> <resourceName>
+
+````
+
+Generate nest rest module 
+
+````
+bunx nx g @aenode/plugin:nest-module <projectName> <resourceName>
+
+````
+
 
 ---
 
