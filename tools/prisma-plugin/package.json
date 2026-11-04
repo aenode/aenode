@@ -50,7 +50,7 @@
     "sourceRoot": "tools/prisma-plugin/src",
     "projectType": "library",
     "tags": [
-      "lib:prisma-plugin"
+      "cli:cli"
     ],
     "targets": {
       "build": {},

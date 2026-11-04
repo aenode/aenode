@@ -5,9 +5,13 @@ import type { Reflector } from '@aenode/nest/core';
 /**
  * Mark the target resource as public which will bypass the authentication
  *
- * @returns Class/Method decorator
+ * @returns Class decorator
  */
-export const Public = () => SetMetadata(MetadataToken.PUBLIC, true);
+export function Public(): ClassDecorator {
+  return (...args) => {
+    SetMetadata(MetadataToken.PUBLIC, true)(...args);
+  };
+}
 
 /**
  * Check the resource is marked as public or not.
@@ -20,8 +24,8 @@ export function isPublic(
   context: ExecutionContext,
   reflector: Reflector,
 ): boolean {
-  return !!reflector.getAllAndOverride<boolean | undefined>(
+  return !!reflector.get<boolean | undefined>(
     MetadataToken.PUBLIC,
-    [context.getHandler(), context.getClass()],
+    context.getClass(),
   );
 }

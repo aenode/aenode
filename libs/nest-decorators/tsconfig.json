@@ -1,0 +1,23 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "references": [
+    {
+      "path": "../types"
+    },
+    {
+      "path": "../nest"
+    },
+    {
+      "path": "../names"
+    },
+    {
+      "path": "../constants"
+    },
+    {
+      "path": "./tsconfig.lib.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    }
+  ]
+}

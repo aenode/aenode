@@ -16,6 +16,33 @@ enum Gender {
   Female
 }
 
+enum Day {
+  ANY
+  Monday
+  Tuesday
+  Wednesday
+  Thursday
+  Friday
+  Saturday
+  Sunday
+}
+
+enum Month {
+  ANY
+  January
+  February
+  March
+  April
+  May
+  June
+  July
+  August
+  September
+  October
+  November
+  December
+}
+
 model Phone {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now()) @map("created_at")

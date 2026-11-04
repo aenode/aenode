@@ -18,10 +18,14 @@ if ! echo "$COMMIT_MSG" | grep -qE "$PATTERN"; then
   exit 1
 fi
 
+
+bun install
 bunx  nx build prisma-plugin
 bunx  nx run-many -t prisma:generate
-bunx  nx run-many -t build
+bunx  nx run-many -t build --parallel=0
 bunx  nx run-many -t lint test
+
+
 
 
 

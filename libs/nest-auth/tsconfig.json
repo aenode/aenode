@@ -5,6 +5,9 @@
       "path": "../types"
     },
     {
+      "path": "../nest-decorators"
+    },
+    {
       "path": "../nest"
     },
     {

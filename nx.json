@@ -60,8 +60,7 @@
         "skipTypeCheck": true,
         "stripLeadingPaths": true,
         "clean": true
-      },
-      "parallelism": false
+      }
     },
     "serve": {
       "executor": "nx:run-commands",

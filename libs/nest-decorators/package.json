@@ -1,0 +1,66 @@
+{
+  "name": "@aenode/nest-decorators",
+  "version": "0.0.1",
+  "description": "Nestjs decorators",
+  "author": {
+    "name": "Ahmet Emrebas",
+    "email": "aenode+aenode+aenode-nest-decorators@proton.me",
+    "url": "https://aenode.github.io/#profile"
+  },
+  "funding": "https://cash.app/$puqlib",
+  "homepage": "https://aenode.github.io/aenode/libs/nest-decorators",
+  "repository": {
+    "directory": "libs/nest-decorators",
+    "type": "github",
+    "url": "https://github.com/aenode/aenode/tree/main/libs/nest-decorators"
+  },
+  "icon": "https://aenode.github.io/aenode/libs/nest-decorators/assets/favicon.svg",
+  "keywords": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
+  "bin": {
+    "aenode-nest-decorators": "./bin/nest-decorators.mjs"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "bun": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "assets",
+    "bin",
+    "dist",
+    "generators.json",
+    "!**/*.tsbuildinfo"
+  ],
+  "nx": {
+    "sourceRoot": "libs/nest-decorators/src",
+    "projectType": "library",
+    "tags": [
+      "lib:module"
+    ],
+    "targets": {
+      "build": {},
+      "doc": {}
+    }
+  },
+  "dependencies": {
+    "@aenode/constants": "workspace:*",
+    "@aenode/names": "workspace:*",
+    "@aenode/nest": "workspace:*",
+    "@aenode/types": "workspace:*",
+    "@swc/helpers": "~0.5.18"
+  }
+}

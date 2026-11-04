@@ -50,6 +50,9 @@
     },
     {
       "path": "./tools/prisma-plugin"
+    },
+    {
+      "path": "./libs/nest-decorators"
     }
   ]
 }

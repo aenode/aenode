@@ -57,9 +57,9 @@
     }
   },
   "dependencies": {
-    "@aenode/constants": "workspace:*",
     "@aenode/nest": "workspace:*",
-    "@swc/helpers": "~0.5.18",
-    "@aenode/types": "workspace:*"
+    "@aenode/nest-decorators": "workspace:*",
+    "@aenode/types": "workspace:*",
+    "@swc/helpers": "~0.5.18"
   }
 }

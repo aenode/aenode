@@ -170,6 +170,7 @@
       "dependencies": {
         "@aenode/constants": "workspace:*",
         "@aenode/nest": "workspace:*",
+        "@aenode/nest-decorators": "workspace:*",
         "@aenode/types": "workspace:*",
         "@swc/helpers": "~0.5.18",
       },
@@ -184,6 +185,20 @@
         "@aenode/constants": "workspace:*",
         "@aenode/nest": "workspace:*",
         "@aenode/prop": "workspace:*",
+        "@swc/helpers": "~0.5.18",
+      },
+    },
+    "libs/nest-decorators": {
+      "name": "@aenode/nest-decorators",
+      "version": "0.0.1",
+      "bin": {
+        "aenode-nest-decorators": "./bin/nest-decorators.mjs",
+      },
+      "dependencies": {
+        "@aenode/constants": "workspace:*",
+        "@aenode/names": "workspace:*",
+        "@aenode/nest": "workspace:*",
+        "@aenode/types": "workspace:*",
         "@swc/helpers": "~0.5.18",
       },
     },
@@ -288,6 +303,8 @@
     "@aenode/nest-auth": ["@aenode/nest-auth@workspace:libs/nest-auth"],
 
     "@aenode/nest-boot": ["@aenode/nest-boot@workspace:libs/nest-boot"],
+
+    "@aenode/nest-decorators": ["@aenode/nest-decorators@workspace:libs/nest-decorators"],
 
     "@aenode/nest-prisma": ["@aenode/nest-prisma@workspace:libs/nest-prisma"],
 

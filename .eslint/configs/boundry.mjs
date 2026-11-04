@@ -22,8 +22,12 @@ export default [
               onlyDependOnLibsWithTags: ['lib:*', 'cli:*'],
             },
             {
-              sourceTag: 'lib:*',
-              onlyDependOnLibsWithTags: ['lib:shared'],
+              sourceTag: 'lib:shared',
+              onlyDependOnLibsWithTags: ['lib:shared', 'lib:types'],
+            },
+            {
+              sourceTag: 'lib:module',
+              onlyDependOnLibsWithTags: ['lib:*'],
             },
             {
               sourceTag: 'data:*',

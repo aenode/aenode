@@ -49,7 +49,7 @@
     "sourceRoot": "libs/nest-prisma/src",
     "projectType": "library",
     "tags": [
-      "lib:nest-prisma"
+      "lib:module"
     ],
     "targets": {
       "build": {},

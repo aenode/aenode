@@ -33,16 +33,6 @@ export class EmailController {
   @ApiOkResponse({
     type: EmailReadDto,
     isArray: true,
-    example: [
-      new EmailReadDto({
-        id: 1,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        isActive: true,
-        email: 'email@email.com',
-        userId: 1,
-      }),
-    ],
     description: 'Success: List of emails',
   })
   @ApiUnprocessableEntityResponse({
