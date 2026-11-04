@@ -11,9 +11,6 @@
       "path": "../nest"
     },
     {
-      "path": "../constants"
-    },
-    {
       "path": "./tsconfig.lib.json"
     },
     {

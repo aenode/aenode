@@ -168,7 +168,6 @@
         "aenode-nest-auth": "./bin/nest-auth.mjs",
       },
       "dependencies": {
-        "@aenode/constants": "workspace:*",
         "@aenode/nest": "workspace:*",
         "@aenode/nest-decorators": "workspace:*",
         "@aenode/types": "workspace:*",
