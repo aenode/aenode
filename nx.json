@@ -52,13 +52,16 @@
       "executor": "@nx/js:swc",
       "dependsOn": ["build", "^build"],
       "outputs": ["{options.outputPath}"],
+      "syncGenerators": ["@nx/js:typescript-sync"],
       "options": {
         "outputPath": "{projectRoot}/dist",
         "main": "{projectRoot}/src/index.ts",
         "tsConfig": "{projectRoot}/tsconfig.lib.json",
-        "skipTypeCheck": false,
-        "stripLeadingPaths": true
-      }
+        "skipTypeCheck": true,
+        "stripLeadingPaths": true,
+        "clean": true
+      },
+      "parallelism": false
     },
     "serve": {
       "executor": "nx:run-commands",

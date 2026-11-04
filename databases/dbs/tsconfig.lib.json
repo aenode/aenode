@@ -8,5 +8,9 @@
   },
   "include": ["src/**/*.ts"],
   "exclude": ["src/**/*.spec.ts"],
-  "references": []
+  "references": [
+    {
+      "path": "../contact-db/tsconfig.lib.json"
+    }
+  ]
 }

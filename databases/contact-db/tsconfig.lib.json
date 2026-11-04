@@ -7,5 +7,13 @@
     "types": ["node"]
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["src/**/*.spec.ts"]
+  "exclude": ["src/**/*.spec.ts"],
+  "references": [
+    {
+      "path": "../../libs/prop/tsconfig.lib.json"
+    },
+    {
+      "path": "../../tools/prisma-plugin/tsconfig.lib.json"
+    }
+  ]
 }

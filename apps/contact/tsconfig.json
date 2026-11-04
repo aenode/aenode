@@ -2,6 +2,24 @@
   "extends": "../../tsconfig.base.json",
   "references": [
     {
+      "path": "../../libs/prop"
+    },
+    {
+      "path": "../../libs/nest-prisma"
+    },
+    {
+      "path": "../../libs/nest-boot"
+    },
+    {
+      "path": "../../libs/nest"
+    },
+    {
+      "path": "../../databases/contact-db"
+    },
+    {
+      "path": "../../libs/constants"
+    },
+    {
       "path": "./tsconfig.lib.json"
     },
     {

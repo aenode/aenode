@@ -8,5 +8,15 @@
   },
   "include": ["src/**/*.ts"],
   "exclude": ["vitest.config.mts", "eslint.config.mjs", "src/**/*.spec.ts"],
-  "references": []
+  "references": [
+    {
+      "path": "../prop/tsconfig.lib.json"
+    },
+    {
+      "path": "../nest/tsconfig.lib.json"
+    },
+    {
+      "path": "../constants/tsconfig.lib.json"
+    }
+  ]
 }

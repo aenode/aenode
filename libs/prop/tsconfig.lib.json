@@ -8,5 +8,9 @@
   },
   "include": ["src/**/*.ts"],
   "exclude": ["src/**/*.spec.ts"],
-  "references": []
+  "references": [
+    {
+      "path": "../nest/tsconfig.lib.json"
+    }
+  ]
 }

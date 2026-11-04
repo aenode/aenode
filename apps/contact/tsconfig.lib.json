@@ -8,5 +8,24 @@
   },
   "include": ["src/**/*.ts"],
   "exclude": ["src/**/*.spec.ts"],
-  "references": []
+  "references": [
+    {
+      "path": "../../libs/prop/tsconfig.lib.json"
+    },
+    {
+      "path": "../../libs/nest-prisma/tsconfig.lib.json"
+    },
+    {
+      "path": "../../libs/nest-boot/tsconfig.lib.json"
+    },
+    {
+      "path": "../../libs/nest/tsconfig.lib.json"
+    },
+    {
+      "path": "../../databases/contact-db/tsconfig.lib.json"
+    },
+    {
+      "path": "../../libs/constants/tsconfig.lib.json"
+    }
+  ]
 }

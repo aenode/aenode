@@ -7,5 +7,19 @@
     "types": ["node"]
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["vitest.config.mts", "eslint.config.mjs", "src/**/*.spec.ts"]
+  "exclude": ["vitest.config.mts", "eslint.config.mjs", "src/**/*.spec.ts"],
+  "references": [
+    {
+      "path": "../../libs/nest-boot/tsconfig.lib.json"
+    },
+    {
+      "path": "../../libs/nest/tsconfig.lib.json"
+    },
+    {
+      "path": "../../databases/contact-db/tsconfig.lib.json"
+    },
+    {
+      "path": "../../libs/constants/tsconfig.lib.json"
+    }
+  ]
 }
