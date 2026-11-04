@@ -4,25 +4,9 @@
     "rootDir": "src",
     "outDir": "dist",
     "tsBuildInfoFile": "dist/tsconfig.lib.tsbuildinfo",
-    "forceConsistentCasingInFileNames": true,
-    "types": [
-      "node"
-    ]
+    "types": ["node"]
   },
-  "include": [
-    "src/**/*.ts"
-  ],
-  "exclude": [
-    "vitest.config.mts",
-    "eslint.config.mjs",
-    "src/**/*.spec.ts"
-  ],
-  "references": [
-    {
-      "path": "../nest/tsconfig.lib.json"
-    },
-    {
-      "path": "../constants/tsconfig.lib.json"
-    }
-  ]
+  "include": ["src/**/*.ts"],
+  "exclude": ["vitest.config.mts", "eslint.config.mjs", "src/**/*.spec.ts"],
+  "references": []
 }

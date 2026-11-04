@@ -11,7 +11,7 @@
   "private": true,
   "dependencies": {
     "@aenode/nest-boot": "workspace:*",
-    "@nx/devkit": "24.0.3",
+    "@nx/devkit": "24.0.4",
     "axios": "^1.6.0"
   },
   "devDependencies": {
@@ -20,10 +20,10 @@
     "@eslint/js": "^9.8.0",
     "@nx/eslint": "23.2.1",
     "@nx/eslint-plugin": "23.2.1",
-    "@nx/js": "24.0.3",
+    "@nx/js": "24.0.4",
     "@nx/node": "24.0.3",
-    "@nx/plugin": "^24.0.3",
-    "@nx/vitest": "24.0.3",
+    "@nx/plugin": "24.0.4",
+    "@nx/vitest": "24.0.4",
     "@nx/workspace": "24.0.3",
     "@swc-node/register": "~1.11.1",
     "@swc/cli": "~0.8.1",

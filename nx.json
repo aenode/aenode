@@ -48,21 +48,15 @@
         "dependsOn": ["@aenode/aenode:serve"]
       }
     ],
-    "@nx/js:swc": {
-      "cache": true,
-      "dependsOn": ["^build"],
-      "inputs": ["production", "^production"]
-    },
     "build": {
       "executor": "@nx/js:swc",
-      "dependsOn": ["^build"],
+      "dependsOn": ["build", "^build"],
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "{projectRoot}/dist",
         "main": "{projectRoot}/src/index.ts",
         "tsConfig": "{projectRoot}/tsconfig.lib.json",
-        "skipTypeCheck": true,
-        "clean": true,
+        "skipTypeCheck": false,
         "stripLeadingPaths": true
       }
     },
@@ -105,25 +99,11 @@
         ]
       },
       "dependsOn": ["doc-data"]
-    },
-    "doc-data": {
-      "executor": "nx:run-commands",
-      "options": {
-        "commands": [
-          "bunx aenode merge -t json -s {projectRoot}/package.json  -d public/projects.json"
-        ]
-      }
-    },
-    "@nx/js:tsc": {
-      "cache": true,
-      "dependsOn": ["^build"],
-      "inputs": ["production", "^production"]
     }
   },
   "generators": {
     "@aenode/plugin:project": {}
   },
-
   "release": {
     "version": {
       "preVersionCommand": "bunx nx run-many -t build"

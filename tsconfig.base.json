@@ -7,13 +7,10 @@
     "verbatimModuleSyntax": true,
     "strictPropertyInitialization": false,
     "forceConsistentCasingInFileNames": true,
-    "declaration": true,
     "emitDeclarationOnly": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "lib": [
-      "ESNext"
-    ],
+    "lib": ["ESNext"],
     "module": "nodenext",
     "moduleResolution": "nodenext",
     "noEmitOnError": true,
@@ -21,11 +18,9 @@
     "noImplicitOverride": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
-    "skipLibCheck": true,
+    "skipLibCheck": false,
     "strict": true,
     "target": "esnext",
-    "customConditions": [
-      "@aenode/source"
-    ]
+    "customConditions": ["@aenode/source"]
   }
 }

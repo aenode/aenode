@@ -13,6 +13,5 @@
   ],
   "exclude": [
     "src/**/*.spec.ts"
-  ],
-  "references": []
+  ]
 }

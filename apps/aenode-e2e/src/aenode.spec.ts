@@ -2,7 +2,7 @@ import { AppController } from '@aenode/aenode';
 import { type INestApplication } from '@aenode/nest/common';
 import { ConfigService } from '@aenode/nest/config';
 import { request } from '@aenode/nest/supertest';
-import { Test } from '@nestjs/testing';
+import { Test } from '@aenode/nest/testing';
 
 async function createApp(values: Record<string, unknown>) {
   const moduleRef = await Test.createTestingModule({
