@@ -1,7 +1,7 @@
 {
   "name": "@aenode/aenode",
-  "version": "0.0.36",
-  "description": "Aenode core application",
+  "version": "0.0.37",
+  "description": "Aenode core service",
   "author": {
     "name": "Ahmet Emrebas",
     "email": "aenode+aenode@proton.me",

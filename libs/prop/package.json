@@ -1,7 +1,7 @@
 {
   "name": "@aenode/prop",
-  "version": "0.0.1",
-  "description": "- [ ] Add project description",
+  "version": "0.0.37",
+  "description": "Nestjs input validation and swagger property decorator",
   "author": {
     "name": "Ahmet Emrebas",
     "email": "aenode+aenode+aenode-prop@proton.me",

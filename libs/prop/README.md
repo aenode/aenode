@@ -6,7 +6,7 @@
 
 ## @aenode/prop
 
-- [ ] Add project description
+Nestjs input validation and swagger property decorator
 
 ## Install
 
@@ -17,7 +17,11 @@
 ## Examples
 
 ```ts
-const message = 'Hello there';
+export class User {
+  @Prop({ required: true, format: 'email' }) username: string;
+  @Prop({ format: 'password' }) password: string;
+  @Prop({ minimum: 17 }) age: number;
+}
 ```
 
 ---

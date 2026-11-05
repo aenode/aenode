@@ -1,0 +1,62 @@
+{
+  "name": "@aenode/encrypt",
+  "version": "0.0.37",
+  "description": "Encrypt",
+  "author": {
+    "name": "Ahmet Emrebas",
+    "email": "aenode+aenode+aenode-encrypt@proton.me",
+    "url": "https://aenode.github.io/#profile"
+  },
+  "funding": "https://cash.app/$puqlib",
+  "homepage": "https://aenode.github.io/aenode/libs/encrypt",
+  "repository": {
+    "directory": "libs/encrypt",
+    "type": "github",
+    "url": "https://github.com/aenode/aenode/tree/main/libs/encrypt"
+  },
+  "icon": "https://aenode.github.io/aenode/libs/encrypt/assets/favicon.svg",
+  "keywords": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
+  "bin": {
+    "aenode-encrypt": "./bin/encrypt.mjs"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "bun": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "assets",
+    "bin",
+    "dist",
+    "generators.json",
+    "!**/*.tsbuildinfo"
+  ],
+  "nx": {
+    "sourceRoot": "libs/encrypt/src",
+    "projectType": "library",
+    "tags": [
+      "lib:encrypt"
+    ],
+    "targets": {
+      "build": {},
+      "doc": {}
+    }
+  },
+  "dependencies": {
+    "@swc/helpers": "~0.5.18"
+  }
+}

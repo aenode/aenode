@@ -6,7 +6,7 @@
 
 ## @aenode/contact
 
-- [ ] Add project description
+Contact service
 
 ## Install
 

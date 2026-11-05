@@ -1,6 +1,6 @@
 {
   "name": "@aenode/nest-auth",
-  "version": "0.0.36",
+  "version": "0.0.37",
   "description": "Nest auth module",
   "author": {
     "name": "Ahmet Emrebas",

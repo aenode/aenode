@@ -45,7 +45,6 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.codeActionsOnSave": {
     "source.fixAll.prettier": "always",
-    "source.sort.json": "never",
     "source.fixAll.eslint": "always",
     "source.sortImports": "always",
     "source.removeUnused.ts": "explicit",

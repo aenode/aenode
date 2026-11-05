@@ -1,0 +1,65 @@
+{
+  "name": "@aenode/nest-encrypt",
+  "version": "0.0.37",
+  "description": "Nestjs encryption module",
+  "author": {
+    "name": "Ahmet Emrebas",
+    "email": "aenode+aenode+aenode-nest-encrypt@proton.me",
+    "url": "https://aenode.github.io/#profile"
+  },
+  "funding": "https://cash.app/$puqlib",
+  "homepage": "https://aenode.github.io/aenode/libs/nest-encrypt",
+  "repository": {
+    "directory": "libs/nest-encrypt",
+    "type": "github",
+    "url": "https://github.com/aenode/aenode/tree/main/libs/nest-encrypt"
+  },
+  "icon": "https://aenode.github.io/aenode/libs/nest-encrypt/assets/favicon.svg",
+  "keywords": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
+  "bin": {
+    "aenode-nest-encrypt": "./bin/nest-encrypt.mjs"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "bun": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "assets",
+    "bin",
+    "dist",
+    "generators.json",
+    "!**/*.tsbuildinfo"
+  ],
+  "nx": {
+    "sourceRoot": "libs/nest-encrypt/src",
+    "projectType": "library",
+    "tags": [
+      "lib:module"
+    ],
+    "targets": {
+      "build": {},
+      "doc": {}
+    }
+  },
+  "dependencies": {
+    "@aenode/constants": "workspace:*",
+    "@aenode/nest": "workspace:*",
+    "@aenode/encrypt": "workspace:*",
+    "@swc/helpers": "~0.5.18"
+  }
+}

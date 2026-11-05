@@ -1,7 +1,7 @@
 {
   "name": "@aenode/cli",
-  "version": "0.0.36",
-  "description": "- [ ] Add project description",
+  "version": "0.0.37",
+  "description": "Aenode CLI",
   "author": {
     "name": "Ahmet Emrebas",
     "email": "aenode+aenode@-cliproton.me",

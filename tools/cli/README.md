@@ -6,7 +6,7 @@
 
 ## @aenode/cli
 
-Aenode cli tool
+Aenode CLI
 
 ## Install
 

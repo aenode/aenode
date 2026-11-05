@@ -13,9 +13,6 @@
       "path": "./databases/contact-db"
     },
     {
-      "path": "./databases/dbs"
-    },
-    {
       "path": "./libs/constants"
     },
     {
@@ -53,6 +50,21 @@
     },
     {
       "path": "./libs/nest-decorators"
+    },
+    {
+      "path": "./databases/aenode-db"
+    },
+    {
+      "path": "./libs/hash"
+    },
+    {
+      "path": "./libs/encrypt"
+    },
+    {
+      "path": "./libs/nest-encrypt"
+    },
+    {
+      "path": "./libs/nest-hash"
     }
   ]
 }

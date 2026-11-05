@@ -1,0 +1,64 @@
+{
+  "name": "@aenode/nest-hash",
+  "version": "0.0.37",
+  "description": "Nestjs hash module",
+  "author": {
+    "name": "Ahmet Emrebas",
+    "email": "aenode+aenode+aenode-nest-hash@proton.me",
+    "url": "https://aenode.github.io/#profile"
+  },
+  "funding": "https://cash.app/$puqlib",
+  "homepage": "https://aenode.github.io/aenode/libs/nest-hash",
+  "repository": {
+    "directory": "libs/nest-hash",
+    "type": "github",
+    "url": "https://github.com/aenode/aenode/tree/main/libs/nest-hash"
+  },
+  "icon": "https://aenode.github.io/aenode/libs/nest-hash/assets/favicon.svg",
+  "keywords": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
+  "bin": {
+    "aenode-nest-hash": "./bin/nest-hash.mjs"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "bun": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "assets",
+    "bin",
+    "dist",
+    "generators.json",
+    "!**/*.tsbuildinfo"
+  ],
+  "nx": {
+    "sourceRoot": "libs/nest-hash/src",
+    "projectType": "library",
+    "tags": [
+      "lib:module"
+    ],
+    "targets": {
+      "build": {},
+      "doc": {}
+    }
+  },
+  "dependencies": {
+    "@aenode/nest": "workspace:*",
+    "@swc/helpers": "~0.5.18",
+    "@aenode/hash": "workspace:*"
+  }
+}
