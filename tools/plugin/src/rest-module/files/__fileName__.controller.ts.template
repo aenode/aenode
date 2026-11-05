@@ -1,0 +1,47 @@
+import {
+  <%- className %>CreateDto,
+  <%- className %>FindManyDto,
+  <%- className %>ReadDto,
+  <%- className %>UpdateDto,
+} from '@aenode/contact-db/nest';
+import {
+  CreateOne,
+  DeleteOneById,
+  FindMany,
+  FindOneById,
+  ParamId,
+  ResouceController,
+  UpdateOneById,
+} from '@aenode/nest-decorators';
+import { Body, Query } from '@aenode/nest/common';
+import { <%- className %>Service } from '../../data/index.js';
+
+@ResouceController()
+export class <%- className %>Controller {
+  constructor(protected service: <%- className %>Service) {}
+
+  @FindMany({ responseType: <%- className %>ReadDto })
+  async findMany(@Query() query: <%- className %>FindManyDto) {
+    return await this.service.findMany(query);
+  }
+
+  @FindOneById({ responseType: <%- className %>ReadDto })
+  async findOneById(@ParamId() id: number) {
+    return await this.service.findUniqueOneById(id);
+  }
+
+  @CreateOne({ responseType: <%- className %>ReadDto })
+  async createOne(@Body() data: <%- className %>CreateDto) {
+    return await this.service.createOne(data);
+  }
+
+  @UpdateOneById({ responseType: <%- className %>ReadDto })
+  async updateOneById(@ParamId() id: number, @Body() data: <%- className %>UpdateDto) {
+    return await this.service.updateOneById(id, data);
+  }
+
+  @DeleteOneById({ responseType: <%- className %>ReadDto })
+  async deleteOne(@ParamId() id: number) {
+    return await this.service.softDeleteOneById(id);
+  }
+}

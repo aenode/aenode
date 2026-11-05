@@ -1,7 +1,11 @@
 import { Env } from '@aenode/constants';
-import { Logger, type Type } from '@aenode/nest/common';
+import {
+  ClassSerializerInterceptor,
+  Logger,
+  type Type,
+} from '@aenode/nest/common';
 import { ConfigService } from '@aenode/nest/config';
-import { NestFactory } from '@aenode/nest/core';
+import { NestFactory, Reflector } from '@aenode/nest/core';
 import { DocumentBuilder, SwaggerModule } from '@aenode/nest/swagger';
 
 import { globalValidationPipe } from '@aenode/prop';
@@ -40,8 +44,10 @@ export async function boot(options: BootOptions) {
 
   app.enableCors({ origins: [allowedOrigins.split(',')] });
   app.setGlobalPrefix(apiPrefix);
+
   app.enableShutdownHooks();
 
+  app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
   app.useGlobalPipes(globalValidationPipe);
 
   swaggerIntegration: {

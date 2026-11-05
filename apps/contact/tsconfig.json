@@ -8,6 +8,9 @@
       "path": "../../libs/nest-prisma"
     },
     {
+      "path": "../../libs/nest-decorators"
+    },
+    {
       "path": "../../libs/nest-boot"
     },
     {

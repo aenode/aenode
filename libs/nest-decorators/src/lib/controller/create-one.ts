@@ -1,15 +1,15 @@
-import { Post, type Type } from '@aenode/nest/common';
-import { ApiCreatedResponse, ApiOperation } from '@aenode/nest/swagger';
+import { Post } from '@aenode/nest/common';
+import { ApiCreatedResponse } from '@aenode/nest/swagger';
 import { Operation } from '@aenode/types';
 import { OperationName } from '../metadata/operation-name.js';
 import { CommonMethod } from './common-method.js';
+import type { MethodOptions } from './method-options.js';
 
-export function CreateOne(responseType: Type): MethodDecorator {
+export function CreateOne(options: MethodOptions): MethodDecorator {
   return (...args) => {
-    CommonMethod()(...args);
-    ApiOperation({ summary: 'Create one' })(...args);
+    CommonMethod(options)(...args);
     ApiCreatedResponse({
-      type: responseType,
+      type: options.responseType,
       description: 'Successfull',
     })(...args);
     OperationName(Operation.WRITE)(...args);

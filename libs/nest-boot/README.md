@@ -6,7 +6,7 @@
 
 ## @aenode/nest-boot
 
-- [ ] Add project description
+Nestjs bootstrap module
 
 ## Install
 

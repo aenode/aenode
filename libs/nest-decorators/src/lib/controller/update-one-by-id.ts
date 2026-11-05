@@ -1,19 +1,15 @@
-import { Patch, type Type } from '@aenode/nest/common';
-import {
-  ApiNotFoundResponse,
-  ApiOkResponse,
-  ApiOperation,
-} from '@aenode/nest/swagger';
+import { Patch } from '@aenode/nest/common';
+import { ApiNotFoundResponse, ApiOkResponse } from '@aenode/nest/swagger';
 import { Operation } from '@aenode/types';
 import { OperationName } from '../metadata/operation-name.js';
 import { CommonMethod } from './common-method.js';
+import type { MethodOptions } from './method-options.js';
 
-export function UpdateOneById(responseType: Type): MethodDecorator {
+export function UpdateOneById(options: MethodOptions): MethodDecorator {
   return (...args) => {
-    CommonMethod()(...args);
-    ApiOperation({ summary: 'Update one by id' })(...args);
+    CommonMethod(options)(...args);
     ApiOkResponse({
-      type: responseType,
+      type: options.responseType,
       description: 'Successfull',
     })(...args);
     ApiNotFoundResponse({ description: 'Not found' })(...args);

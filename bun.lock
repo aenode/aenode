@@ -80,6 +80,7 @@
         "@aenode/contact-db": "workspace:*",
         "@aenode/nest": "workspace:*",
         "@aenode/nest-boot": "workspace:*",
+        "@aenode/nest-decorators": "workspace:*",
         "@aenode/nest-prisma": "workspace:*",
         "@aenode/prop": "workspace:*",
         "@prisma/client": "7.8.0",
@@ -296,6 +297,7 @@
         "aenode": "./bin/aenode.mjs",
       },
       "dependencies": {
+        "@aenode/names": "workspace:*",
         "@swc/helpers": "~0.5.18",
         "commander": "^15.0.0",
         "uuid": "^14.0.3",

@@ -1,19 +1,15 @@
-import { Delete, type Type } from '@aenode/nest/common';
-import {
-  ApiNotFoundResponse,
-  ApiOkResponse,
-  ApiOperation,
-} from '@aenode/nest/swagger';
+import { Delete } from '@aenode/nest/common';
+import { ApiNotFoundResponse, ApiOkResponse } from '@aenode/nest/swagger';
 import { Operation } from '@aenode/types';
 import { OperationName } from '../metadata/operation-name.js';
 import { CommonMethod } from './common-method.js';
+import type { MethodOptions } from './method-options.js';
 
-export function DeleteOneById(responseType: Type): MethodDecorator {
+export function DeleteOneById(options: MethodOptions): MethodDecorator {
   return (...args) => {
-    CommonMethod()(...args);
-    ApiOperation({ summary: 'Delete one by id' })(...args);
+    CommonMethod(options)(...args);
     ApiOkResponse({
-      type: responseType,
+      type: options.responseType,
       description: 'Successfull',
     })(...args);
     ApiNotFoundResponse({ description: 'Not found' })(...args);

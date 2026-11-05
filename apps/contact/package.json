@@ -73,6 +73,7 @@
     "@aenode/contact-db": "workspace:*",
     "@aenode/nest": "workspace:*",
     "@aenode/nest-boot": "workspace:*",
+    "@aenode/nest-decorators": "workspace:*",
     "@aenode/nest-prisma": "workspace:*",
     "@aenode/prop": "workspace:*",
     "@prisma/client": "7.8.0"

@@ -1,15 +1,15 @@
-import { Get, type Type } from '@aenode/nest/common';
-import { ApiOkResponse, ApiOperation } from '@aenode/nest/swagger';
+import { Get } from '@aenode/nest/common';
+import { ApiOkResponse } from '@aenode/nest/swagger';
 import { Operation } from '@aenode/types';
 import { OperationName } from '../metadata/operation-name.js';
 import { CommonMethod } from './common-method.js';
+import type { MethodOptions } from './method-options.js';
 
-export function FindMany(responseType: Type): MethodDecorator {
+export function FindMany(options: MethodOptions): MethodDecorator {
   return (...args) => {
-    CommonMethod()(...args);
-    ApiOperation({ summary: 'Find many' })(...args);
+    CommonMethod(options)(...args);
     ApiOkResponse({
-      type: responseType,
+      type: options.responseType,
       isArray: true,
       description: 'Successfull',
     })(...args);

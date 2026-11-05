@@ -9,6 +9,11 @@
       "factory": "./dist/prisma-module/prisma-module.js",
       "schema": "./dist/prisma-module/schema.json",
       "description": "prisma-module generator"
+    },
+    "rest-module": {
+      "factory": "./dist/rest-module/rest-module.js",
+      "schema": "./dist/rest-module/schema.json",
+      "description": "rest-module generator"
     }
   }
 }

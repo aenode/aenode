@@ -58,6 +58,7 @@
     }
   },
   "dependencies": {
+    "@aenode/names": "workspace:*",
     "@swc/helpers": "~0.5.18",
     "commander": "^15.0.0",
     "uuid": "^14.0.3"

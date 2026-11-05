@@ -11,9 +11,9 @@ export function replace(program: Command) {
       '-e,--extention <extentions...>',
       'Include the files with the extention only',
     )
-    .option('-t,--target <string>', 'Target working directory', cwd())
-    .option('-p,--placeholders <placeholders...>', 'placeholders')
-    .option('-v,--values <values...>', 'New values')
+    .requiredOption('-p,--placeholders <placeholders...>', 'placeholders')
+    .requiredOption('-t,--target <string>', 'Target working directory', cwd())
+    .requiredOption('-v,--values <values...>', 'New values')
     .option('-r,--recursive', 'Include sub directories')
     .action(async ({ extention, target, placeholders, values, recursive }) => {
       const dridents = await readdir(target, {

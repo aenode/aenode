@@ -1,7 +1,7 @@
 {
   "name": "@aenode/nest-boot",
   "version": "0.0.39",
-  "description": "Nestjs boot function",
+  "description": "Nestjs bootstrap module",
   "author": {
     "name": "Ahmet Emrebas",
     "email": "aenode+aenode-nest-boot@proton.me",

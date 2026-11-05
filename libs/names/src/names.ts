@@ -53,5 +53,10 @@ export function names(value: string) {
     snake,
     title,
     sentence,
+
+    className: pascal,
+    propertyName: camel,
+    constantName: constant,
+    fileName: kebab,
   };
 }

@@ -3,20 +3,50 @@ import { rename as fsRename, readdir } from 'node:fs/promises';
 import { join } from 'node:path';
 import { cwd } from 'node:process';
 
+export type RenameParams = {
+  target: string;
+  recursive: boolean;
+  extentions?: string[];
+  before?: string;
+  after?: string;
+  undo?: boolean;
+  placeholders?: string[];
+  values?: string[];
+};
+
 export function rename(program: Command) {
   program
     .command('rename')
-    .description('Rename multiple files based on file extention')
+    .description('Rename multiple files based on file extentions')
     .option(
-      '-e,--extention <extentions...>',
-      'Include the files with the extention only',
+      '-e,--extentions <extentionss...>',
+      'Include the files with the extentions only',
     )
     .option('-t,--target <string>', 'Target working directory', cwd())
-    .option('-p,--prefix <string>', 'Prefix to add the file name')
-    .option('-s,--suffix <string>', 'Suffix to add the file name')
+    .option(
+      '-p,--placeholders <placeholders...>',
+      'List of placeholders to replace by value',
+    )
+    .option(
+      '-v,--values <values...>',
+      'List of values to be replaced by placeholder',
+    )
+    .option('-b,--before <string>', 'Prefix to add the file name')
+    .option('-a,--after <string>', 'Suffix to add the file name')
     .option('-u,--undo', 'Undo the operation')
-    .option('-r,--recursive', 'Include sub directories')
-    .action(async ({ target, extention, prefix, suffix, recursive, undo }) => {
+    .option('-r,--recursive', 'Include sub directories', false)
+    .action(async (options: RenameParams) => {
+      const {
+        target,
+        extentions,
+        before,
+        after,
+        recursive,
+        undo,
+        placeholders,
+        values,
+      } = options;
+
       const dridents = await readdir(target, {
         recursive,
         withFileTypes: true,
@@ -25,8 +55,8 @@ export function rename(program: Command) {
       const files = dridents
         .filter((e) => e.isFile())
         .filter((e) => {
-          if (extention) {
-            return extention.some((ex: string) => e.name.endsWith(ex));
+          if (extentions) {
+            return extentions.some((ex: string) => e.name.endsWith(ex));
           }
           return true;
         });
@@ -38,20 +68,56 @@ export function rename(program: Command) {
         let newFileName = oldFileName;
 
         if (undo) {
-          if (prefix) {
-            newFileName = newFileName.replace(new RegExp(`^${prefix}`), '');
+          if (before) {
+            newFileName = newFileName.replace(new RegExp(`^${before}`), '');
           }
 
-          if (suffix) {
-            newFileName = newFileName.replace(new RegExp(`${suffix}$`), '');
+          if (after) {
+            newFileName = newFileName.replace(new RegExp(`${after}$`), '');
+          }
+
+          if (placeholders && values) {
+            if (
+              placeholders.length > 0 &&
+              placeholders.length === values.length
+            ) {
+              for (let i = 0; i < placeholders.length; i++) {
+                newFileName = newFileName.replace(
+                  new RegExp(`${values[i]}`, 'g'),
+                  placeholders[i],
+                );
+              }
+            } else {
+              throw new Error(
+                'Placeholders length does not match the values legnth',
+              );
+            }
           }
         } else {
-          if (prefix) {
-            newFileName = prefix + newFileName;
+          if (before) {
+            newFileName = before + newFileName;
           }
 
-          if (suffix) {
-            newFileName = newFileName + suffix;
+          if (after) {
+            newFileName = newFileName + after;
+          }
+
+          if (placeholders && values) {
+            if (
+              placeholders.length > 0 &&
+              placeholders.length === values.length
+            ) {
+              for (let i = 0; i < placeholders.length; i++) {
+                newFileName = newFileName.replace(
+                  new RegExp(`${placeholders[i]}`, 'g'),
+                  values[i],
+                );
+              }
+            } else {
+              throw new Error(
+                'Placeholders length does not match the values legnth',
+              );
+            }
           }
         }
 

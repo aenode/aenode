@@ -5,3 +5,5 @@ export * from './email/email.module.js';
 export * from './email/email.service.js';
 export * from './phone/phone.module.js';
 export * from './phone/phone.service.js';
+export * from './user/user.module.js';
+export * from './user/user.service.js';

@@ -7,11 +7,7 @@ import type { Reflector } from '@aenode/nest/core';
  *
  * @returns Class decorator
  */
-export function Public(): ClassDecorator {
-  return (...args) => {
-    SetMetadata(MetadataToken.PUBLIC, true)(...args);
-  };
-}
+export const Public = () => SetMetadata(MetadataToken.PUBLIC, true);
 
 /**
  * Check the resource is marked as public or not.
@@ -24,8 +20,8 @@ export function isPublic(
   context: ExecutionContext,
   reflector: Reflector,
 ): boolean {
-  return !!reflector.get<boolean | undefined>(
+  return !!reflector.getAllAndOverride<boolean | undefined>(
     MetadataToken.PUBLIC,
-    context.getClass(),
+    [context.getClass(), context.getHandler()],
   );
 }

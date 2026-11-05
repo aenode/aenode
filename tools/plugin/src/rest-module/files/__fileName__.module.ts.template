@@ -1,0 +1,9 @@
+import { Module } from '@aenode/nest/common';
+import { <%- className %>DataModule } from '../../data/index.js';
+import { <%- className %>Controller } from './<%- fileName %>.controller.js';
+
+@Module({
+  imports: [<%- className %>DataModule],
+  controllers: [<%- className %>Controller],
+})
+export class <%- className %>Module {}

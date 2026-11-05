@@ -4,10 +4,13 @@ import { history } from './commands/history/history.js';
 import { merge } from './commands/merge/merge.js';
 import { rename } from './commands/rename/rename.js';
 import { replace } from './commands/replace/replace.js';
+import { template } from './commands/template/template.js';
 import { uuid } from './commands/uuid/uuid.js';
 import { writeLog } from './log/log.js';
 
-[bye, merge, history, uuid, rename, replace].forEach((e) => e(program));
+[bye, merge, history, uuid, rename, replace, template].forEach((e) =>
+  e(program),
+);
 
 const aenode = program.name('aenode').description('aenode cli');
 
