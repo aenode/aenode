@@ -7,6 +7,6 @@
     "types": ["node"]
   },
   "include": ["src/**/*.ts"],
-  "exclude": ["vitest.config.mts", "eslint.config.mjs", "src/**/*.spec.ts"],
+  "exclude": ["vitest.config.mts", "eslint.config.mjs", "**/*.spec.ts"],
   "references": []
 }

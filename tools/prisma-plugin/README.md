@@ -11,13 +11,36 @@ Prisma plugins
 ## Install
 
 ```sh
-  bun add @aenode/prisma-plugin
+  bun add -D @aenode/prisma-plugin
 ```
 
 ## Examples
 
 ```ts
-const message = 'Hello there';
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+generator nest {
+  provider = "aenode-prisma-nest"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model App {
+  id        Int      @id @default(autoincrement())
+  uuid      String   @unique @db.Uuid
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  isActive  Boolean  @default(true) @map("is_active")
+
+  name        String  @unique
+  description String?
+}
+
 ```
 
 ---

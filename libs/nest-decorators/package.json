@@ -1,6 +1,6 @@
 {
   "name": "@aenode/nest-decorators",
-  "version": "0.0.37",
+  "version": "0.0.39",
   "description": "Nestjs decorators",
   "author": {
     "name": "Ahmet Emrebas",

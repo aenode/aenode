@@ -1,6 +1,6 @@
 {
   "name": "@aenode/nest-encrypt",
-  "version": "0.0.37",
+  "version": "0.0.39",
   "description": "Nestjs encryption module",
   "author": {
     "name": "Ahmet Emrebas",

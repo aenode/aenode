@@ -1,7 +1,7 @@
 {
   "name": "@aenode/plugin",
-  "version": "0.0.37",
-  "description": "Nestjs module wrapper exports nestjs modules as they are",
+  "version": "0.0.39",
+  "description": "Aenode project/resource generator",
   "author": {
     "name": "Ahmet Emrebas",
     "email": "aenode+aenode@proton.me",

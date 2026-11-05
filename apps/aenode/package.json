@@ -1,6 +1,6 @@
 {
   "name": "@aenode/aenode",
-  "version": "0.0.37",
+  "version": "0.0.39",
   "description": "Aenode core service",
   "author": {
     "name": "Ahmet Emrebas",

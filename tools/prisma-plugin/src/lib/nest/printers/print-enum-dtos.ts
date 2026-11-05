@@ -15,7 +15,13 @@ export function printEnumFilterDto(model: DMMF.DatamodelEnum) {
 }
 
 export function printEnumDtos(datamodel: DMMF.Datamodel) {
-  const enumFilterDtos = datamodel.enums
+  const enumModels = datamodel.enums;
+
+  if (enumModels.length === 0) {
+    return 'export const thereIsNoEnumModelsInDatabase=true; ';
+  }
+
+  const enumFilterDtos = enumModels
     .map((model) => printEnumFilterDto(model))
     .join('\n\n');
 

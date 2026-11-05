@@ -79,6 +79,9 @@
   "nx": {
     "sourceRoot": "<%- directory %>/src",
     "projectType": "library",
+    "tags": [
+      "data:prisma"
+    ],
     "targets": {
       "build": {
         "dependsOn": [
@@ -92,9 +95,10 @@
     }
   },
   "dependencies": {
+    "@aenode/prop": "<%- aenodeVersion %>:*",
     "@swc/helpers": "~0.5.18"
   },
   "devDependencies": {
-    "@aenode/prisma-plugin": "workspace:*"
+    "@aenode/prisma-plugin": "<%- aenodeVersion %>:*"
   }
 }

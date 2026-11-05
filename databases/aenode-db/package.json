@@ -1,6 +1,6 @@
 {
   "name": "@aenode/aenode-db",
-  "version": "0.0.37",
+  "version": "0.0.39",
   "description": "Aenode databases",
   "author": {
     "name": "Ahmet Emrebas",
@@ -79,6 +79,9 @@
   "nx": {
     "sourceRoot": "databases/aenode-db/src",
     "projectType": "library",
+    "tags": [
+      "data:prisma"
+    ],
     "targets": {
       "build": {
         "dependsOn": [
@@ -92,6 +95,8 @@
     }
   },
   "dependencies": {
+    "@aenode/prop": "workspace:*",
+    "@prisma/client": "7.8.0",
     "@swc/helpers": "~0.5.18"
   },
   "devDependencies": {

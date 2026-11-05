@@ -55,6 +55,7 @@ jobs:
             bunx  nx run-many -t prisma:generate
             bunx  nx run-many -t build --parallel=0
             bunx  nx run-many -t lint test
+            bun aenode:graph
             bunx  nx run-many -t doc
 
       - name: Setup Pages

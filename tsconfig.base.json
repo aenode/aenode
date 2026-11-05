@@ -10,6 +10,7 @@
     "emitDeclarationOnly": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "skipLibCheck": true,
     "lib": ["ESNext"],
     "module": "nodenext",
     "moduleResolution": "nodenext",
@@ -18,7 +19,6 @@
     "noImplicitOverride": true,
     "noImplicitReturns": true,
     "noUnusedLocals": true,
-    "skipLibCheck": false,
     "strict": true,
     "target": "esnext",
     "customConditions": ["@aenode/source"]

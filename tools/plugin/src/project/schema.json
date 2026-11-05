@@ -82,6 +82,12 @@
       "description": "Version",
       "$default": { "$source": "argv", "index": 11 },
       "x-promp": "What version would you like to use?"
+    },
+    "aenodeVersion": {
+      "type": "string",
+      "description": "Version",
+      "$default": { "$source": "argv", "index": 12 },
+      "x-promp": "What version would you like to use?"
     }
   },
   "required": ["type", "directory"]
