@@ -1,6 +1,6 @@
 {
   "name": "@aenode/prisma-plugin",
-  "version": "0.0.39",
+  "version": "0.0.40",
   "description": "Prisma plugins",
   "author": {
     "name": "Ahmet Emrebas",
