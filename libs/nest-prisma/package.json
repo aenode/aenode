@@ -1,6 +1,6 @@
 {
   "name": "@aenode/nest-prisma",
-  "version": "0.0.40",
+  "version": "0.0.42",
   "description": "Nestjs prisma client module",
   "author": {
     "name": "Ahmet Emrebas",

@@ -1,6 +1,6 @@
 {
   "name": "@aenode/plugin",
-  "version": "0.0.40",
+  "version": "0.0.42",
   "description": "Aenode project/resource generator",
   "author": {
     "name": "Ahmet Emrebas",

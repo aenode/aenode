@@ -1,6 +1,6 @@
 {
   "name": "@aenode/constants",
-  "version": "0.0.40",
+  "version": "0.0.42",
   "description": "Common environment keys and constants",
   "author": {
     "name": "Ahmet Emrebas",

@@ -6,7 +6,7 @@
 
 ## @aenode/nest-auth
 
-- [ ] Add project description
+Nestjs auth module
 
 ## Install
 
