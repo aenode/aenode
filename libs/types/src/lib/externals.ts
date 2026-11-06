@@ -1,2 +1,1 @@
-import 'type-fest';
-export * from 'type-fest';
+export type * from 'type-fest';
