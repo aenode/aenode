@@ -11,9 +11,6 @@
   "references": [
     {
       "path": "../nest/tsconfig.lib.json"
-    },
-    {
-      "path": "../constants/tsconfig.lib.json"
     }
   ]
 }

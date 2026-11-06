@@ -5,9 +5,6 @@
       "path": "../../libs/nest-decorators"
     },
     {
-      "path": "../../databases/contact-db"
-    },
-    {
       "path": "../../libs/prop"
     },
     {

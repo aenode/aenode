@@ -10,11 +10,11 @@ import {
   FindOneById,
   ParamId,
   ResouceController,
+  DeleteOneById,
   UpdateOneById,
 } from '@aenode/nest-decorators';
 import { Body, Query } from '@aenode/nest/common';
-import { <%- className %>Serviceimport { Controller } from '../../../../../libs/nest/dist/common';
- } from '../../data/index.js';
+import { <%- className %>Serviceimport  } from '../../data/index.js';
 
 @ResouceController()
 export class <%- className %>Controller {

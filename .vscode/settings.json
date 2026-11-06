@@ -4,10 +4,6 @@
   "eslint.enable": true,
   "eslint.validate": ["json", "javascript", "typescript"],
   "files.associations": {
-    "*.json.template": "json",
-    "*.swcrc.template": "json",
-    "*.ts.template": "typescript",
-    ".env.template": "env",
     ".env": "env",
     ".config": "yaml,env",
     "*.sh.*": "shellscript",
@@ -20,7 +16,8 @@
     "*.json.*": "json",
     "*.md.*": "markdown",
     "*license": "markdown",
-    "*license.*": "markdown"
+    "*license.*": "markdown",
+    "*.template": "ejs"
   },
   "eslint.workingDirectories": [
     {

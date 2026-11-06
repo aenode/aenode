@@ -2,9 +2,6 @@
   "extends": "../../tsconfig.base.json",
   "references": [
     {
-      "path": "../nest-otp"
-    },
-    {
       "path": "../nest"
     },
     {

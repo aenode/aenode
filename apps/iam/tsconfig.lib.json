@@ -13,9 +13,6 @@
       "path": "../../libs/nest-decorators/tsconfig.lib.json"
     },
     {
-      "path": "../../databases/contact-db/tsconfig.lib.json"
-    },
-    {
       "path": "../../libs/prop/tsconfig.lib.json"
     },
     {
