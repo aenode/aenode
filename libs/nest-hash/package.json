@@ -1,6 +1,6 @@
 {
   "name": "@aenode/nest-hash",
-  "version": "0.0.42",
+  "version": "0.0.45",
   "description": "Nestjs hash module",
   "author": {
     "name": "Ahmet Emrebas",

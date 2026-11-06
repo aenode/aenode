@@ -1,6 +1,6 @@
 {
   "name": "@aenode/aenode",
-  "version": "0.0.42",
+  "version": "0.0.45",
   "description": "Aenode core service",
   "author": {
     "name": "Ahmet Emrebas",
@@ -11,13 +11,13 @@
     "aenode-api": "./bin/aenode.mjs"
   },
   "funding": "https://cash.app/$puqlib",
-  "homepage": "https://aenode.github.io/aenode/libs/nest",
+  "homepage": "https://aenode.github.io/aenode/apps/aenode",
   "repository": {
-    "directory": "libs/nest",
+    "directory": "apps/aenode",
     "type": "github",
-    "url": "https://github.com/aenode/aenode/tree/main/libs/nest"
+    "url": "https://github.com/aenode/aenode/tree/main/apps/aenode"
   },
-  "icon": "https://aenode.github.io/aenode/libs/nest/favicon.svg",
+  "icon": "https://aenode.github.io/aenode/apps/aenode/assets/favicon.svg",
   "keywords": [
     "nestjs",
     "rest",
@@ -62,6 +62,7 @@
     "@aenode/constants": "workspace:*",
     "@aenode/contact-db": "workspace:*",
     "@aenode/nest": "workspace:*",
-    "@aenode/nest-boot": "workspace:*"
+    "@aenode/nest-boot": "workspace:*",
+    "@aenode/nest-prisma": "workspace:*"
   }
 }

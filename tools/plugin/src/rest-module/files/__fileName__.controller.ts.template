@@ -14,7 +14,7 @@ import {
   UpdateOneById,
 } from '@aenode/nest-decorators';
 import { Body, Query } from '@aenode/nest/common';
-import { <%- className %>Serviceimport  } from '../../data/index.js';
+import { <%- className %>Service  } from '../../data/index.js';
 
 @ResouceController()
 export class <%- className %>Controller {

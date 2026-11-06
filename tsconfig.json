@@ -19,9 +19,6 @@
       "path": "./libs/names"
     },
     {
-      "path": "./libs/nest-auth"
-    },
-    {
       "path": "./libs/nest-boot"
     },
     {

@@ -1,10 +1,10 @@
 {
   "name": "@aenode/contact",
-  "version": "0.0.42",
+  "version": "0.0.45",
   "description": "Contact service",
   "author": {
     "name": "Ahmet Emrebas",
-    "email": "aenode+aenode+aenode-contact@proton.me",
+    "email": "aenode+aenode-contact@proton.me",
     "url": "https://aenode.github.io/#profile"
   },
   "bin": {

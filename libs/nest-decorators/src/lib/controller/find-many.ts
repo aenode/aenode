@@ -1,4 +1,4 @@
-import { Get } from '@aenode/nest/common';
+import { QueryMethod } from '@aenode/nest/common';
 import { ApiOkResponse } from '@aenode/nest/swagger';
 import { Operation } from '@aenode/types';
 import { OperationName } from '../metadata/operation-name.js';
@@ -14,6 +14,6 @@ export function FindMany(options: MethodOptions): MethodDecorator {
       description: 'Successfull',
     })(...args);
     OperationName(Operation.READ_MANY)(...args);
-    Get()(...args);
+    QueryMethod()(...args);
   };
 }

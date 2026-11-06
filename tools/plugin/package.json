@@ -1,6 +1,6 @@
 {
   "name": "@aenode/plugin",
-  "version": "0.0.42",
+  "version": "0.0.45",
   "description": "Aenode project/resource generator",
   "author": {
     "name": "Ahmet Emrebas",
@@ -11,13 +11,13 @@
     "aenode-plugin": "./bin/plugin.mjs"
   },
   "funding": "https://cash.app/$puqlib",
-  "homepage": "https://aenode.github.io/aenode/libs/nest",
+  "homepage": "https://aenode.github.io/aenode/tools/plugin",
   "repository": {
-    "directory": "libs/nest",
+    "directory": "tools/plugin",
     "type": "github",
-    "url": "https://github.com/aenode/aenode/tree/main/libs/nest"
+    "url": "https://github.com/aenode/aenode/tree/main/tools/plugin"
   },
-  "icon": "https://aenode.github.io/aenode/libs/nest/favicon.svg",
+  "icon": "https://aenode.github.io/aenode/tools/plugin/assets/favicon.svg",
   "keywords": [
     "nestjs",
     "rest",

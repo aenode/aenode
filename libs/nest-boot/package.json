@@ -1,6 +1,6 @@
 {
   "name": "@aenode/nest-boot",
-  "version": "0.0.42",
+  "version": "0.0.45",
   "description": "Nestjs bootstrap module",
   "author": {
     "name": "Ahmet Emrebas",

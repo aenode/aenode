@@ -1,6 +1,6 @@
 {
   "name": "@aenode/nest",
-  "version": "0.0.42",
+  "version": "0.0.45",
   "description": "Nestjs module wrapper exports nestjs modules as they are",
   "author": {
     "name": "Ahmet Emrebas",
@@ -15,7 +15,7 @@
     "type": "github",
     "url": "https://github.com/aenode/aenode/tree/main/libs/nest"
   },
-  "icon": "https://aenode.github.io/aenode/libs/nest/favicon.svg",
+  "icon": "https://aenode.github.io/aenode/libs/nest/assets/favicon.svg",
   "keywords": [
     "nestjs",
     "rest",

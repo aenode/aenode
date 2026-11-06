@@ -1,6 +1,6 @@
 {
   "name": "@aenode/prop",
-  "version": "0.0.42",
+  "version": "0.0.45",
   "description": "Nestjs input validation and swagger property decorator",
   "author": {
     "name": "Ahmet Emrebas",

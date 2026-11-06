@@ -1,6 +1,6 @@
 {
   "name": "@aenode/cli",
-  "version": "0.0.42",
+  "version": "0.0.45",
   "description": "Aenode CLI",
   "author": {
     "name": "Ahmet Emrebas",

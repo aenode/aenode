@@ -46,6 +46,7 @@
     "prettier": "~3.6.2",
     "prisma": "7.8.0",
     "tslib": "^2.3.0",
+    "type-fest": "^5.10.0",
     "typedoc": "^0.28.20",
     "typescript": "~6.0.3",
     "typescript-eslint": "^8.58.0",

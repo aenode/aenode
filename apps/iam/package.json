@@ -1,10 +1,10 @@
 {
   "name": "@aenode/iam",
-  "version": "0.0.42",
+  "version": "0.0.45",
   "description": "Identity and access management service",
   "author": {
     "name": "Ahmet Emrebas",
-    "email": "aenode+aenode+aenode-iam@proton.me",
+    "email": "aenode+aenode-iam@proton.me",
     "url": "https://aenode.github.io/#profile"
   },
   "funding": "https://cash.app/$puqlib",

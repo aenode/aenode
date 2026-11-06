@@ -10,6 +10,9 @@
   "exclude": ["vitest.config.mts", "eslint.config.mjs", "src/**/*.spec.ts"],
   "references": [
     {
+      "path": "../../libs/nest-prisma/tsconfig.lib.json"
+    },
+    {
       "path": "../../libs/nest-boot/tsconfig.lib.json"
     },
     {
