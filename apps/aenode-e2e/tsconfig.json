@@ -8,12 +8,5 @@
     "types": ["vitest/globals", "node"]
   },
   "include": ["vitest.config.mts", "src/**/*.ts"],
-  "references": [
-    {
-      "path": "../../libs/nest"
-    },
-    {
-      "path": "../aenode"
-    }
-  ]
+  "references": []
 }

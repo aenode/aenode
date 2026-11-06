@@ -1,6 +1,6 @@
 {
   "name": "@aenode/iam",
-  "version": "0.0.1",
+  "version": "0.0.42",
   "description": "Identity and access management service",
   "author": {
     "name": "Ahmet Emrebas",
@@ -72,11 +72,10 @@
     "@aenode/constants": "workspace:*",
     "@aenode/nest": "workspace:*",
     "@aenode/nest-boot": "workspace:*",
-    "@aenode/iam-db": "workspace:*",
     "@aenode/nest-prisma": "workspace:*",
     "@aenode/prop": "workspace:*",
-    "@prisma/client": "7.8.0",
+    "@aenode/iam-db": "workspace:*",
     "@aenode/nest-decorators": "workspace:*",
-    "@swc/helpers": "~0.5.18"
+    "@prisma/client": "7.8.0"
   }
 }

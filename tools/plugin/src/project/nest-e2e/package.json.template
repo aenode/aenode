@@ -20,9 +20,5 @@
     }
   },
   "private": true,
-  "type": "module",
-  "devDependencies": {
-    "<%- projectName %>": "workspace:*",
-    "@aenode/nest": "workspace:*"
-  }
+  "type": "module"
 }

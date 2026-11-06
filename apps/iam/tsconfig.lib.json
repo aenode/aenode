@@ -13,13 +13,13 @@
       "path": "../../libs/nest-decorators/tsconfig.lib.json"
     },
     {
+      "path": "../../databases/iam-db/tsconfig.lib.json"
+    },
+    {
       "path": "../../libs/prop/tsconfig.lib.json"
     },
     {
       "path": "../../libs/nest-prisma/tsconfig.lib.json"
-    },
-    {
-      "path": "../../databases/iam-db/tsconfig.lib.json"
     },
     {
       "path": "../../libs/nest-boot/tsconfig.lib.json"

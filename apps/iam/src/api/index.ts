@@ -2,3 +2,5 @@
 export * from './app.controller.js';
 export * from './app.module.js';
 export * from './bootstrap.js';
+export * from './user/user.controller.js';
+export * from './user/user.module.js';

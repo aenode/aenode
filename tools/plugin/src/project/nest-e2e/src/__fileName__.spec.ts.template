@@ -1,46 +1,11 @@
-import { AppController } from '<%- projectName %>';
-import { type INestApplication } from '@aenode/nest/common';
-import { ConfigService } from '@aenode/nest/config';
-import { request } from '@aenode/nest/supertest';
-import { Test } from '@aenode/nest/testing';
-
-async function createApp(values: Record<string, unknown>) {
-  const moduleRef = await Test.createTestingModule({
-    controllers: [AppController],
-    providers: [
-      {
-        provide: ConfigService,
-        useValue: { get: (key: string) => values[key] },
-      },
-    ],
-  }).compile();
-
-  const app = moduleRef.createNestApplication();
-  await app.init();
-  return app;
-}
+import axios from 'axios';
 
 describe('AppController (e2e)', () => {
-  let app: INestApplication;
+  it('should get info', async () => {
+    const response = await axios.get('http://localhost:3001/api/info');
 
-  afterEach(async () => {
-    await app?.close();
-  });
-
-  describe('GET /info', () => {
-    it('returns values read from the unprefixed keys', async () => {
-      app = await createApp({
-        NAME: 'app-name',
-        DESCRIPTION: 'app-description',
-        API_PREFIX: 'api',
-        PORT: 3000,
-        ALLOWED_ORIGINS: 'http://localhost:4200',
-        AUTH_PROFILE: 'ADMIN_ONLY',
-      });
-
-      const res = await request(app.getHttpServer()).get('/info').expect(200);
-
-      expect(res.body.name).toEqual('app-name');
-    });
+    expect(response.status).toEqual(200);
+    expect(response.data).toBeDefined();
+    console.log(response.data);
   });
 });

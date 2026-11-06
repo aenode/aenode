@@ -5,13 +5,13 @@
       "path": "../../libs/nest-decorators"
     },
     {
+      "path": "../../databases/iam-db"
+    },
+    {
       "path": "../../libs/prop"
     },
     {
       "path": "../../libs/nest-prisma"
-    },
-    {
-      "path": "../../databases/iam-db"
     },
     {
       "path": "../../libs/nest-boot"
