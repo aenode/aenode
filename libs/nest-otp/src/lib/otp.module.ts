@@ -1,8 +1,8 @@
 import { Module } from '@aenode/nest/common';
-import { OtpService } from './otp.service.js';
+import { OtpManagerService } from './otp.service.js';
 
 @Module({
-  providers: [OtpService],
-  exports: [OtpService],
+  providers: [OtpManagerService],
+  exports: [OtpManagerService],
 })
-export class OtpModule {}
+export class OtpManagerModule {}

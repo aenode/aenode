@@ -4,16 +4,17 @@ import {
   getEncryptionKeyToken,
   provideEncryptionKey,
 } from './encryption-key.provider.js';
-import { EncriptionService } from './encryption.service.js';
+import { EncryptionService } from './encryption.service.js';
 
 @Module({
   imports: [ConfigModule],
+  providers: [EncryptionService],
 })
 export class EncryptionModule {
   static register(target?: string, scope?: string): DynamicModule {
     return {
       module: EncryptionModule,
-      providers: [provideEncryptionKey(target, scope), EncriptionService],
+      providers: [provideEncryptionKey(target, scope), EncryptionService],
       exports: [getEncryptionKeyToken(target, scope)],
     };
   }

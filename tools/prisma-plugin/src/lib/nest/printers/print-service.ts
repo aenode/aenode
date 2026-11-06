@@ -286,7 +286,7 @@ export function printService(model: DMMF.Model) {
     upsertCompositeMethods,
     findUnqiueOneMethods,
     findFirstOneMethods,
-    `  findMany(query: ${modelName}FindManyDto) {`,
+    `  findMany(query?: ${modelName}FindManyDto) {`,
     `    return this.delegate.findMany(query);`,
     `  }`,
 

@@ -3,7 +3,7 @@ import { generateSecret, generateURI, NobleCryptoPlugin, verify } from 'otplib';
 import { toBuffer, toDataURL } from 'qrcode';
 
 @Injectable()
-export class OtpService {
+export class OtpManagerService {
   generateOtpSecret(): string {
     return generateSecret({
       length: 30,

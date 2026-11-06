@@ -2,7 +2,7 @@ import { decrypt, encrypt } from '@aenode/encrypt';
 import { Injectable } from '@aenode/nest/common';
 
 @Injectable()
-export class EncriptionService {
+export class EncryptionService {
   constructor(protected readonly key: Buffer) {}
 
   encrypt(plaintext: string) {

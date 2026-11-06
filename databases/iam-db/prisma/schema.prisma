@@ -42,8 +42,7 @@ model Role {
 
   name String @unique
 
-  rolePermissions RolePermission[]
-  userRoles       UserRole[]
+  userRoles UserRole[]
 
   @@map("roles")
 }
@@ -56,26 +55,9 @@ model Permission {
 
   name String @unique
 
-  rolePermissions RolePermission[]
   userPermissions UserPermission[]
 
   @@map("permissions")
-}
-
-model RolePermission {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
-  isActive  Boolean  @default(true) @map("is_active")
-
-  role   Role @relation(fields: [roleId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  roleId Int  @map("role_id")
-
-  permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  permissionId Int        @map("permission_id")
-
-  @@unique([roleId, permissionId])
-  @@map("role_permissions")
 }
 
 model UserRole {

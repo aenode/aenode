@@ -2,22 +2,31 @@
   "extends": "../../tsconfig.base.json",
   "references": [
     {
-      "path": "../../libs/nest-decorators"
-    },
-    {
-      "path": "../../databases/iam-db"
-    },
-    {
       "path": "../../libs/prop"
     },
     {
       "path": "../../libs/nest-prisma"
     },
     {
+      "path": "../../libs/nest-otp"
+    },
+    {
+      "path": "../../libs/nest-hash"
+    },
+    {
+      "path": "../../libs/nest-encrypt"
+    },
+    {
+      "path": "../../libs/nest-decorators"
+    },
+    {
       "path": "../../libs/nest-boot"
     },
     {
       "path": "../../libs/nest"
+    },
+    {
+      "path": "../../databases/iam-db"
     },
     {
       "path": "../../libs/constants"

@@ -5,6 +5,7 @@ import { Module } from '@aenode/nest/common';
 import { ConfigModule } from '@aenode/nest/config';
 import { APP_INTERCEPTOR } from '@aenode/nest/core';
 import { EventEmitterModule } from '@aenode/nest/emitter';
+import { AuthModule } from '../auth/auth.module.js';
 import { AppController } from './app.controller.js';
 import { OtpModule } from './otp/otp.module.js';
 import { PermissionModule } from './permission/permission.module.js';
@@ -20,6 +21,8 @@ import { UserModule } from './user/user.module.js';
     EventEmitterModule.forRoot({ global: true, delimiter: '.' }),
     CacheModule.register({ isGlobal: true, ttl: 5_000 }),
     PrismaClientModule.register(PrismaClient),
+
+    AuthModule,
     OtpModule,
     PermissionModule,
     RoleModule,

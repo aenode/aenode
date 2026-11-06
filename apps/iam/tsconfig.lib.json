@@ -11,22 +11,31 @@
   "exclude": ["src/**/*.spec.ts"],
   "references": [
     {
-      "path": "../../libs/nest-decorators/tsconfig.lib.json"
-    },
-    {
-      "path": "../../databases/iam-db/tsconfig.lib.json"
-    },
-    {
       "path": "../../libs/prop/tsconfig.lib.json"
     },
     {
       "path": "../../libs/nest-prisma/tsconfig.lib.json"
     },
     {
+      "path": "../../libs/nest-otp/tsconfig.lib.json"
+    },
+    {
+      "path": "../../libs/nest-hash/tsconfig.lib.json"
+    },
+    {
+      "path": "../../libs/nest-encrypt/tsconfig.lib.json"
+    },
+    {
+      "path": "../../libs/nest-decorators/tsconfig.lib.json"
+    },
+    {
       "path": "../../libs/nest-boot/tsconfig.lib.json"
     },
     {
       "path": "../../libs/nest/tsconfig.lib.json"
+    },
+    {
+      "path": "../../databases/iam-db/tsconfig.lib.json"
     },
     {
       "path": "../../libs/constants/tsconfig.lib.json"
