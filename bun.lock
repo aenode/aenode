@@ -126,6 +126,17 @@
         "@swc/helpers": "~0.5.18",
       },
     },
+    "libs/dtos": {
+      "name": "@aenode/dtos",
+      "version": "0.0.1",
+      "bin": {
+        "aenode-dtos": "./bin/dtos.mjs",
+      },
+      "dependencies": {
+        "@aenode/prop": "workspace:*",
+        "@swc/helpers": "~0.5.18",
+      },
+    },
     "libs/encrypt": {
       "name": "@aenode/encrypt",
       "version": "0.0.40",
@@ -195,8 +206,10 @@
         "aenode-nest-auth": "./bin/nest-auth.mjs",
       },
       "dependencies": {
+        "@aenode/constants": "workspace:*",
         "@aenode/nest": "workspace:*",
         "@aenode/nest-decorators": "workspace:*",
+        "@aenode/prop": "workspace:*",
         "@aenode/types": "workspace:*",
         "@swc/helpers": "~0.5.18",
       },
@@ -347,6 +360,8 @@
     "@aenode/contact": ["@aenode/contact@workspace:apps/contact"],
 
     "@aenode/contact-db": ["@aenode/contact-db@workspace:databases/contact-db"],
+
+    "@aenode/dtos": ["@aenode/dtos@workspace:libs/dtos"],
 
     "@aenode/encrypt": ["@aenode/encrypt@workspace:libs/encrypt"],
 

@@ -5,10 +5,16 @@
       "path": "../types"
     },
     {
+      "path": "../prop"
+    },
+    {
       "path": "../nest-decorators"
     },
     {
       "path": "../nest"
+    },
+    {
+      "path": "../constants"
     },
     {
       "path": "./tsconfig.lib.json"

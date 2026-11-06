@@ -1,7 +1,6 @@
 // @index(['./**/*.ts', '!./**/*.spec.ts','!./**/index.ts', '!./**/_*.ts','!./**/main.ts', '!./**/generated/**'], f => `export * from '${f.path}.js'`)
 export * from './common/base-dto-class.js';
 export * from './common/global-validation-pipe.js';
-export * from './common/message.dto.js';
 export * from './common/validation-error-response.dto.js';
 export * from './default-value-transformer.js';
 export * from './json-transformer.js';

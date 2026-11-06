@@ -1,0 +1,63 @@
+{
+  "name": "@aenode/dtos",
+  "version": "0.0.1",
+  "description": "Common dtos",
+  "author": {
+    "name": "Ahmet Emrebas",
+    "email": "aenode+aenode+aenode-dtos@proton.me",
+    "url": "https://aenode.github.io/#profile"
+  },
+  "funding": "https://cash.app/$puqlib",
+  "homepage": "https://aenode.github.io/aenode/libs/dtos",
+  "repository": {
+    "directory": "libs/dtos",
+    "type": "github",
+    "url": "https://github.com/aenode/aenode/tree/main/libs/dtos"
+  },
+  "icon": "https://aenode.github.io/aenode/libs/dtos/assets/favicon.svg",
+  "keywords": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
+  "bin": {
+    "aenode-dtos": "./bin/dtos.mjs"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "bun": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "assets",
+    "bin",
+    "dist",
+    "generators.json",
+    "!**/*.tsbuildinfo"
+  ],
+  "nx": {
+    "sourceRoot": "libs/dtos/src",
+    "projectType": "library",
+    "tags": [
+      "lib:module"
+    ],
+    "targets": {
+      "build": {},
+      "doc": {}
+    }
+  },
+  "dependencies": {
+    "@aenode/prop": "workspace:*",
+    "@swc/helpers": "~0.5.18"
+  }
+}

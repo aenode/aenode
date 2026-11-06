@@ -70,6 +70,21 @@ export class EnvAuth extends BaseEnv {
   static readonly JWT_SECRET = 'JWT_SECRET';
 
   /**
+   * Who created the jwt
+   */
+  static readonly JWT_ISSUER = 'JWT_ISSUER';
+
+  /**
+   * What is the jwt for
+   */
+  static readonly JWT_SUBJECT = 'JWT_SUBJECT';
+
+  /**
+   * Who is the jwt for
+   */
+  static readonly JWT_AUDIENCE = 'JWT_AUDIENCE';
+
+  /**
    * Encription secret to encript data
    */
   static readonly ENCRIPTION_SECRET = 'ENCRIPTION_SECRET';
