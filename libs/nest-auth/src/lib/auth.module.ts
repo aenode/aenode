@@ -1,6 +1,8 @@
 import { Env } from '@aenode/constants';
+import { HashModule } from '@aenode/nest-hash';
 import { Module } from '@aenode/nest/common';
 import { ConfigModule, ConfigService } from '@aenode/nest/config';
+import { EventEmitterModule } from '@aenode/nest/emitter';
 import { JwtModule } from '@aenode/nest/jwt';
 import { randomBytes } from 'node:crypto';
 import { LoginService } from './login/login.service.js';
@@ -9,6 +11,8 @@ import { UserService } from './user/user.service.js';
 @Module({
   imports: [
     ConfigModule,
+    HashModule,
+    EventEmitterModule,
     JwtModule.registerAsync({
       inject: [ConfigService],
       useFactory(config: ConfigService) {

@@ -60,6 +60,7 @@
     "@aenode/constants": "workspace:*",
     "@aenode/nest": "workspace:*",
     "@aenode/nest-decorators": "workspace:*",
+    "@aenode/nest-hash": "workspace:*",
     "@aenode/prop": "workspace:*",
     "@aenode/types": "workspace:*",
     "@swc/helpers": "~0.5.18"

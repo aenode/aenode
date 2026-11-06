@@ -10,10 +10,13 @@
   "exclude": ["src/**/*.spec.ts"],
   "references": [
     {
-      "path": "../hash/tsconfig.lib.json"
+      "path": "../nest-otp/tsconfig.lib.json"
     },
     {
       "path": "../nest/tsconfig.lib.json"
+    },
+    {
+      "path": "../hash/tsconfig.lib.json"
     }
   ]
 }

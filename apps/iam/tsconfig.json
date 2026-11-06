@@ -1,0 +1,35 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "references": [
+    {
+      "path": "../../libs/nest-decorators"
+    },
+    {
+      "path": "../../databases/contact-db"
+    },
+    {
+      "path": "../../libs/prop"
+    },
+    {
+      "path": "../../libs/nest-prisma"
+    },
+    {
+      "path": "../../databases/iam-db"
+    },
+    {
+      "path": "../../libs/nest-boot"
+    },
+    {
+      "path": "../../libs/nest"
+    },
+    {
+      "path": "../../libs/constants"
+    },
+    {
+      "path": "./tsconfig.lib.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    }
+  ]
+}

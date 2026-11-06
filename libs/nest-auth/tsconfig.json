@@ -8,6 +8,9 @@
       "path": "../prop"
     },
     {
+      "path": "../nest-hash"
+    },
+    {
       "path": "../nest-decorators"
     },
     {

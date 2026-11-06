@@ -28,7 +28,7 @@ export class PermissionGuard implements CanActivate {
     const requiredRoles = getRoles(context, this.reflector);
     const requiredPermissins = getPermissions(context, this.reflector);
 
-    const userUuid = req.user.uuid;
+    const userUuid = req.user.userUUID;
 
     if (this.userService.isAdmin(userUuid)) {
       return true;

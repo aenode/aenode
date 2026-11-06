@@ -101,7 +101,11 @@
     }
   },
   "generators": {
-    "@aenode/plugin:project": {}
+    "@aenode/plugin:project": {
+      "orgName": "aenode",
+      "aenodeVersion": "0.0.42",
+      "version": "0.0.42"
+    }
   },
   "release": {
     "version": {

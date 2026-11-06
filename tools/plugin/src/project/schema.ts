@@ -1,4 +1,4 @@
-import { names } from '@nx/devkit';
+import { names } from '@aenode/names';
 import { basename } from 'node:path';
 
 export type ProjectType = 'nest' | 'nest-e2e' | 'lib' | 'cli' | 'prisma';
@@ -19,6 +19,8 @@ export class ProjectGeneratorSchema {
   projectName: string;
   names: ReturnType<typeof names>;
   aenodeVersion?: string;
+
+  workspaceVersion: string;
 
   constructor(value: ProjectGeneratorSchema) {
     Object.assign(this, value);

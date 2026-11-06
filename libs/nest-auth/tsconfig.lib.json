@@ -16,6 +16,9 @@
       "path": "../prop/tsconfig.lib.json"
     },
     {
+      "path": "../nest-hash/tsconfig.lib.json"
+    },
+    {
       "path": "../nest-decorators/tsconfig.lib.json"
     },
     {

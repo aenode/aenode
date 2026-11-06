@@ -75,6 +75,11 @@ export class EnvAuth extends BaseEnv {
   static readonly JWT_ISSUER = 'JWT_ISSUER';
 
   /**
+   * Who created the otp
+   */
+  static readonly OTP_ISSUER = 'OTP_ISSUER';
+
+  /**
    * What is the jwt for
    */
   static readonly JWT_SUBJECT = 'JWT_SUBJECT';

@@ -3,10 +3,9 @@ import {
   <%- className %>FindManyDto,
   <%- className %>ReadDto,
   <%- className %>UpdateDto,
-} from '@aenode/contact-db/nest';
+} from '<%- project %>-db/nest';
 import {
   CreateOne,
-  DeleteOneById,
   FindMany,
   FindOneById,
   ParamId,
@@ -14,7 +13,8 @@ import {
   UpdateOneById,
 } from '@aenode/nest-decorators';
 import { Body, Query } from '@aenode/nest/common';
-import { <%- className %>Service } from '../../data/index.js';
+import { <%- className %>Serviceimport { Controller } from '../../../../../libs/nest/dist/common';
+ } from '../../data/index.js';
 
 @ResouceController()
 export class <%- className %>Controller {

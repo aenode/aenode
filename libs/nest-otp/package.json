@@ -1,0 +1,68 @@
+{
+  "name": "@aenode/nest-otp",
+  "version": "0.0.1",
+  "description": "- [ ] Add project description",
+  "author": {
+    "name": "Ahmet Emrebas",
+    "email": "aenode+aenode+aenode-nest-otp@proton.me",
+    "url": "https://aenode.github.io/#profile"
+  },
+  "funding": "https://cash.app/$puqlib",
+  "homepage": "https://aenode.github.io/aenode/libs/nest-otp",
+  "repository": {
+    "directory": "libs/nest-otp",
+    "type": "github",
+    "url": "https://github.com/aenode/aenode/tree/main/libs/nest-otp"
+  },
+  "icon": "https://aenode.github.io/aenode/libs/nest-otp/assets/favicon.svg",
+  "keywords": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
+  "bin": {
+    "aenode-nest-otp": "./bin/nest-otp.mjs"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "bun": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "assets",
+    "bin",
+    "dist",
+    "generators.json",
+    "!**/*.tsbuildinfo"
+  ],
+  "nx": {
+    "sourceRoot": "libs/nest-otp/src",
+    "projectType": "library",
+    "tags": [
+      "lib:module"
+    ],
+    "targets": {
+      "build": {},
+      "doc": {}
+    }
+  },
+  "dependencies": {
+    "@aenode/nest": "workspace:*",
+    "@swc/helpers": "~0.5.18",
+    "otplib": "^13.6.0",
+    "qrcode": "^1.5.4"
+  },
+  "devDependencies": {
+    "@types/qrcode": "^1.5.6"
+  }
+}

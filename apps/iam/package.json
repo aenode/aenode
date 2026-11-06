@@ -1,0 +1,82 @@
+{
+  "name": "@aenode/iam",
+  "version": "0.0.1",
+  "description": "Identity and access management service",
+  "author": {
+    "name": "Ahmet Emrebas",
+    "email": "aenode+aenode+aenode-iam@proton.me",
+    "url": "https://aenode.github.io/#profile"
+  },
+  "funding": "https://cash.app/$puqlib",
+  "homepage": "https://aenode.github.io/aenode/apps/iam",
+  "repository": {
+    "directory": "apps/iam",
+    "type": "github",
+    "url": "https://github.com/aenode/aenode/tree/main/apps/iam"
+  },
+  "icon": "https://aenode.github.io/aenode/apps/iam/assets/favicon.svg",
+  "keywords": [
+    "lib"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
+  "bin": {
+    "aenode-iam": "./bin/iam.mjs"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "bun": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./api": {
+      "bun": "./src/api/index.ts",
+      "types": "./dist/api/index.d.ts",
+      "import": "./dist/api/index.js",
+      "default": "./dist/api/index.js"
+    },
+    "./data": {
+      "bun": "./src/data/index.ts",
+      "types": "./dist/data/index.d.ts",
+      "import": "./dist/data/index.js",
+      "default": "./dist/data/index.js"
+    }
+  },
+  "files": [
+    "assets",
+    "bin",
+    "dist",
+    "!**/*.tsbuildinfo"
+  ],
+  "nx": {
+    "sourceRoot": "apps/iam/src",
+    "projectType": "library",
+    "tags": [
+      "app:nest"
+    ],
+    "targets": {
+      "build": {},
+      "serve": {},
+      "doc": {}
+    }
+  },
+  "dependencies": {
+    "@aenode/constants": "workspace:*",
+    "@aenode/nest": "workspace:*",
+    "@aenode/nest-boot": "workspace:*",
+    "@aenode/iam-db": "workspace:*",
+    "@aenode/nest-prisma": "workspace:*",
+    "@aenode/prop": "workspace:*",
+    "@prisma/client": "7.8.0",
+    "@aenode/nest-decorators": "workspace:*",
+    "@swc/helpers": "~0.5.18"
+  }
+}

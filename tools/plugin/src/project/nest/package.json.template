@@ -69,8 +69,12 @@
     }
   },
   "dependencies": {
-    "@aenode/constants": "workspace:*",
-    "@aenode/nest": "workspace:*",
-    "@aenode/nest-boot": "workspace:*"
+    "@aenode/constants": "<%- aenodeVersion %>",
+    "@aenode/nest": "<%- aenodeVersion %>",
+    "@aenode/nest-boot": "<%- aenodeVersion %>",
+    "@aenode/nest-prisma": "<%- aenodeVersion %>",
+    "@aenode/prop": "<%- aenodeVersion %>",
+    "@prisma/client": "7.8.0",
+    "<%- projectName %>-db": "workspace:*"
   }
 }

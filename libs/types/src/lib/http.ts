@@ -8,7 +8,19 @@ export type UserData = {
   permissions?: Set<string>;
 };
 
-export type UserJwtData = { sub: number; uuid: string };
+export type SessionData = {
+  id: number;
+  userId: number;
+  deviceUUID: string;
+  agent?: string;
+};
+
+export type UserJwtData = {
+  /**
+   * User id
+   */
+  sub: number;
+};
 
 export type ExtendedRequest = {
   user: UserJwtData;

@@ -68,6 +68,15 @@
     },
     {
       "path": "./libs/dtos"
+    },
+    {
+      "path": "./libs/nest-otp"
+    },
+    {
+      "path": "./databases/iam-db"
+    },
+    {
+      "path": "./apps/iam"
     }
   ]
 }

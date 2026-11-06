@@ -13,6 +13,12 @@ datasource db {
 
 
 
+enum Status {
+  ACTIVE
+  PASSIVE
+}
+
+
 
 model User {
   id   Int    @id @default(autoincrement())
