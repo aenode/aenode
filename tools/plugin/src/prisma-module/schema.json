@@ -15,13 +15,16 @@
     },
 
     "name": {
-      "type": "string",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
       "description": "Resource name",
       "$default": {
         "$source": "argv",
         "index": 1
       },
-      "x-prompt": "What name would you like to use?"
+      "x-prompt": "What names would you like to use?"
     }
   },
   "required": ["project", "name"]

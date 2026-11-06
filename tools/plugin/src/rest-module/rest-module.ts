@@ -17,14 +17,16 @@ export async function restModuleGenerator(
   const projectSrcRoot = (projectConfiguration.sourceRoot ??=
     projectConfiguration.root + '/src');
 
-  const sourceNames = names(options.name);
+  for (const name of options.name) {
+    const sourceNames = names(name);
 
-  const targetRoot = path.join(projectSrcRoot, 'api', sourceNames.fileName);
+    const targetRoot = path.join(projectSrcRoot, 'api', sourceNames.fileName);
 
-  generateFiles(tree, path.join(import.meta.dirname, 'files'), targetRoot, {
-    ...sourceNames,
-    project: options.project,
-  });
+    generateFiles(tree, path.join(import.meta.dirname, 'files'), targetRoot, {
+      ...sourceNames,
+      project: options.project,
+    });
+  }
   await formatFiles(tree);
 }
 
