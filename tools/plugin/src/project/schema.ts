@@ -1,7 +1,7 @@
 import { names } from '@aenode/names';
 import { basename } from 'node:path';
 
-export type ProjectType = 'nest' | 'nest-e2e' | 'lib' | 'cli' | 'prisma';
+export type ProjectType = 'nest' | 'lib' | 'cli' | 'prisma';
 
 export class ProjectGeneratorSchema {
   type: ProjectType = 'lib';
@@ -32,9 +32,11 @@ export class ProjectGeneratorSchema {
     this.homepageUrl = `${this.homepageUrl ?? 'https://aenode.github.io/aenode'}/${this.directory}`;
     this.repositoryUrl = `${this.repositoryUrl ?? 'https://github.com/aenode/aenode/tree/main'}/${this.directory}`;
     this.iconUrl = `${this.homepageUrl}/assets/favicon.svg`;
-    if (this.aenodeVersion) {
+
+    if (!this.aenodeVersion) {
       this.aenodeVersion = 'workspace:*';
     }
+
     if (!this.email) {
       this.email = `aenode+${this.names.fileName}@proton.me`;
     } else {
@@ -45,8 +47,7 @@ export class ProjectGeneratorSchema {
     }
 
     if (!this.projectName) {
-      const e2eSuffix = this.type === 'nest-e2e' ? '-e2e' : '';
-      this.projectName = `@${this.orgName}/${this.names.fileName}${e2eSuffix}`;
+      this.projectName = `@${this.orgName}/${this.names.fileName}`;
     }
   }
 }

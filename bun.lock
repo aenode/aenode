@@ -97,9 +97,11 @@
         "@aenode/iam-db": "workspace:*",
         "@aenode/nest": "workspace:*",
         "@aenode/nest-boot": "workspace:*",
+        "@aenode/nest-decorators": "workspace:*",
         "@aenode/nest-prisma": "workspace:*",
-        "@aenode/prop": "0.0.42",
+        "@aenode/prop": "workspace:*",
         "@prisma/client": "7.8.0",
+        "@swc/helpers": "~0.5.18",
       },
     },
     "databases/aenode-db": {
@@ -295,7 +297,6 @@
       "dependencies": {
         "@aenode/hash": "workspace:*",
         "@aenode/nest": "workspace:*",
-        "@aenode/nest-otp": "workspace:*",
         "@swc/helpers": "~0.5.18",
       },
     },
@@ -306,7 +307,6 @@
         "aenode-nest-otp": "./bin/nest-otp.mjs",
       },
       "dependencies": {
-        "@aenode/constants": "workspace:*",
         "@aenode/nest": "workspace:*",
         "@swc/helpers": "~0.5.18",
         "otplib": "^13.6.0",

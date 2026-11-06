@@ -41,49 +41,56 @@ export function generateByProjectType(
   );
 }
 
+export function generateNestE2eProject(
+  tree: Tree,
+  options: ProjectGeneratorSchema,
+) {
+  generateFiles(
+    tree,
+    path.join(import.meta.dirname, 'nest-e2e'),
+    options.directory + '-e2e',
+    { ...options, ...options.names },
+  );
+}
+
 export async function projectGenerator(
   tree: Tree,
   options: ProjectGeneratorSchema,
 ) {
   options = new ProjectGeneratorSchema(options);
 
+  // Generate the common configuration files exluding the e2e projects
+  generateCommonConfig(tree, options);
+
   // Generate the project type specific files
   generateByProjectType(tree, options);
 
-  // Generate the common configuration files exluding the e2e projects
-  switch (options.type) {
-    case 'nest':
-    case 'lib':
-    case 'cli':
-    case 'prisma': {
-      generateCommonConfig(tree, options);
-      break;
-    }
-    case 'nest-e2e': {
-      break;
-    }
+  if (options.type === 'lib') {
+    generateLibConfig(tree, options);
   }
 
-  switch (options.type) {
-    case 'lib': {
-      generateLibConfig(tree, options);
-      break;
-    }
-    case 'prisma':
-    case 'cli':
-    case 'nest':
-    case 'nest-e2e': {
-      break;
-    }
+  if (options.type === 'nest') {
+    generateNestE2eProject(tree, options);
   }
 
   updateJson(tree, 'tsconfig.json', (value) => {
     value.references ??= [];
     const projectPath = `./${options.directory}`;
+    const e2eProjectPath = projectPath + '-e2e';
     if (
       !value.references.find((e: { path: string }) => e.path === projectPath)
     ) {
       value.references.push({ path: projectPath });
+    }
+
+    if (options.type === 'nest') {
+      if (
+        !value.references.find(
+          (e: { path: string }) => e.path === e2eProjectPath,
+        )
+      ) {
+        value.references.push({ path: e2eProjectPath });
+      }
     }
     return value;
   });

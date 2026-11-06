@@ -3,7 +3,6 @@ import { type INestApplication } from '@aenode/nest/common';
 import { ConfigService } from '@aenode/nest/config';
 import { request } from '@aenode/nest/supertest';
 import { Test } from '@aenode/nest/testing';
-import { describe, afterEach, it, expect } from 'vitest';
 
 async function createApp(values: Record<string, unknown>) {
   const moduleRef = await Test.createTestingModule({

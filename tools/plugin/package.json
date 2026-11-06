@@ -69,8 +69,8 @@
     }
   },
   "dependencies": {
-    "@aenode/names": "workspace:*",
     "@nx/devkit": "24.0.3",
+    "@aenode/names": "workspace:*",
     "@swc/helpers": "~0.5.18"
   },
   "generators": "./generators.json"
