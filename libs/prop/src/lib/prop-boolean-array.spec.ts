@@ -1,6 +1,6 @@
+import { transformAndValidateSyncTest } from './common/transform-and-validate.js';
 import type { PropValidationOptions } from './prop-options.js';
 import { PropValidation } from './prop-validation.js';
-import { transformAndValidate } from './test-helpers.js';
 
 describe('Boolean Array Validation', () => {
   it.each`
@@ -22,7 +22,7 @@ describe('Boolean Array Validation', () => {
         @PropValidation(options) value: boolean[];
       }
 
-      const foundConstraints = transformAndValidate(Sample, value);
+      const foundConstraints = transformAndValidateSyncTest(Sample, value);
       expect(foundConstraints.sort()).toEqual(errors.sort());
     },
   );

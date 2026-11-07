@@ -1,8 +1,8 @@
 import { faker } from '@aenode/nest/faker';
 import { v4, v7 } from '@aenode/nest/uuid';
+import { transformAndValidateSyncTest } from './common/transform-and-validate.js';
 import type { PropValidationOptions } from './prop-options.js';
 import { PropValidation } from './prop-validation.js';
-import { transformAndValidate } from './test-helpers.js';
 
 describe('String Value Validation', () => {
   it.each`
@@ -44,7 +44,7 @@ describe('String Value Validation', () => {
         @PropValidation(options) value: string;
       }
 
-      const foundConstraints = transformAndValidate(Sample, value);
+      const foundConstraints = transformAndValidateSyncTest(Sample, value);
       expect(foundConstraints.sort()).toEqual(errors.sort());
       expect(foundConstraints.sort()).toEqual(errors.sort());
     },

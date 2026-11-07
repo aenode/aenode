@@ -23,11 +23,14 @@ model User {
   updatedAt DateTime @updatedAt @map("updated_at")
   isActive  Boolean  @default(true) @map("is_active")
 
-  username String
+  /// @format(email)
+  username String @unique
+
+  /// @format(password) @hash
   password String
 
+  otp             Otp?
   sessions        Session[]
-  otps            Otp[]
   userRoles       UserRole[]
   userPermissions UserPermission[]
 
@@ -99,11 +102,15 @@ model Session {
   isActive  Boolean  @default(true) @map("is_active")
 
   user   User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  userId Int
+  userId Int  @map("user_id")
 
-  deviceUUID String @map("device_uuid")
+  /// @format(uuid7)
+  deviceUUID String  @map("device_uuid")
   agent      String
-  ipAddress  String @map("ip_address")
+  location   String?
+
+  /// @format(ip)
+  ipAddress String @map("ip_address")
 
   @@map("sessions")
 }
@@ -120,7 +127,8 @@ model Otp {
   secret String
 
   user   User @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  userId Int  @map("user_id")
+  userId Int  @unique @map("user_id")
 
+  @@index([userId])
   @@map("otps")
 }

@@ -1,6 +1,8 @@
 // @index(['./**/*.ts', '!./**/*.spec.ts','!./**/index.ts', '!./**/_*.ts','!./**/main.ts', '!./**/generated/**'], f => `export * from '${f.path}.js'`)
 export * from './common/base-dto-class.js';
 export * from './common/global-validation-pipe.js';
+export * from './common/to-validation-error-dto.js';
+export * from './common/transform-and-validate.js';
 export * from './common/validation-error-response.dto.js';
 export * from './default-value-transformer.js';
 export * from './json-transformer.js';
@@ -15,7 +17,6 @@ export * from './prop-options.js';
 export * from './prop-string.js';
 export * from './prop-validation.js';
 export * from './prop.js';
-export * from './test-helpers.js';
 export * from './to-api-property-optionts.js';
 export * from './validators/is-relative-path.js';
 export * from './validators/less-than.js';

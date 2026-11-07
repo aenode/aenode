@@ -18,4 +18,3 @@ export * from './nest-decorators.js';
 export * from './params/param-id.js';
 export * from './params/param-uuid.js';
 export * from './params/user-id.js';
-export * from './params/user-name.js';

@@ -3,6 +3,7 @@ import {
   IsEAN,
   IsEmail,
   IsIn,
+  IsIP,
   IsJSON,
   IsJWT,
   IsNotIn,
@@ -50,7 +51,6 @@ export function __PropStringFormat(
       }
       case 'ean': {
         IsEAN(validationOptions)(...args);
-
         break;
       }
       case 'name': {
@@ -70,14 +70,24 @@ export function __PropStringFormat(
         IsUrl(undefined, validationOptions)(...args);
         break;
       }
-
       case 'path': {
         IsRelativePath(validationOptions)(...args);
         break;
       }
-
       case 'jwt': {
         IsJWT(validationOptions)(...args);
+        break;
+      }
+      case 'ip': {
+        IsIP(undefined, validationOptions)(...args);
+        break;
+      }
+      case 'ip4': {
+        IsIP('4', validationOptions)(...args);
+        break;
+      }
+      case 'ip6': {
+        IsIP('6', validationOptions)(...args);
         break;
       }
     }

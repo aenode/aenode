@@ -7,6 +7,8 @@ import {
 import type { Request } from '@aenode/nest/express';
 import { JwtService } from '@aenode/nest/jwt';
 import { AuthService } from '../auth.service.js';
+import type { EnableOtpDto } from '../dtos/enable-otp.dto.js';
+import { LoginResponseDto } from '../dtos/login-response.dto.js';
 import { LoginWithOtpDto } from '../dtos/login-with-otp.dto.js';
 import { LoginDto } from '../dtos/login.dto.js';
 
@@ -18,46 +20,83 @@ export class LoginService {
     protected readonly jwtService: JwtService,
   ) {}
 
-  async login(data: LoginDto, req: Request) {
+  protected async createAndSignSession(userId: number, req: Request) {
+    const session = await this.authService.createSession(userId, req);
+
+    const { id: sessionId, deviceUUID } = session;
+
+    const token = await this.authService.signToken(sessionId);
+
+    return new LoginResponseDto({
+      token,
+      deviceUUID,
+    });
+  }
+
+  async login(data: LoginDto, req: Request): Promise<LoginResponseDto> {
     const foundUser = this.authService.findUserByUsername(data.username);
 
     if (!foundUser) {
       throw new NotFoundException('User not found');
     }
 
-    if (
-      !(await this.hashService.verifyPassword(
-        foundUser.password,
-        data.password,
-      ))
-    ) {
+    const { id: userId, password: hashedPassword } = foundUser;
+    const { password: rawPassword } = data;
+
+    const isPasswordCorrect = await this.hashService.verifyPassword(
+      hashedPassword,
+      rawPassword,
+    );
+
+    if (!isPasswordCorrect) {
       throw new BadRequestException('Wrong password');
     }
 
-    const session = await this.authService.createSession(foundUser.id, req);
-    const token = await this.authService.signToken(session.id);
-    return { token };
+    return await this.createAndSignSession(userId, req);
   }
 
-  async loginWithOtp(data: LoginWithOtpDto, req: Request) {
+  async loginWithOtp(
+    data: LoginWithOtpDto,
+    req: Request,
+  ): Promise<LoginResponseDto> {
     const foundOtp = this.authService.findOtpByUsername(data.username);
 
     if (foundOtp && foundOtp.isEnabled === true) {
+      const { userId } = foundOtp;
       const secret = this.authService.decrypt(foundOtp.secret);
 
       const isOtpVerified = await this.authService.verifyOtp(data.otp, secret);
       if (isOtpVerified === true) {
-        const session = await this.authService.createSession(
-          foundOtp.userId,
-          req,
-        );
-
-        const token = await this.authService.signToken(session.id);
-
-        return { token };
+        return await this.createAndSignSession(userId, req);
       }
       throw new BadRequestException('Invalid otp');
     }
     throw new NotFoundException('Otp not found');
+  }
+
+  logout(sessionId: number) {
+    return this.authService.deleteSessionById(sessionId);
+  }
+
+  logoutAll(sessionId: number) {
+    return this.authService.deleteAllSessionsById(sessionId);
+  }
+
+  async enable2FA(data: EnableOtpDto, sessionId: number) {
+    const foundOtp = this.authService.findOtpBySessionId(sessionId);
+
+    if (!foundOtp) {
+      throw new NotFoundException('Otp not found');
+    }
+
+    const secret = await this.authService.decrypt(foundOtp.secret);
+
+    const isOtpVerified = await this.authService.verifyOtp(data.otp, secret);
+
+    if (isOtpVerified) {
+      return await this.authService.enableOtp(foundOtp.id);
+    }
+
+    throw new BadRequestException('Invalid otp');
   }
 }

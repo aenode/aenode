@@ -13,7 +13,10 @@ export type StringFormat =
   | 'url'
   | 'data-uri'
   | 'path'
-  | 'jwt';
+  | 'jwt'
+  | 'ip'
+  | 'ip4'
+  | 'ip6';
 
 export type NumberFormat = 'integer' | 'positive' | 'percent';
 

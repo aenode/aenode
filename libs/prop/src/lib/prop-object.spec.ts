@@ -1,6 +1,6 @@
+import { transformAndValidateSyncTest } from './common/transform-and-validate.js';
 import type { PropValidationOptions } from './prop-options.js';
 import { PropValidation } from './prop-validation.js';
-import { transformAndValidate } from './test-helpers.js';
 
 describe('Object Validation', () => {
   class Obj {
@@ -21,7 +21,7 @@ describe('Object Validation', () => {
         @PropValidation(options) value: Obj;
       }
 
-      const foundConstraints = transformAndValidate(Sample, value);
+      const foundConstraints = transformAndValidateSyncTest(Sample, value);
       expect(foundConstraints.sort()).toEqual(errors.sort());
     },
   );
