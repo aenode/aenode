@@ -103,7 +103,6 @@
         "@aenode/prop": "workspace:*",
         "@aenode/types": "workspace:*",
         "@prisma/client": "7.8.0",
-        "type-fest": "^5.10.0",
       },
     },
     "apps/iam-e2e": {
