@@ -40,6 +40,14 @@
   ],
   "targetDefaults": {
     "test": {},
+    "prune": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "rm -rf {projectRoot}/dist {projectRoot}/node_modules {projectRoot}/out-tsc {projectRoot}/src/generated"
+        ]
+      }
+    },
     "build": {
       "executor": "@nx/js:swc",
       "dependsOn": ["build", "^build"],

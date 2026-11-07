@@ -63,6 +63,7 @@
       "app:nest"
     ],
     "targets": {
+      "prune": {},
       "build": {},
       "serve": {},
       "doc": {}
