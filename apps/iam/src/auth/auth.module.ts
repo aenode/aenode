@@ -11,6 +11,8 @@ import {
   UserDataModule,
 } from '../data/index.js';
 import { AuthService } from './auth.service.js';
+import { LoginControler } from './login/login.controller.js';
+import { LoginService } from './login/login.service.js';
 
 @Module({
   imports: [
@@ -39,6 +41,7 @@ import { AuthService } from './auth.service.js';
     SessionDataModule,
     OtpDataModule,
   ],
-  providers: [AuthService],
+  controllers: [LoginControler],
+  providers: [AuthService, LoginService],
 })
 export class AuthModule {}

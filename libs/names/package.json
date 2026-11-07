@@ -1,6 +1,6 @@
 {
   "name": "@aenode/names",
-  "version": "0.0.45",
+  "version": "0.0.47",
   "description": "Create all variants of a given text",
   "author": {
     "name": "Ahmet Emrebas",

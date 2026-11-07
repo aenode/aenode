@@ -1,6 +1,6 @@
 {
   "name": "@aenode/aenode-db",
-  "version": "0.0.45",
+  "version": "0.0.47",
   "description": "Aenode databases",
   "author": {
     "name": "Ahmet Emrebas",

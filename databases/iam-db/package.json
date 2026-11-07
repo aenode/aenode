@@ -1,6 +1,6 @@
 {
   "name": "@aenode/iam-db",
-  "version": "0.0.45",
+  "version": "0.0.47",
   "description": "Identity and access management database",
   "author": {
     "name": "Ahmet Emrebas",

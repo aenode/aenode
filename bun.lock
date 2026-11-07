@@ -51,7 +51,7 @@
     },
     "apps/aenode": {
       "name": "@aenode/aenode",
-      "version": "0.0.45",
+      "version": "0.0.47",
       "bin": {
         "aenode-api": "./bin/aenode.mjs",
       },
@@ -69,7 +69,7 @@
     },
     "apps/contact": {
       "name": "@aenode/contact",
-      "version": "0.0.45",
+      "version": "0.0.47",
       "bin": {
         "aenode-contact": "./bin/contact.mjs",
       },
@@ -86,7 +86,7 @@
     },
     "apps/iam": {
       "name": "@aenode/iam",
-      "version": "0.0.45",
+      "version": "0.0.47",
       "bin": {
         "aenode-iam": "./bin/iam.mjs",
       },
@@ -111,7 +111,7 @@
     },
     "databases/aenode-db": {
       "name": "@aenode/aenode-db",
-      "version": "0.0.45",
+      "version": "0.0.47",
       "bin": {
         "aenode-aenode-db": "./bin/aenode-db.mjs",
       },
@@ -126,7 +126,7 @@
     },
     "databases/contact-db": {
       "name": "@aenode/contact-db",
-      "version": "0.0.45",
+      "version": "0.0.47",
       "bin": {
         "aenode-contact-db": "./bin/contact-db.mjs",
       },
@@ -141,7 +141,7 @@
     },
     "databases/iam-db": {
       "name": "@aenode/iam-db",
-      "version": "0.0.45",
+      "version": "0.0.47",
       "bin": {
         "aenode-iam-db": "./bin/iam-db.mjs",
       },
@@ -156,7 +156,7 @@
     },
     "libs/constants": {
       "name": "@aenode/constants",
-      "version": "0.0.45",
+      "version": "0.0.47",
       "bin": {
         "aenode-constants": "./bin/constants.mjs",
       },
@@ -166,7 +166,7 @@
     },
     "libs/dtos": {
       "name": "@aenode/dtos",
-      "version": "0.0.45",
+      "version": "0.0.47",
       "bin": {
         "aenode-dtos": "./bin/dtos.mjs",
       },
@@ -177,7 +177,7 @@
     },
     "libs/encrypt": {
       "name": "@aenode/encrypt",
-      "version": "0.0.45",
+      "version": "0.0.47",
       "bin": {
         "aenode-encrypt": "./bin/encrypt.mjs",
       },
@@ -187,7 +187,7 @@
     },
     "libs/hash": {
       "name": "@aenode/hash",
-      "version": "0.0.45",
+      "version": "0.0.47",
       "bin": {
         "aenode-hash": "./bin/hash.mjs",
       },
@@ -198,7 +198,7 @@
     },
     "libs/names": {
       "name": "@aenode/names",
-      "version": "0.0.45",
+      "version": "0.0.47",
       "bin": {
         "aenode-names": "./bin/names.mjs",
       },
@@ -208,7 +208,7 @@
     },
     "libs/nest": {
       "name": "@aenode/nest",
-      "version": "0.0.45",
+      "version": "0.0.47",
       "dependencies": {
         "@faker-js/faker": "^10.6.0",
         "@nestjs/cache-manager": "^12.0.2",
@@ -239,7 +239,7 @@
     },
     "libs/nest-boot": {
       "name": "@aenode/nest-boot",
-      "version": "0.0.45",
+      "version": "0.0.47",
       "bin": {
         "aenode-nest-boot": "./bin/nest-boot.mjs",
       },
@@ -252,7 +252,7 @@
     },
     "libs/nest-decorators": {
       "name": "@aenode/nest-decorators",
-      "version": "0.0.45",
+      "version": "0.0.47",
       "bin": {
         "aenode-nest-decorators": "./bin/nest-decorators.mjs",
       },
@@ -266,7 +266,7 @@
     },
     "libs/nest-encrypt": {
       "name": "@aenode/nest-encrypt",
-      "version": "0.0.45",
+      "version": "0.0.47",
       "bin": {
         "aenode-nest-encrypt": "./bin/nest-encrypt.mjs",
       },
@@ -279,7 +279,7 @@
     },
     "libs/nest-hash": {
       "name": "@aenode/nest-hash",
-      "version": "0.0.45",
+      "version": "0.0.47",
       "bin": {
         "aenode-nest-hash": "./bin/nest-hash.mjs",
       },
@@ -291,7 +291,7 @@
     },
     "libs/nest-otp": {
       "name": "@aenode/nest-otp",
-      "version": "0.0.45",
+      "version": "0.0.47",
       "bin": {
         "aenode-nest-otp": "./bin/nest-otp.mjs",
       },
@@ -307,7 +307,7 @@
     },
     "libs/nest-prisma": {
       "name": "@aenode/nest-prisma",
-      "version": "0.0.45",
+      "version": "0.0.47",
       "bin": {
         "aenode-nest-prisma": "./bin/nest-prisma.mjs",
       },
@@ -322,7 +322,7 @@
     },
     "libs/prop": {
       "name": "@aenode/prop",
-      "version": "0.0.45",
+      "version": "0.0.47",
       "bin": {
         "aenode-prop": "./bin/prop.mjs",
       },
@@ -333,7 +333,7 @@
     },
     "libs/types": {
       "name": "@aenode/types",
-      "version": "0.0.45",
+      "version": "0.0.47",
       "bin": {
         "aenode-types": "./bin/types.mjs",
       },
@@ -344,7 +344,7 @@
     },
     "tools/cli": {
       "name": "@aenode/cli",
-      "version": "0.0.45",
+      "version": "0.0.47",
       "bin": {
         "aenode": "./bin/aenode.mjs",
       },
@@ -360,7 +360,7 @@
     },
     "tools/plugin": {
       "name": "@aenode/plugin",
-      "version": "0.0.45",
+      "version": "0.0.47",
       "bin": {
         "aenode-plugin": "./bin/plugin.mjs",
       },
@@ -372,7 +372,7 @@
     },
     "tools/prisma-plugin": {
       "name": "@aenode/prisma-plugin",
-      "version": "0.0.45",
+      "version": "0.0.47",
       "bin": {
         "aenode-prisma-plugin": "./bin/prisma-plugin.mjs",
         "aenode-prisma-nest": "./bin/nest.mjs",
