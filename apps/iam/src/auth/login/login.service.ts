@@ -6,6 +6,7 @@ import {
 } from '@aenode/nest/common';
 import type { Request } from '@aenode/nest/express';
 import { JwtService } from '@aenode/nest/jwt';
+import { AuthUser } from '../auth-user.js';
 import { AuthService } from '../auth.service.js';
 import type { EnableOtpDto } from '../dtos/enable-otp.dto.js';
 import { LoginResponseDto } from '../dtos/login-response.dto.js';
@@ -34,13 +35,13 @@ export class LoginService {
   }
 
   async login(data: LoginDto, req: Request): Promise<LoginResponseDto> {
-    const foundUser = this.authService.findUserByUsername(data.username);
+    const authUser = AuthUser.findUserByUsername(data.username);
 
-    if (!foundUser) {
+    if (!authUser) {
       throw new NotFoundException('User not found');
     }
 
-    const { id: userId, password: hashedPassword } = foundUser;
+    const { id: userId, password: hashedPassword } = authUser.user;
     const { password: rawPassword } = data;
 
     const isPasswordCorrect = await this.hashService.verifyPassword(
@@ -59,7 +60,7 @@ export class LoginService {
     data: LoginWithOtpDto,
     req: Request,
   ): Promise<LoginResponseDto> {
-    const foundOtp = this.authService.findOtpByUsername(data.username);
+    const foundOtp = AuthUser.findOtpByUsername(data.username);
 
     if (foundOtp && foundOtp.isEnabled === true) {
       const { userId } = foundOtp;
@@ -75,7 +76,7 @@ export class LoginService {
   }
 
   logout(sessionId: number) {
-    return this.authService.deleteSessionById(sessionId);
+    return this.authService.deleteSessionBySessionId(sessionId);
   }
 
   logoutAll(sessionId: number) {
@@ -83,12 +84,11 @@ export class LoginService {
   }
 
   async enable2FA(data: EnableOtpDto, sessionId: number) {
-    const foundOtp = this.authService.findOtpBySessionId(sessionId);
+    const foundOtp = AuthUser.findOtpBySessionId(sessionId);
 
     if (!foundOtp) {
       throw new NotFoundException('Otp not found');
     }
-
     const secret = await this.authService.decrypt(foundOtp.secret);
 
     const isOtpVerified = await this.authService.verifyOtp(data.otp, secret);
