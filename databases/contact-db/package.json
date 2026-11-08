@@ -83,6 +83,7 @@
     ],
     "projectType": "library",
     "targets": {
+      "prune": {},
       "build": {
         "dependsOn": [
           "prisma:generate"

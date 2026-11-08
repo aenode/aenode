@@ -83,6 +83,7 @@
       "data:prisma"
     ],
     "targets": {
+      "prune": {},
       "build": {
         "dependsOn": [
           "prisma:generate"

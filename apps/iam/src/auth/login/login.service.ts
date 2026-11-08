@@ -8,7 +8,7 @@ import type { Request } from '@aenode/nest/express';
 import { JwtService } from '@aenode/nest/jwt';
 import { AuthUser } from '../auth-user.js';
 import { AuthService } from '../auth.service.js';
-import type { EnableOtpDto } from '../dtos/enable-otp.dto.js';
+import { EnableOtpDto } from '../dtos/enable-otp.dto.js';
 import { LoginResponseDto } from '../dtos/login-response.dto.js';
 import { LoginWithOtpDto } from '../dtos/login-with-otp.dto.js';
 import { LoginDto } from '../dtos/login.dto.js';
