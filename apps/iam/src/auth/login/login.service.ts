@@ -23,15 +23,10 @@ export class LoginService {
 
   protected async createAndSignSession(userId: number, req: Request) {
     const session = await this.authService.createSession(userId, req);
-
     const { id: sessionId, deviceUUID } = session;
-
     const token = await this.authService.signToken(sessionId);
 
-    return new LoginResponseDto({
-      token,
-      deviceUUID,
-    });
+    return new LoginResponseDto({ token, deviceUUID });
   }
 
   async login(data: LoginDto, req: Request): Promise<LoginResponseDto> {

@@ -5,9 +5,10 @@ import {
   OtpUpdateDto,
 } from '@aenode/iam-db/nest';
 import type { EncryptionService } from '@aenode/nest-encrypt';
-import { OtpService as OtpManagerService } from '@aenode/nest-otp';
+import { OtpManagerService } from '@aenode/nest-otp';
 import { InjectPrismaDelegate } from '@aenode/nest-prisma';
 import { Injectable } from '@aenode/nest/common';
+
 @Injectable()
 export class OtpService extends OtpDelegateService {
   constructor(

@@ -9,7 +9,6 @@ import { AuthModule } from '../auth/auth.module.js';
 import { AppController } from './app.controller.js';
 import { OtpModule } from './otp/otp.module.js';
 import { PermissionModule } from './permission/permission.module.js';
-import { RolePermissionModule } from './role-permission/role-permission.module.js';
 import { RoleModule } from './role/role.module.js';
 import { SessionModule } from './session/session.module.js';
 import { UserRoleModule } from './user-role/user-role.module.js';
@@ -21,12 +20,10 @@ import { UserModule } from './user/user.module.js';
     EventEmitterModule.forRoot({ global: true, delimiter: '.' }),
     CacheModule.register({ isGlobal: true, ttl: 5_000 }),
     PrismaClientModule.register(PrismaClient),
-
     AuthModule,
     OtpModule,
     PermissionModule,
     RoleModule,
-    RolePermissionModule,
     SessionModule,
     UserModule,
     UserRoleModule,

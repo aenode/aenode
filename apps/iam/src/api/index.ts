@@ -6,8 +6,6 @@ export * from './otp/otp.controller.js';
 export * from './otp/otp.module.js';
 export * from './permission/permission.controller.js';
 export * from './permission/permission.module.js';
-export * from './role-permission/role-permission.controller.js';
-export * from './role-permission/role-permission.module.js';
 export * from './role/role.controller.js';
 export * from './role/role.module.js';
 export * from './session/session.controller.js';
