@@ -4,7 +4,6 @@ import { HashModule } from '@aenode/nest-hash';
 import { OtpManagerModule } from '@aenode/nest-otp';
 import { Module, type OnModuleInit } from '@aenode/nest/common';
 import { ConfigService } from '@aenode/nest/config';
-import { APP_GUARD } from '@aenode/nest/core';
 import { JwtModule } from '@aenode/nest/jwt';
 import {
   OtpDataModule,
@@ -19,8 +18,6 @@ import {
 } from '../data/index.js';
 import { AuthUser } from './auth-user.js';
 import { AuthService } from './auth.service.js';
-import { AuthGuard } from './guards/auth.guard.js';
-import { PermissionGuard } from './guards/permission.guard.js';
 import { LoginControler } from './login/login.controller.js';
 import { LoginService } from './login/login.service.js';
 
@@ -53,18 +50,8 @@ import { LoginService } from './login/login.service.js';
     UserRoleDataModule,
   ],
   controllers: [LoginControler],
-  providers: [
-    AuthService,
-    LoginService,
-    {
-      provide: APP_GUARD,
-      useClass: AuthGuard,
-    },
-    {
-      provide: APP_GUARD,
-      useClass: PermissionGuard,
-    },
-  ],
+  providers: [AuthService, LoginService],
+  exports: [JwtModule],
 })
 export class AuthModule implements OnModuleInit {
   constructor(

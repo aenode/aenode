@@ -17,6 +17,9 @@
       "path": "../../libs/nest-hash"
     },
     {
+      "path": "../../libs/nest-event"
+    },
+    {
       "path": "../../libs/nest-encrypt"
     },
     {

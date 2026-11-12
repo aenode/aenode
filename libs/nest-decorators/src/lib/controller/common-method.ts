@@ -4,8 +4,8 @@ import {
   ApiUnauthorizedResponse,
   ApiUnprocessableEntityResponse,
 } from '@aenode/nest/swagger';
+import { Emit, EmitInput, EmitOutput } from '../metadata/emit.js';
 import { Public } from '../metadata/public.js';
-import { Emit } from './emit.js';
 import type { MethodOptions } from './method-options.js';
 import { operationSummary } from './operation-summary.js';
 
@@ -25,6 +25,10 @@ export function CommonMethod(options: MethodOptions): MethodDecorator {
 
     if (options.emit === true) {
       Emit()(...args);
+    } else if (options.emitBefore === true) {
+      EmitInput()(...args);
+    } else if (options.emitAfter === true) {
+      EmitOutput()(...args);
     }
 
     if (options.public === true) {

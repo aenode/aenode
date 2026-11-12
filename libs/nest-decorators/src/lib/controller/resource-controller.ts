@@ -19,8 +19,8 @@ export function ResouceController(
     const resourceName = names(resourceNameRaw).constant;
     const resourcePath = names(resourcePathRaw).kebab;
 
-    Controller(resourcePath)(...args);
     ApiBearerAuth()(...args);
     ResourceName(resourceName)(...args);
+    Controller(resourcePath)(...args);
   };
 }

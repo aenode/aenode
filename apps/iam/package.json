@@ -76,6 +76,7 @@
     "@aenode/nest-boot": "workspace:*",
     "@aenode/nest-decorators": "workspace:*",
     "@aenode/nest-encrypt": "workspace:*",
+    "@aenode/nest-event": "workspace:*",
     "@aenode/nest-hash": "workspace:*",
     "@aenode/nest-otp": "workspace:*",
     "@aenode/nest-prisma": "workspace:*",

@@ -4,8 +4,8 @@ import type { Reflector } from '@aenode/nest/core';
 import type { Operation } from '@aenode/types';
 
 export function OperationName(operation: Operation): MethodDecorator {
-  return () => {
-    SetMetadata(MetadataToken.OPERATION_NAME, operation);
+  return (...args) => {
+    SetMetadata(MetadataToken.OPERATION_NAME, operation)(...args);
   };
 }
 

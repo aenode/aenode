@@ -26,6 +26,9 @@
       "path": "../../libs/nest-hash/tsconfig.lib.json"
     },
     {
+      "path": "../../libs/nest-event/tsconfig.lib.json"
+    },
+    {
       "path": "../../libs/nest-encrypt/tsconfig.lib.json"
     },
     {

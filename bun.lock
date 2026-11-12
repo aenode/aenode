@@ -97,6 +97,7 @@
         "@aenode/nest-boot": "workspace:*",
         "@aenode/nest-decorators": "workspace:*",
         "@aenode/nest-encrypt": "workspace:*",
+        "@aenode/nest-event": "workspace:*",
         "@aenode/nest-hash": "workspace:*",
         "@aenode/nest-otp": "workspace:*",
         "@aenode/nest-prisma": "workspace:*",
@@ -277,6 +278,18 @@
         "@swc/helpers": "~0.5.18",
       },
     },
+    "libs/nest-event": {
+      "name": "@aenode/nest-event",
+      "version": "0.0.42",
+      "bin": {
+        "aenode-nest-event": "./bin/nest-event.mjs",
+      },
+      "dependencies": {
+        "@aenode/nest": "workspace:*",
+        "@aenode/nest-decorators": "workspace:*",
+        "@swc/helpers": "~0.5.18",
+      },
+    },
     "libs/nest-hash": {
       "name": "@aenode/nest-hash",
       "version": "0.0.47",
@@ -422,6 +435,8 @@
     "@aenode/nest-decorators": ["@aenode/nest-decorators@workspace:libs/nest-decorators"],
 
     "@aenode/nest-encrypt": ["@aenode/nest-encrypt@workspace:libs/nest-encrypt"],
+
+    "@aenode/nest-event": ["@aenode/nest-event@workspace:libs/nest-event"],
 
     "@aenode/nest-hash": ["@aenode/nest-hash@workspace:libs/nest-hash"],
 

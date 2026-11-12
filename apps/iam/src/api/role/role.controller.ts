@@ -6,11 +6,12 @@ import {
 } from '@aenode/iam-db/nest';
 import {
   CreateOne,
+  DeleteOneById,
   FindMany,
   FindOneById,
+  OnEventInput,
   ParamId,
   ResouceController,
-  DeleteOneById,
   UpdateOneById,
 } from '@aenode/nest-decorators';
 import { Body, Query } from '@aenode/nest/common';
@@ -19,6 +20,11 @@ import { RoleService } from '../../data/index.js';
 @ResouceController()
 export class RoleController {
   constructor(protected service: RoleService) {}
+
+  @OnEventInput()
+  onWriteOne(data: any) {
+    console.log(data);
+  }
 
   @FindMany({ responseType: RoleReadDto })
   async findMany(@Query() query: RoleFindManyDto) {
@@ -30,7 +36,7 @@ export class RoleController {
     return await this.service.findUniqueOneById(id);
   }
 
-  @CreateOne({ responseType: RoleReadDto })
+  @CreateOne({ responseType: RoleReadDto, emit: true })
   async createOne(@Body() data: RoleCreateDto) {
     return await this.service.createOne(data);
   }

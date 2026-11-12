@@ -8,6 +8,9 @@ export type MethodOptions = {
    */
   emit?: boolean;
 
+  emitAfter?: boolean;
+  emitBefore?: boolean;
+
   /**
    * Operation summary
    */
