@@ -115,9 +115,9 @@ export class AuthUser {
     return;
   }
 
-  static loadUsers(...users: AuthUser[]) {
+  static loadUsers(...users: UserWithRelations[]) {
     for (const u of users) {
-      AuthUser.userIdUserMap.set(u.id, u);
+      AuthUser.userIdUserMap.set(u.id, new AuthUser(u));
       AuthUser.usernameUserIdMap.set(u.username, u.id);
     }
   }

@@ -7,7 +7,6 @@ import {
 import { HashService } from '@aenode/nest-hash';
 import { InjectPrismaDelegate } from '@aenode/nest-prisma';
 import { Injectable } from '@aenode/nest/common';
-import { AuthUser } from '../../auth/auth-user.js';
 
 @Injectable()
 export class UserService extends UserDelegateService {
@@ -37,8 +36,8 @@ export class UserService extends UserDelegateService {
     return this.beforeCreateAndUpdate(data);
   }
 
-  async findAuthUsers() {
-    const foundUsers = await this.delegate.findMany({
+  async findManyUsersWithRelations() {
+    return await this.delegate.findMany({
       where: { isActive: true },
       include: {
         otp: true,
@@ -51,7 +50,5 @@ export class UserService extends UserDelegateService {
         },
       },
     });
-
-    return foundUsers.map((e) => new AuthUser(e));
   }
 }

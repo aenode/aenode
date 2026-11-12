@@ -55,15 +55,16 @@ export class AuthModule implements OnModuleInit {
   async onModuleInit() {
     const ROOT_USERNAME = this.config.getOrThrow(Env.AUTH.ROOT_USERNAME);
     const ROOT_PASSWORD = this.config.getOrThrow(Env.AUTH.ROOT_PASSWORD);
+
     await this.userService.upsertOneByUsername({
       username: ROOT_USERNAME,
       password: ROOT_PASSWORD,
     });
-    const foundUser =
+    const rootUser =
       await this.userService.findUniqueOneByUsername(ROOT_USERNAME);
-    console.log(foundUser);
+    console.log(rootUser);
 
-    const authUsers = await this.userService.findAuthUsers();
-    AuthUser.loadUsers(...authUsers);
+    const foundUsers = await this.userService.findManyUsersWithRelations();
+    AuthUser.loadUsers(...foundUsers);
   }
 }
