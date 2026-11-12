@@ -1,9 +1,10 @@
 import { decrypt, encrypt } from '@aenode/encrypt';
 import { Injectable } from '@aenode/nest/common';
+import { InjectEncryptionKey } from './encryption-key.provider.js';
 
 @Injectable()
 export class EncryptionService {
-  constructor(protected readonly key: Buffer) {}
+  constructor(@InjectEncryptionKey() protected readonly key: Buffer) {}
 
   encrypt(plaintext: string) {
     return encrypt(plaintext, this.key);

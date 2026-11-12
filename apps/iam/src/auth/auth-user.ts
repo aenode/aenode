@@ -1,6 +1,6 @@
 import { type Prisma } from '@aenode/iam-db';
 import type { OtpModel, SessionModel } from '@aenode/iam-db/models';
-import type { ReadonlyDeep } from '@aenode/types';
+import { type ReadonlyDeep } from '@aenode/types';
 
 export type UserWithRelations = Prisma.UserGetPayload<{
   include: {
@@ -26,7 +26,7 @@ export class AuthUser {
   protected readonly sessionIdSessionMap: Map<
     number,
     ReadonlyDeep<SessionModel>
-  >;
+  > = new Map<number, ReadonlyDeep<SessionModel>>();
 
   public get user() {
     return {
@@ -113,6 +113,19 @@ export class AuthUser {
     }
 
     return;
+  }
+
+  static loadUsers(...users: AuthUser[]) {
+    for (const u of users) {
+      AuthUser.userIdUserMap.set(u.id, u);
+      AuthUser.usernameUserIdMap.set(u.username, u.id);
+    }
+  }
+
+  static loadSessions(...sessions: [sessionId: number, userId: number][]) {
+    for (const s of sessions) {
+      AuthUser.sessionIdUserIdMap.set(s[0], s[1]);
+    }
   }
 
   findSessionBySessionId(sessionId: number): SessionModel | undefined {

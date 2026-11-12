@@ -97,7 +97,7 @@ export class EnvAuth extends BaseEnv {
   /**
    * Root user username
    */
-  static readonly ROOT_USERANME = 'ROOT_USERANME';
+  static readonly ROOT_USERNAME = 'ROOT_USERNAME';
 
   /**
    * Root user password
@@ -120,7 +120,7 @@ export class EnvAuth extends BaseEnv {
   }
 
   get ROOT_USERANME() {
-    return this.prep(EnvAuth.ROOT_USERANME);
+    return this.prep(EnvAuth.ROOT_USERNAME);
   }
 
   get ROOT_PASSWORD() {

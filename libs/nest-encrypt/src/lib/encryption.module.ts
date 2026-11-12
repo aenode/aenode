@@ -15,7 +15,7 @@ export class EncryptionModule {
     return {
       module: EncryptionModule,
       providers: [provideEncryptionKey(target, scope), EncryptionService],
-      exports: [getEncryptionKeyToken(target, scope)],
+      exports: [getEncryptionKeyToken(target, scope), EncryptionService],
     };
   }
 }

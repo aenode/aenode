@@ -11,12 +11,7 @@
       "@aenode/iam"
     ],
     "targets": {
-      "e2e": {
-        "dependsOn": [
-          "@aenode/iam:build",
-          "@aenode/iam:serve"
-        ]
-      }
+      "e2e": {}
     }
   },
   "private": true,

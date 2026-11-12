@@ -6,6 +6,7 @@ import { ConfigModule } from '@aenode/nest/config';
 import { APP_INTERCEPTOR } from '@aenode/nest/core';
 import { EventEmitterModule } from '@aenode/nest/emitter';
 import { AuthModule } from '../auth/auth.module.js';
+import { UserDataModule } from '../data/index.js';
 import { AppController } from './app.controller.js';
 import { OtpModule } from './otp/otp.module.js';
 import { PermissionModule } from './permission/permission.module.js';
@@ -27,6 +28,7 @@ import { UserModule } from './user/user.module.js';
     SessionModule,
     UserModule,
     UserRoleModule,
+    UserDataModule,
   ],
   controllers: [AppController],
   providers: [{ provide: APP_INTERCEPTOR, useClass: CacheInterceptor }],

@@ -4,7 +4,7 @@ import {
   OtpDelegateService,
   OtpUpdateDto,
 } from '@aenode/iam-db/nest';
-import type { EncryptionService } from '@aenode/nest-encrypt';
+import { EncryptionService } from '@aenode/nest-encrypt';
 import { OtpManagerService } from '@aenode/nest-otp';
 import { InjectPrismaDelegate } from '@aenode/nest-prisma';
 import { Injectable } from '@aenode/nest/common';
