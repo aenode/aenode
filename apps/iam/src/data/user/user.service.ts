@@ -7,6 +7,7 @@ import {
 import { HashService } from '@aenode/nest-hash';
 import { InjectPrismaDelegate } from '@aenode/nest-prisma';
 import { Injectable } from '@aenode/nest/common';
+import type { UserWithRelations } from '../../auth/auth-user.js';
 
 @Injectable()
 export class UserService extends UserDelegateService {
@@ -36,17 +37,17 @@ export class UserService extends UserDelegateService {
     return this.beforeCreateAndUpdate(data);
   }
 
-  async findManyUsersWithRelations() {
+  async findManyUsersWithRelations(): Promise<UserWithRelations[]> {
     return await this.delegate.findMany({
       where: { isActive: true },
       include: {
         otp: true,
         sessions: true,
         userPermissions: {
-          include: { permission: { select: { name: true } } },
+          include: { permission: true },
         },
         userRoles: {
-          include: { role: { select: { name: true } } },
+          include: { role: true },
         },
       },
     });

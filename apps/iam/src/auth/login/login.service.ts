@@ -26,6 +26,7 @@ export class LoginService {
     const { id: sessionId, deviceUUID } = session;
     const token = await this.authService.signToken(sessionId);
 
+    AuthUser.loadSessions(...[[sessionId, userId] as [number, number]]);
     return new LoginResponseDto({ token, deviceUUID });
   }
 

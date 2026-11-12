@@ -4,16 +4,23 @@ import { HashModule } from '@aenode/nest-hash';
 import { OtpManagerModule } from '@aenode/nest-otp';
 import { Module, type OnModuleInit } from '@aenode/nest/common';
 import { ConfigService } from '@aenode/nest/config';
+import { APP_GUARD } from '@aenode/nest/core';
 import { JwtModule } from '@aenode/nest/jwt';
-import { randomBytes } from 'node:crypto';
 import {
   OtpDataModule,
+  RoleDataModule,
+  RoleService,
   SessionDataModule,
+  SessionService,
   UserDataModule,
+  UserRoleDataModule,
+  UserRoleService,
   UserService,
 } from '../data/index.js';
 import { AuthUser } from './auth-user.js';
 import { AuthService } from './auth.service.js';
+import { AuthGuard } from './guards/auth.guard.js';
+import { PermissionGuard } from './guards/permission.guard.js';
 import { LoginControler } from './login/login.controller.js';
 import { LoginService } from './login/login.service.js';
 
@@ -25,9 +32,9 @@ import { LoginService } from './login/login.service.js';
     JwtModule.registerAsync({
       inject: [ConfigService],
       useFactory(config: ConfigService) {
-        const secret = config.get(Env.AUTH.JWT_SECRET, randomBytes(32));
-        const issuer = config.get(Env.AUTH.JWT_ISSUER, 'aenode');
-        const audience = config.get(Env.AUTH.JWT_AUDIENCE, 'aenode');
+        const secret = config.get(Env.AUTH.JWT_SECRET);
+        const issuer = config.get(Env.AUTH.JWT_ISSUER);
+        const audience = config.get(Env.AUTH.JWT_AUDIENCE);
         return {
           global: true,
           secret,
@@ -42,14 +49,30 @@ import { LoginService } from './login/login.service.js';
     UserDataModule,
     SessionDataModule,
     OtpDataModule,
+    RoleDataModule,
+    UserRoleDataModule,
   ],
   controllers: [LoginControler],
-  providers: [AuthService, LoginService],
+  providers: [
+    AuthService,
+    LoginService,
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: PermissionGuard,
+    },
+  ],
 })
 export class AuthModule implements OnModuleInit {
   constructor(
     protected readonly config: ConfigService,
     protected readonly userService: UserService,
+    protected readonly roleService: RoleService,
+    protected readonly userRoleService: UserRoleService,
+    protected readonly sessionService: SessionService,
   ) {}
 
   async onModuleInit() {
@@ -60,11 +83,31 @@ export class AuthModule implements OnModuleInit {
       username: ROOT_USERNAME,
       password: ROOT_PASSWORD,
     });
+
     const rootUser =
       await this.userService.findUniqueOneByUsername(ROOT_USERNAME);
+
     console.log(rootUser);
 
     const foundUsers = await this.userService.findManyUsersWithRelations();
+
     AuthUser.loadUsers(...foundUsers);
+
+    if (rootUser) {
+      const createdRole = await this.roleService.upsertOneByName({
+        name: 'admin',
+      });
+
+      await this.userRoleService.upsertOneByUserIdAndRoleId({
+        roleId: createdRole.id,
+        userId: rootUser.id,
+      });
+    }
+
+    const sessions = await this.sessionService.findMany();
+
+    AuthUser.loadSessions(
+      ...sessions.map((e) => [e.id, e.userId] as [number, number]),
+    );
   }
 }
