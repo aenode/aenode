@@ -2,5 +2,24 @@
   "extends": "./tsconfig.base.json",
   "compileOnSave": false,
   "files": [],
-  "references": []
+  "references": [
+    {
+      "path": "./libs/fs"
+    },
+    {
+      "path": "./libs/names"
+    },
+    {
+      "path": "./apps/iam"
+    },
+    {
+      "path": "./tools/eslint"
+    },
+    {
+      "path": "./tools/cli"
+    },
+    {
+      "path": "./tools/plugin"
+    }
+  ]
 }
