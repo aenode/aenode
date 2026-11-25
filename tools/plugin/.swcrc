@@ -18,5 +18,10 @@
     "type": "es6"
   },
   "sourceMaps": true,
-  "exclude": ["jest.config.[ct]s", ".*\\.spec.tsx?$", ".*\\.test.tsx?$", "./src/jest-setup.ts$", "./**/jest-setup.ts$", ".*.js$"]
+  "exclude": [
+    "vitest.config.mts",
+    ".*\\.spec.tsx?$",
+    ".*\\.test.tsx?$",
+    ".*.js$"
+  ]
 }

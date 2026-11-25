@@ -16,10 +16,14 @@
   },
   "files": [
     "dist",
+    "generators.json",
     "!**/*.tsbuildinfo"
   ],
   "nx": {
     "sourceRoot": "tools/plugin/src",
+    "tags": [
+      "shared:dev"
+    ],
     "targets": {
       "build": {
         "executor": "@nx/js:swc",
@@ -30,13 +34,14 @@
           "outputPath": "tools/plugin/dist",
           "main": "tools/plugin/src/index.ts",
           "tsConfig": "tools/plugin/tsconfig.lib.json",
-          "skipTypeCheck": true,
           "stripLeadingPaths": true
         }
       }
     }
   },
   "dependencies": {
+    "@nx/devkit": "^24.0.7",
     "@swc/helpers": "~0.5.18"
-  }
+  },
+  "generators": "./generators.json"
 }

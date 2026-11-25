@@ -21,7 +21,7 @@
   "nx": {
     "sourceRoot": "libs/fs/src",
     "tags": [
-      "lib:node"
+      "node:lib"
     ],
     "targets": {
       "build": {

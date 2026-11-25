@@ -12,6 +12,36 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js"
+    },
+    "./angular": {
+      "types": "./dist/lib/angular.d.ts",
+      "import": "./dist/lib/angular.js",
+      "default": "./dist/lib/angular.js"
+    },
+    "./nestjs": {
+      "types": "./dist/lib/nestjs.d.ts",
+      "import": "./dist/lib/nestjs.js",
+      "default": "./dist/lib/nestjs.js"
+    },
+    "./nodejs": {
+      "types": "./dist/lib/nodejs.d.ts",
+      "import": "./dist/lib/nodejs.js",
+      "default": "./dist/lib/nodejs.js"
+    },
+    "./shared": {
+      "types": "./dist/lib/shared.d.ts",
+      "import": "./dist/lib/shared.js",
+      "default": "./dist/lib/shared.js"
+    },
+    "./nx-plugin": {
+      "types": "./dist/lib/nx-plugin.d.ts",
+      "import": "./dist/lib/nx-plugin.js",
+      "default": "./dist/lib/nx-plugin.js"
+    },
+    "./dev": {
+      "types": "./dist/lib/dev.d.ts",
+      "import": "./dist/lib/dev.js",
+      "default": "./dist/lib/dev.js"
     }
   },
   "files": [
@@ -20,6 +50,9 @@
   ],
   "nx": {
     "sourceRoot": "tools/eslint/src",
+    "tags": [
+      "shared:dev"
+    ],
     "targets": {
       "build": {
         "executor": "@nx/js:swc",
@@ -37,6 +70,8 @@
     }
   },
   "dependencies": {
-    "@swc/helpers": "~0.5.18"
+    "@nx/eslint-plugin": "^24.0.7",
+    "@swc/helpers": "~0.5.18",
+    "jsonc-eslint-parser": "^3.3.0"
   }
 }

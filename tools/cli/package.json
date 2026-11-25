@@ -20,6 +20,9 @@
   ],
   "nx": {
     "sourceRoot": "tools/cli/src",
+    "tags": [
+      "shared:dev"
+    ],
     "targets": {
       "build": {
         "executor": "@nx/js:swc",

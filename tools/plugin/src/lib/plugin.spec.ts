@@ -1,7 +1,7 @@
-import { plugin } from './plugin.js';
+import { somePlugin } from './plugin.js';
 
 describe('plugin', () => {
   it('should work', () => {
-    expect(plugin()).toEqual('plugin');
+    expect(somePlugin()).toEqual('plugin');
   });
 });

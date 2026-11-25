@@ -1,3 +1,3 @@
-export function plugin(): string {
+export function somePlugin(): string {
   return 'plugin';
 }

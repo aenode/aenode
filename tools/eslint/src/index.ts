@@ -1,1 +1,1 @@
-export * from './lib/eslint.js';
+export const ESLINT_CONFIG ='ESLINT_CONFIG'
