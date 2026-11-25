@@ -7,6 +7,7 @@
   "dependencies": {},
   "devDependencies": {
     "@aenode/eslint": "workspace:*",
+    "@aenode/plugin": "workspace:*",
     "@eslint/js": "^9.8.0",
     "@nx/eslint": "24.0.7",
     "@nx/eslint-plugin": "24.0.7",

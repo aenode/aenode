@@ -1,1 +1,1 @@
-export * from './lib/plugin.js';
+export const AENODE_PLUGIN = 'AENODE_PLUGIN';

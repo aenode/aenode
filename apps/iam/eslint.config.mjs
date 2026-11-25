@@ -1,3 +1,3 @@
-import baseConfig from '../../eslint.config.mjs';
+import config from '@aenode/eslint/nestjs';
 
-export default [...baseConfig];
+export default [...config];

@@ -34,7 +34,15 @@
           "outputPath": "tools/plugin/dist",
           "main": "tools/plugin/src/index.ts",
           "tsConfig": "tools/plugin/tsconfig.lib.json",
-          "stripLeadingPaths": true
+          "skipTypeCheck": false,
+          "stripLeadingPaths": true,
+          "assets": [
+            {
+              "input": "./tools/plugin/src",
+              "glob": "**/!(*.ts)",
+              "output": "."
+            }
+          ]
         }
       }
     }

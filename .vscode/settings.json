@@ -32,5 +32,38 @@
     "**/.vscode": true
   },
   "chat.disableAIFeatures": true,
-  "eslint.validate": ["json"]
+  "eslint.validate": ["json", "javascript", "typescript"],
+  "[dotenv]": {
+    "editor.defaultFormatter": "IronGeek.vscode-env"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.prettier": "always",
+    "source.fixAll.eslint": "always",
+    "source.sortImports": "always",
+    "source.removeUnused.ts": "explicit",
+    "source.organizeImports": "always",
+    "source.addMissingImports.ts": "always"
+  },
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma"
+  },
+  "[env]": {
+    "editor.defaultFormatter": "IronGeek.vscode-env"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }

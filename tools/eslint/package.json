@@ -72,6 +72,7 @@
   "dependencies": {
     "@nx/eslint-plugin": "^24.0.7",
     "@swc/helpers": "~0.5.18",
+    "eslint-plugin-unicorn": "^80.0.0",
     "jsonc-eslint-parser": "^3.3.0"
   }
 }
