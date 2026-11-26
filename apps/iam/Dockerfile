@@ -10,8 +10,8 @@ RUN bun install --production
 
 COPY dist ./dist
 
-EXPOSE 5000
+EXPOSE 3000
 
 USER bun
 
-CMD ["node", "dist/main.js"]
+CMD ["bun", "dist/main.js"]

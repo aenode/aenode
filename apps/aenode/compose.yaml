@@ -1,0 +1,79 @@
+x-service: &service
+  restart: unless-stopped
+  environment: &service-env
+    NODE_ENV: production
+    HOST: 0.0.0.0
+    IAM_URL: http://iam:3000
+  depends_on:
+    postgres:
+      condition: service_healthy
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    ports:
+      - '127.0.0.1:5432:5432' # dev access only; remove if not needed
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER:-postgres}']
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  iam:
+    <<: *service
+    build: ../iam
+    image: aenode-iam
+    environment:
+      <<: *service-env
+      PORT: 3000
+      DATABASE_URL: postgres://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD}@postgres:5432/aenode?schema=iam
+    ports:
+      - '3000:3000'
+    healthcheck:
+      test: ['CMD', 'bun', '-e', "fetch('http://localhost:3000/health').then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 5s
+
+  hr:
+    <<: *service
+    build: ../hr
+    image: aenode-hr
+    environment:
+      <<: *service-env
+      PORT: 3001
+      DATABASE_URL: postgres://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD}@postgres:5432/aenode?schema=hr
+    ports:
+      - '3001:3001'
+    depends_on:
+      postgres:
+        condition: service_healthy
+      iam:
+        condition: service_healthy
+
+  ims:
+    <<: *service
+    build: ./apps/ims
+    image: aenode-ims
+    environment:
+      <<: *service-env
+      PORT: 3002
+      DATABASE_URL: postgres://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD}@postgres:5432/aenode?schema=ims
+    ports:
+      - '3002:3002'
+    depends_on:
+      postgres:
+        condition: service_healthy
+      iam:
+        condition: service_healthy
+
+volumes:
+  pgdata:

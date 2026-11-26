@@ -35,7 +35,8 @@
   "workspaces": [
     "libs/*",
     "apps/*",
-    "tools/*"
+    "tools/*",
+    "app/*"
   ],
   "nx": {
     "includedScripts": [],

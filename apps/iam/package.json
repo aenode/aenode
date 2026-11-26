@@ -1,5 +1,6 @@
 {
   "name": "@aenode/iam",
+  "description": "Iam - Identity and access management service",
   "version": "0.0.1",
   "type": "module",
   "main": "./dist/index.js",
@@ -55,7 +56,7 @@
           "docker-build"
         ],
         "options": {
-          "command": "docker rm -f aenode-iam 2>/dev/null; docker run --name aenode-iam -p 5000:5000 aenode-iam"
+          "command": "docker rm -f aenode-iam 2>/dev/null; docker run --name aenode-iam -p 3000:3000 aenode-iam"
         }
       }
     }
@@ -64,8 +65,14 @@
     "@nestjs/common": "^12.6.3",
     "@nestjs/config": "^12.1.1",
     "@nestjs/core": "^12.6.3",
+    "@nestjs/event-emitter": "^12.0.3",
     "@nestjs/platform-express": "^12.6.3",
+    "@nestjs/schedule": "^12.0.4",
     "@nestjs/swagger": "^12.1.3",
+    "@nestjs/terminus": "^12.2.0",
     "@swc/helpers": "~0.5.18"
+  },
+  "devDependencies": {
+    "@nestjs/testing": "^12.6.3"
   }
 }

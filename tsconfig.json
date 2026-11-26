@@ -23,6 +23,9 @@
     },
     {
       "path": "./apps/con"
+    },
+    {
+      "path": "./apps/aenode"
     }
   ]
 }

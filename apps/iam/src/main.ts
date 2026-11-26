@@ -1,25 +1,21 @@
 import '@nestjs/platform-express';
 //
 import { Logger } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import type { NestExpressApplication } from '@nestjs/platform-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { AppConfigService } from './app/app-config.service.js';
 import { AppModule } from './app/app.module.js';
 
 async function main() {
-  const logger = new Logger('Iam');
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
-  const config = app.get(ConfigService);
-  const port = config.getOrThrow<number>('PORT', 5000);
+  const { NAME, TITLE, DESCRIPTION, PORT } = app.get(AppConfigService);
+  const logger = new Logger(NAME);
 
-  // Configure Swagger
+  app.setGlobalPrefix('api', { exclude: ['health/{*path}'] });
+
   {
-    const swaggerConfig = new DocumentBuilder()
-      .addBearerAuth()
-      .setTitle('Iam (Identity and access management system)')
-      .setDescription('Manage user credentials, authentication, and autorization')
-      .build();
+    const swaggerConfig = new DocumentBuilder().addBearerAuth().setTitle(TITLE).setDescription(DESCRIPTION).build();
     const swaggerDoc = SwaggerModule.createDocument(app, swaggerConfig, { autoTagControllers: true });
     SwaggerModule.setup('docs', app, swaggerDoc);
   }
@@ -27,7 +23,7 @@ async function main() {
   app.enableShutdownHooks();
   app.enableCors({ origin: '*' });
 
-  await app.listen(port);
+  await app.listen(PORT);
 
   logger.log(`up and running at ${await app.getUrl()}`);
 }
