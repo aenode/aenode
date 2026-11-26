@@ -6,9 +6,9 @@
     "importHelpers": true,
     "isolatedModules": true,
     "verbatimModuleSyntax": true,
-    "lib": [
-      "es2022"
-    ],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "lib": ["es2022"],
     "module": "nodenext",
     "moduleResolution": "nodenext",
     "noEmitOnError": true,
@@ -19,8 +19,6 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "es2022",
-    "customConditions": [
-      "@aenode/source"
-    ]
+    "customConditions": ["@aenode/source"]
   }
 }

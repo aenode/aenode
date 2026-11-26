@@ -1,9 +1,9 @@
 import { readJSONFile } from './read-json-file.js';
 import { writeTextFile } from './write-text-file.js';
 
-export async function updateJSONFile<T>(filePath: string, updateFn: (value: T) => unknown) {
+export async function updateJSONFile<T>(filePath: string, updateFn: (value: T) => Promise<unknown> | unknown) {
   const jsonContent = await readJSONFile<T>(filePath);
-  const updatedJsonContent = updateFn(jsonContent);
+  const updatedJsonContent = await updateFn(jsonContent);
 
   await writeTextFile(filePath, JSON.stringify(updatedJsonContent));
 }
