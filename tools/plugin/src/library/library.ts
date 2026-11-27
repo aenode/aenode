@@ -1,21 +1,34 @@
 import {
   formatFiles,
   generateFiles,
-  readProjectConfiguration,
+  updateJson,
   type Tree,
 } from '@nx/devkit';
-import { join } from 'node:path';
+import { basename, join, normalize } from 'node:path';
 import type { LibraryGeneratorSchema } from './schema.js';
 
 export async function libraryGenerator(
   tree: Tree,
   options: LibraryGeneratorSchema,
 ) {
-  const pc = readProjectConfiguration(tree, options.project);
+  const directory = `./${normalize(options.directory)}`;
+  const shortName = basename(directory);
+  const projectName = `@aenode/${shortName}`;
 
-  generateFiles(tree, join(import.meta.dirname, 'files'), pc.root, {
-    projectName: pc.name,
-    directory: pc.root,
+  generateFiles(tree, join(import.meta.dirname, 'files'), directory, {
+    projectName,
+    directory,
+  });
+
+  updateJson(tree, 'tsconfig.json', (value) => {
+    if (
+      !value.references.find(
+        (e: { path: string }) => e.path === directory,
+      )
+    ) {
+      value.references.push({ path: directory });
+    }
+    return value;
   });
 
   formatFiles(tree);

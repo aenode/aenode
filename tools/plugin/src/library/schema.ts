@@ -1,3 +1,3 @@
 export interface LibraryGeneratorSchema {
-  project: string;
+  directory: string;
 }
