@@ -30,43 +30,7 @@
   "nx": {
     "sourceRoot": "apps/iam/src",
     "targets": {
-      "build": {
-        "executor": "@nx/js:swc",
-        "outputs": [
-          "{options.outputPath}"
-        ],
-        "options": {
-          "outputPath": "apps/iam/dist",
-          "main": "apps/iam/src/index.ts",
-          "tsConfig": "apps/iam/tsconfig.lib.json",
-          "skipTypeCheck": true,
-          "stripLeadingPaths": true
-        }
-      },
-      "serve": {
-        "executor": "nx:run-commands",
-        "options": {
-          "command": "bun --watch apps/iam/src/main.ts"
-        }
-      },
-      "docker-build": {
-        "executor": "nx:run-commands",
-        "dependsOn": [
-          "build"
-        ],
-        "options": {
-          "command": "docker build -t aenode-iam apps/iam"
-        }
-      },
-      "docker-run": {
-        "executor": "nx:run-commands",
-        "dependsOn": [
-          "docker-build"
-        ],
-        "options": {
-          "command": "docker rm -f aenode-iam 2>/dev/null; docker run --name aenode-iam -p 3000:3000 aenode-iam"
-        }
-      }
+      "build": {}
     }
   },
   "dependencies": {

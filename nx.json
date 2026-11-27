@@ -48,6 +48,26 @@
         "stripLeadingPaths": true
       }
     },
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "bun --watch {projectRoot}/src/main.ts"
+      }
+    },
+    "docker:build": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["build"],
+      "options": {
+        "command": "docker build -t {projectName} {projectRoot}"
+      }
+    },
+    "docker:run": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["docker-build"],
+      "options": {
+        "command": "docker rm -f {projectName} 2>/dev/null; docker run --name {projectName} -p 3000:3000 {projectName}"
+      }
+    },
     "@nx/js:swc": {
       "cache": true,
       "dependsOn": ["^build"],

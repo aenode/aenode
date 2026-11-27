@@ -1,1 +1,3 @@
-# Iam - Identity and access management service
+# @aenode/iam
+
+Iam - Identity and access management service

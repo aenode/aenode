@@ -5,7 +5,6 @@ import moduleBoundry from './module-boundry.js';
 import noUndefined from './no-undefined.js';
 import noUnusedVars from './no-unused-vars.js';
 import protocol from './protocol.js';
-import unboundMethod from './unbound-method.js';
 
 export default [
   ...nx.configs['flat/base'],
@@ -18,5 +17,4 @@ export default [
   ...noUndefined,
   ...noUnusedVars,
   ...protocol,
-  ...unboundMethod,
 ] as unknown[];

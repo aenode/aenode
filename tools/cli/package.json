@@ -24,19 +24,7 @@
       "shared:dev"
     ],
     "targets": {
-      "build": {
-        "executor": "@nx/js:swc",
-        "outputs": [
-          "{options.outputPath}"
-        ],
-        "options": {
-          "outputPath": "tools/cli/dist",
-          "main": "tools/cli/src/index.ts",
-          "tsConfig": "tools/cli/tsconfig.lib.json",
-          "skipTypeCheck": true,
-          "stripLeadingPaths": true
-        }
-      }
+      "build": {}
     }
   },
   "dependencies": {

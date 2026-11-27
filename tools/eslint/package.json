@@ -54,25 +54,14 @@
       "shared:dev"
     ],
     "targets": {
-      "build": {
-        "executor": "@nx/js:swc",
-        "outputs": [
-          "{options.outputPath}"
-        ],
-        "options": {
-          "outputPath": "tools/eslint/dist",
-          "main": "tools/eslint/src/index.ts",
-          "tsConfig": "tools/eslint/tsconfig.lib.json",
-          "skipTypeCheck": true,
-          "stripLeadingPaths": true
-        }
-      }
+      "build": {}
     }
   },
   "dependencies": {
     "@nx/eslint-plugin": "^24.0.7",
     "@swc/helpers": "~0.5.18",
     "eslint-plugin-unicorn": "^80.0.0",
-    "jsonc-eslint-parser": "^3.3.0"
+    "jsonc-eslint-parser": "^3.3.0",
+    "typescript-eslint": "^8.58.0"
   }
 }
