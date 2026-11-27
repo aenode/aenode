@@ -12,7 +12,7 @@ export async function libraryGenerator(
   tree: Tree,
   options: LibraryGeneratorSchema,
 ) {
-  const directory = `./${normalize(options.directory)}`;
+  const directory = `${normalize(options.directory)}`;
   const shortName = basename(directory);
   const projectName = `@aenode/${shortName}`;
 

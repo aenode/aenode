@@ -7,6 +7,7 @@
     "email": "aenode+npm@proton.me",
     "url": "https://aenode.github.io"
   },
+  "homepage": "https://aenode.github.io/aenode/<%- directory %>",
   "publishConfig": {
     "access": "public",
     "tag": "latest"
