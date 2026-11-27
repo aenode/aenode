@@ -6,6 +6,7 @@
     "email": "aenode+aenode@proton.me",
     "url": "https://aenode.github.io"
   },
+  "homepage": "https://aenode.github.io",
   "scripts": {
     "aenode:prune": "rm -rf node_modules **/**/node_modules **/**/dist **/**/out-tsc **/**/test-output .nx .angular"
   },

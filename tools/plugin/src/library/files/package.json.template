@@ -7,11 +7,11 @@
     "email": "aenode+npm@proton.me",
     "url": "https://aenode.github.io"
   },
-  "funding":["https://cash.app/$puqlib"],
   "publishConfig": {
     "access": "public",
     "tag": "latest"
   },
+  "funding":["https://cash.app/$puqlib"],
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
