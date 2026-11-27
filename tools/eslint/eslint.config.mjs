@@ -1,3 +1,3 @@
-import config from '@aenode/eslint/dev';
+import config from '@aenode/eslint/nodejs';
 
 export default [...config];

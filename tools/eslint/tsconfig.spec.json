@@ -8,9 +8,10 @@
       "vite/client",
       "node",
       "vitest"
-    ]
+    ],
+    "forceConsistentCasingInFileNames": true
   },
-  "include": ["test/**/*.spec.ts"],
+  "include": ["src/**/*.ts", "test/**/*.ts"],
   "references": [
     {
       "path": "./tsconfig.lib.json"

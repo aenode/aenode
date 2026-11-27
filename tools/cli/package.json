@@ -1,6 +1,19 @@
 {
   "name": "@aenode/cli",
   "version": "0.0.1",
+  "description": "Common utility commands",
+  "author": {
+    "name": "Ahmet Emrebas",
+    "email": "aenode+npm@proton.me",
+    "url": "https://aenode.github.io"
+  },
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
+  "funding": [
+    "https://cash.app/$puqlib"
+  ],
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",

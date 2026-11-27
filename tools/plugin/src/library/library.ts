@@ -1,6 +1,7 @@
 import {
   formatFiles,
   generateFiles,
+  installPackagesTask,
   updateJson,
   type Tree,
 } from '@nx/devkit';
@@ -30,6 +31,8 @@ export async function libraryGenerator(
     }
     return value;
   });
+
+  installPackagesTask(tree, true);
 
   formatFiles(tree);
 }

@@ -2,10 +2,18 @@
   "name": "@aenode/iam",
   "description": "Iam - Identity and access management service",
   "version": "0.0.1",
+  "author": {
+    "name": "Ahmet Emrebas",
+    "email": "aenode+app@proton.me",
+    "url": "https://aenode.github.io"
+  },
   "publishConfig": {
     "access": "public",
     "tag": "latest"
   },
+  "funding": [
+    "https://cash.app/$puqlib"
+  ],
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
