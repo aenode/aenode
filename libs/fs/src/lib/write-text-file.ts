@@ -1,5 +1,11 @@
-import { writeFile } from 'node:fs/promises';
+import { access, mkdir, writeFile } from 'node:fs/promises';
+import { dirname } from 'node:path';
 
-export function writeTextFile(filePath: string, content: string, abortController?: AbortController) {
+export async function writeTextFile(filePath: string, content: string, abortController?: AbortController) {
+  try {
+    await access(dirname(filePath));
+  } catch {
+    await mkdir(dirname(filePath), { recursive: true });
+  }
   return writeFile(filePath, content, { encoding: 'utf-8', signal: abortController?.signal });
 }

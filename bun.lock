@@ -6,6 +6,7 @@
       "name": "@aenode/source",
       "devDependencies": {
         "@aenode/eslint": "workspace:*",
+        "@aenode/iam": "workspace:*",
         "@aenode/plugin": "workspace:*",
         "@eslint/js": "^9.8.0",
         "@nx/eslint": "24.0.7",
@@ -48,6 +49,9 @@
     "apps/iam": {
       "name": "@aenode/iam",
       "version": "0.0.1",
+      "bin": {
+        "aenode-iam": "./bin/aenode-iam.mjs",
+      },
       "dependencies": {
         "@nestjs/common": "^12.6.3",
         "@nestjs/config": "^12.1.1",
