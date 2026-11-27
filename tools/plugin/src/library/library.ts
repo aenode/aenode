@@ -16,7 +16,7 @@ export async function libraryGenerator(
   const shortName = basename(directory);
   const orgname = options.orgname ?? 'aenode';
   const email = options.email ?? 'aenode';
-  const authorName = options.authorName ?? 'aenode';
+  const authorName = options.authorName ?? 'Ahmet Emrebas';
   const username = options.username ?? 'aenode';
   const homepage = options.homepage ?? 'https://aenode.github.io';
   const funding = options.funding ?? 'https://cash.app/$puqlib';
