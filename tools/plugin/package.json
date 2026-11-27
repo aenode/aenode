@@ -14,6 +14,7 @@
   "funding": [
     "https://cash.app/$puqlib"
   ],
+  "homepage": "https://aenode.github.io/aenode/tools/plugin",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",

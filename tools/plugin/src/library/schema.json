@@ -57,6 +57,16 @@
         "index": 5
       },
       "x-prompt": "What email url would you like to use?"
+    },
+
+    "funding": {
+      "type": "string",
+      "description": "funding url",
+      "$default": {
+        "$source": "argv",
+        "index": 6
+      },
+      "x-prompt": "What funding would you like to use?"
     }
   },
   "required": ["directory"]

@@ -90,6 +90,14 @@
       "linter": "eslint",
       "bundler": "swc",
       "unitTestRunner": "vitest"
+    },
+    "@aenode/plugin:library": {
+      "orgname": "aenode",
+      "authorName": "Ahmet Emrebas",
+      "email": "aenode+npm@proton.me",
+      "username": "aenode",
+      "homepage": "https://aenode.github.io",
+      "funding": "https://cash.app/$puqlib"
     }
   },
   "release": {

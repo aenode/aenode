@@ -20,7 +20,6 @@ export async function libraryGenerator(
   const username = options.username ?? 'aenode';
   const homepage = options.homepage ?? 'https://aenode.github.io';
   const funding = options.funding ?? 'https://cash.app/$puqlib';
-
   const projectName = `@${orgname}/${shortName}`;
 
   generateFiles(tree, join(import.meta.dirname, 'files'), directory, {
