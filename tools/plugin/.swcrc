@@ -17,11 +17,5 @@
   "module": {
     "type": "es6"
   },
-  "sourceMaps": true,
-  "exclude": [
-    "vitest.config.mts",
-    ".*\\.spec.tsx?$",
-    ".*\\.test.tsx?$",
-    ".*.js$"
-  ]
+  "sourceMaps": true
 }

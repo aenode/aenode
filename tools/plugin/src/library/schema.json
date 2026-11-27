@@ -1,18 +1,18 @@
 {
   "$schema": "https://json-schema.org/schema",
-  "$id": "Library",
-  "title": "",
+  "$id": "LibraryGenerator",
+  "title": "Library generator",
   "type": "object",
   "properties": {
-    "name": {
+    "project": {
       "type": "string",
-      "description": "",
+      "description": "Project name",
       "$default": {
         "$source": "argv",
         "index": 0
       },
-      "x-prompt": "What name would you like to use?"
+      "x-prompt": "What project would you like to use?"
     }
   },
-  "required": ["name"]
+  "required": ["project"]
 }

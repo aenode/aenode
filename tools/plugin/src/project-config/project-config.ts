@@ -1,4 +1,5 @@
 import {
+  formatFiles,
   generateFiles,
   readProjectConfiguration,
   type Tree,
@@ -16,6 +17,8 @@ export async function projectConfigGenerator(
     projectName: pc.name,
     directory: pc.root,
   });
+
+  formatFiles(tree);
 }
 
 export default projectConfigGenerator;

@@ -5,11 +5,6 @@
       "schema": "./dist/library/schema.json",
       "description": "library generator"
     },
-    "generator": {
-      "factory": "./dist/generator/generator.js",
-      "schema": "./dist/generator/schema.json",
-      "description": "generator generator"
-    },
     "project-config": {
       "factory": "./dist/project-config/project-config.js",
       "schema": "./dist/project-config/schema.json",

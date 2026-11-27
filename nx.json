@@ -48,6 +48,12 @@
         "stripLeadingPaths": true
       }
     },
+    "doc": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "typedoc --entryPointStrategy expand {projectRoot}/src --out public/{projectRoot} --tsconfig {projectRoot}/tsconfig.lib.json"
+      }
+    },
     "serve": {
       "executor": "nx:run-commands",
       "options": {

@@ -2,6 +2,11 @@
   "name": "@aenode/source",
   "version": "0.0.0",
   "license": "MIT",
+  "author": {
+    "name": "Ahmet Emrebas",
+    "email": "aenode+aenode@proton.me",
+    "url": "https://aenode.github.io"
+  },
   "scripts": {
     "aenode:prune": "rm -rf node_modules **/**/node_modules **/**/dist **/**/out-tsc **/**/test-output .nx .angular"
   },
@@ -28,6 +33,7 @@
     "nx": "24.0.7",
     "prettier": "~3.6.2",
     "tslib": "^2.3.0",
+    "typedoc": "^0.28.20",
     "typescript": "~6.0.3",
     "typescript-eslint": "^8.58.0",
     "verdaccio": "^6.3.2",

@@ -1,5 +1,6 @@
 {
   "name": "@aenode/plugin",
+  "description": "Nx plugin that provides a set of project generators.",
   "version": "0.0.1",
   "type": "module",
   "main": "./dist/index.js",

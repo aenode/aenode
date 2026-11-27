@@ -1,0 +1,8 @@
+
+import { some } from '../src/lib/some.js';
+
+describe("some", ()=>{ 
+    it('should some', ()=>{ 
+        expect(some()).toEqual('some');
+    })
+})
