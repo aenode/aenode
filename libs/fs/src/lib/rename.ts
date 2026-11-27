@@ -18,7 +18,7 @@ export async function rename(filePath: string, newFileName: string) {
 
   const newFilePath = join(dirname(filePath), newFileName);
 
-  if (await isFileExists(newFilePath)) {
+  if ((await isFileExists(newFilePath)) === true) {
     throw new FileExistsError(newFilePath);
   }
 

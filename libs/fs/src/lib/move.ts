@@ -1,6 +1,8 @@
-import { access, rename as fsRename, mkdir } from 'node:fs/promises';
+import { rename as fsRename, mkdir } from 'node:fs/promises';
 import { dirname } from 'node:path';
 import { FileExistsError } from './errors/file-exists-error.js';
+import { FileNotExistError } from './errors/file-not-exist-error.js';
+import { isFileExists } from './is-file-exists.js';
 
 /**
  * Move the source file to the target file.
@@ -10,13 +12,12 @@ import { FileExistsError } from './errors/file-exists-error.js';
  * @param targetFilePath
  */
 export async function move(sourceFilePath: string, targetFilePath: string) {
-  try {
-    await access(targetFilePath);
+  if ((await isFileExists(targetFilePath)) === true) {
     throw new FileExistsError(targetFilePath);
-  } catch (error) {
-    if (error instanceof FileExistsError) {
-      throw error;
-    }
+  }
+
+  if ((await isFileExists(sourceFilePath)) === false) {
+    throw new FileNotExistError(sourceFilePath);
   }
 
   await mkdir(dirname(targetFilePath), { recursive: true });
