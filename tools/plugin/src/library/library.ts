@@ -14,12 +14,25 @@ export async function libraryGenerator(
 ) {
   const directory = `${normalize(options.directory)}`;
   const shortName = basename(directory);
-  const projectName = `@aenode/${shortName}`;
+  const orgname = options.orgname ?? 'aenode';
+  const email = options.email ?? 'aenode';
+  const authorName = options.authorName ?? 'aenode';
+  const username = options.username ?? 'aenode';
+  const homepage = options.homepage ?? 'https://aenode.github.io';
+  const funding = options.funding ?? 'https://cash.app/$puqlib';
+
+  const projectName = `@${orgname}/${shortName}`;
 
   generateFiles(tree, join(import.meta.dirname, 'files'), directory, {
     projectName,
     directory,
     shortName,
+    orgname,
+    username,
+    email,
+    funding,
+    authorName,
+    homepage,
   });
 
   updateJson(tree, 'tsconfig.json', (value) => {

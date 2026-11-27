@@ -3,16 +3,16 @@
   "description":"Project is generated from @aenode/plugin:library",
   "version": "0.0.1",
   "author": {
-    "name": "Ahmet Emrebas",
-    "email": "aenode+npm@proton.me",
-    "url": "https://aenode.github.io"
+    "name": "<%- authorName %>",
+    "email": "<%- email %>",
+    "url": "<%- homepage %>"
   },
-  "homepage": "https://aenode.github.io/aenode/<%- directory %>",
+  "homepage": "<%- homepage %>/aenode/<%- directory %>",
   "publishConfig": {
     "access": "public",
     "tag": "latest"
   },
-  "funding":["https://cash.app/$puqlib"],
+  "funding":["<%- funding %>"],
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -20,6 +20,7 @@
   "exports": {
     "./package.json": "./package.json",
     ".": {
+      "@aenode/source": "./src/index.ts",
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js"

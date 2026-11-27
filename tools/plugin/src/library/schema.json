@@ -12,6 +12,51 @@
         "index": 0
       },
       "x-prompt": "What directory would you like to use?"
+    },
+    "orgname": {
+      "type": "string",
+      "description": "orgname name",
+      "$default": {
+        "$source": "argv",
+        "index": 1
+      },
+      "x-prompt": "What orgname would you like to use?"
+    },
+    "username": {
+      "type": "string",
+      "description": "username name",
+      "$default": {
+        "$source": "argv",
+        "index": 2
+      },
+      "x-prompt": "What username would you like to use?"
+    },
+    "authorName": {
+      "type": "string",
+      "description": "username name",
+      "$default": {
+        "$source": "argv",
+        "index": 3
+      },
+      "x-prompt": "What author name would you like to use?"
+    },
+    "homepage": {
+      "type": "string",
+      "description": "username name",
+      "$default": {
+        "$source": "argv",
+        "index": 4
+      },
+      "x-prompt": "What homepage url would you like to use?"
+    },
+    "email": {
+      "type": "string",
+      "description": "username name",
+      "$default": {
+        "$source": "argv",
+        "index": 5
+      },
+      "x-prompt": "What email url would you like to use?"
     }
   },
   "required": ["directory"]
