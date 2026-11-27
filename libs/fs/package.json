@@ -1,11 +1,11 @@
 {
   "name": "@aenode/fs",
   "description": "nodejs fs library",
+  "version": "0.0.1",
   "publishConfig": {
     "access": "public",
     "tag": "latest"
   },
-  "version": "0.0.1",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",

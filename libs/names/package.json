@@ -1,6 +1,11 @@
 {
   "name": "@aenode/names",
+  "description": "Create name variants",
   "version": "0.0.1",
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
