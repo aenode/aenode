@@ -1,7 +1,6 @@
 import { ConfigModule } from '@nestjs/config';
 import { Test } from '@nestjs/testing';
-import { AppConfigService } from '../src/app/app-config.service.js';
-import { AppController } from '../src/app/app.controller.js';
+import { AppConfigService, AppController } from '../src/index.js';
 
 describe('AppController', () => {
   let controller: AppController;

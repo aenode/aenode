@@ -30,6 +30,7 @@
   "files": [
     "bin",
     "dist",
+    "Dockerfile",
     "!**/*.tsbuildinfo"
   ],
   "bin": {
@@ -56,8 +57,7 @@
     "@nestjs/schedule": "^12.0.4",
     "@nestjs/swagger": "^12.1.3",
     "@nestjs/terminus": "^12.2.0",
-    "@swc/helpers": "~0.5.18",
-    "@nestjs/testing": "12.6.3"
+    "@swc/helpers": "~0.5.18"
   },
   "devDependencies": {
     "@nestjs/testing": "^12.6.3"
