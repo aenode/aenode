@@ -2,7 +2,9 @@
   "name": "@aenode/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "aenode:prune": "rm -rf node_module rm -rf **/**/node_modules **/**/dist **/**/out-tsc **/**/test-output"
+  },
   "private": true,
   "dependencies": {},
   "devDependencies": {

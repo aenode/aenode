@@ -1,5 +1,10 @@
 {
   "name": "@aenode/fs",
+  "description": "nodejs fs library",
+  "publishConfig": {
+    "access": "public",
+    "tag": "latest"
+  },
   "version": "0.0.1",
   "type": "module",
   "main": "./dist/index.js",
@@ -24,19 +29,7 @@
       "node:lib"
     ],
     "targets": {
-      "build": {
-        "executor": "@nx/js:swc",
-        "outputs": [
-          "{options.outputPath}"
-        ],
-        "options": {
-          "outputPath": "libs/fs/dist",
-          "main": "libs/fs/src/index.ts",
-          "tsConfig": "libs/fs/tsconfig.lib.json",
-          "skipTypeCheck": true,
-          "stripLeadingPaths": true
-        }
-      }
+      "build": {}
     }
   },
   "dependencies": {

@@ -3,6 +3,7 @@ import { readTextFile } from './read-text-file.js';
 /**
  * Read JSON file and parse.
  *
+ * @throws See {@link readTextFile}
  * @param filePath
  * @param abortController
  * @returns JSON content

@@ -18,12 +18,6 @@
       "options": {
         "typecheck": {
           "targetName": "typecheck"
-        },
-        "build": {
-          "targetName": "build",
-          "configName": "tsconfig.lib.json",
-          "buildDepsName": "build-deps",
-          "watchDepsName": "watch-deps"
         }
       }
     },
@@ -43,6 +37,17 @@
     }
   ],
   "targetDefaults": {
+    "build": {
+      "executor": "@nx/js:swc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "{projectRoot}/dist",
+        "main": "{projectRoot}/src/index.ts",
+        "tsConfig": "{projectRoot}/tsconfig.lib.json",
+        "skipTypeCheck": false,
+        "stripLeadingPaths": true
+      }
+    },
     "@nx/js:swc": {
       "cache": true,
       "dependsOn": ["^build"],
