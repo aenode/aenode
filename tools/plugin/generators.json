@@ -9,6 +9,11 @@
       "factory": "./dist/project-config/project-config.js",
       "schema": "./dist/project-config/schema.json",
       "description": "project-config generator"
+    },
+    "nestjs": {
+      "factory": "./dist/nestjs/nestjs",
+      "schema": "./dist/nestjs/schema.json",
+      "description": "nestjs generator"
     }
   }
 }

@@ -60,27 +60,28 @@
         "command": "bun --watch {projectRoot}/src/main.ts"
       }
     },
-    "docker:build": {
-      "executor": "nx:run-commands",
-      "dependsOn": ["build"],
-      "options": {
-        "command": "docker build -t {projectName} {projectRoot}"
-      }
-    },
-    "docker:run": {
-      "executor": "nx:run-commands",
-      "dependsOn": ["docker-build"],
-      "options": {
-        "command": "docker rm -f {projectName} 2>/dev/null; docker run --name {projectName} -p 3000:3000 {projectName}"
-      }
+    "test": {
+      "dependsOn": ["^build"]
     },
     "@nx/js:swc": {
       "cache": true,
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"]
     },
-    "test": {
-      "dependsOn": ["^build"]
+
+    "docker:build": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["build"],
+      "options": {
+        "command": "docker build -t aenode-$(basename {projectRoot}) {projectRoot}"
+      }
+    },
+    "docker:run": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["docker-build"],
+      "options": {
+        "command": "docker rm -f aenode-$(basename {projectRoot}) 2>/dev/null; docker run --name aenode-$(basename {projectRoot}) -p $PORT:$PORT -e PORT=$PORT aenode-$(basename {projectRoot})"
+      }
     }
   },
   "generators": {

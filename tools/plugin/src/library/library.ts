@@ -19,6 +19,7 @@ export async function libraryGenerator(
   generateFiles(tree, join(import.meta.dirname, 'files'), directory, {
     projectName,
     directory,
+    shortName,
   });
 
   updateJson(tree, 'tsconfig.json', (value) => {

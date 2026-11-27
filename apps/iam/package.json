@@ -37,9 +37,14 @@
   },
   "nx": {
     "sourceRoot": "apps/iam/src",
+    "tags": [
+      "server:nest"
+    ],
     "targets": {
       "build": {},
-      "serve": {}
+      "serve": {},
+      "docker:build": {},
+      "docker:run": {}
     }
   },
   "dependencies": {
