@@ -1,7 +1,7 @@
 {
   "name": "@aenode/cli",
   "version": "0.0.1",
-  "description": "Common utility commands",
+  "description": "Common cli commands",
   "author": {
     "name": "Ahmet Emrebas",
     "email": "aenode+npm@proton.me",
