@@ -1,15 +1,14 @@
 import { ConfigModule } from '@nestjs/config';
 import { Test } from '@nestjs/testing';
-import { beforeEach, describe, expect, it } from 'vitest';
-import { AppConfigService } from './app-config.service.js';
-import { AppController } from './app.controller.js';
+import { AppConfigService } from '../src/app/app-config.service.js';
+import { AppController } from '../src/app/app.controller.js';
 
 describe('AppController', () => {
   let controller: AppController;
 
   beforeEach(async () => {
     const moduleRef = await Test.createTestingModule({
-      imports: [ConfigModule],
+      imports: [ConfigModule.forRoot(), ConfigModule],
       controllers: [AppController],
       providers: [AppConfigService],
     }).compile();

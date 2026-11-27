@@ -3,7 +3,7 @@ import { AppConfigService } from './app-config.service.js';
 
 @Controller()
 export class AppController {
-  constructor(protected readonly appConfig: AppConfigService) {}
+  constructor(public readonly appConfig: AppConfigService) {}
 
   @Get('info')
   info() {

@@ -1,8 +1,9 @@
 import {
+  generateFiles,
   readProjectConfiguration,
   type Tree,
 } from '@nx/devkit';
-import { inspect } from 'node:util';
+import { join } from 'node:path';
 import type { ProjectConfigGeneratorSchema } from './schema.js';
 
 export async function projectConfigGenerator(
@@ -11,7 +12,10 @@ export async function projectConfigGenerator(
 ) {
   const pc = readProjectConfiguration(tree, options.project);
 
-  console.log(inspect(pc));
+  generateFiles(tree, join(import.meta.dirname, 'files'), pc.root, {
+    projectName: pc.name,
+    directory: pc.root,
+  });
 }
 
 export default projectConfigGenerator;

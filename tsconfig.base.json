@@ -5,6 +5,7 @@
     "isolatedModules": true,
     "verbatimModuleSyntax": true,
     "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "strictPropertyInitialization": false,
     "lib": ["es2022"],
     "module": "nodenext",

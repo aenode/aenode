@@ -23,10 +23,16 @@ export class AppConfigService {
   }
 
   get TITLE() {
-    return this.config.get('TITLE', 'Iam (Identity and access management system)');
+    return this.config.get(
+      'TITLE',
+      'Iam (Identity and access management system)',
+    );
   }
 
   get DESCRIPTION() {
-    return this.config.get('DESCRIPTION', 'Manage user credentials, authentication, and autorization');
+    return this.config.get(
+      'DESCRIPTION',
+      'Manage user credentials, authentication, and autorization',
+    );
   }
 }

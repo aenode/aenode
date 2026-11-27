@@ -7,7 +7,12 @@ import { AppConfigService } from './app-config.service.js';
 import { AppController } from './app.controller.js';
 
 @Module({
-  imports: [ConfigModule.forRoot({ cache: true }), EventEmitterModule.forRoot({ delimiter: '.' }), ScheduleModule.forRoot(), HealthModule],
+  imports: [
+    ConfigModule.forRoot({ cache: true }),
+    EventEmitterModule.forRoot({ delimiter: '.' }),
+    ScheduleModule.forRoot(),
+    HealthModule,
+  ],
   controllers: [AppController],
   providers: [AppConfigService],
 })
